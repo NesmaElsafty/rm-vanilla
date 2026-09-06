@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dr. Rana Mosaad | وعي · اتصال · تمكين</title>
   <meta name="description" content="رحلة عودة إلى فطرتك واستعادة قيمتك واتصالك الحقيقي بالله.">
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Dr. Rana Mosaad | وعي · اتصال · تمكين">
   <meta property="og:description" content="رحلة عودة إلى فطرتك واستعادة قيمتك واتصالك الحقيقي بالله.">
   <meta property="og:image" content="assets/images/dr_rana_portrait.png">
+  <link rel="canonical" href="session-detail.html">
   <link rel="icon" href="assets/images/rana-logo.png">
   <link rel="stylesheet" href="assets/css/main.css">
   <script>
@@ -31,6 +33,7 @@
   </script>
 </head>
 <body class="program-detail-page session-detail-page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="luxury-backdrop" aria-hidden="true">
     <div class="backdrop-set backdrop-set--dark">
       <div class="backdrop-layer" style="background: linear-gradient(155deg, #040a14 0%, #071424 22%, #0a1628 45%, #0d1b34 62%, #071424 82%, #040a14 100%);"></div>
@@ -104,9 +107,69 @@
       </div>
     </nav>
 
-    <main class="page-main page-main--padded">
+    <main id="main-content" class="page-main page-main--padded">
       <div class="slide-inner">
-        <div data-detail-root="session"></div>
+        <div data-detail-root="session">
+          <div data-detail-found>
+            <a class="detail-back program-detail-back" data-detail-back href="index.html#programs">
+              <span data-detail-back-icon></span>
+              <span data-detail-back-label></span>
+            </a>
+
+            <section class="session-hero glass-slide">
+              <div class="session-hero__mesh" aria-hidden="true"></div>
+              <div class="session-hero__layout">
+                <div class="session-hero__media">
+                  <div class="session-hero__photo-card">
+                    <div class="session-hero__photo-shine" aria-hidden="true"></div>
+                    <img data-detail-image class="session-hero__photo" src="" alt="" decoding="async">
+                    <span class="session-hero__photo-badge" data-detail-photo-badge></span>
+                  </div>
+                </div>
+                <div class="session-hero__content">
+                  <span class="session-hero__tag" data-detail-eyebrow></span>
+                  <h1 class="session-hero__title" data-detail-title></h1>
+                  <p class="session-hero__lead" data-detail-subtitle></p>
+                  <p class="session-hero__desc" data-detail-lead></p>
+                  <div class="session-hero__actions">
+                    <a data-detail-hero-cta class="btn-luxury-primary" href="index.html#contact"></a>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <div id="session-detail-content" class="program-detail-tabs-shell glass-slide session-detail-tabs glow-card" data-detail-tabs-shell>
+              <div class="program-detail-tabs" role="tablist" data-detail-tablist aria-label=""></div>
+              <div class="program-detail-tab-panel" data-detail-tab-panels></div>
+            </div>
+
+            <div data-detail-testimonials></div>
+            <div data-detail-gallery></div>
+
+            <section class="program-detail-cta-bar" data-detail-cta>
+              <div class="program-detail-cta-bar-inner glass-slide">
+                <div class="program-detail-cta-bar-copy">
+                  <h2 class="program-detail-cta-bar-title" data-detail-cta-title></h2>
+                  <p class="program-detail-cta-bar-text" data-detail-cta-text></p>
+                </div>
+                <a data-detail-cta-button class="btn-luxury-primary" href="index.html#contact"></a>
+              </div>
+            </section>
+
+            <section class="program-detail-related-section" data-detail-related>
+              <h2 class="keynote-headline program-detail-related-heading" data-detail-related-title></h2>
+              <div class="program-detail-related-grid" data-detail-related-grid></div>
+            </section>
+          </div>
+
+          <section class="detail-not-found glass-slide" data-detail-not-found hidden role="status">
+            <h1 class="keynote-display detail-not-found-title" data-detail-404-title></h1>
+            <p class="keynote-body detail-not-found-text" data-detail-404-body></p>
+            <a class="detail-back program-detail-back" data-detail-404-back href="index.html#programs">
+              <span data-detail-404-back-label></span>
+            </a>
+          </section>
+        </div>
       </div>
     </main>
 
@@ -161,11 +224,11 @@
           <div class="footer-col">
             <h4 class="footer-heading" data-i18n="footer.empowermentPrograms">برامج التمكين</h4>
             <ul>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programNewVersion">النسخة الجديدة من نفسك</a></li>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programConfidence">كورس عمق الثقة بالنفس</a></li>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programAnaOntha">أنا أنثى (طاقة شفاء ذاتي)</a></li>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programMottasel">برنامج متصل للذكاء العاطفي</a></li>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programApg">APG - إدارة الذات وعبقرية الأداء</a></li>
+              <li><a href="program-detail.html?slug=new-version-of-yourself" class="footer-link" data-i18n="footer.programNewVersion">النسخة الجديدة من نفسك</a></li>
+              <li><a href="program-detail.html?slug=self-confidence" class="footer-link" data-i18n="footer.programConfidence">كورس عمق الثقة بالنفس</a></li>
+              <li><a href="program-detail.html?slug=i-am-female" class="footer-link" data-i18n="footer.programAnaOntha">أنا أنثى (طاقة شفاء ذاتي)</a></li>
+              <li><a href="program-detail.html?slug=mottasel" class="footer-link" data-i18n="footer.programMottasel">برنامج متصل للذكاء العاطفي</a></li>
+              <li><a href="program-detail.html?slug=apg" class="footer-link" data-i18n="footer.programApg">APG - إدارة الذات وعبقرية الأداء</a></li>
             </ul>
           </div>
           <div class="footer-col">

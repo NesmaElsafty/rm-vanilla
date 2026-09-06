@@ -10,6 +10,8 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
 }
 
 .page-main {
@@ -180,7 +182,7 @@
   height: 3.5rem;
   display: flex;
   align-items: center;
-  overflow: visible;
+  overflow: hidden;
   background: none;
   border: none;
   padding: 0;
@@ -191,7 +193,7 @@
 .nav-logo-btn img {
   height: 3.5rem;
   width: auto;
-  transform: scale(1.5);
+  transform: scale(1.35);
   transform-origin: var(--logo-origin, right center);
 }
 
@@ -201,7 +203,7 @@ html[dir="ltr"] .nav-logo-btn img {
 
 @media (min-width: 640px) {
   .nav-logo-btn img {
-    transform: scale(1.65);
+    transform: scale(1.5);
   }
 }
 
@@ -271,21 +273,24 @@ html[dir="ltr"] .nav-logo-btn img {
   display: flex;
   justify-content: center;
   position: relative;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .hero-portrait-glow {
   position: absolute;
-  inset: 0;
-  transform: scale(1.15);
+  inset: 8%;
   pointer-events: none;
   z-index: 0;
+  border-radius: 50%;
 }
 
 .hero-portrait-frame {
   position: relative;
   width: 100%;
-  max-width: 360px;
+  max-width: min(360px, 100%);
   z-index: 10;
+  overflow: hidden;
 }
 
 .hero-portrait-frame .portrait-with-vines {
@@ -1031,8 +1036,8 @@ html[dir="ltr"] .whatsapp-dock {
 .whatsapp-chatbox {
   display: none;
   margin-bottom: 1rem;
-  width: 320px;
-  max-width: calc(100vw - 3rem);
+  width: min(320px, calc(100% - 0.5rem));
+  max-width: calc(100% - 0.5rem);
   border-radius: 1rem;
   padding: 1.25rem;
   text-align: start;
@@ -1040,6 +1045,7 @@ html[dir="ltr"] .whatsapp-dock {
   border: 1px solid rgba(199, 154, 59, 0.35);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45);
   color: #f8f3eb;
+  box-sizing: border-box;
 }
 
 @media (min-width: 640px) {

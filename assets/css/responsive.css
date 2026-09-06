@@ -78,7 +78,7 @@
   }
 
   .whatsapp-chatbox {
-    width: calc(100vw - 2rem);
+    width: min(320px, calc(100% - 0.5rem));
   }
 
   .hero-portrait-frame {

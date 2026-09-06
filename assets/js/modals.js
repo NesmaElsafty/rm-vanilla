@@ -145,6 +145,13 @@ export function initModals() {
       event.preventDefault();
       openModal(kind);
     });
+    el.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      const kind = el.getAttribute('data-open-modal');
+      if (!MODAL_IDS[kind]) return;
+      event.preventDefault();
+      openModal(kind);
+    });
   });
 
   document.querySelectorAll('[data-retreat-link], [data-detail-slug]').forEach((el) => {

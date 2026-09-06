@@ -1,57 +1,28 @@
 # Laravel migration plan
 
-This Vanilla project is structured so it can become server-rendered Blade with database content.
+This Vanilla site is structured to become server-rendered Blade with database content. `qa/` is development-only and must not be deployed.
 
-## Page mapping
+## Page → Blade mapping
 
-```text
-index.html
-→ resources/views/pages/home.blade.php
+| Vanilla page | Blade view |
+| --- | --- |
+| `index.html` | `resources/views/pages/home.blade.php` |
+| `about.html` | `resources/views/pages/about.blade.php` |
+| `policies.html` | `resources/views/pages/policies.blade.php` |
+| `recorded-sessions.html` | `resources/views/recorded-sessions/index.blade.php` |
+| `program-detail.html?slug=` | `resources/views/programs/show.blade.php` |
+| `workshop-detail.html?slug=` | `resources/views/workshops/show.blade.php` |
+| `session-detail.html?slug=` | `resources/views/sessions/show.blade.php` |
+| `recorded-session-detail.html?slug=` | `resources/views/recorded-sessions/show.blade.php` |
+| `retreat-detail.html?slug=` | `resources/views/retreats/show.blade.php` |
 
-about.html
-→ resources/views/pages/about.blade.php
-
-policies.html
-→ resources/views/pages/policies.blade.php
-
-recorded-sessions.html
-→ resources/views/recorded-sessions/index.blade.php
-
-program-detail.html?slug=example
-→ resources/views/programs/show.blade.php
-
-workshop-detail.html?slug=example
-→ resources/views/workshops/show.blade.php
-
-session-detail.html?slug=example
-→ resources/views/sessions/show.blade.php
-
-recorded-session-detail.html?slug=example
-→ resources/views/recorded-sessions/show.blade.php
-
-retreat-detail.html?slug=upcoming
-→ resources/views/retreats/show.blade.php
-```
-
-Suggested layout:
+Suggested tree:
 
 ```text
 resources/views/
 ├── layouts/app.blade.php
-├── components/
-│   ├── navbar.blade.php
-│   ├── footer.blade.php
-│   ├── whatsapp-widget.blade.php
-│   ├── program-card.blade.php
-│   └── testimonial-card.blade.php
-├── partials/
-│   ├── backdrop.blade.php
-│   ├── hero.blade.php
-│   ├── about-blocks.blade.php
-│   ├── featured-programs.blade.php
-│   ├── testimonials.blade.php
-│   ├── final-cta.blade.php
-│   └── contact.blade.php
+├── components/          # see below
+├── partials/            # hero, about, programs, testimonials, cta, contact, backdrop
 ├── pages/
 ├── programs/
 ├── workshops/
@@ -60,131 +31,82 @@ resources/views/
 └── retreats/
 ```
 
-## Reusable UI mapping
+Routes (route-model binding):
 
 ```text
-Navbar
-→ resources/views/components/navbar.blade.php
-
-Footer
-→ resources/views/components/footer.blade.php
-
-WhatsApp button
-→ resources/views/components/whatsapp-widget.blade.php
-
-Program / workshop / session card
-→ resources/views/components/program-card.blade.php
-
-Featured homepage cards
-→ resources/views/components/featured-offer-card.blade.php
-
-Detail gallery
-→ resources/views/components/detail-gallery.blade.php
-
-Section heading
-→ resources/views/components/keynote-header.blade.php
+/programs/{program:slug}
+/workshops/{workshop:slug}
+/sessions/{session:slug}
+/recorded-sessions/{recordedSession:slug}
+/retreats/{retreat:slug}
 ```
 
-CSS in `assets/css/` can move to `public/css/` (or Vite only for concatenation — not required). JS modules can move to `public/js/`.
-
-## Data flow
+## Assets → public mapping
 
 ```text
-Temporary JS mock data
-        ↓
-Laravel Model
-        ↓
-Controller
-        ↓
-Blade view
+assets/css/**     → public/css/     (or Vite concat only — not required)
+assets/js/**      → public/js/
+assets/images/**  → public/images/  (or Storage for admin-managed media)
 ```
 
-Examples:
+Update paths in Blade (`asset('css/main.css')`, etc.). Seed current image files as initial media when moving to storage.
+
+## Data → Models mapping
+
+Only `.js` seeders remain (JSON duplicates removed). Runtime loaders + bilingual seeders map to Eloquent:
+
+| Vanilla | Laravel |
+| --- | --- |
+| `data/programs.js` + `programs-seeder.js` (+ `.en.js`) | `App\Models\Program` |
+| `data/workshops.js` + `workshops-seeder.js` (+ `.en.js`) | `App\Models\Workshop` |
+| `data/sessions.js` + `sessions-seeder.js` (+ `.en.js`) | `App\Models\PrivateSession` |
+| `data/recorded-sessions.js` + `recorded-sessions-seeder.js` (+ `.en.js`) | `App\Models\RecordedSession` |
+| `data/retreats.js` | `App\Models\Retreat` |
+| `data/testimonials.js` | `App\Models\Testimonial` |
+| `data/content.js` | `lang/ar/*.php` + `lang/en/*.php` |
+| `data/policies.js` | `PolicySection` model or lang files |
+
+See `data/DATA.md` for the single source of truth layout.
+
+## JavaScript after migration
+
+### Keep (client-side enhancement)
+
+- `theme.js` — theme tokens / toggle
+- `language.js` — locale enhancement (or replace with `/locale/{locale}` session switch)
+- `sliders.js` — floating modal carousels + testimonials
+- `modals.js` — training / workshops / private / recorded dialogs
+- `forms.js` — WhatsApp helper, success panel, client validation UX
+- `galleries.js` — detail / about gallery controls
+- `animations.js` — reveal-on-scroll
+- `navigation.js` — mobile menu, scroll spy, hashes
+- `icons.js` / `svg-decor.js` — inline SVG helpers if still needed
+
+### Remove
+
+- **`detail-pages.js` entity HTML generation** — once Blade renders the detail shells. Detail pages already have HTML shells with `data-*` hooks (`data-detail-root`, slots, gallery host). Blade should fill those (or equivalent markup) from the model; drop `URLSearchParams` slug rendering and `innerHTML` templates.
+
+## Recommended Blade components
 
 ```text
-data/programs.js          → App\Models\Program
-data/workshops.js         → App\Models\Workshop
-data/sessions.js          → App\Models\PrivateSession
-data/recorded-sessions.js → App\Models\RecordedSession
-data/retreats.js          → App\Models\Retreat
-data/testimonials.js      → App\Models\Testimonial
-data/content.js           → lang/ar/*.php + lang/en/*.php
-data/policies.js          → PolicySection model or lang files
+x-navbar
+x-footer
+x-whatsapp-widget
+x-program-card
+x-featured-offer-card
+x-detail-gallery
+x-keynote-header
+x-testimonial-card
 ```
 
-Homepage featured cards stay Blade markup:
+Partials for homepage sections: backdrop, hero, about-blocks, featured-programs, testimonials, final-cta, contact.
 
-```blade
-@foreach($featuredOffers as $offer)
-  <article class="program-card glass-slide glow-card">
-    ...
-  </article>
-@endforeach
-```
+## Forms → POST /contact
 
-Detail pages should stop using `URLSearchParams`. Render the selected entity in Blade instead of `detail-pages.js` HTML generation.
-
-## Routing
+`#booking-form-element` is POST-ready:
 
 ```text
-program-detail.html?slug=example
-→ /programs/{program:slug}
-
-workshop-detail.html?slug=example
-→ /workshops/{workshop:slug}
-
-session-detail.html?slug=example
-→ /sessions/{session:slug}
-
-recorded-session-detail.html?slug=example
-→ /recorded-sessions/{recordedSession:slug}
-
-retreat-detail.html?slug=upcoming
-→ /retreats/{retreat:slug}
-```
-
-Use Laravel route model binding. Keep normal `<a href="{{ route('programs.show', $program) }}">` links.
-
-Homepage section links become `/#programs` or named routes with fragments.
-
-## Localization
-
-```text
-data-i18n="nav.home"
-→ {{ __('nav.home') }}
-```
-
-Keep `html lang` and `dir` on the document from the active locale (`ar` → `rtl`, `en` → `ltr`). Laravel can set this in `layouts/app.blade.php`.
-
-`localStorage` language switching can remain as a progressive enhancement, or be replaced by `/locale/{locale}` that sets the session locale and reloads.
-
-## Theme
-
-`data-theme` + CSS variables can stay. Persist via cookie if the theme should survive across devices; otherwise keep `localStorage` (`rana-site-theme`).
-
-## Images
-
-Move `assets/images/` to `public/images/` or Laravel storage.
-
-```text
-assets/images/programs/program-apg.png
-→ /images/programs/program-apg.png
-or Storage::url($program->image)
-```
-
-Admin-managed images should use the storage disk; seed the current files as initial media.
-
-## Forms
-
-`#booking-form-element` is already a semantic POST-ready form:
-
-```html
-name="full_name"
-name="phone"
-name="email"
-name="service_category"
-name="sub_option"
-name="message"
+full_name, phone, email, service_category, sub_option, message
 ```
 
 Laravel target:
@@ -192,47 +114,32 @@ Laravel target:
 ```text
 POST /contact
 → ContactController@store
-→ validation
-→ persist submission
-→ optional WhatsApp/email notification
+→ validate → persist → optional WhatsApp/email notification
 ```
 
-Keep the WhatsApp export link as a secondary action. Do not treat client-side `preventDefault()` as the final backend.
+Add `@csrf`. Keep WhatsApp export as a secondary client action only.
 
-Add `@csrf` when the form posts to Laravel.
+## Localization & theme
+
+- `data-i18n="nav.home"` → `{{ __('nav.home') }}`
+- Set `html lang` / `dir` in `layouts/app.blade.php` (`ar` → `rtl`)
+- `data-theme` + CSS variables can stay; cookie optional for cross-device theme
 
 ## SEO
 
-Each HTML file already has `title`, `meta description`, and Open Graph tags. In Blade:
+Pass `title`, description, and OG fields from the controller/model into the layout. Detail pages should not rely on JS for primary meta.
 
-```blade
-<title>{{ $page->seo_title }}</title>
-<meta name="description" content="{{ $page->seo_description }}">
-<meta property="og:image" content="{{ $page->og_image }}">
-```
+## Deploy note
 
-Detail templates should receive those fields from the model, not from JavaScript.
+**Do not deploy `qa/`** (Playwright, screenshots) or `node_modules/`. Public document root should be Blade/`public` assets only.
 
-## JavaScript after migration
-
-Keep only behavior modules:
-
-- navigation (mobile menu, scroll state)
-- theme / language if still client-side
-- sliders
-- galleries
-- form helpers (WhatsApp URL, success panel)
-- reveal animations
-
-Remove `detail-pages.js` entity rendering once Blade outputs the same markup.
-
-## Suggested first Laravel steps
+## Suggested first steps
 
 1. Copy CSS/JS/images into `public/`.
 2. Create `layouts/app.blade.php` from shared chrome.
-3. Convert `index.html` to `home.blade.php` with `@yield` / `@section`.
-4. Extract navbar/footer/WhatsApp into Blade components.
-5. Replace `data/programs.js` loops with Eloquent + `@foreach`.
-6. Add real routes and route-model-bound show pages.
-7. Wire the contact form to a controller.
-8. Move i18n strings into `lang/`.
+3. Convert `index.html` → `home.blade.php`.
+4. Extract navbar/footer/WhatsApp components.
+5. Replace `data/*.js` loops with Eloquent + `@foreach`.
+6. Add show routes with model binding; Blade fills detail shells.
+7. Wire contact form to `POST /contact`.
+8. Move i18n into `lang/`.

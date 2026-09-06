@@ -42,9 +42,13 @@
 
   --container-max: 72rem;
   --container-wide: 80rem;
+  --space-section: clamp(3.5rem, 8vw, 6rem);
+  --space-section-sm: clamp(2rem, 5vw, 3.5rem);
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1.5rem;
+  --radius-card: 1.25rem;
+  --shadow-card: 0 24px 48px -20px rgba(0, 0, 0, 0.45);
   --transition-fast: 0.2s ease;
   --transition-normal: 0.4s ease;
 }

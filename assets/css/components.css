@@ -392,9 +392,10 @@
 
 .portrait-arch {
   border-radius: 999px 999px 1.75rem 1.75rem;
-  overflow: visible;
+  overflow: hidden;
   border: 1px solid color-mix(in srgb, var(--theme-gold) 22%, transparent);
   box-shadow: 0 40px 80px -24px rgba(0,0,0,0.75), 0 0 100px -20px color-mix(in srgb, var(--theme-rose) 12%, transparent);
+  max-width: 100%;
 }
 
 .portrait-arch--clean {
@@ -1213,6 +1214,16 @@
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--theme-accent) 12%, transparent);
 }
 
+.contact-field-error {
+  margin-top: 0.35rem;
+  font-size: 0.8125rem;
+  color: #e8a0a0;
+}
+
+[aria-invalid="true"].contact-field {
+  border-color: color-mix(in srgb, #c45c5c 70%, var(--theme-gold));
+}
+
 .contact-icon-wrap {
   padding: 0.85rem;
   border-radius: 0.85rem;
@@ -1353,14 +1364,15 @@ textarea.contact-field {
 }
 
 .portrait-with-vines {
-  overflow: visible;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .portrait-vine {
   display: none;
   position: absolute;
-  width: 138%;
-  max-width: 500px;
+  width: 118%;
+  max-width: 420px;
   height: auto;
   pointer-events: none;
   clip-path: inset(14% 0 0 0);
@@ -1374,16 +1386,16 @@ textarea.contact-field {
 
 .portrait-vine--back {
   z-index: 5;
-  top: -14%;
-  right: -26%;
+  top: -10%;
+  right: -12%;
   transform: rotate(-6deg);
   opacity: 0.5;
 }
 
 .portrait-vine--front {
   z-index: 25;
-  top: -6%;
-  left: -32%;
+  top: -4%;
+  left: -14%;
   transform: rotate(10deg) scaleX(-1);
   opacity: 0.92;
 }
@@ -1415,15 +1427,15 @@ textarea.contact-field {
 }
 
 .portrait-with-vines--circle .portrait-vine--back {
-  top: -18%;
-  right: -20%;
+  top: -12%;
+  right: -10%;
   transform: rotate(0deg);
   opacity: 0.45;
 }
 
 .portrait-with-vines--circle .portrait-vine--front {
-  top: -10%;
-  left: -24%;
+  top: -8%;
+  left: -12%;
   right: auto;
   transform: rotate(-15deg) scaleX(-1);
   opacity: 0.88;

@@ -26,7 +26,15 @@ export function applyLocale(locale) {
   document.querySelectorAll('nav[dir], [data-sync-dir]').forEach((el) => {
     el.setAttribute('dir', dir);
   });
-  if (content?.meta?.title) document.title = content.meta.title;
+  // Detail pages set entity titles via detail-pages.js; do not overwrite them.
+  const onDetail = Boolean(document.querySelector('[data-detail-root]'))
+    || /-detail\.html?/i.test(location.pathname);
+  const notFoundShowing = Boolean(
+    document.querySelector('[data-detail-not-found]:not([hidden])'),
+  );
+  if (content?.meta?.title && (!onDetail || notFoundShowing)) {
+    document.title = content.meta.title;
+  }
 }
 
 function persistLocale(locale) {

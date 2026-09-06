@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dr. Rana Mosaad | وعي · اتصال · تمكين</title>
   <meta name="description" content="رحلة عودة إلى فطرتك واستعادة قيمتك واتصالك الحقيقي بالله.">
+  <meta property="og:type" content="website">
   <meta property="og:title" content="Dr. Rana Mosaad | وعي · اتصال · تمكين">
   <meta property="og:description" content="رحلة عودة إلى فطرتك واستعادة قيمتك واتصالك الحقيقي بالله.">
   <meta property="og:image" content="assets/images/dr_rana_portrait.png">
+  <link rel="canonical" href="index.html">
   <link rel="icon" href="assets/images/rana-logo.png">
   <link rel="stylesheet" href="assets/css/main.css">
   <script>
@@ -31,6 +33,7 @@
   </script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="luxury-backdrop" aria-hidden="true">
     <div class="backdrop-set backdrop-set--dark">
       <div class="backdrop-layer" style="background: linear-gradient(155deg, #040a14 0%, #071424 22%, #0a1628 45%, #0d1b34 62%, #071424 82%, #040a14 100%);"></div>
@@ -104,7 +107,7 @@
       </div>
     </nav>
 
-    <main class="page-main">
+    <main id="main-content" class="page-main">
       <section id="hero" class="slide-section slide-hero">
         <div class="slide-inner">
           <div class="hero-grid">
@@ -376,26 +379,29 @@
             </aside>
 
             <div class="contact-form-panel glass-panel">
-              <form id="booking-form-element" class="contact-form" novalidate>
+              <form id="booking-form-element" class="contact-form" novalidate data-form="contact">
                 <div class="contact-form-row">
                   <div class="contact-field-wrap">
                     <label class="contact-field-label" for="full_name" data-i18n="contact.fullName">الاسم ثلاثي أو ثنائي *</label>
-                    <input class="contact-field" type="text" id="full_name" name="full_name" required autocomplete="name" data-i18n-placeholder="contact.fullNamePlaceholder" placeholder="الاسم الكامل">
+                    <input class="contact-field" type="text" id="full_name" name="full_name" required autocomplete="name" data-i18n-placeholder="contact.fullNamePlaceholder" placeholder="الاسم الكامل" aria-describedby="full_name-error">
+                    <p id="full_name-error" class="contact-field-error" data-field-error hidden></p>
                   </div>
                   <div class="contact-field-wrap">
                     <label class="contact-field-label" for="phone" data-i18n="contact.phone">رقم الهاتف (الواتساب المفضل) *</label>
-                    <input class="contact-field" type="tel" id="phone" name="phone" required autocomplete="tel" dir="ltr" data-i18n-placeholder="contact.phonePlaceholder" placeholder="مثال: 0096650000000">
+                    <input class="contact-field" type="tel" id="phone" name="phone" required autocomplete="tel" dir="ltr" data-i18n-placeholder="contact.phonePlaceholder" placeholder="مثال: 0096650000000" aria-describedby="phone-error">
+                    <p id="phone-error" class="contact-field-error" data-field-error hidden></p>
                   </div>
                 </div>
 
                 <div class="contact-form-row">
                   <div class="contact-field-wrap">
                     <label class="contact-field-label" for="email" data-i18n="contact.emailOptional">البريد الإلكتروني (غير إلزامي)</label>
-                    <input class="contact-field" type="email" id="email" name="email" autocomplete="email" dir="ltr" placeholder="name@example.com">
+                    <input class="contact-field" type="email" id="email" name="email" autocomplete="email" dir="ltr" placeholder="name@example.com" aria-describedby="email-error">
+                    <p id="email-error" class="contact-field-error" data-field-error hidden></p>
                   </div>
                   <div class="contact-field-wrap">
                     <label class="contact-field-label" for="service_category" data-i18n="contact.serviceType">نوع الخدمة المفضلة</label>
-                    <select class="contact-field" id="service_category" name="service_category">
+                    <select class="contact-field" id="service_category" name="service_category" required aria-describedby="service_category-error">
                       <option value="private">جلسات خاصة</option>
                       <option value="training">برامج تدريبية</option>
                       <option value="workshops">ورش عمل</option>
@@ -403,12 +409,13 @@
                       <option value="recorded">جلسات مسجلة</option>
                       <option value="retreats">Retreats &amp; Events</option>
                     </select>
+                    <p id="service_category-error" class="contact-field-error" data-field-error hidden></p>
                   </div>
                 </div>
 
-                <div id="specific-program-select-block" data-sub-option-block>
+                <div id="specific-program-select-block" data-sub-option-block class="contact-field-wrap">
                   <label class="contact-field-label" for="sub_option" data-sub-option-label data-i18n="contact.selectSession">اختر الجلسة الخاصة</label>
-                  <select class="contact-field" id="sub_option" name="sub_option" required>
+                  <select class="contact-field" id="sub_option" name="sub_option" required aria-describedby="sub_option-error">
                     <option value="">— يرجى الاختيار من القائمة —</option>
                     <option value="restore-confidence-self-worth">استعادة الثقة والقيمة الذاتية</option>
                     <option value="emotional-need-attachment-release">التحرر من الاحتياج العاطفي والتعلّق</option>
@@ -417,6 +424,7 @@
                     <option value="healing-roots-old-wounds">شفاء الجذور والجروح القديمة</option>
                     <option value="clarity-inner-doubt-release">فكّ التشوش والشك الداخلي</option>
                   </select>
+                  <p id="sub_option-error" class="contact-field-error" data-field-error hidden></p>
                 </div>
 
                 <div class="contact-field-wrap">
@@ -425,11 +433,11 @@
                 </div>
 
                 <div class="contact-form-actions">
-                  <button type="submit" class="btn-luxury-primary" id="submit-form-btn">
+                  <button type="submit" class="btn-luxury-primary" id="submit-form-btn" data-form-submit>
                     <span data-icon="send" data-icon-class="icon icon-sm"></span>
-                    <span data-i18n="contact.submit">إرسال الطلب إلكترونياً</span>
+                    <span data-i18n="contact.submit">إرسال عبر واتساب</span>
                   </button>
-                  <a class="btn-whatsapp-luxury" id="form-whatsapp-export-btn" href="https://wa.me/201039172696" target="_blank" rel="noopener noreferrer">
+                  <a class="btn-whatsapp-luxury" id="form-whatsapp-export-btn" href="https://wa.me/201039172696" target="_blank" rel="noopener noreferrer" data-whatsapp-export>
                     <span data-icon="messageSquare" data-icon-class="icon icon-sm whatsapp-icon"></span>
                     <span data-i18n="contact.confirmWhatsapp">تأكيد الإرسال عبر الواتساب</span>
                   </a>
@@ -522,11 +530,11 @@
           <div class="footer-col">
             <h4 class="footer-heading" data-i18n="footer.empowermentPrograms">برامج التمكين</h4>
             <ul>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programNewVersion">النسخة الجديدة من نفسك</a></li>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programConfidence">كورس عمق الثقة بالنفس</a></li>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programAnaOntha">أنا أنثى (طاقة شفاء ذاتي)</a></li>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programMottasel">برنامج متصل للذكاء العاطفي</a></li>
-              <li><a href="index.html#programs" class="footer-link" data-nav="programs" data-i18n="footer.programApg">APG - إدارة الذات وعبقرية الأداء</a></li>
+              <li><a href="program-detail.html?slug=new-version-of-yourself" class="footer-link" data-i18n="footer.programNewVersion">النسخة الجديدة من نفسك</a></li>
+              <li><a href="program-detail.html?slug=self-confidence" class="footer-link" data-i18n="footer.programConfidence">كورس عمق الثقة بالنفس</a></li>
+              <li><a href="program-detail.html?slug=i-am-female" class="footer-link" data-i18n="footer.programAnaOntha">أنا أنثى (طاقة شفاء ذاتي)</a></li>
+              <li><a href="program-detail.html?slug=mottasel" class="footer-link" data-i18n="footer.programMottasel">برنامج متصل للذكاء العاطفي</a></li>
+              <li><a href="program-detail.html?slug=apg" class="footer-link" data-i18n="footer.programApg">APG - إدارة الذات وعبقرية الأداء</a></li>
             </ul>
           </div>
 

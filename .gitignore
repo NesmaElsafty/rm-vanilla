@@ -1,0 +1,7 @@
+node_modules/
+qa/playwright-report/
+qa/test-results/
+qa/playwright/.cache/
+*.log
+.DS_Store
+Thumbs.db

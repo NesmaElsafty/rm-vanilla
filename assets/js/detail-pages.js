@@ -73,6 +73,44 @@ function currentSlug() {
   return new URLSearchParams(location.search).get('slug') || '';
 }
 
+function contactHref(slug) {
+  return `index.html?scroll=contact&program=${encodeURIComponent(slug)}`;
+}
+
+function updateDocumentMeta(title, description, image) {
+  const siteName = 'Dr. Rana Mosaad';
+  const fullTitle = title ? `${title} | ${siteName}` : document.title;
+  document.title = fullTitle;
+
+  const desc = (description || '').trim();
+  const setMeta = (selector, attr, value) => {
+    if (!value) return;
+    const el = document.querySelector(selector);
+    if (el) el.setAttribute(attr, value);
+  };
+
+  setMeta('meta[name="description"]', 'content', desc);
+  setMeta('meta[property="og:title"]', 'content', fullTitle);
+  setMeta('meta[property="og:description"]', 'content', desc);
+
+  if (image) {
+    try {
+      const absolute = new URL(image, location.href).href;
+      setMeta('meta[property="og:image"]', 'content', absolute);
+    } catch {
+      setMeta('meta[property="og:image"]', 'content', image);
+    }
+  }
+
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.setAttribute('rel', 'canonical');
+    document.head.appendChild(canonical);
+  }
+  canonical.setAttribute('href', location.href.split('#')[0]);
+}
+
 function inferKind(root) {
   const explicit = root.getAttribute('data-detail-root') || root.getAttribute('data-detail-type');
   if (explicit && explicit !== 'true') return explicit;
@@ -82,6 +120,123 @@ function inferKind(root) {
   if (page.includes('recorded')) return 'recorded';
   if (page.includes('session')) return 'session';
   return 'program';
+}
+
+function hasDetailShell(root) {
+  return Boolean(root.querySelector('[data-detail-found]'));
+}
+
+function setSlotText(root, selector, value) {
+  const el = root.querySelector(selector);
+  if (el) el.textContent = value ?? '';
+}
+
+function setSlotHtml(root, selector, html) {
+  const el = root.querySelector(selector);
+  if (el) el.innerHTML = html ?? '';
+}
+
+function setHidden(el, hidden) {
+  if (el) el.hidden = Boolean(hidden);
+}
+
+function toggleFoundState(root, found) {
+  setHidden(root.querySelector('[data-detail-found]'), !found);
+  setHidden(root.querySelector('[data-detail-not-found]'), found);
+}
+
+function populateBack(root, href, label, rtl) {
+  const back = root.querySelector('[data-detail-back]');
+  if (back) back.setAttribute('href', href);
+  setSlotHtml(root, '[data-detail-back-icon]', rtl ? iconArrowRight('icon icon-sm') : iconArrowLeft('icon icon-sm'));
+  setSlotText(root, '[data-detail-back-label]', label);
+}
+
+function populateImage(root, src, alt) {
+  const img = root.querySelector('[data-detail-image]');
+  if (!img) return;
+  img.src = src || '';
+  img.alt = alt || '';
+}
+
+function populateDuration(root, duration) {
+  const sep = root.querySelector('[data-detail-duration-sep]');
+  const dur = root.querySelector('[data-detail-duration]');
+  if (duration) {
+    setHidden(sep, false);
+    setHidden(dur, false);
+    if (dur) dur.textContent = duration;
+  } else {
+    setHidden(sep, true);
+    setHidden(dur, true);
+    if (dur) dur.textContent = '';
+  }
+}
+
+function populateHeroCta(root, label, slug) {
+  const cta = root.querySelector('[data-detail-hero-cta]');
+  if (!cta) return;
+  cta.textContent = label ?? '';
+  cta.setAttribute('href', contactHref(slug));
+}
+
+function populateCtaBar(root, title, text, buttonLabel, programSlug) {
+  const section = root.querySelector('[data-detail-cta]');
+  setHidden(section, false);
+  setSlotText(root, '[data-detail-cta-title]', title);
+  setSlotText(root, '[data-detail-cta-text]', text);
+  const btn = root.querySelector('[data-detail-cta-button]');
+  if (btn) {
+    btn.textContent = buttonLabel ?? '';
+    btn.setAttribute('href', contactHref(programSlug));
+  }
+}
+
+function populateRelated(root, title, items, page) {
+  const section = root.querySelector('[data-detail-related]');
+  if (!section) return;
+  if (!items.length) {
+    setHidden(section, true);
+    setSlotHtml(root, '[data-detail-related-grid]', '');
+    return;
+  }
+  setHidden(section, false);
+  setSlotText(root, '[data-detail-related-title]', title);
+  setSlotHtml(
+    root,
+    '[data-detail-related-grid]',
+    items
+      .map(
+        (item) =>
+          `<a href="${page}?slug=${encodeURIComponent(item.slug)}" class="program-detail-related">
+            <h3 class="program-detail-related-title">${escapeHtml(item.title)}</h3>
+            <p class="program-detail-related-text">${escapeHtml(item.description)}</p>
+          </a>`,
+      )
+      .join(''),
+  );
+}
+
+function populateTabs(root, tabs, aria, panelsHtml) {
+  const tablist = root.querySelector('[data-detail-tablist]');
+  if (tablist) {
+    tablist.setAttribute('aria-label', aria);
+    tablist.innerHTML = tabs
+      .map(
+        (tab) =>
+          `<button type="button" role="tab" data-tab="${tab.id}" aria-selected="${tab.id === activeTab ? 'true' : 'false'}" class="program-detail-tab${tab.id === activeTab ? ' program-detail-tab--active' : ''}">${escapeHtml(tab.label)}</button>`,
+      )
+      .join('');
+  }
+  const panels = root.querySelector('[data-detail-tab-panels]');
+  if (panels) panels.innerHTML = panelsHtml;
+}
+
+function populateGalleryHost(root, html) {
+  const host = root.querySelector('[data-detail-gallery]');
+  if (!host) return;
+  host.innerHTML = html || '';
+  setHidden(host, !html);
 }
 
 function sortedSections(entity) {
@@ -159,34 +314,56 @@ function relatedMarkup(title, items, page) {
   </section>`;
 }
 
-function ctaBar(title, text, buttonLabel, programTitle) {
+function ctaBar(title, text, buttonLabel, programSlug) {
   return `<section class="program-detail-cta-bar">
     <div class="program-detail-cta-bar-inner glass-slide">
       <div class="program-detail-cta-bar-copy">
         <h2 class="program-detail-cta-bar-title">${escapeHtml(title)}</h2>
         <p class="program-detail-cta-bar-text">${escapeHtml(text)}</p>
       </div>
-      <a href="index.html?scroll=contact&program=${encodeURIComponent(programTitle)}" class="btn-luxury-primary">${escapeHtml(buttonLabel)}</a>
+      <a href="${contactHref(programSlug)}" class="btn-luxury-primary">${escapeHtml(buttonLabel)}</a>
     </div>
   </section>`;
 }
 
+function galleryLabels(locale = getLocale()) {
+  const g = getContent(locale)?.gallery || {};
+  const fill = (template, vars) =>
+    String(template || '')
+      .replace(/\{n\}/g, String(vars.n ?? ''))
+      .replace(/\{prefix\}/g, String(vars.prefix ?? ''));
+
+  const isAr = locale === 'ar';
+  return {
+    openImage: (n) =>
+      fill(g.openImage, { n }) || (isAr ? `فتح الصورة ${n}` : `Open image ${n}`),
+    previousImage: g.previousImage || (isAr ? 'الصورة السابقة' : 'Previous image'),
+    nextImage: g.nextImage || (isAr ? 'الصورة التالية' : 'Next image'),
+    thumbnailAlt: (prefix, n) =>
+      fill(g.thumbnailAlt, { prefix, n }) ||
+      (isAr ? `${prefix} صورة مصغرة ${n}` : `${prefix} thumbnail ${n}`),
+    mainAlt: (prefix, n) =>
+      fill(g.mainAlt, { prefix, n }) || `${prefix} ${n}`.trim(),
+  };
+}
+
 function galleryMarkup(images, title, subtitle, altPrefix) {
   if (!images.length) return '';
+  const labels = galleryLabels();
   const thumbs = images.length > 1
     ? `<div class="program-detail-gallery-thumbs">${images
         .map(
           (src, index) =>
-            `<button type="button" class="program-detail-gallery-thumb${index === 0 ? ' program-detail-gallery-thumb--active' : ''}" data-gallery-src="${escapeHtml(src)}" aria-label="Open image ${index + 1}">
-              <img src="${escapeHtml(src)}" alt="${escapeHtml(altPrefix)} thumbnail ${index + 1}" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image"/>
+            `<button type="button" class="program-detail-gallery-thumb${index === 0 ? ' program-detail-gallery-thumb--active' : ''}" data-gallery-src="${escapeHtml(src)}" aria-label="${escapeHtml(labels.openImage(index + 1))}">
+              <img src="${escapeHtml(src)}" alt="${escapeHtml(labels.thumbnailAlt(altPrefix, index + 1))}" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image"/>
             </button>`,
         )
         .join('')}</div>`
     : '';
 
   const nav = images.length > 1
-    ? `<button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--prev" aria-label="Previous image">${iconArrowLeft('icon icon-sm')}</button>
-       <button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--next" aria-label="Next image">${iconArrowRight('icon icon-sm')}</button>`
+    ? `<button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--prev" aria-label="${escapeHtml(labels.previousImage)}">${iconArrowLeft('icon icon-sm')}</button>
+       <button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--next" aria-label="${escapeHtml(labels.nextImage)}">${iconArrowRight('icon icon-sm')}</button>`
     : '';
 
   return `<section class="program-detail-gallery" aria-label="${escapeHtml(title)}" data-gallery-alt="${escapeHtml(altPrefix)}">
@@ -198,7 +375,7 @@ function galleryMarkup(images, title, subtitle, altPrefix) {
       <div class="program-detail-gallery-stage">
         ${nav}
         <figure class="program-detail-gallery-main">
-          <img src="${escapeHtml(images[0])}" alt="${escapeHtml(altPrefix)} 1" loading="lazy" decoding="async" class="program-detail-gallery-main-image"/>
+          <img src="${escapeHtml(images[0])}" alt="${escapeHtml(labels.mainAlt(altPrefix, 1))}" loading="lazy" decoding="async" class="program-detail-gallery-main-image"/>
         </figure>
       </div>
       ${thumbs}
@@ -249,9 +426,20 @@ function notFoundCopy(locale) {
 
 function renderNotFound(root, kind) {
   const locale = getLocale();
-  const rtl = getDir(locale) === 'rtl';
   const copy = notFoundCopy(locale);
   const href = NOT_FOUND[kind] ?? 'index.html#programs';
+
+  if (hasDetailShell(root)) {
+    toggleFoundState(root, false);
+    setSlotText(root, '[data-detail-404-title]', copy.title);
+    setSlotText(root, '[data-detail-404-body]', copy.body);
+    const back = root.querySelector('[data-detail-404-back]');
+    if (back) back.setAttribute('href', href);
+    setSlotText(root, '[data-detail-404-back-label]', copy.back);
+    return;
+  }
+
+  const rtl = getDir(locale) === 'rtl';
   root.innerHTML = `
     <section class="detail-not-found glass-slide" role="status">
       <h1 class="keynote-display detail-not-found-title">${escapeHtml(copy.title)}</h1>
@@ -290,13 +478,55 @@ function renderProgram(root) {
   if (!['story', 'curriculum', 'join'].includes(activeTab)) activeTab = 'story';
 
   const story = buckets.story ?? [];
+  const tabs = [
+    { id: 'story', label: pd.tabsStory },
+    { id: 'curriculum', label: pd.tabsCurriculum },
+    { id: 'join', label: pd.tabsJoin },
+  ];
+  const panelsHtml = `
+    <div data-tab-panel="story" class="program-detail-tab-content" ${activeTab === 'story' ? '' : 'hidden'}>
+      ${story[0] ? compactCard(story[0], true) : ''}
+      ${story.slice(1).length ? `<div class="program-detail-compact-grid">${story.slice(1).map((s) => compactCard(s)).join('')}</div>` : ''}
+    </div>
+    <div data-tab-panel="curriculum" class="program-detail-tab-content" ${activeTab === 'curriculum' ? '' : 'hidden'}>
+      ${(buckets.curriculum ?? []).map((s) => compactCard(s, true)).join('')}
+      ${program.modules?.length ? modulesStrip(program.modules, rtl, childrenByParent) : ''}
+    </div>
+    <div data-tab-panel="join" class="program-detail-tab-content" ${activeTab === 'join' ? '' : 'hidden'}>
+      <div class="program-detail-compact-grid">${(buckets.join ?? []).map((s) => compactCard(s)).join('')}</div>
+      ${faq ? `<details class="program-detail-faq"><summary class="program-detail-faq-summary">${escapeHtml(faq.heading)}</summary><p class="program-detail-faq-text">${escapeHtml(faq.subheading)}</p></details>` : ''}
+    </div>
+  `;
+  const galleryHtml = galleryMarkup(galleryImages, pd.galleryTitle, pd.gallerySubtitle, program.page_title);
+  const ctaTitle = finalCta?.heading ?? pd.readyNextStep;
+  const ctaText = finalCta?.subheading ?? program.hero.subheading;
+
+  if (hasDetailShell(root)) {
+    toggleFoundState(root, true);
+    populateBack(root, 'index.html#programs', pd.backToPrograms, rtl);
+    populateImage(root, program.image, program.page_title);
+    setSlotText(root, '[data-detail-eyebrow]', program.hero.eyebrow);
+    populateDuration(root, duration);
+    setSlotText(root, '[data-detail-title]', program.page_title);
+    setSlotText(root, '[data-detail-subtitle]', program.page_subtitle);
+    setSlotText(root, '[data-detail-lead]', program.hero.subheading);
+    populateHeroCta(root, program.hero.primary_cta, program.slug);
+    populateTabs(root, tabs, pd.sectionsAria, panelsHtml);
+    populateGalleryHost(root, galleryHtml);
+    populateCtaBar(root, ctaTitle, ctaText, program.hero.primary_cta, program.slug);
+    populateRelated(root, pd.relatedPrograms, related, 'program-detail.html');
+    mountExtras(root, testimonials);
+    updateDocumentMeta(program.page_title, program.page_subtitle || program.hero?.subheading, program.image);
+    return;
+  }
+
   root.innerHTML = `
     ${backLink('index.html#programs', pd.backToPrograms, rtl)}
     <section class="program-detail-hero program-detail-hero--compact glass-slide">
       <div class="program-detail-hero-grid">
         <div class="program-detail-hero-visual">
           <div class="program-detail-image-ring" aria-hidden="true"></div>
-          <img src="${escapeHtml(program.image)}" alt="" class="program-detail-image" decoding="async"/>
+          <img src="${escapeHtml(program.image)}" alt="${escapeHtml(program.page_title)}" class="program-detail-image" decoding="async"/>
         </div>
         <div class="program-detail-hero-content">
           <span class="keynote-label program-detail-hero-badge">
@@ -306,41 +536,22 @@ function renderProgram(root) {
           <h1 class="keynote-display program-detail-hero-title">${escapeHtml(program.page_title)}</h1>
           <p class="text-gold-gradient program-detail-hero-subtitle">${escapeHtml(program.page_subtitle)}</p>
           <p class="keynote-body program-detail-hero-lead">${escapeHtml(program.hero.subheading)}</p>
-          <a href="index.html?scroll=contact&program=${encodeURIComponent(program.page_title)}" class="btn-luxury-primary btn-luxury-primary--compact">${escapeHtml(program.hero.primary_cta)}</a>
+          <a href="${contactHref(program.slug)}" class="btn-luxury-primary btn-luxury-primary--compact">${escapeHtml(program.hero.primary_cta)}</a>
         </div>
       </div>
     </section>
     <div class="program-detail-tabs-shell glass-slide">
-      ${tabsMarkup(
-        [
-          { id: 'story', label: pd.tabsStory },
-          { id: 'curriculum', label: pd.tabsCurriculum },
-          { id: 'join', label: pd.tabsJoin },
-        ],
-        pd.sectionsAria,
-      )}
-      <div class="program-detail-tab-panel">
-        <div data-tab-panel="story" class="program-detail-tab-content" ${activeTab === 'story' ? '' : 'hidden'}>
-          ${story[0] ? compactCard(story[0], true) : ''}
-          ${story.slice(1).length ? `<div class="program-detail-compact-grid">${story.slice(1).map((s) => compactCard(s)).join('')}</div>` : ''}
-        </div>
-        <div data-tab-panel="curriculum" class="program-detail-tab-content" ${activeTab === 'curriculum' ? '' : 'hidden'}>
-          ${(buckets.curriculum ?? []).map((s) => compactCard(s, true)).join('')}
-          ${program.modules?.length ? modulesStrip(program.modules, rtl, childrenByParent) : ''}
-        </div>
-        <div data-tab-panel="join" class="program-detail-tab-content" ${activeTab === 'join' ? '' : 'hidden'}>
-          <div class="program-detail-compact-grid">${(buckets.join ?? []).map((s) => compactCard(s)).join('')}</div>
-          ${faq ? `<details class="program-detail-faq"><summary class="program-detail-faq-summary">${escapeHtml(faq.heading)}</summary><p class="program-detail-faq-text">${escapeHtml(faq.subheading)}</p></details>` : ''}
-        </div>
-      </div>
+      ${tabsMarkup(tabs, pd.sectionsAria)}
+      <div class="program-detail-tab-panel">${panelsHtml}</div>
     </div>
     <div data-detail-testimonials></div>
-    ${galleryMarkup(galleryImages, pd.galleryTitle, pd.gallerySubtitle, program.page_title)}
-    ${ctaBar(finalCta?.heading ?? pd.readyNextStep, finalCta?.subheading ?? program.hero.subheading, program.hero.primary_cta, program.page_title)}
+    ${galleryHtml}
+    ${ctaBar(ctaTitle, ctaText, program.hero.primary_cta, program.slug)}
     ${relatedMarkup(pd.relatedPrograms, related, 'program-detail.html')}
   `;
 
   mountExtras(root, testimonials);
+  updateDocumentMeta(program.page_title, program.page_subtitle || program.hero?.subheading, program.image);
 }
 
 function renderWorkshop(root) {
@@ -362,13 +573,55 @@ function renderWorkshop(root) {
   const story = buckets.story ?? [];
   if (!['story', 'curriculum', 'join'].includes(activeTab)) activeTab = 'story';
 
+  const tabs = [
+    { id: 'story', label: pd.tabsStory },
+    { id: 'curriculum', label: pd.tabsCurriculum },
+    { id: 'join', label: pd.tabsJoin },
+  ];
+  const panelsHtml = `
+    <div data-tab-panel="story" class="program-detail-tab-content" ${activeTab === 'story' ? '' : 'hidden'}>
+      ${story[0] ? compactCard(story[0], true) : ''}
+      ${story.slice(1).length ? `<div class="program-detail-compact-grid">${story.slice(1).map((s) => compactCard(s)).join('')}</div>` : ''}
+    </div>
+    <div data-tab-panel="curriculum" class="program-detail-tab-content" ${activeTab === 'curriculum' ? '' : 'hidden'}>
+      ${(buckets.curriculum ?? []).map((s) => compactCard(s, true)).join('')}
+      ${workshop.modules?.length ? modulesStrip(workshop.modules, rtl) : ''}
+      ${workshop.benefits?.length ? `<h3 class="program-detail-compact-title">${escapeHtml(wd.benefitsTitle)}</h3>${modulesStrip(workshop.benefits, rtl)}` : ''}
+    </div>
+    <div data-tab-panel="join" class="program-detail-tab-content" ${activeTab === 'join' ? '' : 'hidden'}>
+      <div class="program-detail-compact-grid">${(buckets.join ?? []).map((s) => compactCard(s)).join('')}</div>
+      ${faq ? `<details class="program-detail-faq"><summary class="program-detail-faq-summary">${escapeHtml(faq.heading)}</summary><p class="program-detail-faq-text">${escapeHtml(faq.subheading)}</p></details>` : ''}
+    </div>
+  `;
+  const ctaTitle = finalCta?.heading ?? pd.readyNextStep;
+  const ctaText = finalCta?.subheading ?? workshop.hero.subheading;
+
+  if (hasDetailShell(root)) {
+    toggleFoundState(root, true);
+    populateBack(root, 'index.html#programs', wd.backToWorkshops, rtl);
+    populateImage(root, workshop.image, workshop.page_title);
+    setSlotText(root, '[data-detail-eyebrow]', workshop.hero.eyebrow);
+    populateDuration(root, duration);
+    setSlotText(root, '[data-detail-title]', workshop.page_title);
+    setSlotText(root, '[data-detail-subtitle]', workshop.page_subtitle);
+    setSlotText(root, '[data-detail-lead]', workshop.hero.subheading);
+    populateHeroCta(root, workshop.hero.primary_cta, workshop.slug);
+    populateTabs(root, tabs, pd.sectionsAria, panelsHtml);
+    populateGalleryHost(root, '');
+    populateCtaBar(root, ctaTitle, ctaText, workshop.hero.primary_cta, workshop.slug);
+    populateRelated(root, wd.relatedWorkshops, related, 'workshop-detail.html');
+    mountExtras(root, testimonials);
+    updateDocumentMeta(workshop.page_title, workshop.page_subtitle || workshop.hero?.subheading, workshop.image);
+    return;
+  }
+
   root.innerHTML = `
     ${backLink('index.html#programs', wd.backToWorkshops, rtl)}
     <section class="program-detail-hero program-detail-hero--compact glass-slide">
       <div class="program-detail-hero-grid">
         <div class="program-detail-hero-visual">
           <div class="program-detail-image-ring" aria-hidden="true"></div>
-          <img src="${escapeHtml(workshop.image)}" alt="" class="program-detail-image" decoding="async"/>
+          <img src="${escapeHtml(workshop.image)}" alt="${escapeHtml(workshop.page_title)}" class="program-detail-image" decoding="async"/>
         </div>
         <div class="program-detail-hero-content">
           <span class="keynote-label program-detail-hero-badge">
@@ -378,41 +631,21 @@ function renderWorkshop(root) {
           <h1 class="keynote-display program-detail-hero-title">${escapeHtml(workshop.page_title)}</h1>
           <p class="text-gold-gradient program-detail-hero-subtitle">${escapeHtml(workshop.page_subtitle)}</p>
           <p class="keynote-body program-detail-hero-lead">${escapeHtml(workshop.hero.subheading)}</p>
-          <a href="index.html?scroll=contact&program=${encodeURIComponent(workshop.page_title)}" class="btn-luxury-primary btn-luxury-primary--compact">${escapeHtml(workshop.hero.primary_cta)}</a>
+          <a href="${contactHref(workshop.slug)}" class="btn-luxury-primary btn-luxury-primary--compact">${escapeHtml(workshop.hero.primary_cta)}</a>
         </div>
       </div>
     </section>
     <div class="program-detail-tabs-shell glass-slide">
-      ${tabsMarkup(
-        [
-          { id: 'story', label: pd.tabsStory },
-          { id: 'curriculum', label: pd.tabsCurriculum },
-          { id: 'join', label: pd.tabsJoin },
-        ],
-        pd.sectionsAria,
-      )}
-      <div class="program-detail-tab-panel">
-        <div data-tab-panel="story" class="program-detail-tab-content" ${activeTab === 'story' ? '' : 'hidden'}>
-          ${story[0] ? compactCard(story[0], true) : ''}
-          ${story.slice(1).length ? `<div class="program-detail-compact-grid">${story.slice(1).map((s) => compactCard(s)).join('')}</div>` : ''}
-        </div>
-        <div data-tab-panel="curriculum" class="program-detail-tab-content" ${activeTab === 'curriculum' ? '' : 'hidden'}>
-          ${(buckets.curriculum ?? []).map((s) => compactCard(s, true)).join('')}
-          ${workshop.modules?.length ? modulesStrip(workshop.modules, rtl) : ''}
-          ${workshop.benefits?.length ? `<h3 class="program-detail-compact-title">${escapeHtml(wd.benefitsTitle)}</h3>${modulesStrip(workshop.benefits, rtl)}` : ''}
-        </div>
-        <div data-tab-panel="join" class="program-detail-tab-content" ${activeTab === 'join' ? '' : 'hidden'}>
-          <div class="program-detail-compact-grid">${(buckets.join ?? []).map((s) => compactCard(s)).join('')}</div>
-          ${faq ? `<details class="program-detail-faq"><summary class="program-detail-faq-summary">${escapeHtml(faq.heading)}</summary><p class="program-detail-faq-text">${escapeHtml(faq.subheading)}</p></details>` : ''}
-        </div>
-      </div>
+      ${tabsMarkup(tabs, pd.sectionsAria)}
+      <div class="program-detail-tab-panel">${panelsHtml}</div>
     </div>
     <div data-detail-testimonials></div>
-    ${ctaBar(finalCta?.heading ?? pd.readyNextStep, finalCta?.subheading ?? workshop.hero.subheading, workshop.hero.primary_cta, workshop.page_title)}
+    ${ctaBar(ctaTitle, ctaText, workshop.hero.primary_cta, workshop.slug)}
     ${relatedMarkup(wd.relatedWorkshops, related, 'workshop-detail.html')}
   `;
 
   mountExtras(root, testimonials);
+  updateDocumentMeta(workshop.page_title, workshop.page_subtitle || workshop.hero?.subheading, workshop.image);
 }
 
 function renderSession(root) {
@@ -431,6 +664,46 @@ function renderSession(root) {
   const story = buckets.story ?? [];
   if (!['story', 'process', 'join'].includes(activeTab)) activeTab = 'story';
 
+  const tabs = [
+    { id: 'story', label: pd.tabsSessionStory },
+    { id: 'process', label: pd.tabsProcess },
+    { id: 'join', label: pd.tabsBooking },
+  ];
+  const panelsHtml = `
+    <div data-tab-panel="story" class="program-detail-tab-content" ${activeTab === 'story' ? '' : 'hidden'}>
+      ${story[0] ? compactCard(story[0], true) : ''}
+      ${story.slice(1).length ? `<div class="program-detail-compact-grid">${story.slice(1).map((s) => compactCard(s)).join('')}</div>` : ''}
+    </div>
+    <div data-tab-panel="process" class="program-detail-tab-content" ${activeTab === 'process' ? '' : 'hidden'}>
+      ${(buckets.process ?? []).map((s) => compactCard(s, true)).join('')}
+      ${session.focus_points?.length ? modulesStrip(session.focus_points, rtl) : ''}
+    </div>
+    <div data-tab-panel="join" class="program-detail-tab-content" ${activeTab === 'join' ? '' : 'hidden'}>
+      <div class="program-detail-compact-grid">${(buckets.join ?? []).map((s) => compactCard(s)).join('')}</div>
+    </div>
+  `;
+  const ctaTitle = finalCta?.heading ?? pd.readyNextStep;
+  const ctaText = finalCta?.subheading ?? session.hero.subheading;
+
+  if (hasDetailShell(root)) {
+    toggleFoundState(root, true);
+    populateBack(root, 'index.html#programs', pd.backToSessions, rtl);
+    populateImage(root, session.image, session.page_title);
+    setSlotText(root, '[data-detail-photo-badge]', session.hero.eyebrow);
+    setSlotText(root, '[data-detail-eyebrow]', session.hero.eyebrow);
+    setSlotText(root, '[data-detail-title]', session.page_title);
+    setSlotText(root, '[data-detail-subtitle]', session.page_subtitle);
+    setSlotText(root, '[data-detail-lead]', session.hero.subheading);
+    populateHeroCta(root, session.hero.primary_cta, session.slug);
+    populateTabs(root, tabs, pd.sessionSectionsAria, panelsHtml);
+    populateGalleryHost(root, '');
+    populateCtaBar(root, ctaTitle, ctaText, session.hero.primary_cta, session.slug);
+    populateRelated(root, pd.relatedSessions, related, 'session-detail.html');
+    mountExtras(root, testimonials);
+    updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, session.image);
+    return;
+  }
+
   root.innerHTML = `
     ${backLink('index.html#programs', pd.backToSessions, rtl)}
     <section class="session-hero glass-slide">
@@ -448,38 +721,23 @@ function renderSession(root) {
           <h1 class="session-hero__title">${escapeHtml(session.page_title)}</h1>
           <p class="session-hero__lead">${escapeHtml(session.page_subtitle)}</p>
           <p class="session-hero__desc">${escapeHtml(session.hero.subheading)}</p>
+          <div class="session-hero__actions">
+            <a href="${contactHref(session.slug)}" class="btn-luxury-primary">${escapeHtml(session.hero.primary_cta)}</a>
+          </div>
         </div>
       </div>
     </section>
     <div id="session-detail-content" class="program-detail-tabs-shell glass-slide session-detail-tabs glow-card">
-      ${tabsMarkup(
-        [
-          { id: 'story', label: pd.tabsSessionStory },
-          { id: 'process', label: pd.tabsProcess },
-          { id: 'join', label: pd.tabsBooking },
-        ],
-        pd.sessionSectionsAria,
-      )}
-      <div class="program-detail-tab-panel">
-        <div data-tab-panel="story" class="program-detail-tab-content" ${activeTab === 'story' ? '' : 'hidden'}>
-          ${story[0] ? compactCard(story[0], true) : ''}
-          ${story.slice(1).length ? `<div class="program-detail-compact-grid">${story.slice(1).map((s) => compactCard(s)).join('')}</div>` : ''}
-        </div>
-        <div data-tab-panel="process" class="program-detail-tab-content" ${activeTab === 'process' ? '' : 'hidden'}>
-          ${(buckets.process ?? []).map((s) => compactCard(s, true)).join('')}
-          ${session.focus_points?.length ? modulesStrip(session.focus_points, rtl) : ''}
-        </div>
-        <div data-tab-panel="join" class="program-detail-tab-content" ${activeTab === 'join' ? '' : 'hidden'}>
-          <div class="program-detail-compact-grid">${(buckets.join ?? []).map((s) => compactCard(s)).join('')}</div>
-        </div>
-      </div>
+      ${tabsMarkup(tabs, pd.sessionSectionsAria)}
+      <div class="program-detail-tab-panel">${panelsHtml}</div>
     </div>
     <div data-detail-testimonials></div>
-    ${ctaBar(finalCta?.heading ?? pd.readyNextStep, finalCta?.subheading ?? session.hero.subheading, session.hero.primary_cta, session.page_title)}
+    ${ctaBar(ctaTitle, ctaText, session.hero.primary_cta, session.slug)}
     ${relatedMarkup(pd.relatedSessions, related, 'session-detail.html')}
   `;
 
   mountExtras(root, testimonials);
+  updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, session.image);
 }
 
 function renderRecorded(root) {
@@ -511,6 +769,47 @@ function renderRecorded(root) {
     )
     .join('');
 
+  const tabs = [
+    { id: 'story', label: rs.tabsStory },
+    { id: 'transformation', label: rs.tabsTransformation },
+    { id: 'focus', label: rs.tabsFocus },
+  ];
+  const panelsHtml = `
+    <div data-tab-panel="story" class="program-detail-tab-content" ${activeTab === 'story' ? '' : 'hidden'}>
+      ${story[0] ? compactCard(story[0], true) : ''}
+      ${story.slice(1).length ? `<div class="program-detail-compact-grid">${story.slice(1).map((s) => compactCard(s)).join('')}</div>` : ''}
+    </div>
+    <div data-tab-panel="transformation" class="program-detail-tab-content" ${activeTab === 'transformation' ? '' : 'hidden'}>
+      ${transformation ? compactCard(transformation, true) : ''}
+      ${transformCards ? `<div class="rs-transformation-grid">${transformCards}</div>` : ''}
+    </div>
+    <div data-tab-panel="focus" class="program-detail-tab-content" ${activeTab === 'focus' ? '' : 'hidden'}>
+      ${session.focus_points?.length ? modulesStrip(session.focus_points, rtl) : ''}
+      <div class="program-detail-compact-grid">${(buckets.focus ?? []).map((s) => compactCard(s)).join('')}</div>
+    </div>
+  `;
+  const ctaTitle = finalCta?.heading ?? rs.readyNextStep;
+  const ctaText = finalCta?.subheading ?? session.hero.subheading;
+
+  if (hasDetailShell(root)) {
+    toggleFoundState(root, true);
+    populateBack(root, 'recorded-sessions.html', rs.backToLibrary, rtl);
+    populateImage(root, session.image, session.page_title);
+    setSlotText(root, '[data-detail-photo-badge]', session.hero.eyebrow);
+    setSlotText(root, '[data-detail-eyebrow]', session.hero.eyebrow);
+    setSlotText(root, '[data-detail-title]', session.page_title);
+    setSlotText(root, '[data-detail-subtitle]', session.page_subtitle);
+    setSlotText(root, '[data-detail-lead]', session.hero.subheading);
+    populateHeroCta(root, session.hero.primary_cta, session.slug);
+    populateTabs(root, tabs, rs.sectionsAria, panelsHtml);
+    populateGalleryHost(root, '');
+    populateCtaBar(root, ctaTitle, ctaText, session.hero.primary_cta, 'recorded-general');
+    populateRelated(root, rs.relatedSessions, related, 'recorded-session-detail.html');
+    mountExtras(root, []);
+    updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, session.image);
+    return;
+  }
+
   root.innerHTML = `
     ${backLink('recorded-sessions.html', rs.backToLibrary, rtl)}
     <section class="session-hero glass-slide">
@@ -529,40 +828,21 @@ function renderRecorded(root) {
           <p class="session-hero__lead">${escapeHtml(session.page_subtitle)}</p>
           <p class="session-hero__desc">${escapeHtml(session.hero.subheading)}</p>
           <div class="session-hero__actions">
-            <a href="index.html?scroll=contact&program=${encodeURIComponent(session.page_title)}" class="btn-luxury-primary">${escapeHtml(session.hero.primary_cta)}</a>
+            <a href="${contactHref(session.slug)}" class="btn-luxury-primary">${escapeHtml(session.hero.primary_cta)}</a>
           </div>
         </div>
       </div>
     </section>
     <div id="rs-detail-content" class="program-detail-tabs-shell glass-slide session-detail-tabs glow-card">
-      ${tabsMarkup(
-        [
-          { id: 'story', label: rs.tabsStory },
-          { id: 'transformation', label: rs.tabsTransformation },
-          { id: 'focus', label: rs.tabsFocus },
-        ],
-        rs.sectionsAria,
-      )}
-      <div class="program-detail-tab-panel">
-        <div data-tab-panel="story" class="program-detail-tab-content" ${activeTab === 'story' ? '' : 'hidden'}>
-          ${story[0] ? compactCard(story[0], true) : ''}
-          ${story.slice(1).length ? `<div class="program-detail-compact-grid">${story.slice(1).map((s) => compactCard(s)).join('')}</div>` : ''}
-        </div>
-        <div data-tab-panel="transformation" class="program-detail-tab-content" ${activeTab === 'transformation' ? '' : 'hidden'}>
-          ${transformation ? compactCard(transformation, true) : ''}
-          ${transformCards ? `<div class="rs-transformation-grid">${transformCards}</div>` : ''}
-        </div>
-        <div data-tab-panel="focus" class="program-detail-tab-content" ${activeTab === 'focus' ? '' : 'hidden'}>
-          ${session.focus_points?.length ? modulesStrip(session.focus_points, rtl) : ''}
-          <div class="program-detail-compact-grid">${(buckets.focus ?? []).map((s) => compactCard(s)).join('')}</div>
-        </div>
-      </div>
+      ${tabsMarkup(tabs, rs.sectionsAria)}
+      <div class="program-detail-tab-panel">${panelsHtml}</div>
     </div>
-    ${ctaBar(finalCta?.heading ?? rs.readyNextStep, finalCta?.subheading ?? session.hero.subheading, session.hero.primary_cta, session.page_title)}
+    ${ctaBar(ctaTitle, ctaText, session.hero.primary_cta, 'recorded-general')}
     ${relatedMarkup(rs.relatedSessions, related, 'recorded-session-detail.html')}
   `;
 
   mountExtras(root, []);
+  updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, session.image);
 }
 
 function renderRetreat(root) {
@@ -577,6 +857,22 @@ function renderRetreat(root) {
   const titleHtml = (rd.titleParts ?? [])
     .map((part) => (part.gold ? `<span class="text-gold-gradient">${escapeHtml(part.text)}</span>` : escapeHtml(part.text)))
     .join('');
+  const galleryHtml = galleryMarkup(retreat.gallery, rd.galleryTitle, rd.gallerySubtitle, rd.eyebrow);
+
+  if (hasDetailShell(root)) {
+    toggleFoundState(root, true);
+    populateBack(root, 'index.html#programs', rd.backToHome, rtl);
+    populateImage(root, retreat.hero, rd.eyebrow);
+    setSlotText(root, '[data-detail-eyebrow]', rd.eyebrow);
+    setSlotHtml(root, '[data-detail-title]', titleHtml);
+    setSlotText(root, '[data-detail-lead]', rd.heroSubtitle);
+    populateHeroCta(root, rd.primaryCta, 'upcoming');
+    populateGalleryHost(root, galleryHtml);
+    populateCtaBar(root, rd.pageTitle, rd.heroSubtitle, rd.primaryCta, 'upcoming');
+    mountExtras(root, []);
+    updateDocumentMeta(rd.pageTitle || rd.eyebrow, rd.heroSubtitle, retreat.hero);
+    return;
+  }
 
   root.innerHTML = `
     ${backLink('index.html#programs', rd.backToHome, rtl)}
@@ -587,20 +883,21 @@ function renderRetreat(root) {
         </span>
         <div class="program-detail-hero-visual program-detail-hero-visual--photo">
           <div class="program-detail-image-ring" aria-hidden="true"></div>
-          <img src="${escapeHtml(retreat.hero)}" alt="" class="program-detail-image" decoding="async"/>
+          <img src="${escapeHtml(retreat.hero)}" alt="${escapeHtml(rd.eyebrow)}" class="program-detail-image" decoding="async"/>
         </div>
         <div class="program-detail-hero-content retreat-detail-hero-content">
           <h1 class="keynote-display program-detail-hero-title retreat-detail-hero-title">${titleHtml}</h1>
           <p class="keynote-body program-detail-hero-lead">${escapeHtml(rd.heroSubtitle)}</p>
-          <a href="index.html?scroll=contact&program=${encodeURIComponent(rd.eyebrow)}" class="btn-luxury-primary btn-luxury-primary--compact">${escapeHtml(rd.primaryCta)}</a>
+          <a href="${contactHref('upcoming')}" class="btn-luxury-primary btn-luxury-primary--compact">${escapeHtml(rd.primaryCta)}</a>
         </div>
       </div>
     </section>
-    ${galleryMarkup(retreat.gallery, rd.galleryTitle, rd.gallerySubtitle, rd.eyebrow)}
-    ${ctaBar(rd.pageTitle, rd.heroSubtitle, rd.primaryCta, rd.eyebrow)}
+    ${galleryHtml}
+    ${ctaBar(rd.pageTitle, rd.heroSubtitle, rd.primaryCta, 'upcoming')}
   `;
 
   mountExtras(root, []);
+  updateDocumentMeta(rd.pageTitle || rd.eyebrow, rd.heroSubtitle, retreat.hero);
 }
 
 function mountExtras(root, testimonials) {
@@ -613,6 +910,8 @@ function mountExtras(root, testimonials) {
   testimonialSlider = null;
   if (host && testimonials?.length) {
     testimonialSlider = createTestimonialSlider(host, testimonials);
+  } else if (host) {
+    host.innerHTML = '';
   }
 }
 

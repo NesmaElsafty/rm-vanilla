@@ -230,6 +230,8 @@
   z-index: 1;
   width: min(17.5rem, 72vw);
   margin-inline: auto;
+  overflow: hidden;
+  border-radius: 50%;
 }
 
 .about-page-hero-portrait-stack {
@@ -250,17 +252,19 @@
 }
 
 .about-page-hero-ring--outer {
-  width: calc(100% + 2.75rem);
-  height: calc(100% + 2.75rem);
+  width: 100%;
+  height: 100%;
   border: 1px solid color-mix(in srgb, var(--theme-gold) 22%, transparent);
   opacity: 0.85;
+  box-sizing: border-box;
 }
 
 .about-page-hero-ring--inner {
-  width: calc(100% + 1.25rem);
-  height: calc(100% + 1.25rem);
+  width: calc(100% - 1.25rem);
+  height: calc(100% - 1.25rem);
   border: 1px dashed color-mix(in srgb, var(--theme-gold) 35%, transparent);
   opacity: 0.55;
+  box-sizing: border-box;
 }
 
 .about-page-hero-portrait {

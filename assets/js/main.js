@@ -2,7 +2,7 @@ import { initTheme } from './theme.js';
 import { initLanguage, applyI18n, getLocale } from './language.js';
 import { initNavigation } from './navigation.js';
 import { initAnimations } from './animations.js';
-import { initForms, initWhatsAppWidget, refreshForms } from './forms.js';
+import { initForms, initWhatsAppWidget } from './forms.js';
 import { initModals } from './modals.js';
 import { initGalleries } from './galleries.js';
 import { initDetailPage, refreshDetailPage, initPolicies, refreshPolicies } from './detail-pages.js';
@@ -108,11 +108,11 @@ function initHomepageTestimonials() {
 function onLocaleChange() {
   applyI18n();
   initIcons();
-  refreshForms();
   refreshDetailPage();
   refreshPolicies();
   initHomepageTestimonials();
   initRecordedLibrary();
+  // forms refresh via forms.js locale listener only
 }
 
 export function boot() {

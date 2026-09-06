@@ -2,7 +2,6 @@ html {
   scroll-behavior: smooth;
   background-color: var(--theme-bg);
   transition: background-color 0.5s ease;
-  overflow-x: hidden;
 }
 
 body {
@@ -11,7 +10,6 @@ body {
   text-align: start;
   color: var(--theme-cream);
   min-height: 100vh;
-  overflow-x: hidden;
   background: transparent;
   transition: color 0.5s ease;
 }
@@ -102,4 +100,21 @@ svg.h-4 {
 
 .rotate-180 {
   transform: rotate(180deg);
+}
+
+.skip-link {
+  position: absolute;
+  inset-inline-start: 1rem;
+  top: -100px;
+  z-index: 100;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-sm);
+  background: var(--theme-navy);
+  color: var(--theme-cream);
+  text-decoration: none;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 40%, transparent);
+}
+
+.skip-link:focus {
+  top: 1rem;
 }

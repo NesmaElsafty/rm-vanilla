@@ -5,7 +5,6 @@ import { iconSend, iconX } from './icons.js';
 export const WHATSAPP_NUMBER = '201039172696';
 export const WHATSAPP_DISPLAY = '+201039172696';
 export const WHATSAPP_URL = 'https://wa.me/201039172696';
-export const CONTACT_EMAIL = 'drranamossad@gmail.com';
 export const MOTMAIN_TELEGRAM_URL = 'https://t.me/+hT9o9oJwoghhYjdk';
 
 const CATEGORY_IDS = ['private', 'training', 'workshops', 'initiatives', 'recorded', 'retreats'];
@@ -174,6 +173,7 @@ function rebuildSubOptions(form) {
       select.required = false;
       select.innerHTML = '';
       select.value = '';
+      select.removeAttribute('aria-invalid');
     }
     return;
   }
@@ -185,6 +185,73 @@ function rebuildSubOptions(form) {
   }
 }
 
+function clearFieldErrors(form) {
+  form.querySelectorAll('[data-field-error]').forEach((el) => {
+    el.hidden = true;
+    el.textContent = '';
+  });
+  form.querySelectorAll('[aria-invalid="true"]').forEach((el) => {
+    el.removeAttribute('aria-invalid');
+  });
+}
+
+function showFieldError(input, message) {
+  if (!input) return;
+  input.setAttribute('aria-invalid', 'true');
+  const wrap = input.closest('.contact-field-wrap, [data-sub-option-block]');
+  const host = wrap?.querySelector('[data-field-error]') || input.parentElement?.querySelector('[data-field-error]');
+  if (host) {
+    host.hidden = false;
+    host.textContent = message;
+  }
+}
+
+function validateForm(form) {
+  const data = content();
+  const contact = data.contact ?? {};
+  clearFieldErrors(form);
+
+  const name = form.elements.full_name?.value?.trim() ?? '';
+  const phone = form.elements.phone?.value?.trim() ?? '';
+  const email = form.elements.email?.value?.trim() ?? '';
+  const categoryId = form.elements.service_category?.value || '';
+  const sub = form.elements.sub_option?.value || '';
+  const subRequired = Boolean(form.elements.sub_option?.required);
+
+  let firstInvalid = null;
+
+  if (!name) {
+    showFieldError(form.elements.full_name, contact.errorNameRequired || contact.required || 'Required');
+    firstInvalid ??= form.elements.full_name;
+  }
+
+  if (!phone) {
+    showFieldError(form.elements.phone, contact.errorPhoneRequired || contact.required || 'Required');
+    firstInvalid ??= form.elements.phone;
+  }
+
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showFieldError(form.elements.email, contact.errorEmailInvalid || 'Invalid email');
+    firstInvalid ??= form.elements.email;
+  }
+
+  if (!categoryId) {
+    showFieldError(form.elements.service_category, contact.errorCategoryRequired || contact.required || 'Required');
+    firstInvalid ??= form.elements.service_category;
+  }
+
+  if (subRequired && !sub) {
+    showFieldError(form.elements.sub_option, contact.errorSubRequired || contact.required || 'Required');
+    firstInvalid ??= form.elements.sub_option;
+  }
+
+  if (firstInvalid) {
+    firstInvalid.focus?.();
+    return false;
+  }
+  return true;
+}
+
 function applyPrefill(form) {
   const params = new URLSearchParams(location.search);
   const preselected = params.get('program') || window.__preSelectedProgram;
@@ -192,7 +259,7 @@ function applyPrefill(form) {
 
   const data = content();
   const optionMatch = allOptions(data).find(
-    (option) => option.label === preselected || option.slug === preselected,
+    (option) => option.slug === preselected || option.label === preselected,
   );
 
   if (optionMatch) {
@@ -206,17 +273,20 @@ function applyPrefill(form) {
     }
   }
 
-  const categoryMatch = data.contactCategories?.find((category) => category.label === preselected);
+  const categoryMatch = data.contactCategories?.find(
+    (category) => category.id === preselected || category.label === preselected,
+  );
   if (categoryMatch && form.elements.service_category) {
     form.elements.service_category.value = categoryMatch.id;
     rebuildSubOptions(form);
-    return;
   }
+}
 
-  if (form.elements.service_category) form.elements.service_category.value = 'training';
-  rebuildSubOptions(form);
-  if (form.elements.sub_option) form.elements.sub_option.value = preselected;
-  if (form.elements.message) form.elements.message.value = prefillMessage(data.contact, preselected);
+function setFormBusy(form, busy) {
+  form.setAttribute('aria-busy', busy ? 'true' : 'false');
+  form.querySelectorAll('button[type="submit"], [data-form-submit]').forEach((btn) => {
+    btn.disabled = busy;
+  });
 }
 
 function showSuccess(form) {
@@ -242,9 +312,11 @@ function showSuccess(form) {
 
 function resetForm(form) {
   form.reset();
+  clearFieldErrors(form);
   if (form.elements.service_category) form.elements.service_category.value = 'private';
   rebuildSubOptions(form);
   form.hidden = false;
+  setFormBusy(form, false);
   const panel = document.getElementById('contact-success-panel');
   if (panel) panel.hidden = true;
   updateWhatsAppLinks(form);
@@ -282,17 +354,25 @@ export function initForms() {
 
   form.addEventListener('submit', (event) => {
     event.preventDefault();
-    const name = form.elements.full_name?.value?.trim();
-    const phone = form.elements.phone?.value?.trim();
-    if (!name || !phone) return;
+    if (!validateForm(form)) return;
+
+    setFormBusy(form, true);
+    updateWhatsAppLinks(form);
+
+    // No backend yet: prepare payload for Laravel and open WhatsApp as the delivery channel.
+    const payload = new FormData(form);
+    form.dataset.lastPayload = JSON.stringify(Object.fromEntries(payload.entries()));
+
+    const exportLink = document.getElementById('form-whatsapp-export-btn');
+    const url = exportLink?.getAttribute('href') || buildWhatsAppUrl(form);
+    window.open(url, '_blank', 'noopener,noreferrer');
     showSuccess(form);
+    setFormBusy(form, false);
   });
 
   document.querySelectorAll('[data-submit-another], #contact-submit-another').forEach((btn) => {
     btn.addEventListener('click', () => resetForm(form));
   });
-
-  document.addEventListener('localechange', () => refreshForms());
 }
 
 function iconWhatsApp(cls = 'w-9 h-9') {
@@ -303,6 +383,22 @@ function sendWhatsApp(text) {
   const w = content().whatsapp;
   const finalizeMsg = text || w.defaultMsg;
   window.open(`${WHATSAPP_URL}?text=${encodeURIComponent(finalizeMsg)}`, '_blank', 'noopener,noreferrer');
+}
+
+function renderWhatsAppPresets(presetsHost, presets, chatbox) {
+  if (!presetsHost || !presets?.length) return;
+  presetsHost.innerHTML = presets
+    .map(
+      (preset) =>
+        `<button type="button" data-whatsapp-preset class="whatsapp-preset" data-msg="${encodeURIComponent(preset.msg)}">${preset.text}</button>`,
+    )
+    .join('');
+  presetsHost.querySelectorAll('[data-whatsapp-preset]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      sendWhatsApp(decodeURIComponent(btn.getAttribute('data-msg') || ''));
+      if (chatbox) chatbox.hidden = true;
+    });
+  });
 }
 
 export function initWhatsAppWidget() {
@@ -316,21 +412,7 @@ export function initWhatsAppWidget() {
   if (chatbox) {
     chatbox.hidden = true;
     const presetsHost = chatbox.querySelector('[data-whatsapp-presets]');
-    if (presetsHost && w.presets?.length) {
-      presetsHost.innerHTML = w.presets
-        .map(
-          (preset) =>
-            `<button type="button" data-whatsapp-preset class="whatsapp-preset" data-msg="${encodeURIComponent(preset.msg)}">${preset.text}</button>`,
-        )
-        .join('');
-    }
-
-    chatbox.querySelectorAll('[data-whatsapp-preset]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        sendWhatsApp(decodeURIComponent(btn.getAttribute('data-msg') || ''));
-        chatbox.hidden = true;
-      });
-    });
+    renderWhatsAppPresets(presetsHost, w.presets, chatbox);
 
     const input = chatbox.querySelector('input[type="text"], [data-whatsapp-input]');
     const sendBtn = chatbox.querySelector('[data-whatsapp-send]');
@@ -378,18 +460,6 @@ export function initWhatsAppWidget() {
   document.addEventListener('localechange', () => {
     const next = content().whatsapp;
     const presetsHost = chatbox?.querySelector('[data-whatsapp-presets]');
-    if (!presetsHost || !next.presets) return;
-    presetsHost.innerHTML = next.presets
-      .map(
-        (preset) =>
-          `<button type="button" data-whatsapp-preset class="whatsapp-preset" data-msg="${encodeURIComponent(preset.msg)}">${preset.text}</button>`,
-      )
-      .join('');
-    presetsHost.querySelectorAll('[data-whatsapp-preset]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        sendWhatsApp(decodeURIComponent(btn.getAttribute('data-msg') || ''));
-        if (chatbox) chatbox.hidden = true;
-      });
-    });
+    renderWhatsAppPresets(presetsHost, next.presets, chatbox);
   });
 }
