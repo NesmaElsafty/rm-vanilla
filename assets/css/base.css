@@ -1,0 +1,105 @@
+html {
+  scroll-behavior: smooth;
+  background-color: var(--theme-bg);
+  transition: background-color 0.5s ease;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-sans);
+  direction: inherit;
+  text-align: start;
+  color: var(--theme-cream);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: transparent;
+  transition: color 0.5s ease;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--theme-gold) 40%, transparent);
+  color: var(--theme-cream);
+}
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--theme-bg); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--theme-gold) 0%, var(--theme-rose) 100%);
+  border-radius: 99px;
+}
+
+.keynote-display {
+  font-family: var(--font-serif);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: var(--theme-cream);
+}
+
+.keynote-headline {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--theme-cream);
+}
+
+.keynote-body {
+  font-family: var(--font-sans);
+  line-height: 1.9;
+  color: var(--theme-cream-muted);
+}
+
+.text-gold-gradient {
+  background: var(--theme-gold-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+.icon {
+  display: inline-block;
+  width: 1.25rem;
+  height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.icon-xs {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.icon-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+.icon-md {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.icon-lg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.icon-xl {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.text-brand-gold {
+  color: var(--theme-gold);
+}
+
+svg.w-4,
+svg.h-4 {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}

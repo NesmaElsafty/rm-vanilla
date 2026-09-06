@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,650;0,700;1,400&family=Tajawal:wght@300;400;500;700;800;900&family=Mirza:wght@400;500;600;700&family=Dancing+Script:wght@500;600;700&display=swap');
+
+/* Theme tokens — defaults match "luxury-rose" from index.css + footer vars */
+:root {
+  --theme-bg: #071424;
+  --theme-navy: #0D1B34;
+  --theme-navy-deep: #040a14;
+  --theme-purple-deep: #2B103F;
+  --theme-primary: #4B146D;
+  --theme-accent: #7A3EB1;
+  --theme-rose: #B98FA2;
+  --theme-mauve: #9D81A0;
+  --theme-cream: #F8F3EB;
+  --theme-cream-muted: rgba(248, 243, 235, 0.76);
+  --theme-gold: #C79A3B;
+  --theme-soft-gold: #D7BE7A;
+  --theme-glass-border: rgba(199, 154, 59, 0.16);
+  --theme-glass-bg: linear-gradient(155deg, rgba(255,255,255,0.04) 0%, rgba(43,16,63,0.25) 50%, rgba(13,27,52,0.5) 100%);
+  --theme-slide-bg: linear-gradient(160deg, rgba(75,20,109,0.14) 0%, rgba(13,27,52,0.55) 45%, rgba(43,16,63,0.35) 100%);
+  --theme-nav-scrolled: rgba(7, 20, 36, 0.78);
+  --theme-btn-primary: linear-gradient(135deg, rgba(248, 243, 235, 0.28) 0%, rgba(215, 190, 122, 0.42) 45%, rgba(199, 154, 59, 0.52) 100%);
+  --theme-btn-primary-text: #F8F3EB;
+  --theme-btn-ghost-text: rgba(215, 190, 122, 0.95);
+  --theme-btn-ghost-border: rgba(199, 154, 59, 0.4);
+  --theme-gold-gradient: linear-gradient(135deg, #F8F3EB 0%, #D7BE7A 45%, #C79A3B 100%);
+  --theme-section-line: linear-gradient(90deg, transparent, rgba(199,154,59,0.28) 40%, rgba(185,143,162,0.1) 60%, transparent);
+  --theme-logo-glow: white;
+  --theme-portrait-glow: radial-gradient(ellipse 65% 75% at 50% 42%, rgba(194,153,173,0.32) 0%, rgba(157,129,160,0.16) 38%, transparent 78%);
+  --theme-input-bg: rgba(12, 5, 26, 0.55);
+  --theme-input-border: rgba(199, 154, 59, 0.25);
+  --theme-contact-note-bg: rgba(75, 20, 109, 0.2);
+  --theme-contact-icon-bg: rgba(199, 154, 59, 0.1);
+  --theme-footer-charter-bg: rgba(28, 9, 43, 0.45);
+  --theme-footer-social-bg: rgba(255, 255, 255, 0.05);
+  --theme-footer-social-hover-text: #12051A;
+  --theme-footer-modal-bg: #12051A;
+
+  --font-sans: "Tajawal", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-serif: "Noto Kufi Arabic", serif;
+  --font-display: "Playfair Display", serif;
+  --font-handwrite: "Mirza", "Noto Kufi Arabic", cursive;
+
+  --container-max: 72rem;
+  --container-wide: 80rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.5rem;
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.4s ease;
+}
+
+[data-theme="luxury-rose"] {
+  --theme-bg: #071424;
+  --theme-navy: #0D1B34;
+  --theme-navy-deep: #040a14;
+  --theme-purple-deep: #2B103F;
+  --theme-primary: #4B146D;
+  --theme-accent: #7A3EB1;
+  --theme-rose: #B98FA2;
+  --theme-mauve: #9D81A0;
+  --theme-cream: #F8F3EB;
+  --theme-cream-muted: rgba(248, 243, 235, 0.76);
+  --theme-gold: #C79A3B;
+  --theme-soft-gold: #D7BE7A;
+  --theme-glass-border: rgba(199, 154, 59, 0.16);
+  --theme-glass-bg: linear-gradient(155deg, rgba(255,255,255,0.04) 0%, rgba(43,16,63,0.25) 50%, rgba(13,27,52,0.5) 100%);
+  --theme-slide-bg: linear-gradient(160deg, rgba(75,20,109,0.14) 0%, rgba(13,27,52,0.55) 45%, rgba(43,16,63,0.35) 100%);
+  --theme-nav-scrolled: rgba(7, 20, 36, 0.78);
+  --theme-btn-primary: linear-gradient(135deg, rgba(248, 243, 235, 0.28) 0%, rgba(215, 190, 122, 0.42) 45%, rgba(199, 154, 59, 0.52) 100%);
+  --theme-btn-primary-text: #F8F3EB;
+  --theme-btn-ghost-text: rgba(215, 190, 122, 0.95);
+  --theme-btn-ghost-border: rgba(199, 154, 59, 0.4);
+  --theme-gold-gradient: linear-gradient(135deg, #F8F3EB 0%, #D7BE7A 45%, #C79A3B 100%);
+  --theme-section-line: linear-gradient(90deg, transparent, rgba(199,154,59,0.28) 40%, rgba(185,143,162,0.1) 60%, transparent);
+  --theme-logo-glow: white;
+  --theme-portrait-glow: radial-gradient(ellipse 65% 75% at 50% 42%, rgba(194,153,173,0.32) 0%, rgba(157,129,160,0.16) 38%, transparent 78%);
+  --theme-input-bg: rgba(12, 5, 26, 0.55);
+  --theme-input-border: rgba(199, 154, 59, 0.25);
+  --theme-contact-note-bg: rgba(75, 20, 109, 0.2);
+  --theme-contact-icon-bg: rgba(199, 154, 59, 0.1);
+  --theme-footer-charter-bg: rgba(28, 9, 43, 0.45);
+  --theme-footer-social-bg: rgba(255, 255, 255, 0.05);
+  --theme-footer-social-hover-text: #12051A;
+  --theme-footer-modal-bg: #12051A;
+}
+
+[data-theme="cream-elegance"] {
+  --theme-bg: #F8F3EB;
+  --theme-primary: #4B146D;
+  --theme-gold: #C79A3B;
+  --theme-accent: #7A3EB1;
+  --theme-cream: #2B103F;
+  --theme-cream-muted: rgba(43, 16, 63, 0.68);
+  --theme-navy: #2B103F;
+  --theme-navy-deep: #EDE8DF;
+  --theme-purple-deep: #4B146D;
+  --theme-rose: rgba(122, 62, 177, 0.45);
+  --theme-mauve: rgba(43, 16, 63, 0.52);
+  --theme-soft-gold: #D7BE7A;
+  --theme-glass-border: rgba(199, 154, 59, 0.28);
+  --theme-glass-bg: linear-gradient(155deg, rgba(255,255,255,0.92) 0%, rgba(248,243,235,0.88) 48%, rgba(237,232,223,0.94) 100%);
+  --theme-slide-bg: linear-gradient(160deg, rgba(255,255,255,0.95) 0%, rgba(248,243,235,0.9) 50%, rgba(237,232,223,0.92) 100%);
+  --theme-nav-scrolled: rgba(248, 243, 235, 0.94);
+  --theme-btn-primary: linear-gradient(135deg, #4B146D 0%, #5A1A82 55%, #7A3EB1 100%);
+  --theme-btn-primary-text: #F8F3EB;
+  --theme-btn-ghost-text: #4B146D;
+  --theme-btn-ghost-border: rgba(199, 154, 59, 0.5);
+  --theme-gold-gradient: linear-gradient(135deg, #D7BE7A 0%, #C79A3B 52%, #A8842E 100%);
+  --theme-section-line: linear-gradient(90deg, transparent, rgba(199,154,59,0.28) 38%, rgba(122,62,177,0.14) 62%, transparent);
+  --theme-logo-glow: purple;
+  --theme-portrait-glow: radial-gradient(ellipse 65% 75% at 50% 42%, rgba(199,154,59,0.26) 0%, rgba(185,143,162,0.2) 35%, rgba(122,62,177,0.14) 55%, transparent 78%);
+  --theme-input-bg: rgba(255, 255, 255, 0.96);
+  --theme-input-border: rgba(199, 154, 59, 0.35);
+  --theme-contact-note-bg: rgba(75, 20, 109, 0.06);
+  --theme-contact-icon-bg: rgba(199, 154, 59, 0.12);
+  --theme-footer-charter-bg: linear-gradient(155deg, rgba(255,255,255,0.92) 0%, rgba(248,243,235,0.88) 48%, rgba(237,232,223,0.94) 100%);
+  --theme-footer-social-bg: rgba(199, 154, 59, 0.1);
+  --theme-footer-social-hover-text: #2B103F;
+  --theme-footer-modal-bg: #F8F3EB;
+}

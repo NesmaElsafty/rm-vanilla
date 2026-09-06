@@ -1,0 +1,359 @@
+{
+  "recorded_sessions_category": {
+    "slug": "meditation-sessions-library",
+    "type": "recorded_sessions_category",
+    "category_name": "Meditation Sessions Library",
+    "category_label_en": "Recorded Sessions",
+    "page_title": "Meditation Sessions Library",
+    "page_subtitle": "A quiet space to pause the noise of life… and hear what your heart truly needs.",
+    "hero": {
+      "eyebrow": "Recorded Sessions",
+      "heading": "Meditation Sessions Library",
+      "subheading": "Each audio session is designed to walk with you through a different stage of your journey — helping you release inner blocks, return to peace, and connect more deeply with Allah and yourself.",
+      "primary_cta": "Explore Sessions",
+      "secondary_cta": "Start Your Journey"
+    },
+    "sections": [
+      {
+        "key": "intro",
+        "order": 1,
+        "heading": "A Quiet Space to Return Within",
+        "subheading": "This library is designed to be an audio companion that helps you pause, breathe, and hear what your heart needs at every stage of your journey."
+      },
+      {
+        "key": "purpose",
+        "order": 2,
+        "heading": "Why Meditation Sessions?",
+        "subheading": "Because some transformations don't need more thinking — they need a quiet space where your heart can settle, see clearly, and reconnect."
+      },
+      {
+        "key": "sessions_list",
+        "order": 3,
+        "heading": "Choose the Session That Fits Your Stage",
+        "subheading": "Whether you need surrender, self-reconciliation, forgiveness, or connection with your future self — you'll find a session that walks with you in calm and depth."
+      },
+      {
+        "key": "final_cta",
+        "order": 4,
+        "heading": "Start with the Session Your Heart Is Calling You To",
+        "subheading": "Each session is a small space to return to peace and draw closer to yourself and Allah in a deeper, truer way."
+      }
+    ]
+  },
+  "recorded_sessions_landing_pages": [
+    {
+      "slug": "surrender-facing-challenges",
+      "type": "recorded_session",
+      "category_slug": "meditation-sessions-library",
+      "session_name": "Surrender When Facing Challenges",
+      "page_title": "Surrender When Facing Challenges",
+      "page_subtitle": "From resisting reality to calm and trust in Allah",
+      "duration": null,
+      "format": "audio",
+      "hero": {
+        "eyebrow": "Audio Meditation Session",
+        "heading": "Surrender When Facing Challenges",
+        "subheading": "A session that helps you stop the inner struggle and return to trust in Allah — so you realize peace doesn't come when challenges end, but when your heart's relationship with them changes.",
+        "primary_cta": "Start Session",
+        "secondary_cta": "Session Details"
+      },
+      "sections": [
+        {
+          "key": "opening_description",
+          "order": 1,
+          "heading": "When Life Feels Heavier Than You Can Bear",
+          "subheading": "There are moments when we resist reality, get caught in fear, and search for answers that don't come. This session helps you return to conscious surrender."
+        },
+        {
+          "key": "session_purpose",
+          "order": 2,
+          "heading": "What Is This Session For?",
+          "subheading": "To help you calm inner conflict, restore trust in Allah, and move from trying to control everything to calm and reassurance."
+        },
+        {
+          "key": "transformation",
+          "order": 3,
+          "heading": "What Will You Experience Inside the Session?",
+          "subheading": "An inner shift from resisting reality and fearing the future to acceptance, reliance on Allah, and conscious surrender."
+        },
+        {
+          "key": "audience",
+          "order": 4,
+          "heading": "This Session Is for You If",
+          "subheading": "You're going through a difficult challenge, feeling tension and pressure, or trying to control everything and need to return to trust in Allah."
+        },
+        {
+          "key": "final_cta",
+          "order": 5,
+          "heading": "Return to the Space of Surrender",
+          "subheading": "Start a session that helps your heart stop resisting and move closer to calm and trust in Allah."
+        }
+      ],
+      "transformation_points": [
+        { "order": 1, "from": "Resisting reality", "to": "Accepting what Allah decrees" },
+        { "order": 2, "from": "Fear of the future", "to": "Trust and reliance on Allah" },
+        { "order": 3, "from": "Tension and pressure", "to": "Calm and reassurance" },
+        { "order": 4, "from": "Trying to control everything", "to": "Conscious surrender" }
+      ],
+      "focus_points": [
+        {
+          "order": 1,
+          "heading": "Calming Inner Conflict",
+          "subheading": "A space that helps you stop resisting what happens inside and outside you."
+        },
+        {
+          "order": 2,
+          "heading": "Restoring Trust in Allah",
+          "subheading": "Returning to reliance on Allah instead of being consumed by fear and control."
+        },
+        {
+          "order": 3,
+          "heading": "Conscious Surrender",
+          "subheading": "Surrender doesn't mean giving up — it's a calmer, more balanced heart posture."
+        }
+      ]
+    },
+    {
+      "slug": "reconcile-with-yourself",
+      "type": "recorded_session",
+      "category_slug": "meditation-sessions-library",
+      "session_name": "Reconcile with Yourself",
+      "page_title": "Reconcile with Yourself",
+      "page_subtitle": "From self-blame to compassion and acceptance",
+      "duration": null,
+      "format": "audio",
+      "hero": {
+        "eyebrow": "Audio Meditation Session",
+        "heading": "Reconcile with Yourself",
+        "subheading": "A session that gives you a quiet space to rebuild your relationship with yourself — away from self-blame — so you see your worth as Allah created it and welcome yourself with love and balance.",
+        "primary_cta": "Start Session",
+        "secondary_cta": "Session Details"
+      },
+      "sections": [
+        {
+          "key": "opening_description",
+          "order": 1,
+          "heading": "Perhaps You've Been Harder on Yourself Than Anyone Else",
+          "subheading": "You constantly judge yourself, blame yourself for mistakes, and forget that Allah looks at you with mercy before you look at yourself."
+        },
+        {
+          "key": "session_purpose",
+          "order": 2,
+          "heading": "What Is This Session For?",
+          "subheading": "To help you build a kinder relationship with yourself, soften inner criticism, and receive yourself from a place of more love and balance."
+        },
+        {
+          "key": "transformation",
+          "order": 3,
+          "heading": "What Will You Experience Inside the Session?",
+          "subheading": "An inner shift from self-blame and feeling not enough to self-acceptance, recognizing your worth, and peace with your own journey."
+        },
+        {
+          "key": "audience",
+          "order": 4,
+          "heading": "This Session Is for You If",
+          "subheading": "You blame yourself often, feel not good enough, compare yourself to others, or need a more compassionate inner voice."
+        },
+        {
+          "key": "final_cta",
+          "order": 5,
+          "heading": "Begin Reconciling with Yourself",
+          "subheading": "Give your heart a space where it sees you with mercy, and start a calmer, truer relationship with yourself."
+        }
+      ],
+      "transformation_points": [
+        { "order": 1, "from": "Self-blame", "to": "Self-acceptance" },
+        { "order": 2, "from": "Feeling not enough", "to": "Recognizing your true worth" },
+        { "order": 3, "from": "Comparing yourself to others", "to": "Peace with your own journey" },
+        { "order": 4, "from": "Constant inner criticism", "to": "A more compassionate inner voice" }
+      ],
+      "focus_points": [
+        {
+          "order": 1,
+          "heading": "Softening Inner Criticism",
+          "subheading": "Moving from constant harshness to a calmer space of understanding and compassion."
+        },
+        {
+          "order": 2,
+          "heading": "Seeing True Worth",
+          "subheading": "An inner reminder that your value isn't tied to mistakes or comparisons."
+        },
+        {
+          "order": 3,
+          "heading": "Accepting Your Own Path",
+          "subheading": "Stopping the measure against others and returning to your own path."
+        }
+      ]
+    },
+    {
+      "slug": "forgiveness",
+      "type": "recorded_session",
+      "category_slug": "meditation-sessions-library",
+      "session_name": "Forgiveness",
+      "page_title": "Forgiveness",
+      "page_subtitle": "From carrying the past to deeper inner peace",
+      "duration": null,
+      "format": "audio",
+      "hero": {
+        "eyebrow": "Audio Meditation Session",
+        "heading": "Forgiveness",
+        "subheading": "A session that helps you free your heart from the weight it has carried for years, leave the past in its place, and give yourself a new chance at life without the chains of anger, blame, or bitterness.",
+        "primary_cta": "Start Session",
+        "secondary_cta": "Session Details"
+      },
+      "sections": [
+        {
+          "key": "opening_description",
+          "order": 1,
+          "heading": "Forgiveness Is Not Justifying What Happened",
+          "subheading": "And it's not denying the pain — it's a decision to free your heart from the weight it has carried for years."
+        },
+        {
+          "key": "session_purpose",
+          "order": 2,
+          "heading": "What Is This Session For?",
+          "subheading": "To help you leave the past in its place, detach from pain, and return to a deeper presence in the present."
+        },
+        {
+          "key": "transformation",
+          "order": 3,
+          "heading": "What Will You Experience Inside the Session?",
+          "subheading": "An inner shift from clinging to pain, anger, and blame to conscious forgiveness and inner peace."
+        },
+        {
+          "key": "audience",
+          "order": 4,
+          "heading": "This Session Is for You If",
+          "subheading": "You feel the past still drains your energy, carry anger or bitterness, or need to free your heart without denying what happened."
+        },
+        {
+          "key": "final_cta",
+          "order": 5,
+          "heading": "Free Your Heart from the Weight of the Past",
+          "subheading": "Start the forgiveness session and open a new space for peace and presence."
+        }
+      ],
+      "transformation_points": [
+        { "order": 1, "from": "Clinging to pain", "to": "Freedom from it" },
+        { "order": 2, "from": "Anger and bitterness", "to": "Inner peace" },
+        { "order": 3, "from": "Blaming others or yourself", "to": "Conscious forgiveness" },
+        { "order": 4, "from": "Draining energy in the past", "to": "Deeper presence in the now" }
+      ],
+      "focus_points": [
+        {
+          "order": 1,
+          "heading": "Freeing the Heart",
+          "subheading": "Releasing emotional weight tied to the past without justification or denial."
+        },
+        {
+          "order": 2,
+          "heading": "Conscious Forgiveness",
+          "subheading": "An inner choice to release blame and bitterness while honoring what you felt."
+        },
+        {
+          "order": 3,
+          "heading": "Presence in the Now",
+          "subheading": "Reclaiming your energy from the past and returning to your current life with greater peace."
+        }
+      ]
+    },
+    {
+      "slug": "future-self-meeting",
+      "type": "recorded_session",
+      "category_slug": "meditation-sessions-library",
+      "session_name": "Meeting Your Future Self",
+      "page_title": "Meeting Your Future Self",
+      "page_subtitle": "From confusion and hesitation to clarity and inspiration",
+      "duration": null,
+      "format": "audio",
+      "hero": {
+        "eyebrow": "Audio Meditation Session",
+        "heading": "Meeting Your Future Self",
+        "subheading": "A meditative journey where you meet your calmer, more mature, more connected self — to draw clarity and inspiration and return with practical steps you can start today.",
+        "primary_cta": "Start Session",
+        "secondary_cta": "Session Details"
+      },
+      "sections": [
+        {
+          "key": "opening_description",
+          "order": 1,
+          "heading": "Inside Every Person Is a Calmer, More Mature Version",
+          "subheading": "A version more connected to Allah — but it waits for you to choose it and begin moving toward it."
+        },
+        {
+          "key": "session_purpose",
+          "order": 2,
+          "heading": "What Is This Session For?",
+          "subheading": "To help you connect with your future self, see her life, feel her presence, and return with inspiration and practical steps."
+        },
+        {
+          "key": "transformation",
+          "order": 3,
+          "heading": "What Will You Experience Inside the Session?",
+          "subheading": "An inner shift from confusion, hesitation, and reactivity to clarity, confidence in your choices, and leading your life with awareness."
+        },
+        {
+          "key": "audience",
+          "order": 4,
+          "heading": "This Session Is for You If",
+          "subheading": "You feel confused, need a clearer view of the next stage, or want to connect with the version Allah created you to become."
+        },
+        {
+          "key": "final_cta",
+          "order": 5,
+          "heading": "Move Closer to Your Future Self",
+          "subheading": "Start a session that helps you see the path more clearly and return with practical steps you can begin today."
+        }
+      ],
+      "transformation_points": [
+        { "order": 1, "from": "Confusion", "to": "Clarity" },
+        { "order": 2, "from": "Hesitation", "to": "Confidence in your choices" },
+        { "order": 3, "from": "Living reactively", "to": "Leading your life with awareness" },
+        { "order": 4, "from": "Disconnection from your vision", "to": "Connection with who Allah created you to become" }
+      ],
+      "focus_points": [
+        {
+          "order": 1,
+          "heading": "Connecting with the Vision",
+          "subheading": "A clearer view of the future self you want to move toward."
+        },
+        {
+          "order": 2,
+          "heading": "Drawing Clarity and Inspiration",
+          "subheading": "Receiving an inner message that helps you understand the next stage."
+        },
+        {
+          "order": 3,
+          "heading": "Practical Steps from Today",
+          "subheading": "Returning from the session with clearer feeling and small, actionable steps."
+        }
+      ]
+    }
+  ],
+  "recorded_sessions_home_cards": [
+    {
+      "slug": "surrender-facing-challenges",
+      "title": "Surrender When Facing Challenges",
+      "description": "A meditation session that helps you stop inner struggle and return to trust in Allah and calm when facing challenges.",
+      "button_text": "Learn More"
+    },
+    {
+      "slug": "reconcile-with-yourself",
+      "title": "Reconcile with Yourself",
+      "description": "A calm session that helps you soften self-blame, see your true worth, and build a more compassionate inner voice.",
+      "button_text": "Learn More"
+    },
+    {
+      "slug": "forgiveness",
+      "title": "Forgiveness",
+      "description": "A session to free your heart from the weight of the past, release anger, blame, and bitterness, and return to deeper inner peace.",
+      "button_text": "Learn More"
+    },
+    {
+      "slug": "future-self-meeting",
+      "title": "Meeting Your Future Self",
+      "description": "A meditative journey to connect with your calmer, more mature self and draw clarity, inspiration, and practical steps.",
+      "button_text": "Learn More"
+    }
+  ]
+}

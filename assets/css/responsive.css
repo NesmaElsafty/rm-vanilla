@@ -1,0 +1,114 @@
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .logo-white-highlight,
+  .whatsapp-green-highlight,
+  .botanical-line-art--animated .vine-light-trace,
+  .botanical-line-art--animated .vine-light-dot,
+  .botanical-line-art--animated.portrait-vine--front,
+  .portrait-vine--front.botanical-line-art--animated,
+  .botanical-line-art--animated.portrait-vine--back,
+  .portrait-vine--back.botanical-line-art--animated,
+  .hero-botanical-between.botanical-line-art--animated,
+  .backdrop-glow-animated,
+  .floating-programs-slide,
+  .floating-programs-ring,
+  .floating-programs-sparkle,
+  .floating-program-card-image-ring,
+  .gold-border-light,
+  .gold-border-light::after,
+  .glass-panel::after,
+  .glass-slide::after,
+  .keynote-label::after,
+  .btn-luxury-ghost::after,
+  .gold-rule,
+  .gold-rule-short,
+  .journey-curve-light,
+  .journey-circle--animated::before,
+  .journey-circle--animated::after,
+  .journey-circle-dot,
+  .journey-arrow-wrap,
+  .portrait-name-bar,
+  .portrait-name-bar::after,
+  .hero-scroll-btn {
+    animation: none;
+  }
+
+  .botanical-line-art--animated .vine-light-trace {
+    opacity: 0.45;
+    stroke-dashoffset: 50;
+  }
+
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .modal-layer,
+  .whatsapp-chatbox {
+    transition: none;
+  }
+
+  .session-detail-page .session-detail-card,
+  .session-detail-page .session-detail-chip,
+  .session-detail-page .session-detail-related,
+  .session-detail-page .session-detail-cta,
+  .session-detail-page .program-detail-testimonials blockquote.glass-slide {
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .session-detail-page .session-hero:hover .session-hero__photo,
+  .session-detail-page .program-detail-testimonials blockquote.glass-slide:hover,
+  .session-detail-modal-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 374px) {
+  .nav-inner,
+  .footer-inner {
+    padding-inline: 0.75rem;
+  }
+
+  .hero-title {
+    font-size: 1.875rem;
+  }
+
+  .whatsapp-chatbox {
+    width: calc(100vw - 2rem);
+  }
+
+  .hero-portrait-frame {
+    max-width: 280px;
+  }
+
+  .final-cta-card {
+    padding: 2.5rem 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .slide-inner {
+    padding-inline: clamp(1.5rem, 4vw, 2rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-scroll {
+    margin-top: 5.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .slide-inner {
+    max-width: 72rem;
+  }
+
+  .nav-inner,
+  .footer-inner {
+    max-width: 80rem;
+  }
+}
