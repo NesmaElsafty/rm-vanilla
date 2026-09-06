@@ -86,6 +86,7 @@ function ensureSlider(kind) {
     createFloatingSlider(root, config.items, {
       textOnly: config.textOnly,
       dotsLabel: config.dotsLabel,
+      detailPage: config.page,
       autoplay: true,
       onSelect(slug) {
         closeModal(kind);
@@ -148,6 +149,10 @@ export function initModals() {
 
   document.querySelectorAll('[data-retreat-link], [data-detail-slug]').forEach((el) => {
     el.addEventListener('click', (event) => {
+      const nestedLink = event.target.closest('a[href]');
+      if (nestedLink && nestedLink !== el) return;
+      if (el.tagName === 'A' && el.getAttribute('href')) return;
+
       const slug = el.getAttribute('data-detail-slug') || el.getAttribute('data-retreat-link') || 'upcoming';
       event.preventDefault();
       location.href = `retreat-detail.html?slug=${encodeURIComponent(slug)}`;
@@ -155,10 +160,8 @@ export function initModals() {
   });
 
   document.querySelectorAll('[data-view-all-recorded]').forEach((el) => {
-    el.addEventListener('click', (event) => {
-      event.preventDefault();
+    el.addEventListener('click', () => {
       closeAllModals();
-      location.href = 'recorded-sessions.html';
     });
   });
 

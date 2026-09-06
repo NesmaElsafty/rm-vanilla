@@ -835,6 +835,7 @@
   align-items: stretch;
   gap: 1rem;
   padding: 1.15rem 1.25rem;
+  border-radius: 1rem;
   border: 1px solid color-mix(in srgb, var(--pd-gold) 28%, transparent);
   background:
     radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--theme-accent) 10%, transparent), transparent 50%),
@@ -1357,6 +1358,27 @@
   text-align: center;
 }
 
+.recorded-list-header .keynote-headline {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .recorded-list-header .keynote-headline {
+    font-size: 1.5rem;
+  }
+}
+
+.recorded-intro-grid .program-detail-compact-card {
+  padding: 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .recorded-intro-grid .program-detail-compact-card {
+    padding: 1.5rem;
+  }
+}
+
 .recorded-list-header .gold-rule-short {
   max-width: 4rem;
   margin-inline: auto;
@@ -1370,10 +1392,32 @@
   font-size: 0.875rem;
   color: color-mix(in srgb, var(--theme-cream) 70%, transparent);
   margin-bottom: 1.5rem;
+  text-decoration: none;
 }
 
 .detail-back:hover {
   color: var(--theme-gold);
+}
+
+.detail-not-found {
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  max-width: 40rem;
+  margin: 2rem auto;
+}
+
+.detail-not-found-title {
+  margin-bottom: 1rem;
+  font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.detail-not-found-text {
+  margin-bottom: 1.75rem;
+  color: color-mix(in srgb, var(--theme-cream) 75%, transparent);
+}
+
+.detail-not-found .detail-back {
+  justify-content: center;
 }
 
 .policies-title {

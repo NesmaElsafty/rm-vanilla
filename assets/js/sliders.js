@@ -69,7 +69,7 @@ function closestPhysicalIndex(container) {
   return closest;
 }
 
-function cardMarkup(item, textOnly, isActive, ctaIcon) {
+function cardMarkup(item, textOnly, isActive, ctaIcon, detailHref = '') {
   const visual = textOnly
     ? ''
     : `<div class="floating-program-card-visual">
@@ -81,6 +81,10 @@ function cardMarkup(item, textOnly, isActive, ctaIcon) {
     ? `floating-program-card floating-program-card--text-only glass-slide glow-card session-detail-modal-card${isActive ? ' session-detail-modal-card--active' : ''}`
     : 'floating-program-card glass-slide glow-card';
 
+  const href = detailHref
+    ? `${detailHref}?slug=${encodeURIComponent(item.slug)}`
+    : `#${encodeURIComponent(item.slug)}`;
+
   return `<article class="${articleClass}">
     <div class="floating-program-card-halo" aria-hidden="true"></div>
     ${visual}
@@ -88,10 +92,10 @@ function cardMarkup(item, textOnly, isActive, ctaIcon) {
       <div class="gold-rule-short gold-rule-short--card"></div>
       <h4 class="floating-program-card-title keynote-headline">${escapeHtml(item.title)}</h4>
       <p class="floating-program-card-description keynote-body">${escapeHtml(item.description)}</p>
-      <button type="button" data-slider-select="${escapeHtml(item.slug)}" class="btn-luxury-ghost floating-program-card-cta">
+      <a href="${href}" data-slider-select="${escapeHtml(item.slug)}" class="btn-luxury-ghost floating-program-card-cta">
         <span>${escapeHtml(item.button_text)}</span>
         ${ctaIcon}
-      </button>
+      </a>
     </div>
   </article>`;
 }
@@ -99,7 +103,7 @@ function cardMarkup(item, textOnly, isActive, ctaIcon) {
 export function createFloatingSlider(container, items, options = {}) {
   if (!container || !items?.length) return { destroy() {}, refresh() {} };
 
-  const { onSelect, autoplay = true, textOnly = false, dotsLabel = '' } = options;
+  const { onSelect, autoplay = true, textOnly = false, dotsLabel = '', detailPage = '' } = options;
   const count = items.length;
   const dir = getDir(getLocale());
   const rtl = dir === 'rtl';
@@ -123,7 +127,7 @@ export function createFloatingSlider(container, items, options = {}) {
     .map(({ item, copy, idx }, physical) => {
       const isActive = idx === activeIndex;
       return `<div class="floating-programs-slide${isActive ? ' floating-programs-slide--active' : ''}" style="--float-delay: ${(idx % count) * 0.55}s" data-slide-copy="${copy}" data-slide-index="${idx}">
-        ${cardMarkup(item, textOnly, isActive, ctaIcon)}
+        ${cardMarkup(item, textOnly, isActive, ctaIcon, detailPage)}
       </div>`;
     })
     .join('');
@@ -275,7 +279,14 @@ export function createFloatingSlider(container, items, options = {}) {
   });
 
   container.querySelectorAll('[data-slider-select]').forEach((btn) => {
-    btn.addEventListener('click', () => onSelect?.(btn.getAttribute('data-slider-select')));
+    btn.addEventListener('click', (event) => {
+      const slug = btn.getAttribute('data-slider-select');
+      if (!slug) return;
+      if (typeof onSelect === 'function') {
+        event.preventDefault();
+        onSelect(slug);
+      }
+    });
   });
 
   requestAnimationFrame(() => goPhysical(count, false));

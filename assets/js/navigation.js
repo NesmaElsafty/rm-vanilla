@@ -2,6 +2,15 @@ const HOME_SECTIONS = ['hero', 'about', 'programs', 'testimonials', 'final-cta',
 const SCROLL_OFFSET = 180;
 const SCROLL_THRESHOLD = 24;
 
+const SECTION_HREF = {
+  hero: 'index.html',
+  about: 'about.html',
+  programs: 'index.html#programs',
+  testimonials: 'index.html#testimonials',
+  contact: 'index.html#contact',
+  'final-cta': 'index.html#final-cta',
+};
+
 function currentPage() {
   const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   return file || 'index.html';
@@ -85,12 +94,12 @@ export function goToSection(id) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
-    location.href = 'about.html';
+    location.href = SECTION_HREF.about;
     return;
   }
 
   if (!isHomePage()) {
-    location.href = `index.html#${id}`;
+    location.href = SECTION_HREF[id] ?? `index.html#${id}`;
     return;
   }
 
@@ -127,7 +136,7 @@ function highlightCurrentPage() {
     return;
   }
 
-  if (currentPage() === 'recorded-sessions.html') {
+  if (currentPage() === 'recorded-sessions.html' || currentPage() === 'policies.html') {
     document.querySelectorAll('[data-nav]').forEach((link) => {
       link.classList.remove('is-active', 'text-brand-gold');
     });
@@ -135,6 +144,23 @@ function highlightCurrentPage() {
   }
 
   if (isHomePage()) syncActiveFromScroll();
+}
+
+function handleNavClick(event, id) {
+  closeMobileMenu();
+
+  if (id === 'about') {
+    if (isAboutPage()) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    return;
+  }
+
+  if (isHomePage() && document.getElementById(id)) {
+    event.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
 export function initNavigation() {
@@ -156,30 +182,36 @@ export function initNavigation() {
 
   document.querySelectorAll('[data-nav]').forEach((link) => {
     link.addEventListener('click', (event) => {
-      event.preventDefault();
-      goToSection(link.getAttribute('data-nav'));
+      const id = link.getAttribute('data-nav');
+      if (!id) return;
+      handleNavClick(event, id);
     });
   });
 
   document.querySelectorAll('[data-home]').forEach((el) => {
     el.addEventListener('click', (event) => {
-      event.preventDefault();
-      goHome();
+      if (isHomePage()) {
+        event.preventDefault();
+        goHome();
+        return;
+      }
+      closeMobileMenu();
     });
   });
 
   document.querySelectorAll('[data-scroll="contact"]').forEach((el) => {
     el.addEventListener('click', (event) => {
-      event.preventDefault();
-      goToSection('contact');
+      closeMobileMenu();
+      if (isHomePage() && document.getElementById('contact')) {
+        event.preventDefault();
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   });
 
   document.querySelectorAll('[data-policies]').forEach((el) => {
-    el.addEventListener('click', (event) => {
-      event.preventDefault();
-      const highlight = el.getAttribute('data-policies');
-      location.href = highlight ? `policies.html?highlight=${encodeURIComponent(highlight)}` : 'policies.html';
+    el.addEventListener('click', () => {
+      closeMobileMenu();
     });
   });
 

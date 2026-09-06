@@ -232,8 +232,33 @@ function uniqueImages(list) {
   return list.filter((src, index, all) => src && all.indexOf(src) === index);
 }
 
-function redirectMissing(kind) {
-  location.replace(NOT_FOUND[kind] ?? 'index.html#programs');
+function notFoundCopy(locale) {
+  if (locale === 'en') {
+    return {
+      title: 'Content not found',
+      body: 'We could not find this page. The link may be incorrect, or the content may have been moved.',
+      back: 'Go back',
+    };
+  }
+  return {
+    title: 'المحتوى غير موجود',
+    body: 'تعذر العثور على هذه الصفحة. قد يكون الرابط غير صحيح أو تم نقل المحتوى.',
+    back: 'العودة',
+  };
+}
+
+function renderNotFound(root, kind) {
+  const locale = getLocale();
+  const rtl = getDir(locale) === 'rtl';
+  const copy = notFoundCopy(locale);
+  const href = NOT_FOUND[kind] ?? 'index.html#programs';
+  root.innerHTML = `
+    <section class="detail-not-found glass-slide" role="status">
+      <h1 class="keynote-display detail-not-found-title">${escapeHtml(copy.title)}</h1>
+      <p class="keynote-body detail-not-found-text">${escapeHtml(copy.body)}</p>
+      ${backLink(href, copy.back, rtl)}
+    </section>
+  `;
 }
 
 function renderProgram(root) {
@@ -242,7 +267,7 @@ function renderProgram(root) {
   const content = getContent(locale);
   const pd = content.programDetail;
   const program = getProgramBySlug(currentSlug(), locale);
-  if (!program) return redirectMissing('program');
+  if (!program) return renderNotFound(root, 'program');
 
   const sections = sortedSections(program).filter((s) => !PROGRAM_SKIP.has(s.key));
   const buckets = groupSections(sections, TAB_MAP.program);
@@ -325,7 +350,7 @@ function renderWorkshop(root) {
   const pd = content.programDetail;
   const wd = content.workshopDetail;
   const workshop = getWorkshopBySlug(currentSlug(), locale);
-  if (!workshop) return redirectMissing('workshop');
+  if (!workshop) return renderNotFound(root, 'workshop');
 
   const sections = sortedSections(workshop).filter((s) => !PROGRAM_SKIP.has(s.key));
   const buckets = groupSections(sections, TAB_MAP.workshop);
@@ -396,7 +421,7 @@ function renderSession(root) {
   const content = getContent(locale);
   const pd = content.programDetail;
   const session = getSessionBySlug(currentSlug(), locale);
-  if (!session) return redirectMissing('session');
+  if (!session) return renderNotFound(root, 'session');
 
   const sections = sortedSections(session).filter((s) => !SKIP_KEYS.has(s.key) && s.key !== 'faq');
   const buckets = groupSections(sections, TAB_MAP.session);
@@ -463,7 +488,7 @@ function renderRecorded(root) {
   const content = getContent(locale);
   const rs = content.recordedSessionDetail;
   const session = getRecordedSessionBySlug(currentSlug(), locale);
-  if (!session) return redirectMissing('recorded');
+  if (!session) return renderNotFound(root, 'recorded');
 
   const sections = sortedSections(session).filter((s) => !RECORDED_SKIP.has(s.key));
   const buckets = groupSections(sections, TAB_MAP.recorded);
@@ -547,7 +572,7 @@ function renderRetreat(root) {
   const rd = content.retreatDetail;
   const slug = currentSlug() || RETREAT_SLUG;
   const retreat = getRetreatBySlug(slug, locale);
-  if (!retreat) return redirectMissing('retreat');
+  if (!retreat) return renderNotFound(root, 'retreat');
 
   const titleHtml = (rd.titleParts ?? [])
     .map((part) => (part.gold ? `<span class="text-gold-gradient">${escapeHtml(part.text)}</span>` : escapeHtml(part.text)))

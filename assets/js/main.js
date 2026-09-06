@@ -72,13 +72,28 @@ function initRecordedLibrary() {
 
   if (!grid || !cards?.length) return;
   grid.innerHTML = cards
-    .map(
-      (card) => `<a href="recorded-session-detail.html?slug=${encodeURIComponent(card.slug)}" class="program-detail-related session-detail-related">
-        <h3 class="program-detail-related-title">${card.title}</h3>
-        <p class="program-detail-related-text">${card.description}</p>
-        <span class="program-detail-related-cta"><span>${card.button_text}</span>${ctaIcon}</span>
-      </a>`,
-    )
+    .map((card) => {
+      const title = String(card.title ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      const description = String(card.description ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      const button = String(card.button_text ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+      return `<a href="recorded-session-detail.html?slug=${encodeURIComponent(card.slug)}" class="program-detail-related session-detail-related">
+        <h3 class="program-detail-related-title">${title}</h3>
+        <p class="program-detail-related-text">${description}</p>
+        <span class="program-detail-related-cta"><span>${button}</span>${ctaIcon}</span>
+      </a>`;
+    })
     .join('');
 }
 
