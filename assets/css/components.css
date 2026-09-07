@@ -68,7 +68,6 @@
     0 6px 20px -8px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
   animation: gold-border-pulse 10s ease-in-out infinite;
-  position: relative;
 }
 
 .portrait-name-bar::after {
@@ -1377,8 +1376,9 @@ textarea.contact-field {
 }
 
 .portrait-with-vines {
+  position: relative;
   max-width: 100%;
-  /* Vines intentionally overhang the arch — do not clip */
+  /* Vines + name bar intentionally overhang the arch — do not clip */
   overflow: visible;
 }
 
