@@ -409,7 +409,21 @@ export const translations = {
     },
     aboutPage: {
       backToHome: 'العودة للرئيسية',
+      eyebrow: 'DR. RANA MOSAAD',
       title: 'من هي د. رنا مسعد؟',
+      role: 'مدربة وعي ذاتي وروحي',
+      positioning:
+        'أرشدك في طريقك للوعي بذاتك، واستعادة قيمتك، وبناء اتصال قوي وعميق بالله وبذاتك.',
+      heroPrograms: 'عرض البرامج',
+      heroBook: 'احجز استشارتك',
+      snapshot: [
+        { label: 'التخصص', value: 'وعي ذاتي وروحي' },
+        { label: 'الخبرة', value: '+6 سنوات' },
+        { label: 'الأثر', value: '+3000 طالب وسيدة' },
+        { label: 'المنهج', value: 'نفسي · روحي · تدريبي' },
+      ],
+      storyNum: '01',
+      storyTitle: 'رحلتي',
       journeyIntro: 'بدأت رحلتي بسؤال واحد:',
       journeyQuestion: 'هل يمكن للإنسان أن يبدأ من جديد؟',
       journeyP1:
@@ -417,14 +431,6 @@ export const translations = {
       journeyP2:
         'من هنا بدأت رحلة طويلة من الوعي، والشفاء، والغفران، والتسليم، والتطوير المستمر. رحلة غيّرت حياتي من الداخل قبل أن تغيّر كل ما حولي.',
       identityStatement: 'واليوم، اصبحت مدربة وعي ذاتي وروحي.',
-      intro:
-        'أرشدك في طريقك للوعي بذاتك، واستعادة قيمتك، والتحرر من العوائق والتعلقات التي تمنعها من الاستمتاع بالحياة، وتبني اتصالًا قوي وعميق بالله وبذاتها، من خلال برامج تدريبية وجلسات خاصة تعيدها إلى السلام والاتزان والامتلاء الحقيقي.',
-      impact:
-        'على مدار أكثر من 6 سنوات، ساعدت أكثر من 3000 طالب وسيدة في الوصول إلى التمكين والسلام الداخلي من خلال جلسات فردية، تدريبات جماعية، وبرامج تحولية عميقة.',
-      statsStudents: '+3000',
-      statsStudentsLabel: 'طالب وسيدة',
-      statsYears: '+6',
-      statsYearsLabel: 'سنوات من الخبرة',
       methodTitle: 'منهجي',
       methodBody:
         'قائم على الدمج بين التجربة الواقعية، التدريب العملي، المنهج العلمي , والعمل علي الجذور النفسية والروحية، مدعومًا باعتمادات وتخصصات متقدمة، منها:',
@@ -434,6 +440,7 @@ export const translations = {
         'المنهج العلمي',
         'الجذور النفسية والروحية',
       ],
+      credentialsTitle: 'الاعتمادات والتخصصات',
       credentials: [
         'مدربة معتمدة لمدرسة الدلالات العصبية الأمريكية',
         'Neuro-semantics Trainer of Trainers',
@@ -447,16 +454,12 @@ export const translations = {
       methodSupportLead: 'هذا التنوع ليس للعرض، بل لأنه يخدم هدفي الأساسي:',
       methodSupportEmphasis:
         'أن تصبح <span class="text-gold-gradient">واعي بذاتك</span>، و<span class="text-gold-gradient">متمكن من قدراتك</span>، و<span class="text-gold-gradient">متصل بالله</span>.',
-      brandTriad: ['وعي', 'تمكين', 'اتصال'],
-      whyTitle: 'ليه تختار رنا كرفيق في رحلتك؟',
-      reasonsHtml: [
-        'أقدّم رحلة عملية وروحية متكاملة تساعدك على السلام الداخلي والتمكين دون انفصال عن الحياة الواقعية، وفيها كل ما تحتاجاه من { <span class="text-gold-gradient">Therapy</span>, <span class="text-gold-gradient">Coaching</span>, <span class="text-gold-gradient">إرشاد روحي</span> } في مكان واحد.',
-        'أنا لا أساعدك فقط على فهم نفسك، بل على <span class="text-gold-gradient">استعادة قيمتك من الداخل</span> بدل البحث عنها في الخارج.',
-        'أعالج <span class="text-gold-gradient">الجذر النفسي والروحي</span> وراء الشك، التعلّق، والاحتياج العاطفي من خلال <span class="text-gold-gradient">اتصال أعمق بالله والذات</span>.',
-      ],
-      reasonTags: ['Therapy', 'Coaching', 'إرشاد روحي'],
-      problemsTitle: 'المشكلات التي أساعدك علي حلها.',
-      problemsIntro: 'أرافقك في مساحات تحول متعددة، منها:',
+      workTitle: 'مختارات من البرامج والخدمات',
+      workViewAll: 'استكشف كل الخدمات',
+      impactTitle: 'الأثر',
+      statsStudentsLabel: 'طالب وسيدة',
+      statsYearsLabel: 'سنوات من الخبرة',
+      practiceTitle: 'مساحات أعمل عليها',
       problems: [
         'الوعي الذاتي وفهم النفس',
         'استعادة القيمة الذاتية',
@@ -470,11 +473,46 @@ export const translations = {
         'كسر الأنماط المتكرره في العلاقات',
         'الانتقال من المعرفة إلى التجسيد الحقيقي في الواقع',
       ],
+      whyTitle: 'ليه تختار رنا كرفيق في رحلتك؟',
+      reasonHeadlines: [
+        'رحلة متكاملة: Therapy · Coaching · إرشاد روحي',
+        'استعادة القيمة من الداخل',
+        'العمل على الجذر النفسي والروحي',
+      ],
+      reasonsHtml: [
+        'أقدّم رحلة عملية وروحية متكاملة تساعدك على السلام الداخلي والتمكين دون انفصال عن الحياة الواقعية، وفيها كل ما تحتاجاه من { <span class="text-gold-gradient">Therapy</span>, <span class="text-gold-gradient">Coaching</span>, <span class="text-gold-gradient">إرشاد روحي</span> } في مكان واحد.',
+        'أنا لا أساعدك فقط على فهم نفسك، بل على <span class="text-gold-gradient">استعادة قيمتك من الداخل</span> بدل البحث عنها في الخارج.',
+        'أعالج <span class="text-gold-gradient">الجذر النفسي والروحي</span> وراء الشك، التعلّق، والاحتياج العاطفي من خلال <span class="text-gold-gradient">اتصال أعمق بالله والذات</span>.',
+      ],
+      testimonialsTitle: 'مختارات من قصص التحول',
+      testimonialsMore: 'عرض المزيد من قصص التحول',
+      selectedTestimonials: [
+        {
+          name: 'هاجر ايت ناصر',
+          role: 'مهندسة ومدربة · المغرب',
+          quote:
+            'خضت مع رنا دورات كثيرة: أنا أنثى، ديتوكس، APG وحاليا NLP وكذلك حصص كوتشينغ شخصية. الجميل في رنا هي سلاسة الشرح وعمق التعبير الذي يوصل الفكرة والمفهوم بوضوح وعمق. قدرة رنا على الاتصال خطيرة وهي تعطي حسب ما أنت تحتاجه بالضبط كأنها تفهمك على طول ماذا تريد وماذا تحتاج وهذه سمة نادرة عند الكثير من الكوتشز. في الجلسات بتحس رنا بتخاطب الروح مباشرة دون واسطات وهذا ما يجعل الأثر مضاعف. كل التوفيق لكِ يا أحلى كوتش ومرشد.',
+          image: 'assets/images/testimonials/hajar-ait-nasser.png',
+        },
+        {
+          name: 'ميرفت جلال',
+          role: 'ربة منزل',
+          quote:
+            'درست مع د. رنا كورس أنا أنثى وكورس الثقة بالنفس وبرنامج ديتوكس وبرنامج متصل ومبادرة مطمئن كل جمعة. د. رنا من أكثر المدربين المؤثرين فعلاً؛ كل كورس ترك بصمات قوية في حياتي وغيّرني ولله الحمد تغييراً جذرياً. شكراً لعطائك وخبرتك وتنظيمك وسلاسة أسلوبك وصدقك في كل كلمة، شكراً من القلب.',
+          image: 'assets/images/testimonials/mervat-galal.png',
+        },
+        {
+          name: 'فاديا بدور',
+          role: 'محامية · سوريا',
+          quote:
+            'مبادرة مطمئن المجانية رااااائعة وفيها صدق من القلب كعادة الدكتورة رنا.',
+          image: 'assets/images/testimonials/fadia-bdour.png',
+        },
+      ],
       closingLead: 'أنا لا أعمل على “جانب واحد” منك،',
       closingMid: 'بل أتعامل معك ككل:',
       closingParts: ['روح', 'نفس', 'جسد'],
-      ctaWarm: 'لو حاسس إن الوقت جه تبدأ رحلتك...',
-      ctaHeadline: 'ابدأ رحلتك نحو وعي أعمق، واتزان أكبر، واتصال حقيقي بالله.',
+      ctaHeadline: 'ابدأ رحلتك نحو وعي أعمق واتزان أكبر واتصال حقيقي بالله.',
       ctaButton: 'احجز استشارتك',
       ctaSecondary: 'تعرف على البرامج',
       portraitAlt: 'د. رنا مسعد',
@@ -931,7 +969,21 @@ export const translations = {
     },
     aboutPage: {
       backToHome: 'Back to Home',
+      eyebrow: 'DR. RANA MOSAAD',
       title: 'Who is Dr. Rana Mosaad?',
+      role: 'Self-awareness & spiritual coach',
+      positioning:
+        'I guide you on your path to self-awareness, reclaiming your worth, and building a strong, deep connection with Allah and with yourself.',
+      heroPrograms: 'View programs',
+      heroBook: 'Book your consultation',
+      snapshot: [
+        { label: 'Specialization', value: 'Self-awareness & spiritual' },
+        { label: 'Experience', value: '+6 years' },
+        { label: 'Impact', value: '+3000 students & women' },
+        { label: 'Approach', value: 'Psychological · Spiritual · Training' },
+      ],
+      storyNum: '01',
+      storyTitle: 'My Journey',
       journeyIntro: 'My journey began with one question:',
       journeyQuestion: 'Can a person truly start over?',
       journeyP1:
@@ -939,14 +991,6 @@ export const translations = {
       journeyP2:
         'From there began a long journey of awareness, healing, forgiveness, surrender, and continuous growth. A journey that changed my life from within before it changed everything around me.',
       identityStatement: 'And today, I have become a self-awareness and spiritual coach.',
-      intro:
-        'I guide you on your path to self-awareness, reclaiming your worth, and freeing yourself from the obstacles and attachments that keep you from enjoying life — building a strong, deep connection with Allah and with yourself through training programs and private sessions that return you to peace, balance, and true fulfillment.',
-      impact:
-        'Over more than 6 years, I have helped more than 3,000 students and women reach empowerment and inner peace through one-on-one sessions, group trainings, and deep transformational programs.',
-      statsStudents: '+3000',
-      statsStudentsLabel: 'Students & Women',
-      statsYears: '+6',
-      statsYearsLabel: 'Years of Experience',
       methodTitle: 'My Approach',
       methodBody:
         'It is grounded in combining lived experience, practical training, scientific methodology, and work on psychological and spiritual roots — supported by advanced certifications and specializations, including:',
@@ -956,6 +1000,7 @@ export const translations = {
         'Scientific method',
         'Psychological & spiritual roots',
       ],
+      credentialsTitle: 'Credentials & Qualifications',
       credentials: [
         'Certified trainer of the American School of Neuro-Semantics',
         'Neuro-semantics Trainer of Trainers',
@@ -969,16 +1014,12 @@ export const translations = {
       methodSupportLead: 'This diversity is not for display — it serves my core purpose:',
       methodSupportEmphasis:
         'that you become <span class="text-gold-gradient">aware of yourself</span>, <span class="text-gold-gradient">empowered in your capacities</span>, and <span class="text-gold-gradient">connected with Allah</span>.',
-      brandTriad: ['Awareness', 'Empowerment', 'Connection'],
-      whyTitle: 'Why choose Rana as a companion on your journey?',
-      reasonsHtml: [
-        'I offer an integrated practical and spiritual journey that helps you toward inner peace and empowerment without disconnecting from real life — with everything you need of { <span class="text-gold-gradient">Therapy</span>, <span class="text-gold-gradient">Coaching</span>, <span class="text-gold-gradient">spiritual guidance</span> } in one place.',
-        'I do not only help you understand yourself — I help you <span class="text-gold-gradient">reclaim your worth from within</span>, instead of searching for it outside.',
-        'I address the <span class="text-gold-gradient">psychological and spiritual root</span> behind doubt, attachment, and emotional need through a <span class="text-gold-gradient">deeper connection with Allah and the self</span>.',
-      ],
-      reasonTags: ['Therapy', 'Coaching', 'Spiritual guidance'],
-      problemsTitle: 'The challenges I help you resolve.',
-      problemsIntro: 'I walk with you across multiple spaces of transformation, including:',
+      workTitle: 'Selected programs & services',
+      workViewAll: 'Explore all services',
+      impactTitle: 'Impact',
+      statsStudentsLabel: 'Students & Women',
+      statsYearsLabel: 'Years of Experience',
+      practiceTitle: 'Areas of practice',
       problems: [
         'Self-awareness and understanding the self',
         'Reclaiming self-worth',
@@ -992,10 +1033,45 @@ export const translations = {
         'Breaking repeating patterns in relationships',
         'Moving from knowledge to true embodiment in reality',
       ],
+      whyTitle: 'Why choose Rana as a companion on your journey?',
+      reasonHeadlines: [
+        'An integrated journey: Therapy · Coaching · Spiritual guidance',
+        'Reclaiming worth from within',
+        'Working at the psychological & spiritual root',
+      ],
+      reasonsHtml: [
+        'I offer an integrated practical and spiritual journey that helps you toward inner peace and empowerment without disconnecting from real life — with everything you need of { <span class="text-gold-gradient">Therapy</span>, <span class="text-gold-gradient">Coaching</span>, <span class="text-gold-gradient">spiritual guidance</span> } in one place.',
+        'I do not only help you understand yourself — I help you <span class="text-gold-gradient">reclaim your worth from within</span>, instead of searching for it outside.',
+        'I address the <span class="text-gold-gradient">psychological and spiritual root</span> behind doubt, attachment, and emotional need through a <span class="text-gold-gradient">deeper connection with Allah and the self</span>.',
+      ],
+      testimonialsTitle: 'Selected transformation stories',
+      testimonialsMore: 'See more transformation stories',
+      selectedTestimonials: [
+        {
+          name: 'Hajar Ait Nasser',
+          role: 'Engineer & Trainer · Morocco',
+          quote:
+            "I have taken many courses with Rana: I Am Female, Detox, APG, and currently NLP, as well as private coaching sessions. What is beautiful about Rana is the smoothness of her explanation and the depth of expression that conveys ideas and concepts with clarity and depth. Rana's ability to connect is remarkable — she gives you exactly what you need, as if she instantly understands what you want and what you need, and that is a rare quality among many coaches. In sessions, you feel Rana speaks directly to the soul without intermediaries, and that is what multiplies the impact. All the best to you, the most wonderful coach and guide.",
+          image: 'assets/images/testimonials/hajar-ait-nasser.png',
+        },
+        {
+          name: 'Mervat Galal',
+          role: 'Homemaker',
+          quote:
+            "I studied with Dr. Rana the I Am Woman course, the self-confidence course, the Detox program, the Connected program, and the Mutma'en Friday initiative. Dr. Rana is truly one of the most impactful trainers; every course left a strong mark on my life and, thank God, changed me at the root. Thank you for your giving, your expertise, your organization, the ease of your style, and your honesty in every word — thank you from the heart.",
+          image: 'assets/images/testimonials/mervat-galal.png',
+        },
+        {
+          name: 'Fadia Bdour',
+          role: 'Lawyer · Syria',
+          quote:
+            'The free Motmain initiative is wonderful — full of heartfelt sincerity, as is always the case with Dr. Rana.',
+          image: 'assets/images/testimonials/fadia-bdour.png',
+        },
+      ],
       closingLead: 'I do not work on “one side” of you,',
       closingMid: 'I meet you as a whole:',
       closingParts: ['Spirit', 'Psyche', 'Body'],
-      ctaWarm: 'If you feel the time has come to begin your journey...',
       ctaHeadline:
         'Begin your journey toward deeper awareness, greater balance, and a true connection with Allah.',
       ctaButton: 'Book your consultation',
