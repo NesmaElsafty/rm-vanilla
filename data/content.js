@@ -23,6 +23,7 @@ export const translations = {
     nav: {
       home: 'الرئيسية',
       about: 'عن رنا',
+      philosophy: 'الفلسفه',
       programs: 'البرامج',
       journey: 'رحلة التحول',
       testimonials: 'قالوا عنا',
@@ -37,6 +38,7 @@ export const translations = {
     },
     language: {
       switchTo: 'Switch to English',
+      selector: 'اختيار اللغة',
       ar: 'العربية',
       en: 'English',
     },
@@ -75,9 +77,15 @@ export const translations = {
       l4: 'برامج تحولية عميقة',
       l5: 'جلسات فردية',
     },
+    philosophy: {
+      title: 'فلسفتي في العمل',
+      p1: 'كنت أعتقد أن ما أعيشه هو قدري، حتى أدركت أن <span class="text-gold-gradient">الله لا يغيّر واقعنا</span> حتى نبدأ ب<span class="text-gold-gradient">تغيير ما داخلنا</span>.',
+      p2: 'من هنا بدأت رحلة طويلة من <span class="text-gold-gradient">الوعي، والشفاء، والغفران، والتسليم، والتطوير المستمر</span>. رحلة غيّرت حياتي من الداخل قبل أن تغيّر <span class="text-gold-gradient">كل ما حولي</span>.',
+      p3: 'أؤمن أن <span class="text-gold-gradient">التحول الحقيقي</span> يبدأ حين تتوقف عن محاربة نفسك<br>وتعرف <span class="text-gold-gradient">قيمتك الحقيقية</span><br>وتتعلم كيف تعود إلى الله لا كمعلومة،<br>بل ك<span class="text-gold-gradient">مصدر للأمان، والحب، والاحتواء</span>.',
+    },
     programs: {
       label: 'البرامج التدريبية',
-      title: 'مسارات التحول والتمكين',
+      title: 'خدماتنا',
       titleEmbedded: 'برامجنا التدريبية',
       subtitle: 'برامج مصممة بعناية لتلتقي معكِ حيث أنتِ — وتقودكِ إلى حيث تستحقين أن تكوني.',
       trainingModalTitle: 'البرامج التدريبية',
@@ -98,32 +106,32 @@ export const translations = {
         id: '01',
         title: 'جلسات خاصة',
         description:
-          'جلسات فردية مخصصة في مساحة آمنة، نعمل فيها على الجذور العاطفية والروحية بعمق وخصوصية تامة.',
-        cta: 'احجز جلستك',
+          'جلسات خاصة فردية مع دكتورة رنا فى <span class="text-gold-gradient">مساحة آمنة بلا أى أحكام</span><br>و نعمل فيها على <span class="text-gold-gradient">الجذور العاطفية و الروحية</span> بعمق و خصوصية',
+        cta: 'اعرف المزيد',
         opensModal: 'private',
       },
       {
         id: '02',
-        title: 'برامج تدريبية',
+        title: 'برامج تدريبيه',
         description:
-          'مسارات تدريبية عملية وعميقة لتنمية الوعي، التمكين، والاتزان الداخلي عبر أسابيع من التطبيق الواعي.',
-        cta: 'اكتشفي البرامج',
+          'برامج تطبيقية عملية تهدف <span class="text-gold-gradient">لتغييرك من الداخل</span> ليتغير واقعك<br>نعمل فيها على <span class="text-gold-gradient">التمكين و الاتزان الداخلى</span> عبر أسابيع من التطبيق و التمارين',
+        cta: 'اعرف المزيد',
         opensModal: 'training',
       },
       {
         id: '03',
         title: 'ورش عمل',
         description:
-          'ورش مكثفة في يوم واحد للوعي والتحرر والاتصال — تجربة عملية عميقة في مساحة جماعية داعمة.',
-        cta: 'اكتشفي الورش',
+          'ورش مكثفة<br>ل<span class="text-gold-gradient">الوعى و التحرر و الاتصال</span> — <span class="text-gold-gradient">تجربة عملية عميقة</span> فى مساحة جماعية داعمة',
+        cta: 'اعرف المزيد',
         opensModal: 'workshops',
       },
       {
         id: '04',
         title: 'جلسات مسجلة',
         description:
-          'محتوى مسجل يمكنكِ الوصول إليه في أي وقت، لمواصلة رحلة الوعي والتطبيق بمرونة تناسب إيقاع حياتك.',
-        cta: 'ابدئي الآن',
+          'جلسات تأمل يمكنك الإستماع لها فى أى وقت لتساعد العقل الباطن فى <span class="text-gold-gradient">التحول و الاتزان</span> و <span class="text-gold-gradient">الاتصال بالله</span>',
+        cta: 'اعرف المزيد',
         opensModal: 'recorded',
       },
       {
@@ -480,11 +488,12 @@ export const translations = {
     nav: {
       home: 'Home',
       about: 'About Rana',
+      philosophy: 'Philosophy',
       programs: 'Programs',
       journey: 'Transformation Journey',
       testimonials: 'Testimonials',
       contact: 'Contact',
-      bookConsultation: 'Book Your Consultation',
+      bookConsultation: 'Book your consultation',
     },
     theme: {
       switchToLight: 'Switch to light mode',
@@ -494,6 +503,7 @@ export const translations = {
     },
     language: {
       switchTo: 'التبديل إلى العربية',
+      selector: 'Language selector',
       ar: 'العربية',
       en: 'English',
     },
@@ -533,9 +543,15 @@ export const translations = {
       l4: 'Deep transformational programs',
       l5: 'Private sessions',
     },
+    philosophy: {
+      title: 'My working philosophy',
+      p1: 'I used to believe that what I was living was my fate, until I realized that <span class="text-gold-gradient">God does not change our reality</span> until we begin to <span class="text-gold-gradient">change what is within us</span>.',
+      p2: 'From there began a long journey of <span class="text-gold-gradient">awareness, healing, forgiveness, surrender, and ongoing growth</span>. A journey that changed my life from the inside before it changed <span class="text-gold-gradient">everything around me</span>.',
+      p3: 'I believe that <span class="text-gold-gradient">true transformation</span> begins when you stop fighting yourself<br>and know your <span class="text-gold-gradient">true worth</span><br>and learn how to return to God not as information,<br>but as a <span class="text-gold-gradient">source of safety, love, and holding</span>.',
+    },
     programs: {
       label: 'Training Programs',
-      title: 'Paths of Transformation & Empowerment',
+      title: 'Our services',
       titleEmbedded: 'Our Training Programs',
       subtitle:
         'Programs carefully designed to meet you where you are — and guide you to where you deserve to be.',
@@ -555,34 +571,34 @@ export const translations = {
     featuredPrograms: [
       {
         id: '01',
-        title: 'Private Sessions',
+        title: 'Private sessions',
         description:
-          'Personalized one-on-one sessions in a safe space, working deeply on emotional and spiritual roots with complete privacy.',
-        cta: 'Book Your Session',
+          'Private one-to-one sessions with Dr. Rana in a <span class="text-gold-gradient">safe, judgment-free space</span><br>where we work on <span class="text-gold-gradient">emotional and spiritual roots</span> with depth and privacy',
+        cta: 'Learn more',
         opensModal: 'private',
       },
       {
         id: '02',
-        title: 'Training Programs',
+        title: 'Training programs',
         description:
-          'Practical, in-depth training paths to develop awareness, empowerment, and inner balance through weeks of conscious practice.',
-        cta: 'Discover Programs',
+          'Practical, applied programs designed to <span class="text-gold-gradient">change you from the inside</span> so your reality can change<br>We work on <span class="text-gold-gradient">empowerment and inner balance</span> across weeks of practice and exercises',
+        cta: 'Learn more',
         opensModal: 'training',
       },
       {
         id: '03',
         title: 'Workshops',
         description:
-          'Intensive one-day workshops for awareness, release, and connection — a deep, practical experience in a supportive group setting.',
-        cta: 'Explore Workshops',
+          'Intensive workshops<br>for <span class="text-gold-gradient">awareness, release, and connection</span> — a <span class="text-gold-gradient">deep practical experience</span> in a supportive group space',
+        cta: 'Learn more',
         opensModal: 'workshops',
       },
       {
         id: '04',
-        title: 'Recorded Sessions',
+        title: 'Recorded sessions',
         description:
-          'Recorded content you can access anytime, to continue your journey of awareness and practice at your own pace.',
-        cta: 'Start Now',
+          'Meditation sessions you can listen to at any time to help the subconscious with <span class="text-gold-gradient">transformation and balance</span> and <span class="text-gold-gradient">connection with God</span>',
+        cta: 'Learn more',
         opensModal: 'recorded',
       },
       {
@@ -629,7 +645,7 @@ export const translations = {
     ],
     testimonials: {
       label: 'Testimonials',
-      title: 'Real Transformation Stories',
+      title: 'Real stories of transformation',
       titleEmbedded: 'What They Say About the Journey',
       programSpecific: 'Stories from This Program',
       sessionSpecific: 'Stories from This Session',

@@ -1,10 +1,11 @@
-const HOME_SECTIONS = ['hero', 'about', 'programs', 'testimonials', 'final-cta', 'contact'];
+const HOME_SECTIONS = ['hero', 'about', 'philosophy', 'programs', 'testimonials', 'final-cta', 'contact'];
 const SCROLL_OFFSET = 180;
 const SCROLL_THRESHOLD = 24;
 
 const SECTION_HREF = {
-  hero: 'index.html',
-  about: 'about.html',
+  hero: 'index.html#hero',
+  about: 'index.html#about',
+  philosophy: 'index.html#philosophy',
   programs: 'index.html#programs',
   testimonials: 'index.html#testimonials',
   contact: 'index.html#contact',
@@ -69,7 +70,9 @@ function updateScrollNav() {
 function setActiveSection(id) {
   document.querySelectorAll('[data-nav]').forEach((link) => {
     const target = link.getAttribute('data-nav');
-    const active = target === 'about' ? isAboutPage() : isHomePage() && target === id;
+    let active = false;
+    if (target === 'about' && isAboutPage()) active = true;
+    else if (isHomePage() && target === id) active = true;
     link.classList.toggle('is-active', active);
     link.classList.toggle('text-brand-gold', active);
   });
@@ -89,21 +92,18 @@ function syncActiveFromScroll() {
 export function goToSection(id) {
   closeMobileMenu();
 
-  if (id === 'about') {
-    if (isAboutPage()) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
-    location.href = SECTION_HREF.about;
-    return;
-  }
-
   if (!isHomePage()) {
     location.href = SECTION_HREF[id] ?? `index.html#${id}`;
     return;
   }
 
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+
+  location.href = SECTION_HREF[id] ?? `index.html#${id}`;
 }
 
 export function goHome() {
@@ -148,14 +148,6 @@ function highlightCurrentPage() {
 
 function handleNavClick(event, id) {
   closeMobileMenu();
-
-  if (id === 'about') {
-    if (isAboutPage()) {
-      event.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-    return;
-  }
 
   if (isHomePage() && document.getElementById(id)) {
     event.preventDefault();

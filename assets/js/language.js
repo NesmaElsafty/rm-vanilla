@@ -80,8 +80,20 @@ function setText(el, value) {
 }
 
 function syncLocaleControls(locale) {
-  const next = locale === 'ar' ? 'en' : 'ar';
+  document.querySelectorAll('[data-locale-set]').forEach((btn) => {
+    const value = btn.getAttribute('data-locale-set');
+    const active = value === locale;
+    btn.classList.toggle('is-active', active);
+    btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  });
+
   const content = getContent(locale);
+  document.querySelectorAll('[data-i18n-aria="language.selector"]').forEach((el) => {
+    if (content?.language?.selector) el.setAttribute('aria-label', content.language.selector);
+  });
+
+  // Legacy single-toggle controls (if any remain on a page).
+  const next = locale === 'ar' ? 'en' : 'ar';
   document.querySelectorAll('[data-locale-next]').forEach((el) => {
     el.textContent = next === 'en' ? content.language.en : content.language.ar;
   });
@@ -139,6 +151,13 @@ export function initLanguage() {
   const locale = readStoredLocale();
   persistLocale(locale);
   applyLocale(locale);
+
+  document.querySelectorAll('[data-locale-set]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const next = btn.getAttribute('data-locale-set');
+      if (next === 'ar' || next === 'en') setLocale(next);
+    });
+  });
 
   document.querySelectorAll('[data-locale-toggle]').forEach((btn) => {
     btn.addEventListener('click', () => toggleLocale());

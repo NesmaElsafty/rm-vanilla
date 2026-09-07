@@ -25,6 +25,22 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
+/** Escapes quote text while preserving trusted gold emphasis spans from content data. */
+function formatTestimonialQuote(value) {
+  const source = String(value ?? '');
+  const marker = /<span class="text-gold-gradient">([\s\S]*?)<\/span>/g;
+  let result = '';
+  let lastIndex = 0;
+  let match;
+  while ((match = marker.exec(source))) {
+    result += escapeHtml(source.slice(lastIndex, match.index));
+    result += `<span class="text-gold-gradient">${escapeHtml(match[1])}</span>`;
+    lastIndex = match.index + match[0].length;
+  }
+  result += escapeHtml(source.slice(lastIndex));
+  return result;
+}
+
 function isRtl() {
   return getDir(getLocale()) === 'rtl';
 }
@@ -338,7 +354,7 @@ export function createTestimonialSlider(container, items) {
           : '';
         return `<blockquote class="testimonials-slide glass-slide${idx === activeIndex ? ' is-active' : ''}" data-testimonial-slide="${idx}">
           <div class="testimonials-quote-icon">${iconQuote('icon icon-lg')}</div>
-          <p class="testimonials-quote">“${escapeHtml(item.content)}”</p>
+          <p class="testimonials-quote">“${formatTestimonialQuote(item.content)}”</p>
           <div class="gold-rule"></div>
           <footer class="testimonials-footer">
             ${image}

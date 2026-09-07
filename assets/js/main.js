@@ -137,6 +137,13 @@ export function boot() {
     console.error('[boot] initIcons failed', err);
   }
   try {
+    // Start Hero entrance before heavier decor work so it begins immediately.
+    initAnimations();
+  } catch (err) {
+    console.error('[boot] initAnimations failed', err);
+    document.getElementById('hero')?.classList.add('hero-is-ready');
+  }
+  try {
     initDecor();
   } catch (err) {
     console.error('[boot] initDecor failed', err);
@@ -145,12 +152,6 @@ export function boot() {
     initNavigation();
   } catch (err) {
     console.error('[boot] initNavigation failed', err);
-  }
-  try {
-    initAnimations();
-  } catch (err) {
-    console.error('[boot] initAnimations failed', err);
-    document.getElementById('hero')?.classList.add('hero-is-ready');
   }
   try {
     initForms();

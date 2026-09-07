@@ -159,8 +159,9 @@
 
 .slide-section {
   position: relative;
-  padding-block: clamp(3.5rem, 6vw, 6rem);
+  padding-block: clamp(2.25rem, 4vw, 4rem);
   isolation: isolate;
+  scroll-margin-top: 5.5rem;
 }
 
 .slide-section::before {
@@ -183,15 +184,16 @@
 }
 
 .slide-hero {
-  min-height: 100vh;
-  padding-top: clamp(6rem, 7vw + 3.5rem, 8rem);
-  padding-bottom: clamp(2rem, 3vw, 3rem);
+  min-height: min(90svh, 54rem);
+  padding-top: clamp(4.75rem, 5vw, 5.5rem);
+  padding-bottom: clamp(1.5rem, 2.5vw, 2.5rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
   /* Keep horizontal page clip, but allow botanical vines to paint */
   overflow-x: hidden;
   overflow-y: visible;
+  scroll-margin-top: 0;
 }
 
 .slide-hero::before { display: none; }
@@ -202,7 +204,7 @@
   width: 100%;
   max-width: 48rem;
   margin-inline: auto;
-  margin-bottom: clamp(2rem, 3vw, 3rem);
+  margin-bottom: clamp(1.5rem, 2.5vw, 2.25rem);
 }
 
 .section-keynote-header.items-center,

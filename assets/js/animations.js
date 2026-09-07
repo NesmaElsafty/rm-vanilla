@@ -48,7 +48,7 @@ function animateCounter(element, delay = 0) {
   const target = Number(element.getAttribute('data-count'));
   if (!Number.isFinite(target)) return;
 
-  const duration = target >= 100 ? 1600 : 1100;
+  const duration = target >= 100 ? 1700 : 1350;
   const startAt = performance.now() + delay;
 
   const tick = (now) => {
@@ -70,7 +70,10 @@ function animateCounter(element, delay = 0) {
 }
 
 function initCounters() {
-  const counters = Array.from(document.querySelectorAll('[data-counter]'));
+  const section = document.getElementById('stats');
+  const counters = Array.from(
+    (section || document).querySelectorAll('[data-counter]'),
+  );
   if (!counters.length) return;
 
   if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
@@ -78,34 +81,32 @@ function initCounters() {
     return;
   }
 
-  counters.forEach((element) => {
-    element.textContent = formatCounterValue(element, 0);
-  });
-
+  // Keep final HTML values until the intentional trigger moment.
   let started = false;
-  const run = (host) => {
+  const run = () => {
     if (started) return;
     started = true;
-    const items = host
-      ? Array.from(host.querySelectorAll('[data-counter]'))
-      : counters;
-    items.forEach((element, index) => animateCounter(element, index * 90));
+    counters.forEach((element, index) => {
+      const target = Number(element.getAttribute('data-count'));
+      if (!Number.isFinite(target)) return;
+      element.textContent = formatCounterValue(element, 0);
+      animateCounter(element, index * 80);
+    });
   };
 
-  const row = document.querySelector('#stats .home-stats-row');
+  const target = section || counters[0];
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
-        run(entry.target);
+        run();
         observer.disconnect();
       });
     },
-    { threshold: 0.35, rootMargin: '0px 0px -4% 0px' },
+    { threshold: 0.55, rootMargin: '0px 0px -10% 0px' },
   );
 
-  if (row) observer.observe(row);
-  else counters.forEach((element) => observer.observe(element));
+  observer.observe(target);
 }
 
 function initHeroEntrance() {
@@ -120,11 +121,9 @@ function initHeroEntrance() {
     return;
   }
 
-  // Double rAF so the browser paints the initial hidden state before revealing.
+  // Single rAF: paint initial hidden state, then start immediately.
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      hero.classList.add('hero-is-ready');
-    });
+    hero.classList.add('hero-is-ready');
   });
 }
 

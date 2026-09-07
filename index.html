@@ -80,18 +80,19 @@
             </a>
           </div>
           <div class="nav-links">
-            <a href="index.html" class="nav-link is-active" data-nav="hero" data-i18n="nav.home">الرئيسية</a>
-            <a href="about.html" class="nav-link" data-nav="about" data-i18n="nav.about">عن رنا</a>
+            <a href="index.html#hero" class="nav-link is-active" data-nav="hero" data-i18n="nav.home">الرئيسية</a>
+            <a href="index.html#about" class="nav-link" data-nav="about" data-i18n="nav.about">عن رنا</a>
+            <a href="index.html#philosophy" class="nav-link" data-nav="philosophy" data-i18n="nav.philosophy">الفلسفه</a>
             <a href="index.html#programs" class="nav-link" data-nav="programs" data-i18n="nav.programs">البرامج</a>
             <a href="index.html#testimonials" class="nav-link" data-nav="testimonials" data-i18n="nav.testimonials">قالوا عنا</a>
             <a href="index.html#contact" class="nav-link" data-nav="contact" data-i18n="nav.contact">تواصل</a>
           </div>
           <div class="nav-actions">
-            <button type="button" class="switcher-btn switcher-btn--lang" data-locale-toggle data-i18n-aria="language.switchTo">
-              <span data-icon="languages" data-icon-class="icon icon-xs"></span>
-              <span class="lang-full" data-locale-next>English</span>
-              <span class="lang-short" data-locale-short>EN</span>
-            </button>
+            <div class="lang-switcher" role="group" data-i18n-aria="language.selector" aria-label="اختيار اللغة">
+              <button type="button" class="lang-switcher-btn" data-locale-set="en" aria-pressed="false">EN</button>
+              <span class="lang-switcher-divider" aria-hidden="true"></span>
+              <button type="button" class="lang-switcher-btn is-active" data-locale-set="ar" aria-pressed="true">AR</button>
+            </div>
             <button type="button" class="switcher-btn switcher-btn--theme" data-theme-toggle data-i18n-aria="theme.switchToLight">
               <span data-theme-icon></span>
             </button>
@@ -104,8 +105,9 @@
       </div>
       <div class="mobile-menu glass-slide" data-mobile-menu hidden>
         <div class="mobile-menu-inner">
-          <a href="index.html" class="mobile-menu-link is-active" data-nav="hero" data-i18n="nav.home">الرئيسية</a>
-          <a href="about.html" class="mobile-menu-link" data-nav="about" data-i18n="nav.about">عن رنا</a>
+          <a href="index.html#hero" class="mobile-menu-link is-active" data-nav="hero" data-i18n="nav.home">الرئيسية</a>
+          <a href="index.html#about" class="mobile-menu-link" data-nav="about" data-i18n="nav.about">عن رنا</a>
+          <a href="index.html#philosophy" class="mobile-menu-link" data-nav="philosophy" data-i18n="nav.philosophy">الفلسفه</a>
           <a href="index.html#programs" class="mobile-menu-link" data-nav="programs" data-i18n="nav.programs">البرامج</a>
           <a href="index.html#testimonials" class="mobile-menu-link" data-nav="testimonials" data-i18n="nav.testimonials">قالوا عنا</a>
           <a href="index.html#contact" class="mobile-menu-link" data-nav="contact" data-i18n="nav.contact">تواصل</a>
@@ -268,35 +270,77 @@
         </div>
       </section>
 
+      <section id="philosophy" class="slide-section philosophy-section" aria-labelledby="philosophy-title">
+        <div class="slide-inner">
+          <div class="philosophy-grid">
+            <div class="philosophy-copy">
+              <h2
+                id="philosophy-title"
+                class="keynote-display philosophy-title text-gold-gradient"
+                data-i18n="philosophy.title"
+                data-reveal
+              >
+                فلسفتي في العمل
+              </h2>
+              <div class="gold-rule-short philosophy-rule" data-reveal data-reveal-delay="40" aria-hidden="true"></div>
+              <p class="keynote-body philosophy-p" data-i18n-html="philosophy.p1" data-reveal data-reveal-delay="80">
+                كنت أعتقد أن ما أعيشه هو قدري، حتى أدركت أن <span class="text-gold-gradient">الله لا يغيّر واقعنا</span> حتى نبدأ ب<span class="text-gold-gradient">تغيير ما داخلنا</span>.
+              </p>
+              <p class="keynote-body philosophy-p" data-i18n-html="philosophy.p2" data-reveal data-reveal-delay="120">
+                من هنا بدأت رحلة طويلة من <span class="text-gold-gradient">الوعي، والشفاء، والغفران، والتسليم، والتطوير المستمر</span>. رحلة غيّرت حياتي من الداخل قبل أن تغيّر <span class="text-gold-gradient">كل ما حولي</span>.
+              </p>
+              <p class="keynote-headline philosophy-close" data-i18n-html="philosophy.p3" data-reveal data-reveal-delay="160">
+                أؤمن أن <span class="text-gold-gradient">التحول الحقيقي</span> يبدأ حين تتوقف عن محاربة نفسك<br>وتعرف <span class="text-gold-gradient">قيمتك الحقيقية</span><br>وتتعلم كيف تعود إلى الله لا كمعلومة،<br>بل ك<span class="text-gold-gradient">مصدر للأمان، والحب، والاحتواء</span>.
+              </p>
+            </div>
+
+            <div class="philosophy-media" data-reveal data-reveal-delay="60">
+              <div class="philosophy-glow" aria-hidden="true" style="background: var(--theme-portrait-glow); filter: blur(28px);"></div>
+              <div class="philosophy-frame portrait-arch glass-slide">
+                <div class="portrait-frame">
+                  <img
+                    src="assets/images/philosophy-tall.png"
+                    alt="Dr. Rana Mosaad"
+                    data-i18n-aria="hero.portraitAlt"
+                    loading="lazy"
+                    decoding="async"
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section id="programs" class="slide-section">
         <div class="slide-inner">
           <header class="section-keynote-header items-center text-center">
-            <div class="section-keynote-eyebrow">
+            <!-- <div class="section-keynote-eyebrow">
               <span class="keynote-label" data-i18n="programs.label">البرامج التدريبية</span>
-            </div>
+            </div> -->
             <div class="section-keynote-separator" aria-hidden="true"></div>
-            <h2 class="section-keynote-title keynote-display text-gold-gradient" data-i18n="programs.title">مسارات التحول والتمكين</h2>
+            <h2 class="section-keynote-title keynote-display text-gold-gradient" data-i18n="programs.title">خدماتنا</h2>
             <div class="section-keynote-rule gold-rule-short"></div>
-            <p class="section-keynote-subtitle keynote-body" data-i18n="programs.subtitle">برامج مصممة بعناية لتلتقي معكِ حيث أنتِ — وتقودكِ إلى حيث تستحقين أن تكوني.</p>
+            <!-- <p class="section-keynote-subtitle keynote-body" data-i18n="programs.subtitle">برامج مصممة بعناية لتلتقي معكِ حيث أنتِ — وتقودكِ إلى حيث تستحقين أن تكوني.</p> -->
           </header>
 
           <div class="programs-grid">
             <article class="program-card glass-slide glow-card" role="button" tabindex="0" data-open-modal="private">
               <div class="gold-rule-short"></div>
               <h3 class="keynote-headline" data-i18n="featuredPrograms.0.title">جلسات خاصة</h3>
-              <p class="keynote-body" data-i18n="featuredPrograms.0.description">جلسات فردية مخصصة في مساحة آمنة، نعمل فيها على الجذور العاطفية والروحية بعمق وخصوصية تامة.</p>
+              <p class="keynote-body" data-i18n-html="featuredPrograms.0.description">جلسات خاصة فردية مع دكتورة رنا فى <span class="text-gold-gradient">مساحة آمنة بلا أى أحكام</span><br>و نعمل فيها على <span class="text-gold-gradient">الجذور العاطفية و الروحية</span> بعمق و خصوصية</p>
               <button type="button" class="btn-luxury-ghost" data-open-modal="private">
-                <span data-i18n="featuredPrograms.0.cta">احجز جلستك</span>
+                <span data-i18n="featuredPrograms.0.cta">اعرف المزيد</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </button>
             </article>
 
             <article class="program-card glass-slide glow-card" role="button" tabindex="0" data-open-modal="training">
               <div class="gold-rule-short"></div>
-              <h3 class="keynote-headline" data-i18n="featuredPrograms.1.title">برامج تدريبية</h3>
-              <p class="keynote-body" data-i18n="featuredPrograms.1.description">مسارات تدريبية عملية وعميقة لتنمية الوعي، التمكين، والاتزان الداخلي عبر أسابيع من التطبيق الواعي.</p>
+              <h3 class="keynote-headline" data-i18n="featuredPrograms.1.title">برامج تدريبيه</h3>
+              <p class="keynote-body" data-i18n-html="featuredPrograms.1.description">برامج تطبيقية عملية تهدف <span class="text-gold-gradient">لتغييرك من الداخل</span> ليتغير واقعك<br>نعمل فيها على <span class="text-gold-gradient">التمكين و الاتزان الداخلى</span> عبر أسابيع من التطبيق و التمارين</p>
               <button type="button" class="btn-luxury-ghost" data-open-modal="training">
-                <span data-i18n="featuredPrograms.1.cta">اكتشفي البرامج</span>
+                <span data-i18n="featuredPrograms.1.cta">اعرف المزيد</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </button>
             </article>
@@ -304,9 +348,9 @@
             <article class="program-card glass-slide glow-card" role="button" tabindex="0" data-open-modal="workshops">
               <div class="gold-rule-short"></div>
               <h3 class="keynote-headline" data-i18n="featuredPrograms.2.title">ورش عمل</h3>
-              <p class="keynote-body" data-i18n="featuredPrograms.2.description">ورش مكثفة في يوم واحد للوعي والتحرر والاتصال — تجربة عملية عميقة في مساحة جماعية داعمة.</p>
+              <p class="keynote-body" data-i18n-html="featuredPrograms.2.description">ورش مكثفة<br>ل<span class="text-gold-gradient">الوعى و التحرر و الاتصال</span> — <span class="text-gold-gradient">تجربة عملية عميقة</span> فى مساحة جماعية داعمة</p>
               <button type="button" class="btn-luxury-ghost" data-open-modal="workshops">
-                <span data-i18n="featuredPrograms.2.cta">اكتشفي الورش</span>
+                <span data-i18n="featuredPrograms.2.cta">اعرف المزيد</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </button>
             </article>
@@ -314,9 +358,9 @@
             <article class="program-card glass-slide glow-card" role="button" tabindex="0" data-open-modal="recorded">
               <div class="gold-rule-short"></div>
               <h3 class="keynote-headline" data-i18n="featuredPrograms.3.title">جلسات مسجلة</h3>
-              <p class="keynote-body" data-i18n="featuredPrograms.3.description">محتوى مسجل يمكنكِ الوصول إليه في أي وقت، لمواصلة رحلة الوعي والتطبيق بمرونة تناسب إيقاع حياتك.</p>
+              <p class="keynote-body" data-i18n-html="featuredPrograms.3.description">جلسات تأمل يمكنك الإستماع لها فى أى وقت لتساعد العقل الباطن فى <span class="text-gold-gradient">التحول و الاتزان</span> و <span class="text-gold-gradient">الاتصال بالله</span></p>
               <button type="button" class="btn-luxury-ghost" data-open-modal="recorded">
-                <span data-i18n="featuredPrograms.3.cta">ابدئي الآن</span>
+                <span data-i18n="featuredPrograms.3.cta">اعرف المزيد</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </button>
             </article>
