@@ -428,6 +428,12 @@ export const translations = {
       methodTitle: 'منهجي',
       methodBody:
         'قائم على الدمج بين التجربة الواقعية، التدريب العملي، المنهج العلمي , والعمل علي الجذور النفسية والروحية، مدعومًا باعتمادات وتخصصات متقدمة، منها:',
+      pillars: [
+        'التجربة الواقعية',
+        'التدريب العملي',
+        'المنهج العلمي',
+        'الجذور النفسية والروحية',
+      ],
       credentials: [
         'مدربة معتمدة لمدرسة الدلالات العصبية الأمريكية',
         'Neuro-semantics Trainer of Trainers',
@@ -439,13 +445,16 @@ export const translations = {
         'أخصائية إرشاد نفسي وأسري جامعة عين شمس',
       ],
       methodSupportLead: 'هذا التنوع ليس للعرض، بل لأنه يخدم هدفي الأساسي:',
-      methodSupportEmphasis: 'أن تصبح واعي بذاتك، ومتمكن من قدراتك، ومتصل بالله.',
+      methodSupportEmphasis:
+        'أن تصبح <span class="text-gold-gradient">واعي بذاتك</span>، و<span class="text-gold-gradient">متمكن من قدراتك</span>، و<span class="text-gold-gradient">متصل بالله</span>.',
+      brandTriad: ['وعي', 'تمكين', 'اتصال'],
       whyTitle: 'ليه تختار رنا كرفيق في رحلتك؟',
-      reasons: [
-        'أقدّم رحلة عملية وروحية متكاملة تساعدك على السلام الداخلي والتمكين دون انفصال عن الحياة الواقعية، وفيها كل ما تحتاجاه من { Therapy, Coaching, إرشاد روحي } في مكان واحد.',
-        'أنا لا أساعدك فقط على فهم نفسك، بل على استعادة قيمتك من الداخل بدل البحث عنها في الخارج.',
-        'أعالج الجذر النفسي والروحي وراء الشك، التعلّق، والاحتياج العاطفي من خلال اتصال أعمق بالله والذات.',
+      reasonsHtml: [
+        'أقدّم رحلة عملية وروحية متكاملة تساعدك على السلام الداخلي والتمكين دون انفصال عن الحياة الواقعية، وفيها كل ما تحتاجاه من { <span class="text-gold-gradient">Therapy</span>, <span class="text-gold-gradient">Coaching</span>, <span class="text-gold-gradient">إرشاد روحي</span> } في مكان واحد.',
+        'أنا لا أساعدك فقط على فهم نفسك، بل على <span class="text-gold-gradient">استعادة قيمتك من الداخل</span> بدل البحث عنها في الخارج.',
+        'أعالج <span class="text-gold-gradient">الجذر النفسي والروحي</span> وراء الشك، التعلّق، والاحتياج العاطفي من خلال <span class="text-gold-gradient">اتصال أعمق بالله والذات</span>.',
       ],
+      reasonTags: ['Therapy', 'Coaching', 'إرشاد روحي'],
       problemsTitle: 'المشكلات التي أساعدك علي حلها.',
       problemsIntro: 'أرافقك في مساحات تحول متعددة، منها:',
       problems: [
@@ -463,9 +472,11 @@ export const translations = {
       ],
       closingLead: 'أنا لا أعمل على “جانب واحد” منك،',
       closingMid: 'بل أتعامل معك ككل:',
-      closingEmphasis: 'روح، ونفس، وجسد',
-      ctaTitle: 'جاهزة لبدء رحلتك؟',
-      ctaButton: 'احجزي استشارتك',
+      closingParts: ['روح', 'نفس', 'جسد'],
+      ctaWarm: 'لو حاسس إن الوقت جه تبدأ رحلتك...',
+      ctaHeadline: 'ابدأ رحلتك نحو وعي أعمق، واتزان أكبر، واتصال حقيقي بالله.',
+      ctaButton: 'احجز استشارتك',
+      ctaSecondary: 'تعرف على البرامج',
       portraitAlt: 'د. رنا مسعد',
     },
     retreatDetail: {
@@ -939,6 +950,12 @@ export const translations = {
       methodTitle: 'My Approach',
       methodBody:
         'It is grounded in combining lived experience, practical training, scientific methodology, and work on psychological and spiritual roots — supported by advanced certifications and specializations, including:',
+      pillars: [
+        'Lived experience',
+        'Practical training',
+        'Scientific method',
+        'Psychological & spiritual roots',
+      ],
       credentials: [
         'Certified trainer of the American School of Neuro-Semantics',
         'Neuro-semantics Trainer of Trainers',
@@ -951,13 +968,15 @@ export const translations = {
       ],
       methodSupportLead: 'This diversity is not for display — it serves my core purpose:',
       methodSupportEmphasis:
-        'that you become aware of yourself, empowered in your capacities, and connected with Allah.',
+        'that you become <span class="text-gold-gradient">aware of yourself</span>, <span class="text-gold-gradient">empowered in your capacities</span>, and <span class="text-gold-gradient">connected with Allah</span>.',
+      brandTriad: ['Awareness', 'Empowerment', 'Connection'],
       whyTitle: 'Why choose Rana as a companion on your journey?',
-      reasons: [
-        'I offer an integrated practical and spiritual journey that helps you toward inner peace and empowerment without disconnecting from real life — with everything you need of { Therapy, Coaching, spiritual guidance } in one place.',
-        'I do not only help you understand yourself — I help you reclaim your worth from within, instead of searching for it outside.',
-        'I address the psychological and spiritual root behind doubt, attachment, and emotional need through a deeper connection with Allah and the self.',
+      reasonsHtml: [
+        'I offer an integrated practical and spiritual journey that helps you toward inner peace and empowerment without disconnecting from real life — with everything you need of { <span class="text-gold-gradient">Therapy</span>, <span class="text-gold-gradient">Coaching</span>, <span class="text-gold-gradient">spiritual guidance</span> } in one place.',
+        'I do not only help you understand yourself — I help you <span class="text-gold-gradient">reclaim your worth from within</span>, instead of searching for it outside.',
+        'I address the <span class="text-gold-gradient">psychological and spiritual root</span> behind doubt, attachment, and emotional need through a <span class="text-gold-gradient">deeper connection with Allah and the self</span>.',
       ],
+      reasonTags: ['Therapy', 'Coaching', 'Spiritual guidance'],
       problemsTitle: 'The challenges I help you resolve.',
       problemsIntro: 'I walk with you across multiple spaces of transformation, including:',
       problems: [
@@ -975,9 +994,12 @@ export const translations = {
       ],
       closingLead: 'I do not work on “one side” of you,',
       closingMid: 'I meet you as a whole:',
-      closingEmphasis: 'Spirit, psyche, and body',
-      ctaTitle: 'Ready to begin your journey?',
-      ctaButton: 'Book Your Consultation',
+      closingParts: ['Spirit', 'Psyche', 'Body'],
+      ctaWarm: 'If you feel the time has come to begin your journey...',
+      ctaHeadline:
+        'Begin your journey toward deeper awareness, greater balance, and a true connection with Allah.',
+      ctaButton: 'Book your consultation',
+      ctaSecondary: 'Explore the programs',
       portraitAlt: 'Dr. Rana Mosaad',
     },
     retreatDetail: {
