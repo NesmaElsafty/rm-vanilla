@@ -329,7 +329,7 @@
               <div class="gold-rule-short"></div>
               <h3 class="keynote-headline" data-i18n="featuredPrograms.0.title">جلسات خاصة</h3>
               <p class="keynote-body" data-i18n-html="featuredPrograms.0.description">جلسات خاصة فردية مع دكتورة رنا فى <span class="text-gold-gradient">مساحة آمنة بلا أى أحكام</span><br>و نعمل فيها على <span class="text-gold-gradient">الجذور العاطفية و الروحية</span> بعمق و خصوصية</p>
-              <button type="button" class="btn-luxury-ghost" data-open-modal="private">
+              <button type="button" class="btn-luxury-primary" data-open-modal="private">
                 <span data-i18n="featuredPrograms.0.cta">اعرف المزيد</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </button>
@@ -339,7 +339,7 @@
               <div class="gold-rule-short"></div>
               <h3 class="keynote-headline" data-i18n="featuredPrograms.1.title">برامج تدريبيه</h3>
               <p class="keynote-body" data-i18n-html="featuredPrograms.1.description">برامج تطبيقية عملية تهدف <span class="text-gold-gradient">لتغييرك من الداخل</span> ليتغير واقعك<br>نعمل فيها على <span class="text-gold-gradient">التمكين و الاتزان الداخلى</span> عبر أسابيع من التطبيق و التمارين</p>
-              <button type="button" class="btn-luxury-ghost" data-open-modal="training">
+              <button type="button" class="btn-luxury-primary" data-open-modal="training">
                 <span data-i18n="featuredPrograms.1.cta">اعرف المزيد</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </button>
@@ -349,7 +349,7 @@
               <div class="gold-rule-short"></div>
               <h3 class="keynote-headline" data-i18n="featuredPrograms.2.title">ورش عمل</h3>
               <p class="keynote-body" data-i18n-html="featuredPrograms.2.description">ورش مكثفة<br>ل<span class="text-gold-gradient">الوعى و التحرر و الاتصال</span> — <span class="text-gold-gradient">تجربة عملية عميقة</span> فى مساحة جماعية داعمة</p>
-              <button type="button" class="btn-luxury-ghost" data-open-modal="workshops">
+              <button type="button" class="btn-luxury-primary" data-open-modal="workshops">
                 <span data-i18n="featuredPrograms.2.cta">اعرف المزيد</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </button>
@@ -359,7 +359,7 @@
               <div class="gold-rule-short"></div>
               <h3 class="keynote-headline" data-i18n="featuredPrograms.3.title">جلسات مسجلة</h3>
               <p class="keynote-body" data-i18n-html="featuredPrograms.3.description">جلسات تأمل يمكنك الإستماع لها فى أى وقت لتساعد العقل الباطن فى <span class="text-gold-gradient">التحول و الاتزان</span> و <span class="text-gold-gradient">الاتصال بالله</span></p>
-              <button type="button" class="btn-luxury-ghost" data-open-modal="recorded">
+              <button type="button" class="btn-luxury-primary" data-open-modal="recorded">
                 <span data-i18n="featuredPrograms.3.cta">اعرف المزيد</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </button>
@@ -369,7 +369,7 @@
               <div class="gold-rule-short"></div>
               <h3 class="keynote-headline" data-i18n="featuredPrograms.4.title">Retreats &amp; Events</h3>
               <p class="keynote-body" data-i18n="featuredPrograms.4.description">رحلات تحولية مكثفة في أجواء هادئة، للخروج من الروتين والاتصال العميق بالذات والله.</p>
-              <a href="retreat-detail.html?slug=upcoming" class="btn-luxury-ghost" data-retreat-link="upcoming">
+              <a href="retreat-detail.html?slug=upcoming" class="btn-luxury-primary" data-retreat-link="upcoming">
                 <span data-i18n="featuredPrograms.4.cta">احجزي مكانك</span>
                 <span data-icon="chevronForward" data-icon-class="icon icon-xs"></span>
               </a>
@@ -392,16 +392,26 @@
         </div>
       </section>
 
-      <section id="final-cta" class="slide-section">
+      <section id="final-cta" class="slide-section final-cta-section">
         <div class="slide-inner">
           <div class="glass-slide final-cta-panel">
-            <div class="final-cta-glow" aria-hidden="true" style="background: radial-gradient(ellipse at 50% 85%, rgba(185,143,162,0.1) 0%, transparent 60%);"></div>
-            <h2 class="keynote-display final-cta-title">
-              <span data-i18n="finalCta.title">هل أنتِ مستعدة للعودة إلى</span>
-              <span class="text-gold-gradient" data-i18n="finalCta.highlight">نسختك الحقيقية؟</span>
+            <div class="final-cta-glow" aria-hidden="true"></div>
+            <h2
+              class="keynote-display final-cta-title"
+              data-i18n-html="finalCta.title"
+              data-reveal
+            >
+              كل برنامج هو باب… لكن الرسالة واحدة: أن تعود إلى <span class="text-gold-gradient">حقيقتك بوعي وتمكين واتصال بالله</span>.
             </h2>
-            <div class="gold-rule"></div>
-            <a href="index.html#contact" class="btn-luxury-primary" data-scroll="contact" data-i18n="finalCta.button">احجز استشارتك المجانية</a>
+            <div class="gold-rule" data-reveal data-reveal-delay="40" aria-hidden="true"></div>
+            <a
+              href="index.html#contact"
+              class="btn-luxury-primary"
+              data-scroll="contact"
+              data-i18n="finalCta.button"
+              data-reveal
+              data-reveal-delay="80"
+            >احجز استشارتك المجانية</a>
           </div>
         </div>
       </section>
@@ -760,7 +770,7 @@
       <p class="keynote-body" data-i18n="programs.recordedModalSubtitle">اختاري الجلسة التأملية التي تناسب مرحلتك</p>
       <div data-slider-root></div>
       <div class="modal-view-all">
-        <a href="recorded-sessions.html" class="btn-luxury-ghost" data-view-all-recorded data-i18n="programs.viewAllRecorded">عرض كل الجلسات</a>
+        <a href="recorded-sessions.html" class="btn-luxury-primary" data-view-all-recorded data-i18n="programs.viewAllRecorded">عرض كل الجلسات</a>
       </div>
     </div>
   </div>

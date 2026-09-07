@@ -108,7 +108,7 @@ function cardMarkup(item, textOnly, isActive, ctaIcon, detailHref = '') {
       <div class="gold-rule-short gold-rule-short--card"></div>
       <h4 class="floating-program-card-title keynote-headline">${escapeHtml(item.title)}</h4>
       <p class="floating-program-card-description keynote-body">${escapeHtml(item.description)}</p>
-      <a href="${href}" data-slider-select="${escapeHtml(item.slug)}" class="btn-luxury-ghost floating-program-card-cta">
+      <a href="${href}" data-slider-select="${escapeHtml(item.slug)}" class="btn-luxury-primary floating-program-card-cta">
         <span>${escapeHtml(item.button_text)}</span>
         ${ctaIcon}
       </a>
@@ -156,14 +156,6 @@ export function createFloatingSlider(container, items, options = {}) {
     .join('');
 
   container.innerHTML = `<div class="floating-programs-scene" dir="${dir}">
-    <div class="floating-programs-sacred-geometry" aria-hidden="true">
-      <span class="floating-programs-ring floating-programs-ring--1"></span>
-      <span class="floating-programs-ring floating-programs-ring--2"></span>
-      <span class="floating-programs-ring floating-programs-ring--3"></span>
-    </div>
-    <div class="floating-programs-sparkles" aria-hidden="true">
-      ${Array.from({ length: 12 }, (_, i) => `<span class="floating-programs-sparkle" style="--sparkle-i:${i}"></span>`).join('')}
-    </div>
     <div class="floating-programs-slider-wrap">
       <div class="floating-programs-slider programs-slider">${slides}</div>
       <div class="floating-programs-nav">
@@ -330,6 +322,51 @@ export function createFloatingSlider(container, items, options = {}) {
   };
 }
 
+const TESTIMONIAL_EXCERPT_CHARS = 170;
+
+function stripHtml(value) {
+  return String(value ?? '').replace(/<[^>]*>/g, '');
+}
+
+function truncatePlain(text, maxChars) {
+  const source = String(text ?? '').trim();
+  if (source.length <= maxChars) return { text: source, truncated: false };
+  const slice = source.slice(0, maxChars);
+  const soft = slice.replace(/\s+\S*$/, '');
+  const excerpt = (soft.length > maxChars * 0.55 ? soft : slice).trimEnd();
+  return { text: `${excerpt}…`, truncated: true };
+}
+
+function formatProgramsMeta(programTaken, copy) {
+  if (!programTaken) return '';
+  const parts = String(programTaken)
+    .split(/[،,]/)
+    .map((part) => part.trim())
+    .filter(Boolean);
+  if (!parts.length) return '';
+
+  if (parts.length <= 2) {
+    return `<div class="testimonials-programs">${parts
+      .map((part) => `<span class="testimonials-badge">${escapeHtml(part)}</span>`)
+      .join('')}</div>`;
+  }
+
+  const shown = 2;
+  const more = parts.length - shown;
+  const word = shown === 1 ? copy.programsWordOne : copy.programsWord;
+  return `<div class="testimonials-programs testimonials-programs--compact" title="${escapeHtml(programTaken)}">
+    <span class="testimonials-programs-summary">${shown} ${escapeHtml(word)}</span>
+    <span class="testimonials-programs-more">+${more}</span>
+  </div>`;
+}
+
+function storyAriaLabel(copy, current, total, name) {
+  return String(copy.storyOf ?? 'Story {current} of {total} — {name}')
+    .replace('{current}', String(current))
+    .replace('{total}', String(total))
+    .replace('{name}', name ?? '');
+}
+
 export function createTestimonialSlider(container, items) {
   if (!container) return { destroy() {}, refresh() {} };
   if (!items?.length) {
@@ -338,30 +375,194 @@ export function createTestimonialSlider(container, items) {
   }
 
   let activeIndex = 0;
+  let modalOpen = false;
+  let wrapEl = null;
+  let onKeyDown = null;
+  let onPointerDown = null;
+  let onPointerUp = null;
+  let pointerStartX = null;
+  let pointerStartY = null;
+  let pointerId = null;
+
+  const getCopy = () => getContent(getLocale()).testimonials ?? {};
+
+  const closeModal = () => {
+    const modal = container.querySelector('[data-testimonial-modal]');
+    if (!modal) return;
+    modal.hidden = true;
+    modal.setAttribute('aria-hidden', 'true');
+    modalOpen = false;
+    document.body.classList.remove('testimonials-modal-open');
+  };
+
+  const openModal = (index) => {
+    const item = items[index];
+    const modal = container.querySelector('[data-testimonial-modal]');
+    const body = container.querySelector('[data-testimonial-modal-body]');
+    const nameEl = container.querySelector('[data-testimonial-modal-name]');
+    const roleEl = container.querySelector('[data-testimonial-modal-role]');
+    if (!item || !modal || !body) return;
+
+    body.innerHTML = `<p class="testimonials-quote testimonials-quote--full">“${formatTestimonialQuote(item.content)}”</p>`;
+    if (nameEl) nameEl.textContent = item.name ?? '';
+    if (roleEl) roleEl.textContent = item.role ?? '';
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    modalOpen = true;
+    document.body.classList.add('testimonials-modal-open');
+    modal.querySelector('[data-testimonial-modal-close]')?.focus();
+  };
+
+  const syncActive = () => {
+    const copy = getCopy();
+    container.querySelectorAll('[data-testimonial-slide]').forEach((slide) => {
+      const idx = Number(slide.getAttribute('data-testimonial-slide'));
+      const active = idx === activeIndex;
+      slide.classList.toggle('is-active', active);
+      slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+      if (active) slide.removeAttribute('inert');
+      else slide.setAttribute('inert', '');
+    });
+    container.querySelectorAll('[data-testimonial-dot]').forEach((dot) => {
+      const idx = Number(dot.getAttribute('data-testimonial-dot'));
+      const active = idx === activeIndex;
+      const name = items[idx]?.name ?? '';
+      dot.classList.toggle('is-active', active);
+      dot.setAttribute('aria-current', active ? 'true' : 'false');
+      dot.setAttribute('aria-label', storyAriaLabel(copy, idx + 1, items.length, name));
+    });
+  };
+
+  const show = (index) => {
+    if (modalOpen) closeModal();
+    activeIndex = (index + items.length) % items.length;
+    syncActive();
+  };
+
+  const unbind = () => {
+    if (wrapEl && onKeyDown) wrapEl.removeEventListener('keydown', onKeyDown);
+    if (wrapEl && onPointerDown) wrapEl.removeEventListener('pointerdown', onPointerDown);
+    if (wrapEl && onPointerUp) {
+      wrapEl.removeEventListener('pointerup', onPointerUp);
+      wrapEl.removeEventListener('pointercancel', onPointerUp);
+    }
+    wrapEl = null;
+    onKeyDown = null;
+    onPointerDown = null;
+    onPointerUp = null;
+    pointerStartX = null;
+    pointerStartY = null;
+    pointerId = null;
+  };
+
+  const bind = () => {
+    unbind();
+    wrapEl = container.querySelector('[data-testimonial-root]');
+    if (!wrapEl) return;
+
+    container.querySelector('[data-testimonial-prev]')?.addEventListener('click', () => show(activeIndex - 1));
+    container.querySelector('[data-testimonial-next]')?.addEventListener('click', () => show(activeIndex + 1));
+    container.querySelectorAll('[data-testimonial-dot]').forEach((dot) => {
+      dot.addEventListener('click', () => show(Number(dot.getAttribute('data-testimonial-dot'))));
+    });
+    container.querySelectorAll('[data-testimonial-read-full]').forEach((btn) => {
+      btn.addEventListener('click', () => openModal(Number(btn.getAttribute('data-testimonial-read-full'))));
+    });
+    container.querySelector('[data-testimonial-modal-close]')?.addEventListener('click', closeModal);
+    container.querySelector('[data-testimonial-modal-backdrop]')?.addEventListener('click', closeModal);
+
+    onKeyDown = (event) => {
+      if (modalOpen) {
+        if (event.key === 'Escape') {
+          event.preventDefault();
+          closeModal();
+        }
+        return;
+      }
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        show(isRtl() ? activeIndex + 1 : activeIndex - 1);
+      } else if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        show(isRtl() ? activeIndex - 1 : activeIndex + 1);
+      } else if (event.key === 'Home') {
+        event.preventDefault();
+        show(0);
+      } else if (event.key === 'End') {
+        event.preventDefault();
+        show(items.length - 1);
+      }
+    };
+    wrapEl.addEventListener('keydown', onKeyDown);
+
+    const applySwipe = (dx, dy) => {
+      if (Math.abs(dx) < 48 || Math.abs(dx) < Math.abs(dy)) return;
+      const goNext = dx < 0;
+      if (isRtl()) {
+        show(goNext ? activeIndex - 1 : activeIndex + 1);
+      } else {
+        show(goNext ? activeIndex + 1 : activeIndex - 1);
+      }
+    };
+
+    onPointerDown = (event) => {
+      if (modalOpen) return;
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      if (event.target.closest('button, a')) return;
+      pointerStartX = event.clientX;
+      pointerStartY = event.clientY;
+      pointerId = event.pointerId;
+      try {
+        wrapEl.setPointerCapture(event.pointerId);
+      } catch {
+        /* ignore */
+      }
+    };
+    onPointerUp = (event) => {
+      if (modalOpen || pointerStartX == null || pointerStartY == null) return;
+      if (pointerId != null && event.pointerId !== pointerId) return;
+      const dx = event.clientX - pointerStartX;
+      const dy = event.clientY - pointerStartY;
+      pointerStartX = null;
+      pointerStartY = null;
+      pointerId = null;
+      applySwipe(dx, dy);
+    };
+    wrapEl.addEventListener('pointerdown', onPointerDown);
+    wrapEl.addEventListener('pointerup', onPointerUp);
+    wrapEl.addEventListener('pointercancel', onPointerUp);
+  };
 
   const render = () => {
+    const copy = getCopy();
     const rtl = isRtl();
     const prevIcon = rtl ? iconChevronRight('icon icon-sm') : iconChevronLeft('icon icon-sm');
     const nextIcon = rtl ? iconChevronLeft('icon icon-sm') : iconChevronRight('icon icon-sm');
+    const prevLabel = copy.prev ?? 'Previous story';
+    const nextLabel = copy.next ?? 'Next story';
 
     const slides = items
       .map((item, idx) => {
-        const image = item.image
-          ? `<img src="${escapeHtml(item.image)}" alt="${escapeHtml(item.name)}" loading="lazy" decoding="async" class="testimonials-avatar"/>`
+        const plain = stripHtml(item.content);
+        const { text: excerpt, truncated } = truncatePlain(plain, TESTIMONIAL_EXCERPT_CHARS);
+        const programs = formatProgramsMeta(item.programTaken, copy);
+        const readFull = truncated
+          ? `<button type="button" class="testimonials-read-full" data-testimonial-read-full="${idx}">${escapeHtml(copy.readFull ?? 'Read full story')}</button>`
           : '';
-        const badge = item.programTaken
-          ? `<span class="testimonials-badge">${escapeHtml(item.programTaken)}</span>`
-          : '';
-        return `<blockquote class="testimonials-slide glass-slide${idx === activeIndex ? ' is-active' : ''}" data-testimonial-slide="${idx}">
-          <div class="testimonials-quote-icon">${iconQuote('icon icon-lg')}</div>
-          <p class="testimonials-quote">“${formatTestimonialQuote(item.content)}”</p>
-          <div class="gold-rule"></div>
+        const quoteHtml = truncated
+          ? escapeHtml(excerpt)
+          : formatTestimonialQuote(item.content);
+
+        return `<blockquote class="testimonials-slide glass-slide${idx === activeIndex ? ' is-active' : ''}" data-testimonial-slide="${idx}" aria-hidden="${idx === activeIndex ? 'false' : 'true'}"${idx === activeIndex ? '' : ' inert'}>
+          <span class="testimonials-quote-icon" aria-hidden="true">${iconQuote('icon icon-lg')}</span>
+          <p class="testimonials-quote">“${quoteHtml}”</p>
+          ${readFull}
+          <div class="gold-rule testimonials-rule" aria-hidden="true"></div>
           <footer class="testimonials-footer">
-            ${image}
-            <div>
+            <div class="testimonials-person">
               <cite class="testimonials-name keynote-headline text-gold-gradient">${escapeHtml(item.name)}</cite>
               <span class="testimonials-role">${escapeHtml(item.role ?? '')}</span>
-              ${badge}
+              ${programs}
             </div>
           </footer>
         </blockquote>`;
@@ -369,50 +570,46 @@ export function createTestimonialSlider(container, items) {
       .join('');
 
     const dots = items
-      .map(
-        (_, idx) =>
-          `<button type="button" data-testimonial-dot="${idx}" class="testimonials-dot${idx === activeIndex ? ' is-active' : ''}" aria-label="${idx + 1}"></button>`,
-      )
+      .map((item, idx) => {
+        const label = storyAriaLabel(copy, idx + 1, items.length, item.name);
+        return `<button type="button" data-testimonial-dot="${idx}" class="testimonials-dot${idx === activeIndex ? ' is-active' : ''}" aria-label="${escapeHtml(label)}" aria-current="${idx === activeIndex ? 'true' : 'false'}"></button>`;
+      })
       .join('');
 
-    container.innerHTML = `<div class="testimonials-wrap" data-testimonial-root>
+    container.innerHTML = `<div class="testimonials-wrap" data-testimonial-root tabindex="0" role="region" aria-roledescription="carousel" aria-label="${escapeHtml(copy.title ?? 'Testimonials')}">
       <div class="testimonials-track">${slides}</div>
       <div class="testimonials-nav">
-        <button type="button" data-testimonial-prev class="testimonials-nav-btn" aria-label="Previous">${prevIcon}</button>
-        <div class="testimonials-dots">${dots}</div>
-        <button type="button" data-testimonial-next class="testimonials-nav-btn" aria-label="Next">${nextIcon}</button>
+        <button type="button" data-testimonial-prev class="testimonials-nav-btn" aria-label="${escapeHtml(prevLabel)}">${prevIcon}</button>
+        <div class="testimonials-dots" role="tablist" aria-label="${escapeHtml(copy.title ?? 'Testimonials')}">${dots}</div>
+        <button type="button" data-testimonial-next class="testimonials-nav-btn" aria-label="${escapeHtml(nextLabel)}">${nextIcon}</button>
+      </div>
+      <div class="testimonials-modal" data-testimonial-modal hidden aria-hidden="true" role="dialog" aria-modal="true" aria-label="${escapeHtml(copy.readFull ?? 'Full story')}">
+        <button type="button" class="testimonials-modal-backdrop" data-testimonial-modal-backdrop tabindex="-1" aria-label="${escapeHtml(copy.closeStory ?? 'Close')}"></button>
+        <div class="testimonials-modal-dialog glass-slide">
+          <button type="button" class="testimonials-modal-close" data-testimonial-modal-close aria-label="${escapeHtml(copy.closeStory ?? 'Close')}">×</button>
+          <div data-testimonial-modal-body></div>
+          <footer class="testimonials-modal-footer">
+            <cite class="testimonials-name keynote-headline text-gold-gradient" data-testimonial-modal-name></cite>
+            <span class="testimonials-role" data-testimonial-modal-role></span>
+          </footer>
+        </div>
       </div>
     </div>`;
 
     bind();
-  };
-
-  const show = (index) => {
-    activeIndex = (index + items.length) % items.length;
-    container.querySelectorAll('[data-testimonial-slide]').forEach((slide) => {
-      slide.classList.toggle('is-active', Number(slide.getAttribute('data-testimonial-slide')) === activeIndex);
-    });
-    container.querySelectorAll('[data-testimonial-dot]').forEach((dot) => {
-      const idx = Number(dot.getAttribute('data-testimonial-dot'));
-      dot.classList.toggle('is-active', idx === activeIndex);
-    });
-  };
-
-  const bind = () => {
-    container.querySelector('[data-testimonial-prev]')?.addEventListener('click', () => show(activeIndex - 1));
-    container.querySelector('[data-testimonial-next]')?.addEventListener('click', () => show(activeIndex + 1));
-    container.querySelectorAll('[data-testimonial-dot]').forEach((dot) => {
-      dot.addEventListener('click', () => show(Number(dot.getAttribute('data-testimonial-dot'))));
-    });
+    syncActive();
   };
 
   render();
 
   return {
     destroy() {
+      closeModal();
+      unbind();
       container.innerHTML = '';
     },
     refresh() {
+      closeModal();
       render();
     },
   };

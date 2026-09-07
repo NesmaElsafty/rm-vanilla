@@ -326,9 +326,8 @@ export function localizeTestimonial(t, locale) {
 }
 
 export function getHomepageTestimonials(locale) {
-  return testimonials
-    .filter((t) => resolveTestimonialLink(t).showOnHome)
-    .map((t) => localizeTestimonial(t, locale));
+  // Homepage shows the full transformation-stories set (showOnHome is retained in data for other uses).
+  return testimonials.map((t) => localizeTestimonial(t, locale));
 }
 
 export function getTestimonialsForSlug(slug, locale) {

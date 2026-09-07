@@ -886,6 +886,7 @@ html[dir="ltr"] .opening-statement-text {
   }
 }
 
+.program-card .btn-luxury-primary,
 .program-card .btn-luxury-ghost {
   width: 100%;
   display: flex;
@@ -1252,6 +1253,10 @@ html[dir="ltr"] .opening-statement-text {
 }
 
 /* ── Final CTA ── */
+.final-cta-section.slide-section {
+  padding-block: clamp(1.5rem, 3vw, 2.5rem);
+}
+
 .final-cta-panel,
 .final-cta-card {
   border-radius: 1.5rem;
@@ -1262,40 +1267,39 @@ html[dir="ltr"] .opening-statement-text {
   justify-content: center;
   max-width: 48rem;
   margin-inline: auto;
-  padding: 3.5rem;
+  padding: clamp(1.75rem, 3.5vw, 2.75rem) clamp(1.25rem, 3vw, 2.25rem);
   position: relative;
   overflow: hidden;
 }
 
 @media (min-width: 640px) {
   .final-cta-card {
-    padding: 5rem;
+    padding: clamp(2rem, 4vw, 3rem);
   }
 }
 
 .final-cta-title {
-  font-size: 1.5rem;
-  margin-bottom: 2.5rem;
-  line-height: 1.625;
-}
-
-@media (min-width: 640px) {
-  .final-cta-title {
-    font-size: 1.875rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .final-cta-title {
-    font-size: 2.25rem;
-  }
+  font-size: clamp(1.15rem, 1.2vw + 0.85rem, 1.75rem);
+  margin: 0 0 1.15rem;
+  line-height: 1.55;
+  max-width: 40rem;
 }
 
 .final-cta-glow {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: radial-gradient(ellipse at 50% 40%, color-mix(in srgb, var(--theme-gold) 10%, transparent), transparent 70%);
+  background:
+    radial-gradient(
+      ellipse at 50% 85%,
+      color-mix(in srgb, var(--theme-rose) 12%, transparent) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse at 50% 40%,
+      color-mix(in srgb, var(--theme-gold) 10%, transparent),
+      transparent 70%
+    );
 }
 
 .final-cta-panel .btn-luxury-primary,
@@ -1306,8 +1310,8 @@ html[dir="ltr"] .opening-statement-text {
 
 .final-cta-panel .gold-rule,
 .final-cta-card .gold-rule {
-  max-width: 20rem;
-  margin-bottom: 2.5rem;
+  max-width: 12rem;
+  margin-bottom: 1.15rem;
 }
 
 /* ── Switchers ── */
@@ -2089,8 +2093,15 @@ svg.h-10,
 /* Testimonials slider */
 .testimonials-wrap {
   position: relative;
-  max-width: min(56rem, 92%);
+  max-width: min(52rem, 92%);
   margin-inline: auto;
+  outline: none;
+  touch-action: pan-y;
+}
+
+.testimonials-wrap:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--theme-gold) 45%, transparent);
+  border-radius: 1.25rem;
 }
 
 .testimonials-wrap::before {
@@ -2098,12 +2109,12 @@ svg.h-10,
   position: absolute;
   left: 50%;
   top: 42%;
-  width: 78%;
-  height: 58%;
+  width: 72%;
+  height: 52%;
   transform: translate(-50%, -50%);
   background: radial-gradient(
     ellipse,
-    color-mix(in srgb, var(--theme-rose) 14%, transparent) 0%,
+    color-mix(in srgb, var(--theme-rose) 10%, transparent) 0%,
     transparent 68%
   );
   filter: blur(48px);
@@ -2111,7 +2122,12 @@ svg.h-10,
   z-index: 0;
 }
 
+/*
+  Grid stack keeps track height = tallest slide (excerpts), so the next
+  section never jumps when the active card changes.
+*/
 .testimonials-track {
+  display: grid;
   position: relative;
   z-index: 1;
   width: 100%;
@@ -2122,27 +2138,30 @@ svg.h-10,
   property — because `.glass-slide` already owns `animation: gold-border-pulse`.
 */
 .testimonials-slide {
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  width: 100%;
+  grid-area: 1 / 1;
+  position: relative;
   box-sizing: border-box;
-  border-radius: 1.5rem;
+  width: 100%;
+  border-radius: 1.25rem;
   text-align: start;
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  padding: clamp(1.05rem, 2.2vw, 1.55rem) clamp(1.1rem, 2.4vw, 1.75rem);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateY(12px);
+  transform: translateY(8px);
   transition:
-    opacity 0.32s ease,
-    transform 0.32s ease,
-    visibility 0.32s ease;
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    visibility 0.3s ease;
   z-index: 1;
+  /* Lighter glass identity — same family, less visual weight */
+  background: color-mix(in srgb, var(--theme-slide-bg) 72%, transparent);
+  box-shadow:
+    0 18px 40px -24px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(248, 243, 235, 0.035);
 }
 
 .testimonials-slide.is-active {
-  position: relative;
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
@@ -2158,70 +2177,137 @@ svg.h-10,
 }
 
 .testimonials-quote-icon {
+  position: absolute;
+  top: 0.85rem;
+  inset-inline-end: 0.95rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.85rem;
-  color: color-mix(in srgb, var(--theme-gold) 55%, transparent);
+  margin: 0;
+  color: color-mix(in srgb, var(--theme-gold) 42%, transparent);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
 }
 
 .testimonials-quote-icon .icon,
 .testimonials-quote-icon svg {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 1.35rem;
+  height: 1.35rem;
 }
 
 .testimonials-quote {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: clamp(1rem, 1vw + 0.7rem, 1.25rem);
-  line-height: 1.9;
+  font-size: clamp(0.95rem, 0.85vw + 0.7rem, 1.12rem);
+  line-height: 1.75;
   color: var(--theme-cream);
-  margin: 0 0 1.35rem;
-  max-width: 46rem;
+  margin: 0 0 0.55rem;
+  max-width: 44rem;
   position: relative;
   z-index: 1;
+  padding-inline-end: 1.6rem;
 }
 
-.testimonials-slide > .gold-rule {
-  margin-bottom: 1.25rem;
+.testimonials-quote--full {
+  font-size: clamp(1rem, 1vw + 0.72rem, 1.2rem);
+  line-height: 1.85;
+  margin-bottom: 1rem;
+  padding-inline-end: 0;
+  max-height: min(55vh, 28rem);
+  overflow: auto;
+}
+
+.testimonials-read-full {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  margin: 0 0 0.85rem;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--theme-gold) 88%, transparent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.testimonials-read-full:hover {
+  color: var(--theme-gold);
+}
+
+.testimonials-rule {
+  margin-bottom: 0.9rem;
+  opacity: 0.85;
 }
 
 .testimonials-footer {
   position: relative;
   z-index: 1;
-  display: flex;
-  align-items: flex-start;
-  gap: 0.85rem;
 }
 
-.testimonials-avatar {
-  width: 3.1rem;
-  height: 3.1rem;
-  border-radius: 999px;
-  object-fit: cover;
-  flex-shrink: 0;
-  border: 1px solid color-mix(in srgb, var(--theme-gold) 35%, transparent);
+.testimonials-person {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
 }
 
 .testimonials-name {
   display: block;
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   font-style: normal;
-  line-height: 1.35;
+  line-height: 1.3;
 }
 
 .testimonials-role {
   display: block;
-  margin-top: 0.2rem;
-  font-size: 0.78rem;
-  line-height: 1.45;
+  margin-top: 0;
+  font-size: 0.72rem;
+  line-height: 1.4;
   color: var(--theme-cream-muted);
+}
+
+.testimonials-programs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+.testimonials-programs--compact {
+  gap: 0.4rem;
+}
+
+.testimonials-programs-summary {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--theme-gold) 78%, transparent);
+}
+
+.testimonials-programs-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  padding: 0.15rem 0.45rem;
+  font-size: 10px;
+  font-weight: 700;
+  color: color-mix(in srgb, var(--theme-gold) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 24%, transparent);
+  background: color-mix(in srgb, var(--theme-gold) 8%, transparent);
+  border-radius: 999px;
 }
 
 .testimonials-badge {
   display: inline-block;
-  margin-top: 0.55rem;
+  margin-top: 0;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 0.02em;
@@ -2229,15 +2315,19 @@ svg.h-10,
   border: 1px solid color-mix(in srgb, var(--theme-gold) 22%, transparent);
   background: color-mix(in srgb, var(--theme-gold) 8%, transparent);
   border-radius: 999px;
-  padding: 0.25rem 0.7rem;
+  padding: 0.2rem 0.55rem;
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .testimonials-nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1.25rem;
-  margin-top: 1.35rem;
+  gap: 1rem;
+  margin-top: 1.1rem;
   position: relative;
   z-index: 2;
 }
@@ -2246,12 +2336,13 @@ svg.h-10,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  padding: 0.45rem;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--theme-gold) 30%, transparent);
   color: var(--theme-gold);
   cursor: pointer;
   background: transparent;
+  transition: background 0.28s ease;
 }
 
 .testimonials-nav-btn:hover {
@@ -2260,24 +2351,88 @@ svg.h-10,
 
 .testimonials-dots {
   display: flex;
-  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem;
   align-items: center;
+  max-width: min(22rem, 70vw);
 }
 
 .testimonials-dot {
-  width: 0.375rem;
-  height: 0.375rem;
+  width: 0.35rem;
+  height: 0.35rem;
   border-radius: 999px;
   border: none;
   background: color-mix(in srgb, var(--theme-gold) 25%, transparent);
   cursor: pointer;
   padding: 0;
-  transition: width 0.2s ease, background 0.2s ease;
+  transition: width 0.28s ease, background 0.28s ease;
 }
 
 .testimonials-dot.is-active {
-  width: 1.5rem;
+  width: 1.25rem;
   background: var(--theme-gold);
+}
+
+.testimonials-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+
+.testimonials-modal[hidden] {
+  display: none !important;
+}
+
+.testimonials-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  background: rgba(8, 4, 14, 0.62);
+  backdrop-filter: blur(6px);
+}
+
+.testimonials-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(36rem, 100%);
+  max-height: min(82vh, 40rem);
+  overflow: auto;
+  border-radius: 1.25rem;
+  padding: clamp(1.25rem, 3vw, 1.85rem);
+  text-align: start;
+}
+
+.testimonials-modal-close {
+  position: absolute;
+  top: 0.65rem;
+  inset-inline-end: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--theme-gold) 10%, transparent);
+  color: var(--theme-gold);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.testimonials-modal-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-top: 0.35rem;
+}
+
+body.testimonials-modal-open {
+  overflow: hidden;
 }
 
 .whatsapp-preset {

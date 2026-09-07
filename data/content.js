@@ -181,10 +181,17 @@ export const translations = {
       titleEmbedded: 'ماذا يقولون عن الرحلة',
       programSpecific: 'قصص من هذا البرنامج',
       sessionSpecific: 'قصص من هذه الجلسة',
+      prev: 'الشهادة السابقة',
+      next: 'الشهادة التالية',
+      readFull: "عرض المزيد",
+      closeStory: 'إغلاق',
+      storyOf: 'قصة {current} من {total} — {name}',
+      programsWord: 'برامج',
+      programsWordOne: 'برنامج',
     },
     finalCta: {
-      title: 'هل أنتِ مستعدة للعودة إلى',
-      highlight: 'نسختك الحقيقية؟',
+      title:
+        'كل برنامج هو باب… لكن الرسالة واحدة: أن تعود إلى <span class="text-gold-gradient">حقيقتك بوعي وتمكين واتصال بالله</span>.',
       button: 'احجز استشارتك المجانية',
     },
     contact: {
@@ -649,11 +656,18 @@ export const translations = {
       titleEmbedded: 'What They Say About the Journey',
       programSpecific: 'Stories from This Program',
       sessionSpecific: 'Stories from This Session',
+      prev: 'Previous story',
+      next: 'Next story',
+      readFull: 'see more',
+      closeStory: 'Close',
+      storyOf: 'Story {current} of {total} — {name}',
+      programsWord: 'programs',
+      programsWordOne: 'program',
     },
     finalCta: {
-      title: 'Are you ready to return to',
-      highlight: 'your true self?',
-      button: 'Book Your Free Consultation',
+      title:
+        'Every program is a door… but the message is one: that you return to your <span class="text-gold-gradient">truth with awareness, empowerment, and connection with God</span>.',
+      button: 'Book your free consultation',
     },
     contact: {
       label: 'Take Your First Step',
