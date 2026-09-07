@@ -68,6 +68,7 @@
     0 6px 20px -8px rgba(0, 0, 0, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.04);
   animation: gold-border-pulse 10s ease-in-out infinite;
+  position: relative;
 }
 
 .portrait-name-bar::after {
@@ -824,7 +825,7 @@
   text-transform: uppercase;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--theme-gold);
+  color: var(--footer-social-accent, var(--theme-gold));
 }
 
 .footer-link {
@@ -868,11 +869,15 @@
   border-radius: 0.75rem;
   border: 1px solid color-mix(in srgb, var(--theme-gold) 20%, transparent);
   background: var(--theme-footer-social-bg);
-  color: var(--theme-gold);
+  color: var(--footer-social-accent, var(--theme-gold));
   transition:
     background 0.25s ease,
     color 0.25s ease,
     border-color 0.25s ease;
+}
+
+.footer-social-icon svg {
+  color: inherit;
 }
 
 .footer-social-icon:hover {
@@ -1376,9 +1381,8 @@ textarea.contact-field {
 }
 
 .portrait-with-vines {
-  position: relative;
   max-width: 100%;
-  /* Vines + name bar intentionally overhang the arch — do not clip */
+  /* Vines intentionally overhang the arch — do not clip */
   overflow: visible;
 }
 
@@ -1409,7 +1413,8 @@ textarea.contact-field {
 .portrait-vine--front {
   z-index: 25;
   top: -4%;
-  left: -14%;
+  /* Shifted left so the branch clears the face/eye area (~25px vs prior -14%) */
+  left: -21%;
   transform: rotate(10deg) scaleX(-1);
   opacity: 0.92;
 }

@@ -1204,6 +1204,7 @@ html[dir="ltr"] .opening-statement-text {
   display: flex;
   flex-direction: column;
   gap: 0.625rem;
+  --footer-social-accent: var(--theme-gold);
 }
 
 .footer-social-fb,
@@ -2001,10 +2002,12 @@ html[data-theme="cream-elegance"] .backdrop-set--light {
 
 .portrait-name {
   position: absolute;
+  bottom: 1.25rem;
+  inset-inline: 5%;
   z-index: 50;
   padding: 1rem 1.25rem;
   border-radius: 0.75rem;
-  box-sizing: border-box;
+  text-align: start;
 }
 
 .portrait-name-title {
@@ -2019,70 +2022,6 @@ html[data-theme="cream-elegance"] .backdrop-set--light {
   margin-top: 0.25rem;
   display: block;
   font-size: 1rem;
-  color: var(--theme-cream);
-}
-
-/* ── Hero portrait identity bar (dedicated; overrides generic conflicts) ── */
-#hero .hero-portrait-frame,
-#hero .portrait-with-vines {
-  position: relative;
-  overflow: visible;
-}
-
-#hero .hero-portrait-identity {
-  position: absolute;
-  inset: auto;
-  inset-inline: auto;
-  inset-block: auto;
-  top: auto;
-  right: auto;
-  bottom: 1.25rem;
-  left: -1.25rem;
-  width: 100%;
-  max-width: none;
-  margin: 0;
-  transform: none;
-  z-index: 40;
-  text-align: right;
-  padding: 1rem 1.25rem;
-  box-sizing: border-box;
-}
-
-html[dir="rtl"] #hero .hero-portrait-identity,
-html[dir="ltr"] #hero .hero-portrait-identity {
-  inset: auto;
-  inset-inline: auto;
-  left: -1.25rem;
-  right: auto;
-  text-align: right;
-}
-
-#hero .hero-portrait-identity .portrait-name-title,
-#hero .hero-portrait-identity .portrait-name-text {
-  display: block;
-  width: fit-content;
-  max-width: 100%;
-  margin-left: auto;
-  margin-right: 0;
-  text-align: right;
-}
-
-@media (max-width: 639px) {
-  #hero .hero-portrait-identity {
-    bottom: 1rem;
-    left: -0.85rem;
-    right: auto;
-    padding: 0.7rem 0.85rem;
-  }
-
-  #hero .hero-portrait-identity .portrait-name-title {
-    font-size: 9px;
-    letter-spacing: 0.1em;
-  }
-
-  #hero .hero-portrait-identity .portrait-name-text {
-    font-size: 0.9rem;
-  }
 }
 
 .btn-full {

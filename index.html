@@ -11,7 +11,7 @@
   <meta property="og:image" content="assets/images/dr_rana_portrait.png">
   <link rel="canonical" href="index.html">
   <link rel="icon" href="assets/images/rana-logo.png">
-  <link rel="stylesheet" href="assets/css/main.css?v=hero-identity-2">
+  <link rel="stylesheet" href="assets/css/main.css">
   <script>
     (function () {
       try {
@@ -146,10 +146,10 @@
                       <img src="assets/images/dr_rana_portrait.png" alt="Dr. Rana Mosaad" data-i18n-aria="hero.portraitAlt">
                       <div class="portrait-shade" aria-hidden="true" style="background: linear-gradient(to top, rgba(4,10,20,0.75) 0%, rgba(4,10,20,0.25) 35%, transparent 58%);"></div>
                     </div>
-                  </div>
-                  <div class="portrait-name portrait-name-bar hero-portrait-identity">
-                    <span class="portrait-name-title" data-i18n="hero.portraitTitle">مدربة وعي ذاتي وروحي</span>
-                    <span class="portrait-name-text" data-i18n="hero.portraitName">Dr. Rana Mosaad</span>
+                    <div class="portrait-name-bar portrait-name">
+                      <span class="keynote-headline portrait-name-text" data-i18n="hero.portraitName">Dr. Rana Mosaad</span>
+                      <span class="portrait-name-title" data-i18n="hero.portraitTitle">مدربة وعي ذاتي وروحي</span>
+                    </div>
                   </div>
                   <div class="portrait-vine portrait-vine--front" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
                 </div>
@@ -212,6 +212,7 @@
               <p class="keynote-body about-rana-body" data-i18n-html="about.body">
                 أرشدك في طريقك للوعي بذاتك، واستعادة <span class="text-gold-gradient">قيمتك</span>، والتحرر من العوائق والتعلقات التي تمنعك من الاستمتاع بالحياة، وتبني <span class="text-gold-gradient">اتصالًا قوي وعميق بالله وبذاتك</span>، من خلال برامج تدريبية وجلسات خاصة تعيدك إلى السلام والاتزان والامتلاء الحقيقي.
               </p>
+              <a href="about.html" class="btn-luxury-ghost about-rana-more" data-i18n="about.readMore">عرض المزيد</a>
             </div>
           </div>
         </div>
@@ -458,15 +459,7 @@
                       <a class="contact-info-value ltr-element" href="mailto:drranamossad@gmail.com" dir="ltr">drranamossad@gmail.com</a>
                     </div>
                   </div>
-                  <div class="contact-info-row">
-                    <div class="contact-icon-wrap">
-                      <span data-icon="clock" data-icon-class="icon icon-md"></span>
-                    </div>
-                    <div>
-                      <span class="contact-info-label" data-i18n="contact.hours">مواعيد العمل والجلسات</span>
-                      <span class="contact-info-value" data-i18n="contact.hoursValue">السبت — الخميس: 2 مساءً — 10 مساءً (مكة)</span>
-                    </div>
-                  </div>
+                  
                 </div>
 
                 <div class="agent-countries">
@@ -486,7 +479,10 @@
                     <li><span class="agent-country-chip"><img src="https://flagcdn.com/w40/sd.webp" width="24" height="18" alt="" class="agent-country-flag" loading="lazy" decoding="async"><span data-i18n="contact.agentCountries.SD">السودان</span></span></li>
                     <li><span class="agent-country-chip"><img src="https://flagcdn.com/w40/ly.webp" width="24" height="18" alt="" class="agent-country-flag" loading="lazy" decoding="async"><span data-i18n="contact.agentCountries.LY">ليبيا</span></span></li>
                     <li><span class="agent-country-chip"><img src="https://flagcdn.com/w40/ye.webp" width="24" height="18" alt="" class="agent-country-flag" loading="lazy" decoding="async"><span data-i18n="contact.agentCountries.YE">اليمن</span></span></li>
-                    <li><span class="agent-country-chip"><img src="https://flagcdn.com/w40/sy.webp" width="24" height="18" alt="" class="agent-country-flag" loading="lazy" decoding="async"><span data-i18n="contact.agentCountries.SY">سوريا</span></span></li>
+                    <li><span class="agent-country-chip"><img src="https://flagcdn.com/w40/sy.webp" width="24" height="18" alt="" class="agent-country-flag" loading="lazy" decoding="async"><span data-i18n="contact.agentCountries.SY">سوريا</span></span></li> 
+                    <li><span class="agent-country-chip"><img src="https://flagcdn.com/w40/iq.webp" width="24" height="18" alt="" class="agent-country-flag" loading="lazy" decoding="async"><span data-i18n="contact.agentCountries.IQ">العراق</span></span></li>
+                    <li><span class="agent-country-chip"><img src="https://flagcdn.com/w40/ps.webp" width="24" height="18" alt="" class="agent-country-flag" loading="lazy" decoding="async"><span data-i18n="contact.agentCountries.PS">فلسطين</span></span></li>
+
                   </ul>
                 </div>
               </div>
@@ -520,6 +516,7 @@
                   <div class="contact-field-wrap">
                     <label class="contact-field-label" for="service_category" data-i18n="contact.serviceType">نوع الخدمة المفضلة</label>
                     <select class="contact-field" id="service_category" name="service_category" required aria-describedby="service_category-error">
+                      <option value="free">استشارة مجانية</option>
                       <option value="private">جلسات خاصة</option>
                       <option value="training">برامج تدريبية</option>
                       <option value="workshops">ورش عمل</option>
@@ -602,7 +599,6 @@
             <a href="index.html" class="footer-logo-btn" data-home aria-label="Dr. Rana Mosaad">
               <img src="assets/images/rana-logo.png" alt="Dr. Rana Mosaad" class="logo-white-highlight footer-logo">
             </a>
-            <p class="footer-text" data-i18n="footer.bio">أكاديمية وتوجيه معتمد لإمضاء مهارات قيادة الذات، البرمجة اللغوية العصبية، وتحقيق التناغم العاطفي والتمكين الشخصي بأدوات قياس دولية معتمدة.</p>
             <div class="footer-social">
               <span class="footer-label" data-i18n="footer.socialLabel">شبكات التواصل الاجتماعي الرسمية</span>
               <div class="footer-social-row">

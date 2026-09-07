@@ -109,115 +109,124 @@
       </div>
     </nav>
 
-    <main id="main-content" class="page-main page-main--padded">
-      <div class="slide-inner">
+    <main id="main-content" class="page-main page-main--padded about-page">
+      <div class="slide-inner about-page-inner">
         <a class="detail-back program-detail-back" href="index.html">
           <span data-icon="arrowBack" data-icon-class="icon icon-sm"></span>
           <span data-i18n="aboutPage.backToHome">العودة للرئيسية</span>
         </a>
 
-        <section class="about-page-hero" aria-label="Dr. Rana Mosaad">
-          <div class="about-page-hero-glow" aria-hidden="true"></div>
-          <div class="about-page-hero-frame">
-            <div class="portrait-with-vines portrait-with-vines--circle">
-              <div class="portrait-vine portrait-vine--back portrait-vine--circle" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
-              <div class="about-page-hero-portrait-stack">
-                <span class="about-page-hero-ring about-page-hero-ring--outer" aria-hidden="true"></span>
-                <span class="about-page-hero-ring about-page-hero-ring--inner" aria-hidden="true"></span>
-                <div class="about-page-hero-portrait">
-                  <img src="assets/images/about-hero-portrait.png" alt="Dr. Rana Mosaad" class="about-page-hero-image" decoding="async">
-                  <div class="about-page-hero-image-shade" aria-hidden="true"></div>
+        <!-- Intro: physical IMAGE LEFT | CONTENT RIGHT (dir forced LTR on grid) -->
+        <section class="about-page-intro" aria-labelledby="about-page-title" data-reveal>
+          <div class="about-page-intro-media">
+            <div class="about-page-intro-glow" aria-hidden="true"></div>
+            <div class="portrait-with-vines">
+              <div class="portrait-vine portrait-vine--back" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
+              <div class="about-page-intro-frame portrait-arch glass-slide">
+                <div class="portrait-frame">
+                  <img
+                    src="assets/images/rana-about.jpg"
+                    alt="Dr. Rana Mosaad"
+                    data-i18n-aria="aboutPage.portraitAlt"
+                    decoding="async"
+                  >
                 </div>
               </div>
-              <div class="portrait-vine portrait-vine--front portrait-vine--circle" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
+              <div class="portrait-vine portrait-vine--front" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
             </div>
           </div>
-          <div class="about-page-hero-rule" aria-hidden="true"></div>
-        </section>
 
-        <div class="glass-slide about-intro-card">
-          <header class="about-intro-header">
-            <h1 class="keynote-display text-gold-gradient" data-i18n="aboutPage.title">من هي د. رنا مسعد؟</h1>
-            <div class="gold-rule-short"></div>
-            <p class="keynote-body about-tagline" data-i18n="aboutPage.tagline">أنا مدربة وعي ذاتي وروحي.</p>
-          </header>
-          <p class="keynote-body" data-i18n="aboutPage.intro">أرشدك في طريقك للوعي بذاتك، واستعادة قيمتك، والتحرر من العوائق والتعلقات التي تمنعها من الاستمتاع بالحياة، وتبني اتصالًا قوي وعميق بالله وبذاتها، من خلال برامج تدريبية وجلسات خاصة تعيدها إلى السلام والاتزان والامتلاء الحقيقي.</p>
-          <p class="keynote-body" data-i18n="aboutPage.impact">على مدار أكثر من 6 سنوات، ساعدت أكثر من 3000 طالب وسيدة في الوصول إلى التمكين والسلام الداخلي من خلال جلسات فردية، تدريبات جماعية، وبرامج تحولية عميقة.</p>
+          <div class="about-page-intro-copy">
+            <h1 id="about-page-title" class="keynote-display about-page-title text-gold-gradient" data-i18n="aboutPage.title">من هي د. رنا مسعد؟</h1>
+            <div class="gold-rule-short" aria-hidden="true"></div>
 
-          <div class="about-stats">
-            <div class="glass-panel glow-card about-stat-card">
-              <span data-icon="users" data-icon-class="icon icon-md"></span>
-              <p class="keynote-display text-gold-gradient" data-i18n="aboutPage.statsStudents">+3000</p>
-              <p class="keynote-body" data-i18n="aboutPage.statsStudentsLabel">طالب وسيدة</p>
-            </div>
-            <div class="glass-panel glow-card about-stat-card">
-              <span data-icon="sparkles" data-icon-class="icon icon-md"></span>
-              <p class="keynote-display text-gold-gradient" data-i18n="aboutPage.statsYears">+6</p>
-              <p class="keynote-body" data-i18n="aboutPage.statsYearsLabel">سنوات من الخبرة</p>
-            </div>
-          </div>
-        </div>
+            <p class="about-page-body" data-i18n="aboutPage.journeyIntro">بدأت رحلتي بسؤال واحد:</p>
+            <p class="about-page-question text-gold-gradient" data-i18n="aboutPage.journeyQuestion">هل يمكن للإنسان أن يبدأ من جديد؟</p>
 
-        <section class="glass-slide about-journey-card">
-          <div class="about-journey-heading">
-            <div class="about-card-icon">
-              <span data-icon="heart" data-icon-class="icon icon-md"></span>
-            </div>
-            <h2 class="keynote-headline" data-i18n="aboutPage.journeyTitle">مسيرتي</h2>
-          </div>
-          <p class="keynote-body" data-i18n="aboutPage.journeyIntro">بدأت رحلتي بسؤال واحد:</p>
-          <blockquote class="about-page-question glass-panel">
-            <p class="keynote-display text-gold-gradient" data-i18n="aboutPage.journeyQuestion">هل يمكن للإنسان أن يبدأ من جديد؟</p>
-          </blockquote>
-          <div class="about-journey-copy">
-            <p class="keynote-body" data-i18n="aboutPage.journeyParagraphs.0">كنت أعتقد أن ما أعيشه هو قدري، حتى أدركت أن الله لا يغيّر واقعنا حتى نبدأ بتغيير ما داخلنا.</p>
-            <p class="keynote-body" data-i18n="aboutPage.journeyParagraphs.1">من هنا بدأت رحلة طويلة من الوعي، والشفاء، والغفران، والتسليم، والتطوير المستمر. رحلة غيّرت حياتي من الداخل قبل أن تغيّر كل ما حولي.</p>
-            <p class="keynote-body" data-i18n="aboutPage.journeyParagraphs.2">واليوم، بعد أكثر من 6 سنوات، ومساعدة أكثر 3000 شخص في رحلاتهم، أصبحت رسالتي أن أكون دليلًا يساعدك على أن تعود إلى نفسك... وتعود إلى الله... وتبني حياة أكثر سلامًا وتمكينًا.</p>
+            <p class="about-page-body" data-i18n="aboutPage.journeyP1">كنت أعتقد أن ما أعيشه هو قدري، حتى أدركت أن الله لا يغيّر واقعنا حتى نبدأ بتغيير ما داخلنا.</p>
+            <p class="about-page-body" data-i18n="aboutPage.journeyP2">من هنا بدأت رحلة طويلة من الوعي، والشفاء، والغفران، والتسليم، والتطوير المستمر. رحلة غيّرت حياتي من الداخل قبل أن تغيّر كل ما حولي.</p>
+
+            <p class="about-page-identity keynote-headline" data-i18n="aboutPage.identityStatement">واليوم، اصبحت مدربة وعي ذاتي وروحي.</p>
+
+            <p class="about-page-body" data-i18n="aboutPage.intro">أرشدك في طريقك للوعي بذاتك، واستعادة قيمتك، والتحرر من العوائق والتعلقات التي تمنعها من الاستمتاع بالحياة، وتبني اتصالًا قوي وعميق بالله وبذاتها، من خلال برامج تدريبية وجلسات خاصة تعيدها إلى السلام والاتزان والامتلاء الحقيقي.</p>
+            <p class="about-page-body" data-i18n="aboutPage.impact">على مدار أكثر من 6 سنوات، ساعدت أكثر من 3000 طالب وسيدة في الوصول إلى التمكين والسلام الداخلي من خلال جلسات فردية، تدريبات جماعية، وبرامج تحولية عميقة.</p>
           </div>
         </section>
 
-        <section class="program-detail-gallery" aria-label="لحظات من مسيرتي" data-gallery-alt="د. رنا مسعد">
-          <div class="program-detail-gallery-head">
-            <h2 class="program-detail-gallery-title" data-i18n="aboutPage.galleryTitle">لحظات من مسيرتي</h2>
-            <p class="program-detail-gallery-subtitle" data-i18n="aboutPage.gallerySubtitle">شهادات، تدريبات، ولقاءات من رحلة الوعي والتمكين.</p>
+        <section class="about-page-stats" data-reveal aria-label="Stats">
+          <div class="about-page-stat glass-panel">
+            <strong class="about-page-stat-value keynote-display text-gold-gradient" data-i18n="aboutPage.statsStudents">+3000</strong>
+            <span class="about-page-stat-label" data-i18n="aboutPage.statsStudentsLabel">طالب وسيدة</span>
           </div>
-          <div class="program-detail-gallery-viewer glass-slide">
-            <div class="program-detail-gallery-stage">
-              <button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--prev" aria-label="Previous image">
-                <span data-icon="arrowLeft" data-icon-class="icon icon-sm"></span>
-              </button>
-              <figure class="program-detail-gallery-main">
-                <img src="assets/images/gallery/about/about-certification-trainer.png" alt="د. رنا مسعد 1" loading="lazy" decoding="async" class="program-detail-gallery-main-image">
-              </figure>
-              <button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--next" aria-label="Next image">
-                <span data-icon="arrowRight" data-icon-class="icon icon-sm"></span>
-              </button>
-            </div>
-            <div class="program-detail-gallery-thumbs">
-              <button type="button" class="program-detail-gallery-thumb program-detail-gallery-thumb--active" data-gallery-src="assets/images/gallery/about/about-certification-trainer.png" aria-label="Open image 1">
-                <img src="assets/images/gallery/about/about-certification-trainer.png" alt="د. رنا مسعد thumbnail 1" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
-              </button>
-              <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-certification-group.png" aria-label="Open image 2">
-                <img src="assets/images/gallery/about/about-certification-group.png" alt="د. رنا مسعد thumbnail 2" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
-              </button>
-              <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-nstt-2025-group.png" aria-label="Open image 3">
-                <img src="assets/images/gallery/about/about-nstt-2025-group.png" alt="د. رنا مسعد thumbnail 3" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
-              </button>
-              <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-nstt-speaking.png" aria-label="Open image 4">
-                <img src="assets/images/gallery/about/about-nstt-speaking.png" alt="د. رنا مسعد thumbnail 4" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
-              </button>
-              <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-pre-certification.png" aria-label="Open image 5">
-                <img src="assets/images/gallery/about/about-pre-certification.png" alt="د. رنا مسعد thumbnail 5" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
-              </button>
-              <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-speaking-event.png" aria-label="Open image 6">
-                <img src="assets/images/gallery/about/about-speaking-event.png" alt="د. رنا مسعد thumbnail 6" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
-              </button>
-              <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-retreat-casual.png" aria-label="Open image 7">
-                <img src="assets/images/gallery/about/about-retreat-casual.png" alt="د. رنا مسعد thumbnail 7" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
-              </button>
-            </div>
-            <div class="program-detail-gallery-counter">1 / 7</div>
+          <div class="about-page-stat glass-panel">
+            <strong class="about-page-stat-value keynote-display text-gold-gradient" data-i18n="aboutPage.statsYears">+6</strong>
+            <span class="about-page-stat-label" data-i18n="aboutPage.statsYearsLabel">سنوات من الخبرة</span>
           </div>
+        </section>
+
+        <section class="about-page-section" data-reveal aria-labelledby="about-method-title">
+          <h2 id="about-method-title" class="about-page-section-title keynote-display text-gold-gradient" data-i18n="aboutPage.methodTitle">منهجي</h2>
+          <div class="gold-rule-short" aria-hidden="true"></div>
+          <p class="about-page-body" data-i18n="aboutPage.methodBody">قائم على الدمج بين التجربة الواقعية، التدريب العملي، المنهج العلمي , والعمل علي الجذور النفسية والروحية، مدعومًا باعتمادات وتخصصات متقدمة، منها:</p>
+          <ul class="about-page-credentials">
+            <li data-i18n="aboutPage.credentials.0">مدربة معتمدة لمدرسة الدلالات العصبية الأمريكية</li>
+            <li data-i18n="aboutPage.credentials.1">Neuro-semantics Trainer of Trainers</li>
+            <li data-i18n="aboutPage.credentials.2">Meta-Coach</li>
+            <li data-i18n="aboutPage.credentials.3">ICF Certified Life Coach</li>
+            <li data-i18n="aboutPage.credentials.4">Enneagram Practitioner</li>
+            <li data-i18n="aboutPage.credentials.5">Trauma Healer</li>
+            <li data-i18n="aboutPage.credentials.6">معالجة لصدمات الماضي والطفولة والطفل الداخلي</li>
+            <li data-i18n="aboutPage.credentials.7">أخصائية إرشاد نفسي وأسري جامعة عين شمس</li>
+          </ul>
+        </section>
+
+        <section class="about-page-support glass-slide" data-reveal>
+          <p class="about-page-body about-page-support-lead" data-i18n="aboutPage.methodSupportLead">هذا التنوع ليس للعرض، بل لأنه يخدم هدفي الأساسي:</p>
+          <p class="about-page-support-emphasis text-gold-gradient" data-i18n="aboutPage.methodSupportEmphasis">أن تصبح واعي بذاتك، ومتمكن من قدراتك، ومتصل بالله.</p>
+        </section>
+
+        <section class="about-page-section" data-reveal aria-labelledby="about-why-title">
+          <h2 id="about-why-title" class="about-page-section-title keynote-display text-gold-gradient" data-i18n="aboutPage.whyTitle">ليه تختار رنا كرفيق في رحلتك؟</h2>
+          <div class="gold-rule-short" aria-hidden="true"></div>
+          <div class="about-page-reasons">
+            <article class="about-page-reason glass-panel">
+              <span class="about-page-reason-num text-gold-gradient" aria-hidden="true">01</span>
+              <p class="about-page-body" data-i18n="aboutPage.reasons.0">أقدّم رحلة عملية وروحية متكاملة تساعدك على السلام الداخلي والتمكين دون انفصال عن الحياة الواقعية، وفيها كل ما تحتاجاه من { Therapy, Coaching, إرشاد روحي } في مكان واحد.</p>
+            </article>
+            <article class="about-page-reason glass-panel">
+              <span class="about-page-reason-num text-gold-gradient" aria-hidden="true">02</span>
+              <p class="about-page-body" data-i18n="aboutPage.reasons.1">أنا لا أساعدك فقط على فهم نفسك، بل على استعادة قيمتك من الداخل بدل البحث عنها في الخارج.</p>
+            </article>
+            <article class="about-page-reason glass-panel">
+              <span class="about-page-reason-num text-gold-gradient" aria-hidden="true">03</span>
+              <p class="about-page-body" data-i18n="aboutPage.reasons.2">أعالج الجذر النفسي والروحي وراء الشك، التعلّق، والاحتياج العاطفي من خلال اتصال أعمق بالله والذات.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="about-page-section" data-reveal aria-labelledby="about-problems-title">
+          <h2 id="about-problems-title" class="about-page-section-title keynote-display text-gold-gradient" data-i18n="aboutPage.problemsTitle">المشكلات التي أساعدك علي حلها.</h2>
+          <div class="gold-rule-short" aria-hidden="true"></div>
+          <p class="about-page-body" data-i18n="aboutPage.problemsIntro">أرافقك في مساحات تحول متعددة، منها:</p>
+          <ul class="about-page-problems">
+            <li data-i18n="aboutPage.problems.0">الوعي الذاتي وفهم النفس</li>
+            <li data-i18n="aboutPage.problems.1">استعادة القيمة الذاتية</li>
+            <li data-i18n="aboutPage.problems.2">التحرر من الشك الداخلي</li>
+            <li data-i18n="aboutPage.problems.3">الاحتياج العاطفي والتعلقات</li>
+            <li data-i18n="aboutPage.problems.4">صدمات الماضي والطفولة</li>
+            <li data-i18n="aboutPage.problems.5">العلاقة بالله والاتصال الروحي</li>
+            <li data-i18n="aboutPage.problems.6">السلام الداخلي والاتزان</li>
+            <li data-i18n="aboutPage.problems.7">التمكين و الثقة و قيادة الذات</li>
+            <li data-i18n="aboutPage.problems.8">توزان طاقة الأنوثة والذكورة</li>
+            <li data-i18n="aboutPage.problems.9">كسر الأنماط المتكرره في العلاقات</li>
+            <li data-i18n="aboutPage.problems.10">الانتقال من المعرفة إلى التجسيد الحقيقي في الواقع</li>
+          </ul>
+        </section>
+
+        <section class="about-page-closing" data-reveal>
+          <p class="about-page-closing-lead" data-i18n="aboutPage.closingLead">أنا لا أعمل على “جانب واحد” منك،</p>
+          <p class="about-page-closing-mid" data-i18n="aboutPage.closingMid">بل أتعامل معك ككل:</p>
+          <p class="about-page-closing-emphasis keynote-display text-gold-gradient" data-i18n="aboutPage.closingEmphasis">روح، ونفس، وجسد</p>
         </section>
 
         <section class="program-detail-cta-bar">
