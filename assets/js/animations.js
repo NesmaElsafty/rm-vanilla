@@ -32,6 +32,102 @@ function initReveals() {
   nodes.forEach((el) => observer.observe(el));
 }
 
+function formatCounterValue(element, value) {
+  const prefix = element.getAttribute('data-prefix') || '';
+  const suffix = element.getAttribute('data-suffix') || '';
+  return `${prefix}${value}${suffix}`;
+}
+
+function setCounterFinal(element) {
+  const target = Number(element.getAttribute('data-count'));
+  if (!Number.isFinite(target)) return;
+  element.textContent = formatCounterValue(element, target);
+}
+
+function animateCounter(element, delay = 0) {
+  const target = Number(element.getAttribute('data-count'));
+  if (!Number.isFinite(target)) return;
+
+  const duration = target >= 100 ? 1600 : 1100;
+  const startAt = performance.now() + delay;
+
+  const tick = (now) => {
+    if (now < startAt) {
+      requestAnimationFrame(tick);
+      return;
+    }
+    const progress = Math.min(1, (now - startAt) / duration);
+    const eased = 1 - (1 - progress) ** 3;
+    element.textContent = formatCounterValue(element, Math.round(target * eased));
+    if (progress < 1) {
+      requestAnimationFrame(tick);
+      return;
+    }
+    element.textContent = formatCounterValue(element, target);
+  };
+
+  requestAnimationFrame(tick);
+}
+
+function initCounters() {
+  const counters = Array.from(document.querySelectorAll('[data-counter]'));
+  if (!counters.length) return;
+
+  if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
+    counters.forEach(setCounterFinal);
+    return;
+  }
+
+  counters.forEach((element) => {
+    element.textContent = formatCounterValue(element, 0);
+  });
+
+  let started = false;
+  const run = (host) => {
+    if (started) return;
+    started = true;
+    const items = host
+      ? Array.from(host.querySelectorAll('[data-counter]'))
+      : counters;
+    items.forEach((element, index) => animateCounter(element, index * 90));
+  };
+
+  const row = document.querySelector('#stats .home-stats-row');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        run(entry.target);
+        observer.disconnect();
+      });
+    },
+    { threshold: 0.35, rootMargin: '0px 0px -4% 0px' },
+  );
+
+  if (row) observer.observe(row);
+  else counters.forEach((element) => observer.observe(element));
+}
+
+function initHeroEntrance() {
+  const hero = document.getElementById('hero');
+  if (!hero || hero.dataset.heroEntrance === 'done') return;
+
+  hero.dataset.heroEntrance = 'done';
+  document.documentElement.classList.add('js');
+
+  if (prefersReducedMotion() || !hero.querySelector('[data-hero-reveal]')) {
+    hero.classList.add('hero-is-ready');
+    return;
+  }
+
+  // Double rAF so the browser paints the initial hidden state before revealing.
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      hero.classList.add('hero-is-ready');
+    });
+  });
+}
+
 function setJourneyActive(stepEl, active) {
   stepEl.classList.toggle('journey-circle--active', active);
   const desc = stepEl.querySelector('[data-journey-desc], .journey-circle-desc');
@@ -86,6 +182,8 @@ function initJourneyCircles() {
 }
 
 export function initAnimations() {
+  initHeroEntrance();
   initReveals();
+  initCounters();
   initJourneyCircles();
 }

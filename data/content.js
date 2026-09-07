@@ -41,55 +41,40 @@ export const translations = {
       en: 'English',
     },
     hero: {
-      label: 'Dr. Rana Mosaad',
+      label: 'وعي ، اتصال ، تمكين',
       titleParts: [
-        { text: ' رحلة عودة الي', gold: false },
-        { text: ' فطرتك', gold: true },
-        { text: ' واستعادة ', gold: false },
-        { text: 'قيمتك واتصالك الحقيقي بالله', gold: true },
+        { text: 'وعي أعمق', gold: true },
+        { text: '، ', gold: false },
+        { text: 'اتصال حقيقي بالله', gold: true, breakAfter: true },
+        { text: 'حياة أكثر ', gold: false },
+        { text: 'سلامًا وتمكينًا ومتعة', gold: true },
+        { text: '.', gold: false },
       ],
       subtitle:
         'بساعدك على التحرر من الشك الداخلي، الاحتياج العاطفي، والانفصال عن الذات، والعودة إلى قيمتك واتصالك الحقيقي بالله، حتى تعيشي بسلام داخلي وتمكين ومتعة.',
       primaryCta: 'ابدئي رحلتك الآن',
-      secondaryCta: 'تعرفي على البرامج',
+      secondaryCta: 'تعرف علي خدماتنا',
       portraitTitle: 'مدربة وعي ذاتي وروحي',
       portraitName: 'Dr. Rana Mosaad',
       portraitAlt: 'Dr. Rana Mosaad',
     },
-    about: {
-      label: 'تعرفي عليّ',
-      title: 'About Dr. Rana Mosaad',
+    opening: {
+      ariaLabel: 'عبارة افتتاحية',
+      text: 'مشكلتك ليست دائمًا في <span class="text-gold-gradient">قلة الوعي</span>… أحيانًا في أن ما تعرفينه <span class="text-gold-gradient">لم يتجسد بعد</span> في واقعك.',
     },
-    aboutBlocks: [
-      {
-        id: 'journey',
-        title: 'الرحلة',
-        description:
-          'رحلة وعي عميقة تبدأ من فهم الذات، واستعادة القيمة الداخلية، والتحرر من العوائق والتعلقات التي تمنع الإنسان من الاستمتاع بالحياة.',
-        icon: 'Compass',
-      },
-      {
-        id: 'methodology',
-        title: 'المنهجية',
-        description:
-          'دمج بين علوم الوعي، الكوتشينج المتقدم، والتشافي النفسي والروحي، من خلال جلسات خاصة وبرامج تدريبية عملية وعميقة.',
-        icon: 'Sparkles',
-      },
-      {
-        id: 'message',
-        title: 'الرسالة',
-        description:
-          'إرشاد الإنسان للعودة إلى السلام والاتزان والامتلاء الحقيقي، وبناء اتصال أعمق بالله وبذاته وبمعنى حياته.',
-        icon: 'Heart',
-      },
-      {
-        id: 'impact',
-        title: 'الأثر',
-        description:
-          'أكثر من 6 سنوات من الخبرة، وأكثر من 1400 شخص وصلوا إلى مراحل أعمق من الوعي، التمكين، والسلام الداخلي عبر جلسات وبرامج تحولية.',
-        icon: 'Star',
-      },
-    ],
+    about: {
+      title: 'من هي د. رنا مسعد؟',
+      intro: 'أنا مدربة <span class="text-gold-gradient">وعي ذاتي وروحي</span>.',
+      body: 'أرشدك في طريقك للوعي بذاتك، واستعادة <span class="text-gold-gradient">قيمتك</span>، والتحرر من العوائق والتعلقات التي تمنعك من الاستمتاع بالحياة، وتبني <span class="text-gold-gradient">اتصالًا قوي وعميق بالله وبذاتك</span>، من خلال برامج تدريبية وجلسات خاصة تعيدك إلى السلام والاتزان والامتلاء الحقيقي.',
+    },
+    stats: {
+      ariaLabel: 'أرقام من الممارسة',
+      l1: 'سنوات من الخبرة',
+      l2: 'طالب وسيدة',
+      l3: 'تدريبات جماعية',
+      l4: 'برامج تحولية عميقة',
+      l5: 'جلسات فردية',
+    },
     programs: {
       label: 'البرامج التدريبية',
       title: 'مسارات التحول والتمكين',
@@ -513,55 +498,41 @@ export const translations = {
       en: 'English',
     },
     hero: {
-      label: 'Dr. Rana Mosaad',
+      label: 'Awareness, Connection, Empowerment',
       titleParts: [
-        { text: 'Return to ', gold: false },
-        { text: 'your true essence', gold: true },
-        { text: ', worth, and connection with ', gold: false },
-        { text: 'Allah.', gold: true },
+        { text: 'Deeper awareness', gold: true },
+        { text: ', ', gold: false },
+        { text: 'a true connection with God', gold: true },
+        { text: '.', gold: false, breakAfter: true },
+        { text: 'A life of greater ', gold: false },
+        { text: 'peace, empowerment, and joy', gold: true },
+        { text: '.', gold: false },
       ],
       subtitle:
-        'I help you release self-doubt, emotional neediness, and disconnection — so you can reclaim your worth, reconnect with Allah, and live with peace, power, and joy.',
-      primaryCta: 'Start Your Journey',
-      secondaryCta: 'Explore Programs',
+        'I help you break free from inner doubt, emotional neediness, and disconnection from yourself — and return to your worth and your true connection with God, so you can live with inner peace, empowerment, and joy.',
+      primaryCta: 'Start your journey now',
+      secondaryCta: 'Discover our services',
       portraitTitle: 'Self-Awareness & Spiritual Coach',
       portraitName: 'Dr. Rana Mosaad',
       portraitAlt: 'Dr. Rana Mosaad',
     },
-    about: {
-      label: 'Get to Know Me',
-      title: 'About Dr. Rana Mosaad',
+    opening: {
+      ariaLabel: 'Opening statement',
+      text: 'The problem is not always a <span class="text-gold-gradient">lack of awareness</span>… sometimes it is that what you already know <span class="text-gold-gradient">has not yet taken form</span> in your life.',
     },
-    aboutBlocks: [
-      {
-        id: 'journey',
-        title: 'The Journey',
-        description:
-          'A deep journey of awareness that begins with understanding yourself, reclaiming inner worth, and freeing yourself from obstacles and attachments that prevent you from enjoying life.',
-        icon: 'Compass',
-      },
-      {
-        id: 'methodology',
-        title: 'Methodology',
-        description:
-          'A blend of consciousness sciences, advanced coaching, and psychological and spiritual healing through private sessions and deep, practical training programs.',
-        icon: 'Sparkles',
-      },
-      {
-        id: 'message',
-        title: 'The Message',
-        description:
-          'Guiding people back to peace, balance, and true fulfillment — building a deeper connection with God, with themselves, and with the meaning of their lives.',
-        icon: 'Heart',
-      },
-      {
-        id: 'impact',
-        title: 'Impact',
-        description:
-          'Over 6 years of experience, and more than 1,400 people who reached deeper stages of awareness, empowerment, and inner peace through transformative sessions and programs.',
-        icon: 'Star',
-      },
-    ],
+    about: {
+      title: 'Who is Dr. Rana Mosaad?',
+      intro: 'I am a <span class="text-gold-gradient">self-awareness and spiritual coach</span>.',
+      body: 'I guide you toward knowing yourself, reclaiming <span class="text-gold-gradient">your worth</span>, and releasing the blocks and attachments that keep you from enjoying life — and toward building a <span class="text-gold-gradient">strong, deep connection with God and with yourself</span>, through training programs and private sessions that return you to peace, balance, and true fullness.',
+    },
+    stats: {
+      ariaLabel: 'Practice highlights',
+      l1: 'Years of experience',
+      l2: 'Students and women',
+      l3: 'Group trainings',
+      l4: 'Deep transformational programs',
+      l5: 'Private sessions',
+    },
     programs: {
       label: 'Training Programs',
       title: 'Paths of Transformation & Empowerment',

@@ -13,14 +13,17 @@ import { getRecordedSessionCards, getRecordedSessionsCategory } from '../../data
 
 let homepageTestimonials = null;
 
-function initDecor() {
-  document.querySelectorAll('[data-botanical]').forEach((el, index) => {
+function initDecor(root = document) {
+  root.querySelectorAll('[data-botanical]').forEach((el, index) => {
     const bold = el.getAttribute('data-botanical-bold') !== 'false';
     const animated = el.getAttribute('data-botanical-animated') !== 'false';
+    el.classList.add('botanical-line-art');
+    el.classList.toggle('botanical-line-art--bold', bold);
+    el.classList.toggle('botanical-line-art--animated', animated);
     el.innerHTML = botanicalSVG({ id: el.id || `botanical-${index}`, bold, animated });
   });
 
-  document.querySelectorAll('[data-journey-curve]').forEach((el, index) => {
+  root.querySelectorAll('[data-journey-curve]').forEach((el, index) => {
     const animated = el.getAttribute('data-journey-curve') !== 'false';
     el.innerHTML = journeyCurveSVG({ id: el.id || `journey-curve-${index}`, animated });
   });
@@ -108,6 +111,7 @@ function initHomepageTestimonials() {
 function onLocaleChange() {
   applyI18n();
   initIcons();
+  initDecor();
   refreshDetailPage();
   refreshPolicies();
   initHomepageTestimonials();
@@ -116,24 +120,53 @@ function onLocaleChange() {
 }
 
 export function boot() {
-  initTheme();
-  initLanguage();
-  applyI18n();
-  initIcons();
-  initDecor();
-  initNavigation();
-  initAnimations();
-  initForms();
-  initWhatsAppWidget();
-  initModals();
+  try {
+    initTheme();
+  } catch (err) {
+    console.error('[boot] initTheme failed', err);
+  }
+  try {
+    initLanguage();
+    applyI18n();
+  } catch (err) {
+    console.error('[boot] language/i18n failed', err);
+  }
+  try {
+    initIcons();
+  } catch (err) {
+    console.error('[boot] initIcons failed', err);
+  }
+  try {
+    initDecor();
+  } catch (err) {
+    console.error('[boot] initDecor failed', err);
+  }
+  try {
+    initNavigation();
+  } catch (err) {
+    console.error('[boot] initNavigation failed', err);
+  }
+  try {
+    initAnimations();
+  } catch (err) {
+    console.error('[boot] initAnimations failed', err);
+    document.getElementById('hero')?.classList.add('hero-is-ready');
+  }
+  try {
+    initForms();
+    initWhatsAppWidget();
+    initModals();
 
-  if (document.querySelector('.program-detail-gallery')) initGalleries();
-  if (document.querySelector('[data-detail-root]')) initDetailPage();
-  if (document.querySelector('[data-policies-root]')) initPolicies();
-  if (document.getElementById('testimonials-slider')) initHomepageTestimonials();
-  if (document.querySelector('[data-recorded-grid], #recorded-sessions-grid')) initRecordedLibrary();
+    if (document.querySelector('.program-detail-gallery')) initGalleries();
+    if (document.querySelector('[data-detail-root]')) initDetailPage();
+    if (document.querySelector('[data-policies-root]')) initPolicies();
+    if (document.getElementById('testimonials-slider')) initHomepageTestimonials();
+    if (document.querySelector('[data-recorded-grid], #recorded-sessions-grid')) initRecordedLibrary();
 
-  document.addEventListener('localechange', onLocaleChange);
+    document.addEventListener('localechange', onLocaleChange);
+  } catch (err) {
+    console.error('[boot] secondary init failed', err);
+  }
 }
 
 boot();

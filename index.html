@@ -28,6 +28,13 @@
         if (l !== 'en') l = 'ar';
         document.documentElement.lang = l;
         document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.classList.add('js');
+        setTimeout(function () {
+          var hero = document.getElementById('hero');
+          if (hero && !hero.classList.contains('hero-is-ready')) {
+            hero.classList.add('hero-is-ready');
+          }
+        }, 2500);
       } catch (e) {}
     })();
   </script>
@@ -111,22 +118,23 @@
       <section id="hero" class="slide-section slide-hero">
         <div class="slide-inner">
           <div class="hero-grid">
-            <div class="hero-botanical-between botanical-line-art--bold hidden-until-lg" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
+            <div class="hero-botanical-between botanical-line-art--bold hidden-until-lg" data-hero-reveal="portrait" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
 
             <div class="hero-copy">
-              <span class="keynote-label" data-i18n="hero.label">Dr. Rana Mosaad</span>
-              <h1 class="keynote-display hero-title" data-i18n-gold-parts="hero.titleParts">
-                رحلة عودة الي <span class="text-gold-gradient">فطرتك</span> واستعادة <span class="text-gold-gradient">قيمتك واتصالك الحقيقي بالله</span>
+              <span class="keynote-label" data-hero-reveal="label" data-i18n="hero.label">وعي ، اتصال ، تمكين</span>
+              <h1 class="keynote-display hero-title" data-hero-reveal="title" data-i18n-gold-parts="hero.titleParts">
+                <span class="text-gold-gradient">وعي أعمق</span>، <span class="text-gold-gradient">اتصال حقيقي بالله</span><br>
+                حياة أكثر <span class="text-gold-gradient">سلامًا وتمكينًا ومتعة</span>.
               </h1>
-              <div class="gold-rule-short"></div>
-              <p class="keynote-body hero-subtitle" data-i18n="hero.subtitle">بساعدك على التحرر من الشك الداخلي، الاحتياج العاطفي، والانفصال عن الذات، والعودة إلى قيمتك واتصالك الحقيقي بالله، حتى تعيشي بسلام داخلي وتمكين ومتعة.</p>
-              <div class="hero-actions">
+              <div class="gold-rule-short" data-hero-reveal="rule"></div>
+              <p class="keynote-body hero-subtitle" data-hero-reveal="subtitle" data-i18n="hero.subtitle">بساعدك على التحرر من الشك الداخلي، الاحتياج العاطفي، والانفصال عن الذات، والعودة إلى قيمتك واتصالك الحقيقي بالله، حتى تعيشي بسلام داخلي وتمكين ومتعة.</p>
+              <div class="hero-actions" data-hero-reveal="actions">
                 <a href="index.html#contact" class="btn-luxury-primary" data-scroll="contact" data-i18n="hero.primaryCta">ابدئي رحلتك الآن</a>
-                <a href="index.html#programs" class="btn-luxury-ghost" data-nav="programs" data-i18n="hero.secondaryCta">تعرفي على البرامج</a>
+                <a href="index.html#programs" class="btn-luxury-ghost" data-nav="programs" data-i18n="hero.secondaryCta">تعرف علي خدماتنا</a>
               </div>
             </div>
 
-            <div class="hero-portrait">
+            <div class="hero-portrait" data-hero-reveal="portrait">
               <div class="hero-portrait-glow" style="background: var(--theme-portrait-glow); filter: blur(24px);" aria-hidden="true"></div>
               <div class="hero-portrait-frame">
                 <div class="portrait-with-vines">
@@ -136,10 +144,6 @@
                       <img src="assets/images/dr_rana_portrait.png" alt="Dr. Rana Mosaad" data-i18n-aria="hero.portraitAlt">
                       <div class="portrait-shade" aria-hidden="true" style="background: linear-gradient(to top, rgba(4,10,20,0.75) 0%, rgba(4,10,20,0.25) 35%, transparent 58%);"></div>
                     </div>
-                    <div class="portrait-name-bar portrait-name">
-                      <span class="portrait-name-title" data-i18n="hero.portraitTitle">مدربة وعي ذاتي وروحي</span>
-                      <span class="keynote-headline portrait-name-text" data-i18n="hero.portraitName">Dr. Rana Mosaad</span>
-                    </div>
                   </div>
                   <div class="portrait-vine portrait-vine--front" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
                 </div>
@@ -147,7 +151,7 @@
             </div>
           </div>
 
-          <div class="hero-scroll">
+          <div class="hero-scroll" data-hero-reveal="scroll">
             <a href="about.html" class="hero-scroll-btn" data-nav="about" aria-label="عن رنا">
               <span data-icon="arrowDown" data-icon-class="icon icon-md"></span>
             </a>
@@ -155,55 +159,111 @@
         </div>
       </section>
 
-      <section id="about" class="slide-section">
+      <section
+        id="opening"
+        class="slide-section opening-statement"
+        data-i18n-aria="opening.ariaLabel"
+        aria-label="عبارة افتتاحية"
+      >
+        <div class="slide-inner opening-statement-inner">
+          <div class="gold-rule-short opening-statement-rule" data-reveal aria-hidden="true"></div>
+          <p
+            class="keynote-display opening-statement-text"
+            data-i18n-html="opening.text"
+            data-reveal
+            data-reveal-delay="80"
+          >
+            مشكلتك ليست دائمًا في <span class="text-gold-gradient">قلة الوعي</span>… أحيانًا في أن ما تعرفينه <span class="text-gold-gradient">لم يتجسد بعد</span> في واقعك.
+          </p>
+          <div class="gold-rule-short opening-statement-rule" data-reveal data-reveal-delay="120" aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <section id="about" class="slide-section about-rana" aria-labelledby="about-title">
         <div class="slide-inner">
-          <div class="glass-slide about-panel">
-            <div class="about-grid">
-              <article class="glass-panel glow-card about-card" data-reveal data-reveal-delay="0">
-                <div class="about-card-row">
-                  <div class="about-icon">
-                    <span data-icon="compass" data-icon-class="icon icon-md"></span>
-                  </div>
-                  <div class="about-card-copy">
-                    <h3 class="keynote-headline" data-i18n="aboutBlocks.0.title">الرحلة</h3>
-                    <p class="keynote-body" data-i18n="aboutBlocks.0.description">رحلة وعي عميقة تبدأ من فهم الذات، واستعادة القيمة الداخلية، والتحرر من العوائق والتعلقات التي تمنع الإنسان من الاستمتاع بالحياة.</p>
-                  </div>
+          <div class="about-rana-grid">
+            <div class="about-rana-media" data-reveal>
+              <div class="about-rana-glow" aria-hidden="true" style="background: var(--theme-portrait-glow); filter: blur(28px);"></div>
+              <div class="about-rana-frame portrait-arch glass-slide">
+                <div class="portrait-frame">
+                  <img
+                    src="assets/images/rana-about.jpg"
+                    alt="Dr. Rana Mosaad"
+                    data-i18n-aria="hero.portraitAlt"
+                    loading="lazy"
+                    decoding="async"
+                  >
                 </div>
-              </article>
-              <article class="glass-panel glow-card about-card" data-reveal data-reveal-delay="80">
-                <div class="about-card-row">
-                  <div class="about-icon">
-                    <span data-icon="sparkles" data-icon-class="icon icon-md"></span>
-                  </div>
-                  <div class="about-card-copy">
-                    <h3 class="keynote-headline" data-i18n="aboutBlocks.1.title">المنهجية</h3>
-                    <p class="keynote-body" data-i18n="aboutBlocks.1.description">دمج بين علوم الوعي، الكوتشينج المتقدم، والتشافي النفسي والروحي، من خلال جلسات خاصة وبرامج تدريبية عملية وعميقة.</p>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-panel glow-card about-card" data-reveal data-reveal-delay="160">
-                <div class="about-card-row">
-                  <div class="about-icon">
-                    <span data-icon="heart" data-icon-class="icon icon-md"></span>
-                  </div>
-                  <div class="about-card-copy">
-                    <h3 class="keynote-headline" data-i18n="aboutBlocks.2.title">الرسالة</h3>
-                    <p class="keynote-body" data-i18n="aboutBlocks.2.description">إرشاد الإنسان للعودة إلى السلام والاتزان والامتلاء الحقيقي، وبناء اتصال أعمق بالله وبذاته وبمعنى حياته.</p>
-                  </div>
-                </div>
-              </article>
-              <article class="glass-panel glow-card about-card" data-reveal data-reveal-delay="240">
-                <div class="about-card-row">
-                  <div class="about-icon">
-                    <span data-icon="star" data-icon-class="icon icon-md"></span>
-                  </div>
-                  <div class="about-card-copy">
-                    <h3 class="keynote-headline" data-i18n="aboutBlocks.3.title">الأثر</h3>
-                    <p class="keynote-body" data-i18n="aboutBlocks.3.description">أكثر من 6 سنوات من الخبرة، وأكثر من 1400 شخص وصلوا إلى مراحل أعمق من الوعي، التمكين، والسلام الداخلي عبر جلسات وبرامج تحولية.</p>
-                  </div>
-                </div>
-              </article>
+              </div>
             </div>
+
+            <div class="about-rana-copy" data-reveal data-reveal-delay="80">
+              <h2 id="about-title" class="keynote-display about-rana-title text-gold-gradient" data-i18n="about.title">من هي د. رنا مسعد؟</h2>
+              <div class="gold-rule-short about-rana-rule" aria-hidden="true"></div>
+              <p class="keynote-headline about-rana-intro" data-i18n-html="about.intro">
+                أنا مدربة <span class="text-gold-gradient">وعي ذاتي وروحي</span>.
+              </p>
+              <p class="keynote-body about-rana-body" data-i18n-html="about.body">
+                أرشدك في طريقك للوعي بذاتك، واستعادة <span class="text-gold-gradient">قيمتك</span>، والتحرر من العوائق والتعلقات التي تمنعك من الاستمتاع بالحياة، وتبني <span class="text-gold-gradient">اتصالًا قوي وعميق بالله وبذاتك</span>، من خلال برامج تدريبية وجلسات خاصة تعيدك إلى السلام والاتزان والامتلاء الحقيقي.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="stats"
+        class="slide-section home-stats"
+        data-i18n-aria="stats.ariaLabel"
+        aria-label="أرقام من الممارسة"
+      >
+        <div class="slide-inner">
+          <div class="home-stats-row glass-slide">
+            <article class="home-stat">
+              <div class="home-stat-value-row">
+                <div class="home-stat-icon" aria-hidden="true">
+                  <span data-icon="clock" data-icon-class="icon icon-sm"></span>
+                </div>
+                <strong class="home-stat-value keynote-display text-gold-gradient" data-counter data-count="6" data-suffix="+">6+</strong>
+              </div>
+              <p class="home-stat-label keynote-body" data-i18n="stats.l1">سنوات من الخبرة</p>
+            </article>
+            <article class="home-stat">
+              <div class="home-stat-value-row">
+                <div class="home-stat-icon" aria-hidden="true">
+                  <span data-icon="users" data-icon-class="icon icon-sm"></span>
+                </div>
+                <strong class="home-stat-value keynote-display text-gold-gradient" data-counter data-count="1400" data-suffix="+">1400+</strong>
+              </div>
+              <p class="home-stat-label keynote-body" data-i18n="stats.l2">طالب وسيدة</p>
+            </article>
+            <article class="home-stat">
+              <div class="home-stat-value-row">
+                <div class="home-stat-icon" aria-hidden="true">
+                  <span data-icon="sparkles" data-icon-class="icon icon-sm"></span>
+                </div>
+                <strong class="home-stat-value keynote-display text-gold-gradient" data-counter data-count="10" data-suffix="+">10+</strong>
+              </div>
+              <p class="home-stat-label keynote-body" data-i18n="stats.l3">تدريبات جماعية</p>
+            </article>
+            <article class="home-stat">
+              <div class="home-stat-value-row">
+                <div class="home-stat-icon" aria-hidden="true">
+                  <span data-icon="star" data-icon-class="icon icon-sm"></span>
+                </div>
+                <strong class="home-stat-value keynote-display text-gold-gradient" data-counter data-count="30" data-suffix="+">30+</strong>
+              </div>
+              <p class="home-stat-label keynote-body" data-i18n="stats.l4">برامج تحولية عميقة</p>
+            </article>
+            <article class="home-stat">
+              <div class="home-stat-value-row">
+                <div class="home-stat-icon" aria-hidden="true">
+                  <span data-icon="heart" data-icon-class="icon icon-sm"></span>
+                </div>
+                <strong class="home-stat-value keynote-display text-gold-gradient" data-counter data-count="10" data-suffix="+">10+</strong>
+              </div>
+              <p class="home-stat-label keynote-body" data-i18n="stats.l5">جلسات فردية</p>
+            </article>
           </div>
         </div>
       </section>

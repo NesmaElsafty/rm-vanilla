@@ -98,7 +98,7 @@
 
 @media (min-width: 1024px) {
   .hero-scroll {
-    margin-top: 5.5rem;
+    margin-top: clamp(2.25rem, 3vw, 3.25rem);
   }
 }
 

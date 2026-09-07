@@ -159,7 +159,7 @@
 
 .slide-section {
   position: relative;
-  padding: clamp(5.5rem, 11vw, 9rem) 0;
+  padding-block: clamp(3.5rem, 6vw, 6rem);
   isolation: isolate;
 }
 
@@ -185,11 +185,13 @@
 .slide-hero {
   min-height: 100vh;
   padding-top: clamp(6rem, 7vw + 3.5rem, 8rem);
-  padding-bottom: 4rem;
+  padding-bottom: clamp(2rem, 3vw, 3rem);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+  /* Keep horizontal page clip, but allow botanical vines to paint */
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .slide-hero::before { display: none; }
@@ -200,7 +202,7 @@
   width: 100%;
   max-width: 48rem;
   margin-inline: auto;
-  margin-bottom: 4rem;
+  margin-bottom: clamp(2rem, 3vw, 3rem);
 }
 
 .section-keynote-header.items-center,
@@ -289,6 +291,9 @@
 .keynote-label {
   display: inline-flex;
   align-items: center;
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 100%;
   gap: 0.5rem;
   padding: 0.35rem 1rem;
   font-size: 0.65rem;
@@ -396,6 +401,8 @@
   border: 1px solid color-mix(in srgb, var(--theme-gold) 22%, transparent);
   box-shadow: 0 40px 80px -24px rgba(0,0,0,0.75), 0 0 100px -20px color-mix(in srgb, var(--theme-rose) 12%, transparent);
   max-width: 100%;
+  position: relative;
+  z-index: 10;
 }
 
 .portrait-arch--clean {
@@ -1298,8 +1305,12 @@ a.contact-info-value:hover {
 }
 
 textarea.contact-field {
-  min-height: 7rem;
+  min-height: 5.5rem;
   resize: vertical;
+}
+
+#contact .section-keynote-header {
+  margin-bottom: clamp(1.75rem, 2.5vw, 2.5rem);
 }
 
 .contact-success-icon {
@@ -1364,8 +1375,9 @@ textarea.contact-field {
 }
 
 .portrait-with-vines {
-  overflow: hidden;
   max-width: 100%;
+  /* Vines intentionally overhang the arch — do not clip */
+  overflow: visible;
 }
 
 .portrait-vine {
