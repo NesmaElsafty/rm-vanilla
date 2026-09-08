@@ -6,6 +6,10 @@ import { initForms, initWhatsAppWidget } from './forms.js';
 import { initModals } from './modals.js';
 import { initGalleries } from './galleries.js';
 import { initDetailPage, refreshDetailPage, initPolicies, refreshPolicies } from './detail-pages.js';
+import {
+  initPrivateSessionDetails,
+  refreshPrivateSessionDetails,
+} from './private-sessions-details.js';
 import { createTestimonialSlider, getHomepageTestimonials } from './sliders.js';
 import { initIcons, getIcon } from './icons.js';
 import { botanicalSVG, journeyCurveSVG } from './svg-decor.js';
@@ -113,6 +117,7 @@ function onLocaleChange() {
   initIcons();
   initDecor();
   refreshDetailPage();
+  refreshPrivateSessionDetails();
   refreshPolicies();
   initHomepageTestimonials();
   initRecordedLibrary();
@@ -160,6 +165,7 @@ export function boot() {
 
     if (document.querySelector('.program-detail-gallery')) initGalleries();
     if (document.querySelector('[data-detail-root]')) initDetailPage();
+    if (document.querySelector('[data-private-session-root]')) initPrivateSessionDetails();
     if (document.querySelector('[data-policies-root]')) initPolicies();
     if (document.getElementById('testimonials-slider')) initHomepageTestimonials();
     if (document.querySelector('[data-recorded-grid], #recorded-sessions-grid')) initRecordedLibrary();

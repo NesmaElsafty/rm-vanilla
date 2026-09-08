@@ -28,7 +28,9 @@ export function applyLocale(locale) {
   });
   // Detail pages set entity titles via detail-pages.js; do not overwrite them.
   const onDetail = Boolean(document.querySelector('[data-detail-root]'))
-    || /-detail\.html?/i.test(location.pathname);
+    || Boolean(document.querySelector('[data-private-session-root]'))
+    || /-detail\.html?/i.test(location.pathname)
+    || /private-sessions-details\.html/i.test(location.pathname);
   const notFoundShowing = Boolean(
     document.querySelector('[data-detail-not-found]:not([hidden])'),
   );

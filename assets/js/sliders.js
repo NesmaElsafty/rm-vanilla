@@ -98,7 +98,7 @@ function cardMarkup(item, textOnly, isActive, ctaIcon, detailHref = '') {
     : 'floating-program-card glass-slide glow-card';
 
   const href = detailHref
-    ? `${detailHref}?slug=${encodeURIComponent(item.slug)}`
+    ? `${typeof detailHref === 'function' ? detailHref(item.slug) : detailHref}?slug=${encodeURIComponent(item.slug)}`
     : `#${encodeURIComponent(item.slug)}`;
 
   return `<article class="${articleClass}">

@@ -4,17 +4,23 @@ function wrapIndex(index, total) {
   return (index + total) % total;
 }
 
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 export function initGallery(root) {
   if (!root) return;
 
   const gallery = root.classList.contains('program-detail-gallery')
     ? root
     : root.querySelector('.program-detail-gallery');
-  if (!gallery) return;
+  if (!gallery || gallery.dataset.galleryReady === '1') return;
+  gallery.dataset.galleryReady = '1';
 
   const images = Array.from(gallery.querySelectorAll('[data-gallery-src]')).map((el) =>
     el.getAttribute('data-gallery-src'),
   );
+  const stage = gallery.querySelector('.program-detail-gallery-stage');
   const stageImage = gallery.querySelector('.program-detail-gallery-main-image');
   const thumbs = Array.from(gallery.querySelectorAll('.program-detail-gallery-thumb'));
   const counter = gallery.querySelector('.program-detail-gallery-counter');
@@ -29,18 +35,40 @@ export function initGallery(root) {
   if (prevBtn && !prevBtn.querySelector('svg')) prevBtn.innerHTML = iconArrowLeft('icon icon-sm');
   if (nextBtn && !nextBtn.querySelector('svg')) nextBtn.innerHTML = iconArrowRight('icon icon-sm');
 
-  const render = () => {
-    activeIndex = wrapIndex(activeIndex, images.length);
-    gallery.setAttribute('data-gallery-index', String(activeIndex));
-    if (stageImage) {
-      stageImage.src = images[activeIndex];
-      const prefix = gallery.getAttribute('data-gallery-alt') || '';
-      stageImage.alt = prefix ? `${prefix} ${activeIndex + 1}` : '';
-    }
+  const updateChrome = () => {
     thumbs.forEach((thumb, index) => {
       thumb.classList.toggle('program-detail-gallery-thumb--active', index === activeIndex);
     });
     if (counter) counter.textContent = `${activeIndex + 1} / ${images.length}`;
+  };
+
+  const applyStageImage = () => {
+    if (stageImage) {
+      stageImage.src = images[activeIndex];
+      const aboutTitle = gallery.closest('.about-gallery')?.querySelector('#about-gallery-title');
+      const prefix =
+        (aboutTitle?.textContent || gallery.getAttribute('data-gallery-alt') || '').trim();
+      stageImage.alt = prefix ? `${prefix} ${activeIndex + 1}` : '';
+    }
+  };
+
+  const render = () => {
+    activeIndex = wrapIndex(activeIndex, images.length);
+    gallery.setAttribute('data-gallery-index', String(activeIndex));
+    updateChrome();
+
+    if (!stageImage) return;
+
+    if (prefersReducedMotion()) {
+      applyStageImage();
+      return;
+    }
+
+    stageImage.classList.add('is-gallery-fading');
+    window.setTimeout(() => {
+      applyStageImage();
+      stageImage.classList.remove('is-gallery-fading');
+    }, 160);
   };
 
   const showPrevious = () => {
@@ -75,7 +103,43 @@ export function initGallery(root) {
     }
   });
 
-  render();
+  // Touch swipe on stage (does not block vertical scroll)
+  if (stage) {
+    let startX = 0;
+    let startY = 0;
+    let tracking = false;
+
+    stage.addEventListener(
+      'touchstart',
+      (event) => {
+        const touch = event.changedTouches[0];
+        if (!touch) return;
+        startX = touch.clientX;
+        startY = touch.clientY;
+        tracking = true;
+      },
+      { passive: true },
+    );
+
+    stage.addEventListener(
+      'touchend',
+      (event) => {
+        if (!tracking) return;
+        tracking = false;
+        const touch = event.changedTouches[0];
+        if (!touch) return;
+        const dx = touch.clientX - startX;
+        const dy = touch.clientY - startY;
+        if (Math.abs(dx) < 48 || Math.abs(dx) <= Math.abs(dy)) return;
+        if (dx < 0) showNext();
+        else showPrevious();
+      },
+      { passive: true },
+    );
+  }
+
+  applyStageImage();
+  updateChrome();
 }
 
 export function initGalleries(root = document) {

@@ -431,6 +431,8 @@ export const translations = {
       journeyP2:
         'من هنا بدأت رحلة طويلة من الوعي، والشفاء، والغفران، والتسليم، والتطوير المستمر. رحلة غيّرت حياتي من الداخل قبل أن تغيّر كل ما حولي.',
       identityStatement: 'واليوم، اصبحت مدربة وعي ذاتي وروحي.',
+      intro:
+        'أرشدك في طريقك للوعي بذاتك، واستعادة قيمتك، والتحرر من العوائق والتعلقات التي تمنعها من الاستمتاع بالحياة، وتبني اتصالًا قوي وعميق بالله وبذاتها، من خلال برامج تدريبية وجلسات خاصة تعيدها إلى السلام والاتزان والامتلاء الحقيقي.',
       methodTitle: 'منهجي',
       methodBody:
         'قائم على الدمج بين التجربة الواقعية، التدريب العملي، المنهج العلمي , والعمل علي الجذور النفسية والروحية، مدعومًا باعتمادات وتخصصات متقدمة، منها:',
@@ -460,6 +462,8 @@ export const translations = {
       statsStudentsLabel: 'طالب وسيدة',
       statsYearsLabel: 'سنوات من الخبرة',
       practiceTitle: 'مساحات أعمل عليها',
+      problemsTitle: 'المشكلات التي أساعدك علي حلها.',
+      problemsIntro: 'أرافقك في مساحات تحول متعددة، منها:',
       problems: [
         'الوعي الذاتي وفهم النفس',
         'استعادة القيمة الذاتية',
@@ -512,10 +516,12 @@ export const translations = {
       closingLead: 'أنا لا أعمل على “جانب واحد” منك،',
       closingMid: 'بل أتعامل معك ككل:',
       closingParts: ['روح', 'نفس', 'جسد'],
+      ctaTitle: 'جاهزة لبدء رحلتك؟',
       ctaHeadline: 'ابدأ رحلتك نحو وعي أعمق واتزان أكبر واتصال حقيقي بالله.',
-      ctaButton: 'احجز استشارتك',
+      ctaButton: 'احجزي استشارتك',
       ctaSecondary: 'تعرف على البرامج',
       portraitAlt: 'د. رنا مسعد',
+      galleryTitle: 'لحظات من مسيرتي',
     },
     retreatDetail: {
       backToHome: 'العودة للرئيسية',
@@ -991,6 +997,8 @@ export const translations = {
       journeyP2:
         'From there began a long journey of awareness, healing, forgiveness, surrender, and continuous growth. A journey that changed my life from within before it changed everything around me.',
       identityStatement: 'And today, I have become a self-awareness and spiritual coach.',
+      intro:
+        'I guide you on your path to self-awareness, reclaiming your worth, and freeing yourself from the obstacles and attachments that keep you from enjoying life — building a strong, deep connection with Allah and with yourself through training programs and private sessions that return you to peace, balance, and true fulfillment.',
       methodTitle: 'My Approach',
       methodBody:
         'It is grounded in combining lived experience, practical training, scientific methodology, and work on psychological and spiritual roots — supported by advanced certifications and specializations, including:',
@@ -1020,6 +1028,8 @@ export const translations = {
       statsStudentsLabel: 'Students & Women',
       statsYearsLabel: 'Years of Experience',
       practiceTitle: 'Areas of practice',
+      problemsTitle: 'The challenges I help you resolve.',
+      problemsIntro: 'I walk with you across multiple spaces of transformation, including:',
       problems: [
         'Self-awareness and understanding the self',
         'Reclaiming self-worth',
@@ -1072,11 +1082,13 @@ export const translations = {
       closingLead: 'I do not work on “one side” of you,',
       closingMid: 'I meet you as a whole:',
       closingParts: ['Spirit', 'Psyche', 'Body'],
+      ctaTitle: 'Ready to begin your journey?',
       ctaHeadline:
         'Begin your journey toward deeper awareness, greater balance, and a true connection with Allah.',
-      ctaButton: 'Book your consultation',
+      ctaButton: 'Book Your Consultation',
       ctaSecondary: 'Explore the programs',
       portraitAlt: 'Dr. Rana Mosaad',
+      galleryTitle: 'Moments from my journey',
     },
     retreatDetail: {
       backToHome: 'Back to Home',

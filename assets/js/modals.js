@@ -6,6 +6,7 @@ import { getWorkshopCards } from '../../data/workshops.js';
 import { getSessionCards } from '../../data/sessions.js';
 import { getRecordedSessionCards } from '../../data/recorded-sessions.js';
 import { iconX } from './icons.js';
+import { getPrivateSessionDetailPage } from '../../data/private-sessions-details.js';
 
 const MODAL_IDS = {
   training: 'modal-training',
@@ -70,7 +71,7 @@ function ensureSlider(kind) {
       items: getSessionCards(locale),
       textOnly: true,
       dotsLabel: copy.privateModalTitle ?? '',
-      page: DETAIL_PAGES.private,
+      page: getPrivateSessionDetailPage,
     },
     recorded: {
       items: getRecordedSessionCards(locale),
@@ -90,7 +91,9 @@ function ensureSlider(kind) {
       autoplay: true,
       onSelect(slug) {
         closeModal(kind);
-        location.href = `${config.page}?slug=${encodeURIComponent(slug)}`;
+        const page =
+          typeof config.page === 'function' ? config.page(slug) : config.page;
+        location.href = `${page}?slug=${encodeURIComponent(slug)}`;
       },
     }),
   );

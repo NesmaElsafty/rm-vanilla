@@ -117,7 +117,7 @@ export function goHome() {
 
 function applyPreselectFromQuery() {
   const params = new URLSearchParams(location.search);
-  const program = params.get('program');
+  const program = params.get('session') || params.get('program');
   if (program) window.__preSelectedProgram = program;
   return params;
 }

@@ -254,7 +254,8 @@ function validateForm(form) {
 
 function applyPrefill(form) {
   const params = new URLSearchParams(location.search);
-  const preselected = params.get('program') || window.__preSelectedProgram;
+  const preselected =
+    params.get('session') || params.get('program') || window.__preSelectedProgram;
   if (!preselected) return;
 
   const data = content();
