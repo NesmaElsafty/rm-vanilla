@@ -4,6 +4,7 @@ import { getProgramBySlug, getProgramCards, getProgramDuration } from '../../dat
 import { getWorkshopBySlug, getWorkshopCards, getWorkshopDuration } from '../../data/workshops.js';
 import { getSessionBySlug, getSessionCards } from '../../data/sessions.js';
 import { getRecordedSessionBySlug, getRecordedSessionCards } from '../../data/recorded-sessions.js';
+import { getRecordedSessionDetailPage } from '../../data/recorded-sessions-details.js';
 import { getRetreatBySlug, RETREAT_SLUG } from '../../data/retreats.js';
 import { createTestimonialSlider, getTestimonialsForProgram } from './sliders.js';
 import { initGallery } from './galleries.js';
@@ -207,13 +208,14 @@ function populateRelated(root, title, items, page) {
     root,
     '[data-detail-related-grid]',
     items
-      .map(
-        (item) =>
-          `<a href="${page}?slug=${encodeURIComponent(item.slug)}" class="program-detail-related">
+      .map((item) => {
+        const href =
+          typeof page === 'function' ? page(item.slug) : page;
+        return `<a href="${href}?slug=${encodeURIComponent(item.slug)}" class="program-detail-related">
             <h3 class="program-detail-related-title">${escapeHtml(item.title)}</h3>
             <p class="program-detail-related-text">${escapeHtml(item.description)}</p>
-          </a>`,
-      )
+          </a>`;
+      })
       .join(''),
   );
 }
@@ -304,13 +306,14 @@ function relatedMarkup(title, items, page) {
   return `<section class="program-detail-related-section">
     <h2 class="keynote-headline program-detail-related-heading">${escapeHtml(title)}</h2>
     <div class="program-detail-related-grid">${items
-      .map(
-        (item) =>
-          `<a href="${page}?slug=${encodeURIComponent(item.slug)}" class="program-detail-related">
+      .map((item) => {
+        const href =
+          typeof page === 'function' ? page(item.slug) : page;
+        return `<a href="${href}?slug=${encodeURIComponent(item.slug)}" class="program-detail-related">
             <h3 class="program-detail-related-title">${escapeHtml(item.title)}</h3>
             <p class="program-detail-related-text">${escapeHtml(item.description)}</p>
-          </a>`,
-      )
+          </a>`;
+      })
       .join('')}</div>
   </section>`;
 }
@@ -807,7 +810,7 @@ function renderRecorded(root) {
     populateTabs(root, tabs, rs.sectionsAria, panelsHtml);
     populateGalleryHost(root, '');
     populateCtaBar(root, ctaTitle, ctaText, session.hero.primary_cta, 'recorded-general');
-    populateRelated(root, rs.relatedSessions, related, 'recorded-session-detail.html');
+    populateRelated(root, rs.relatedSessions, related, getRecordedSessionDetailPage);
     mountExtras(root, []);
     updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, heroSrc);
     return;
@@ -841,7 +844,7 @@ function renderRecorded(root) {
       <div class="program-detail-tab-panel">${panelsHtml}</div>
     </div>
     ${ctaBar(ctaTitle, ctaText, session.hero.primary_cta, 'recorded-general')}
-    ${relatedMarkup(rs.relatedSessions, related, 'recorded-session-detail.html')}
+    ${relatedMarkup(rs.relatedSessions, related, getRecordedSessionDetailPage)}
   `;
 
   mountExtras(root, []);

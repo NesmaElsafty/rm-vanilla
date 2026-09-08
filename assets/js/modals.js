@@ -7,6 +7,7 @@ import { getSessionCards } from '../../data/sessions.js';
 import { getRecordedSessionCards } from '../../data/recorded-sessions.js';
 import { iconX } from './icons.js';
 import { getPrivateSessionDetailPage } from '../../data/private-sessions-details.js';
+import { getRecordedSessionDetailPage } from '../../data/recorded-sessions-details.js';
 
 const MODAL_IDS = {
   training: 'modal-training',
@@ -77,7 +78,7 @@ function ensureSlider(kind) {
       items: getRecordedSessionCards(locale),
       textOnly: true,
       dotsLabel: copy.recordedModalTitle ?? '',
-      page: DETAIL_PAGES.recorded,
+      page: getRecordedSessionDetailPage,
     },
   };
 
