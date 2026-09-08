@@ -9,6 +9,7 @@ import { createTestimonialSlider, getTestimonialsForProgram } from './sliders.js
 import { initGallery } from './galleries.js';
 import { iconArrowLeft, iconArrowRight, iconChevronDown } from './icons.js';
 import { policyTitle, policySections } from '../../data/policies.js';
+import { getProgramHeroImage } from './utils/program-hero-images.js';
 
 const ARABIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
@@ -500,11 +501,12 @@ function renderProgram(root) {
   const galleryHtml = galleryMarkup(galleryImages, pd.galleryTitle, pd.gallerySubtitle, program.page_title);
   const ctaTitle = finalCta?.heading ?? pd.readyNextStep;
   const ctaText = finalCta?.subheading ?? program.hero.subheading;
+  const heroSrc = getProgramHeroImage(program.slug);
 
   if (hasDetailShell(root)) {
     toggleFoundState(root, true);
     populateBack(root, 'index.html#programs', pd.backToPrograms, rtl);
-    populateImage(root, program.image, program.page_title);
+    populateImage(root, heroSrc, program.page_title);
     setSlotText(root, '[data-detail-eyebrow]', program.hero.eyebrow);
     populateDuration(root, duration);
     setSlotText(root, '[data-detail-title]', program.page_title);
@@ -516,7 +518,7 @@ function renderProgram(root) {
     populateCtaBar(root, ctaTitle, ctaText, program.hero.primary_cta, program.slug);
     populateRelated(root, pd.relatedPrograms, related, 'program-detail.html');
     mountExtras(root, testimonials);
-    updateDocumentMeta(program.page_title, program.page_subtitle || program.hero?.subheading, program.image);
+    updateDocumentMeta(program.page_title, program.page_subtitle || program.hero?.subheading, heroSrc);
     return;
   }
 
@@ -526,7 +528,7 @@ function renderProgram(root) {
       <div class="program-detail-hero-grid">
         <div class="program-detail-hero-visual">
           <div class="program-detail-image-ring" aria-hidden="true"></div>
-          <img src="${escapeHtml(program.image)}" alt="${escapeHtml(program.page_title)}" class="program-detail-image" decoding="async"/>
+          <img src="${escapeHtml(heroSrc)}" alt="${escapeHtml(program.page_title)}" class="program-detail-image" decoding="async"/>
         </div>
         <div class="program-detail-hero-content">
           <span class="keynote-label program-detail-hero-badge">
@@ -551,7 +553,7 @@ function renderProgram(root) {
   `;
 
   mountExtras(root, testimonials);
-  updateDocumentMeta(program.page_title, program.page_subtitle || program.hero?.subheading, program.image);
+  updateDocumentMeta(program.page_title, program.page_subtitle || program.hero?.subheading, heroSrc);
 }
 
 function renderWorkshop(root) {
@@ -790,11 +792,12 @@ function renderRecorded(root) {
   `;
   const ctaTitle = finalCta?.heading ?? rs.readyNextStep;
   const ctaText = finalCta?.subheading ?? session.hero.subheading;
+  const heroSrc = getProgramHeroImage(session.slug);
 
   if (hasDetailShell(root)) {
     toggleFoundState(root, true);
     populateBack(root, 'recorded-sessions.html', rs.backToLibrary, rtl);
-    populateImage(root, session.image, session.page_title);
+    populateImage(root, heroSrc, session.page_title);
     setSlotText(root, '[data-detail-photo-badge]', session.hero.eyebrow);
     setSlotText(root, '[data-detail-eyebrow]', session.hero.eyebrow);
     setSlotText(root, '[data-detail-title]', session.page_title);
@@ -806,7 +809,7 @@ function renderRecorded(root) {
     populateCtaBar(root, ctaTitle, ctaText, session.hero.primary_cta, 'recorded-general');
     populateRelated(root, rs.relatedSessions, related, 'recorded-session-detail.html');
     mountExtras(root, []);
-    updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, session.image);
+    updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, heroSrc);
     return;
   }
 
@@ -818,7 +821,7 @@ function renderRecorded(root) {
         <div class="session-hero__media">
           <div class="session-hero__photo-card">
             <div class="session-hero__photo-shine" aria-hidden="true"></div>
-            <img src="${escapeHtml(session.image)}" alt="${escapeHtml(session.page_title)}" class="session-hero__photo" decoding="async"/>
+            <img src="${escapeHtml(heroSrc)}" alt="${escapeHtml(session.page_title)}" class="session-hero__photo" decoding="async"/>
             <span class="session-hero__photo-badge">${escapeHtml(session.hero.eyebrow)}</span>
           </div>
         </div>
@@ -842,7 +845,7 @@ function renderRecorded(root) {
   `;
 
   mountExtras(root, []);
-  updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, session.image);
+  updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, heroSrc);
 }
 
 function renderRetreat(root) {

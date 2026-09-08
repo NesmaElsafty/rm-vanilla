@@ -32,7 +32,7 @@
     })();
   </script>
 </head>
-<body class="private-session-page program-detail-page">
+<body class="private-session-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="luxury-backdrop" aria-hidden="true">
     <div class="backdrop-set backdrop-set--dark">
@@ -113,52 +113,60 @@
       <div class="slide-inner">
         <div data-private-session-root>
           <div class="private-session-page-inner" data-ps-found>
-            <section class="program-detail-hero program-detail-hero--compact glass-slide private-session-hero" data-reveal>
-              <div class="program-detail-hero-grid">
-                <div class="program-detail-hero-visual program-detail-hero-visual--photo">
-                  <div class="program-detail-image-ring" aria-hidden="true"></div>
-                  <img
-                    data-ps-hero-image
-                    class="program-detail-image"
-                    src=""
-                    alt=""
-                    decoding="async"
-                  >
+            <section class="private-session-hero" data-reveal>
+              <div class="private-session-hero__atmosphere" aria-hidden="true">
+                <span class="private-session-hero__glow private-session-hero__glow--image"></span>
+                <span class="private-session-hero__glow private-session-hero__glow--text"></span>
+              </div>
+              <div class="private-session-hero__layout">
+                <div class="private-session-hero__media">
+                  <div class="private-session-hero__halo" aria-hidden="true"></div>
+                  <figure class="private-session-hero__figure">
+                    <img
+                      class="private-session-hero__image"
+                      data-ps-hero-image
+                      src=""
+                      alt=""
+                      width="800"
+                      height="1000"
+                      decoding="async"
+                    >
+                  </figure>
+                  <div class="private-session-hero__botanical" data-botanical data-botanical-bold="false" aria-hidden="true"></div>
                 </div>
-                <div class="program-detail-hero-content">
-                  <span class="keynote-label program-detail-hero-badge">
-                    <span class="program-detail-hero-badge-text" data-ps-eyebrow></span>
-                  </span>
-                  <h1 class="keynote-display program-detail-hero-title" data-ps-session-name></h1>
-                  <p class="text-gold-gradient program-detail-hero-subtitle" data-ps-transformation-title></p>
-                  <div class="private-session-hero__lead" data-ps-description></div>
-                  <a class="btn-luxury-primary btn-luxury-primary--compact private-session-hero__details" href="#journey" data-ps-details-btn>
+                <div class="private-session-hero__mast">
+                  <span class="private-session-hero__eyebrow" data-ps-eyebrow></span>
+                  <p class="private-session-hero__name" data-ps-session-name></p>
+                  <h1 class="private-session-hero__headline" data-ps-transformation-title></h1>
+                </div>
+                <div class="private-session-hero__copy">
+                  <div class="private-session-hero__description" data-ps-description></div>
+                  <a class="private-session-hero__details" href="#journey" data-ps-details-btn>
                     <span data-ps-details-label></span>
                     <span data-ps-details-icon aria-hidden="true"></span>
                   </a>
                 </div>
               </div>
+              <div class="private-session-hero__fade" aria-hidden="true"></div>
             </section>
-
-            <div class="private-session-bridge" aria-hidden="true"></div>
 
             <section id="journey" class="private-session-journey" data-reveal>
-              <span class="private-session-marker" aria-hidden="true">01</span>
-              <div class="private-session-journey__header">
-                <h2 class="private-session-section-title" data-ps-journey-heading></h2>
-                <div class="private-session-journey__lead">
-                  <div class="private-session-journey__badge" aria-hidden="true">
-                    <span class="private-session-journey__badge-num" data-ps-journey-badge-num>04</span>
-                    <span class="private-session-journey__badge-label" data-ps-journey-badge-label>جلسات فردية خاصه</span>
+              <div class="private-session-journey__shell">
+                <div class="private-session-journey__aside">
+                  <span class="private-session-marker" aria-hidden="true">01</span>
+                  <h2 class="private-session-section-title" data-ps-journey-heading></h2>
+                  <div class="private-session-journey__lead">
+                    <div class="private-session-journey__badge" aria-hidden="true">
+                      <span class="private-session-journey__badge-num" data-ps-journey-badge-num>04</span>
+                      <span class="private-session-journey__badge-label" data-ps-journey-badge-label>جلسات فردية خاصه</span>
+                    </div>
+                    <p class="private-session-journey__intro" data-ps-journey-intro></p>
                   </div>
-                  <p class="private-session-journey__intro" data-ps-journey-intro></p>
+                  <p class="private-session-journey__supporting" data-ps-journey-supporting></p>
                 </div>
-                <p class="private-session-journey__supporting" data-ps-journey-supporting></p>
+                <ol class="private-session-journey__list" data-ps-journey-list></ol>
               </div>
-              <ol class="private-session-journey__list" data-ps-journey-list></ol>
             </section>
-
-            <div class="private-session-bridge private-session-bridge--rose" aria-hidden="true"></div>
 
             <section class="private-session-pain" data-reveal>
               <span class="private-session-marker" aria-hidden="true">02</span>
@@ -175,8 +183,6 @@
               </div>
             </section>
 
-            <div class="private-session-bridge private-session-bridge--gold" aria-hidden="true"></div>
-
             <section class="private-session-transformation" data-reveal>
               <span class="private-session-marker" aria-hidden="true">03</span>
               <div class="private-session-transformation__glow" aria-hidden="true"></div>
@@ -189,12 +195,14 @@
               </div>
             </section>
 
-            <div class="private-session-bridge" aria-hidden="true"></div>
-
             <section class="private-session-fit" data-reveal>
-              <span class="private-session-marker" aria-hidden="true">04</span>
-              <h2 class="private-session-section-title" data-ps-fit-heading></h2>
-              <ul class="private-session-fit__list" data-ps-fit-list></ul>
+              <div class="private-session-fit__shell">
+                <div class="private-session-fit__aside">
+                  <span class="private-session-marker" aria-hidden="true">04</span>
+                  <h2 class="private-session-section-title" data-ps-fit-heading></h2>
+                </div>
+                <ul class="private-session-fit__list" data-ps-fit-list></ul>
+              </div>
             </section>
 
             <section class="private-session-final-cta" data-reveal>
@@ -203,7 +211,7 @@
               <div class="private-session-final-cta__inner">
                 <div class="private-session-final-cta__copy">
                   <h2 class="private-session-final-cta__heading" data-ps-cta-heading></h2>
-                  <p class="private-session-final-cta__text" data-ps-cta-text></p>
+                  <div data-ps-cta-text></div>
                 </div>
                 <a class="btn-luxury-primary private-session-final-cta__button" data-ps-cta-button href="index.html#contact"></a>
               </div>
@@ -229,7 +237,6 @@
             <a href="index.html" class="footer-logo-btn" data-home aria-label="Dr. Rana Mosaad">
               <img src="assets/images/rana-logo.png" alt="Dr. Rana Mosaad" class="logo-white-highlight footer-logo">
             </a>
-            <p class="footer-text" data-i18n="footer.bio">أكاديمية وتوجيه معتمد لإمضاء مهارات قيادة الذات، البرمجة اللغوية العصبية، وتحقيق التناغم العاطفي والتمكين الشخصي بأدوات قياس دولية معتمدة.</p>
             <div class="footer-social">
               <span class="footer-label" data-i18n="footer.socialLabel">شبكات التواصل الاجتماعي الرسمية</span>
               <div class="footer-social-row">
@@ -260,6 +267,7 @@
               </div>
             </div>
           </div>
+
           <div class="footer-col">
             <h4 class="footer-heading" data-i18n="footer.quickNav">تصفح سريع</h4>
             <ul>
@@ -270,6 +278,7 @@
               <li><a href="index.html#testimonials" class="footer-link" data-nav="testimonials" data-i18n="footer.successStories">الآراء وقصص النجاح</a></li>
             </ul>
           </div>
+
           <div class="footer-col">
             <h4 class="footer-heading" data-i18n="footer.empowermentPrograms">برامج التمكين</h4>
             <ul>
@@ -280,6 +289,7 @@
               <li><a href="program-detail.html?slug=apg" class="footer-link" data-i18n="footer.programApg">APG - إدارة الذات وعبقرية الأداء</a></li>
             </ul>
           </div>
+
           <div class="footer-col">
             <h4 class="footer-heading" data-i18n="footer.charter">ميثاق الجلسات</h4>
             <div class="footer-charter-box">
@@ -294,6 +304,7 @@
             </div>
           </div>
         </div>
+
         <div class="footer-bottom">
           <p class="footer-made-with-love">
             <span data-i18n="footer.madeWithLove">Made with love by Nesma Elsafty</span>

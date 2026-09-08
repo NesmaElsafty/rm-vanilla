@@ -2,15 +2,13 @@ import { getLocale } from './language.js';
 import {
   getPrivateSessionDetailBySlug,
 } from '../../data/private-sessions-details.js';
-import { getSessionBySlug } from '../../data/sessions.js';
 import {
   iconChevronDown,
   iconArrowLeft,
   iconArrowRight,
   iconCheckCircle,
 } from './icons.js';
-
-const FALLBACK_SESSION_IMAGE = 'assets/images/sessions/session-clarity-inner-doubt.png';
+import { getProgramHeroImage } from './utils/program-hero-images.js';
 
 const ARABIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
@@ -93,6 +91,24 @@ function updateDocumentMeta(session) {
   }
 }
 
+function renderTransformationTitle(title, locale = 'ar') {
+  const source = String(title ?? '');
+  const match =
+    locale === 'en'
+      ? source.match(/^(From)\s+(.+?)\s+(to)\s+(.+)$/i)
+      : source.match(/^(من)\s+(.+?)\s+(إلى)\s+(.+)$/);
+
+  if (!match) return escapeHtml(source);
+
+  const [, fromWord, before, toWord, after] = match;
+  // Exact wording preserved; only visual line breaks/styling.
+  return `<span class="private-session-hero__compose">
+    <span class="private-session-hero__compose-from">${escapeHtml(fromWord)} ${escapeHtml(before)}</span>
+    <span class="private-session-hero__compose-to">${escapeHtml(toWord)}</span>
+    <span class="private-session-hero__compose-clarity">${escapeHtml(after)}</span>
+  </span>`;
+}
+
 function renderJourneyIntro(intro, emphasis = []) {
   return emphasizeText(intro, emphasis);
 }
@@ -148,14 +164,12 @@ function renderFound(root, session, locale) {
 
   const titleEl = root.querySelector('[data-ps-transformation-title]');
   if (titleEl) {
-    titleEl.textContent = session.transformation_title ?? '';
+    titleEl.innerHTML = renderTransformationTitle(session.transformation_title, locale);
   }
 
   const heroImage = root.querySelector('[data-ps-hero-image]');
   if (heroImage) {
-    const legacy = getSessionBySlug(session.slug, locale);
-    const src = legacy?.image || FALLBACK_SESSION_IMAGE;
-    heroImage.setAttribute('src', src);
+    heroImage.setAttribute('src', getProgramHeroImage(session.slug));
     heroImage.setAttribute('alt', session.session_name || '');
   }
 
@@ -166,8 +180,8 @@ function renderFound(root, session, locale) {
       .map((p, i) => {
         const cls =
           i === 0
-            ? 'keynote-body program-detail-hero-lead private-session-hero__question'
-            : 'keynote-body program-detail-hero-lead';
+            ? 'private-session-hero__question'
+            : 'private-session-hero__body';
         return `<p class="${cls}">${escapeHtml(p)}</p>`;
       })
       .join('');
@@ -183,11 +197,17 @@ function renderFound(root, session, locale) {
   }
 
   setText('[data-ps-journey-heading]', session.journey?.heading);
-  setText('[data-ps-journey-badge-num]', toDisplayNum(4, rtl));
+  const sessionCount = Number(session.journey?.session_count) || 4;
+  setText('[data-ps-journey-badge-num]', toDisplayNum(sessionCount, rtl));
   const badgePhrase =
     (display.journey_intro_emphasis && display.journey_intro_emphasis[0]) ||
-    (locale === 'en' ? '4 private one-on-one sessions' : '4 جلسات فردية خاصه');
-  setText('[data-ps-journey-badge-label]', badgePhrase.replace(/^\d+\s*/, ''));
+    (locale === 'en'
+      ? `${sessionCount} private one-on-one sessions`
+      : `${sessionCount} جلسات فردية خاصه`);
+  const badgeLabel =
+    session.journey?.badge_label ||
+    String(badgePhrase).replace(/^\d+\s*/, '');
+  setText('[data-ps-journey-badge-label]', badgeLabel);
 
   const journeyIntro = root.querySelector('[data-ps-journey-intro]');
   if (journeyIntro) {
@@ -237,16 +257,26 @@ function renderFound(root, session, locale) {
   }
 
   setText('[data-ps-transform-heading]', session.transformation?.heading);
+  const transformSection = root.querySelector('.private-session-transformation');
+  const transformBullets = session.transformation?.bullets ?? [];
+  const hasFlowRows = transformBullets.length > 0;
+  if (transformSection) {
+    transformSection.classList.toggle(
+      'private-session-transformation--text-only',
+      !hasFlowRows,
+    );
+  }
+
   const transformIntro = root.querySelector('[data-ps-transform-intro]');
   if (transformIntro) {
     const intro = session.transformation?.intro;
     const lines = Array.isArray(intro) ? intro : intro ? [intro] : [];
     transformIntro.innerHTML = lines
       .map((line, i) => {
-        const cls =
-          i === 0
-            ? 'private-session-transformation__intro'
-            : 'private-session-transformation__bridge';
+        let cls = 'private-session-transformation__intro';
+        if (hasFlowRows && i > 0) {
+          cls = 'private-session-transformation__bridge';
+        }
         return `<p class="${cls}">${escapeHtml(line)}</p>`;
       })
       .join('');
@@ -254,22 +284,34 @@ function renderFound(root, session, locale) {
 
   const flowList = root.querySelector('[data-ps-transform-flow]');
   if (flowList) {
-    const bullets = session.transformation?.bullets ?? [];
-    const flows = display.transformation_flow ?? [];
-    const flowLabels = {
-      prefix: display.flow_prefix || (locale === 'en' ? 'From' : 'من'),
-      connector: display.flow_connector || (locale === 'en' ? 'to' : 'إلى'),
-    };
-    flowList.innerHTML = bullets
-      .map((bullet, index) => renderFlowRow(bullet, flows[index], flowLabels))
-      .join('');
+    if (!hasFlowRows) {
+      flowList.innerHTML = '';
+      flowList.hidden = true;
+    } else {
+      flowList.hidden = false;
+      const flows = display.transformation_flow ?? [];
+      const flowLabels = {
+        prefix: display.flow_prefix || (locale === 'en' ? 'From' : 'من'),
+        connector: display.flow_connector || (locale === 'en' ? 'to' : 'إلى'),
+      };
+      flowList.innerHTML = transformBullets
+        .map((bullet, index) => renderFlowRow(bullet, flows[index], flowLabels))
+        .join('');
+    }
   }
 
   const transformClosing = root.querySelector('[data-ps-transform-closing]');
   if (transformClosing) {
-    const closing = session.transformation?.closing ?? [];
-    transformClosing.innerHTML = closing
-      .map((line) => `<p class="private-session-transformation__closing">${escapeHtml(line)}</p>`)
+    const closing = session.transformation?.closing;
+    const lines = Array.isArray(closing) ? closing : closing ? [closing] : [];
+    transformClosing.innerHTML = lines
+      .map((line, index) => {
+        const outcomeClass =
+          !hasFlowRows && index === lines.length - 1
+            ? ' private-session-transformation__closing--outcome'
+            : '';
+        return `<p class="private-session-transformation__closing${outcomeClass}">${escapeHtml(line)}</p>`;
+      })
       .join('');
   }
 
@@ -289,7 +331,14 @@ function renderFound(root, session, locale) {
   }
 
   setText('[data-ps-cta-heading]', session.final_cta?.heading);
-  setText('[data-ps-cta-text]', session.final_cta?.text);
+  const ctaTextHost = root.querySelector('[data-ps-cta-text]');
+  if (ctaTextHost) {
+    const raw = session.final_cta?.text;
+    const paragraphs = Array.isArray(raw) ? raw : raw ? [raw] : [];
+    ctaTextHost.innerHTML = paragraphs
+      .map((p) => `<p class="private-session-final-cta__text">${escapeHtml(p)}</p>`)
+      .join('');
+  }
   const ctaBtn = root.querySelector('[data-ps-cta-button]');
   if (ctaBtn) {
     ctaBtn.setAttribute('href', bookUrl);

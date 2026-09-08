@@ -288,9 +288,9 @@ export const translations = {
     contactSessions: [
       { slug: 'restore-confidence-self-worth', label: 'استعادة الثقة والقيمة الذاتية' },
       { slug: 'emotional-need-attachment-release', label: 'التحرر من الاحتياج العاطفي والتعلّق' },
-      { slug: 'return-to-god-inner-peace', label: 'العودة إلى الله والسلام الداخلي' },
-      { slug: 'private-journey-1-to-1', label: 'رحلة خاصة 1:1 مع Dr. Rana Mosaad' },
-      { slug: 'healing-roots-old-wounds', label: 'شفاء الجذور والجروح القديمة' },
+      { slug: 'return-to-god-inner-peace', label: 'إصلاح العلاقة مع الله والعودة إليه' },
+      { slug: 'private-journey-1-to-1', label: 'جلسة الإرشاد الخاصة 1:1 مع د. رنا مسعد' },
+      { slug: 'healing-roots-old-wounds', label: 'شفاء الصدمات والجروح القديمة' },
       { slug: 'clarity-inner-doubt-release', label: 'فكّ التشوش والشك الداخلي' },
     ],
     contactInitiatives: [{ slug: 'motmain', label: 'مبادرة مطمئن' }],
