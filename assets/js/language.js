@@ -30,11 +30,17 @@ export function applyLocale(locale) {
   const onDetail = Boolean(document.querySelector('[data-detail-root]'))
     || Boolean(document.querySelector('[data-private-session-root]'))
     || Boolean(document.querySelector('[data-recorded-session-root]'))
+    || Boolean(document.querySelector('[data-workshop-rich-root]'))
+    || Boolean(document.querySelector('[data-program-rich-root]'))
     || /-detail\.html?/i.test(location.pathname)
     || /private-sessions-details\.html/i.test(location.pathname)
-    || /recorded-sessions-details\.html/i.test(location.pathname);
+    || /recorded-sessions-details\.html/i.test(location.pathname)
+    || /workshops-details\.html/i.test(location.pathname)
+    || /programs-details\.html/i.test(location.pathname);
   const notFoundShowing = Boolean(
-    document.querySelector('[data-detail-not-found]:not([hidden])'),
+    document.querySelector('[data-detail-not-found]:not([hidden])')
+      || document.querySelector('[data-pd-not-found]:not([hidden])')
+      || document.querySelector('[data-wd-not-found]:not([hidden])'),
   );
   if (content?.meta?.title && (!onDetail || notFoundShowing)) {
     document.title = content.meta.title;

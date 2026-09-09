@@ -14,6 +14,14 @@ import {
   initRecordedSessionDetails,
   refreshRecordedSessionDetails,
 } from './recorded-sessions-details.js';
+import {
+  initWorkshopDetails,
+  refreshWorkshopDetails,
+} from './workshops-details.js';
+import {
+  initProgramDetails,
+  refreshProgramDetails,
+} from './programs-details.js';
 import { createTestimonialSlider, getHomepageTestimonials } from './sliders.js';
 import { initIcons, getIcon } from './icons.js';
 import { botanicalSVG, journeyCurveSVG } from './svg-decor.js';
@@ -124,6 +132,8 @@ function onLocaleChange() {
   refreshDetailPage();
   refreshPrivateSessionDetails();
   refreshRecordedSessionDetails();
+  refreshWorkshopDetails();
+  refreshProgramDetails();
   refreshPolicies();
   initHomepageTestimonials();
   initRecordedLibrary();
@@ -173,6 +183,8 @@ export function boot() {
     if (document.querySelector('[data-detail-root]')) initDetailPage();
     if (document.querySelector('[data-private-session-root]')) initPrivateSessionDetails();
     if (document.querySelector('[data-recorded-session-root]')) initRecordedSessionDetails();
+    if (document.querySelector('[data-workshop-rich-root]')) initWorkshopDetails();
+    if (document.querySelector('[data-program-rich-root]')) initProgramDetails();
     if (document.querySelector('[data-policies-root]')) initPolicies();
     if (document.getElementById('testimonials-slider')) initHomepageTestimonials();
     if (document.querySelector('[data-recorded-grid], #recorded-sessions-grid')) initRecordedLibrary();

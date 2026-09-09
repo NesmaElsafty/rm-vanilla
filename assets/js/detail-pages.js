@@ -11,6 +11,7 @@ import { initGallery } from './galleries.js';
 import { iconArrowLeft, iconArrowRight, iconChevronDown } from './icons.js';
 import { policyTitle, policySections } from '../../data/policies.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
+import { getProgramDetailPage } from '../../data/programs-details.js';
 
 const ARABIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
@@ -519,7 +520,7 @@ function renderProgram(root) {
     populateTabs(root, tabs, pd.sectionsAria, panelsHtml);
     populateGalleryHost(root, galleryHtml);
     populateCtaBar(root, ctaTitle, ctaText, program.hero.primary_cta, program.slug);
-    populateRelated(root, pd.relatedPrograms, related, 'program-detail.html');
+    populateRelated(root, pd.relatedPrograms, related, getProgramDetailPage);
     mountExtras(root, testimonials);
     updateDocumentMeta(program.page_title, program.page_subtitle || program.hero?.subheading, heroSrc);
     return;
@@ -552,7 +553,7 @@ function renderProgram(root) {
     <div data-detail-testimonials></div>
     ${galleryHtml}
     ${ctaBar(ctaTitle, ctaText, program.hero.primary_cta, program.slug)}
-    ${relatedMarkup(pd.relatedPrograms, related, 'program-detail.html')}
+    ${relatedMarkup(pd.relatedPrograms, related, getProgramDetailPage)}
   `;
 
   mountExtras(root, testimonials);
@@ -614,7 +615,7 @@ function renderWorkshop(root) {
     populateTabs(root, tabs, pd.sectionsAria, panelsHtml);
     populateGalleryHost(root, '');
     populateCtaBar(root, ctaTitle, ctaText, workshop.hero.primary_cta, workshop.slug);
-    populateRelated(root, wd.relatedWorkshops, related, 'workshop-detail.html');
+    populateRelated(root, wd.relatedWorkshops, related, 'workshops-details.html');
     mountExtras(root, testimonials);
     updateDocumentMeta(workshop.page_title, workshop.page_subtitle || workshop.hero?.subheading, workshop.image);
     return;
@@ -646,7 +647,7 @@ function renderWorkshop(root) {
     </div>
     <div data-detail-testimonials></div>
     ${ctaBar(ctaTitle, ctaText, workshop.hero.primary_cta, workshop.slug)}
-    ${relatedMarkup(wd.relatedWorkshops, related, 'workshop-detail.html')}
+    ${relatedMarkup(wd.relatedWorkshops, related, 'workshops-details.html')}
   `;
 
   mountExtras(root, testimonials);
