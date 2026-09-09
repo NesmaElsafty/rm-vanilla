@@ -1,6 +1,6 @@
 /**
  * Richer Private Sessions detail schema (new template).
- * Existing data/sessions.js + seeders remain the source for session-detail.html.
+ * Homepage/session cards remain in data/sessions.js + seeders.
  *
  * Locale notes:
  * - Arabic (ar) is owner source-of-truth for migrated sessions.
@@ -1112,10 +1112,8 @@ export function usesPrivateSessionNewTemplate(slug) {
   return PRIVATE_SESSION_NEW_TEMPLATE_SLUGS.has(slug);
 }
 
-export function getPrivateSessionDetailPage(slug) {
-  return usesPrivateSessionNewTemplate(slug)
-    ? 'private-sessions-details.html'
-    : 'session-detail.html';
+export function getPrivateSessionDetailPage(_slug) {
+  return 'private-sessions-details.html';
 }
 
 export function getPrivateSessionDetailBySlug(slug, locale = 'ar') {

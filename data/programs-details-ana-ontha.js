@@ -1,13 +1,13 @@
 /**
- * Transformation Journey Program Structure — records for slug `ana-ontha`.
- * structure_type: 'transformation-journey'
+ * Feminine Healing Journey Program Structure — records for slug `ana-ontha`.
+ * structure_type: 'feminine-healing-journey'
  *
  * Arabic is owner source-of-truth — do not rewrite, shorten, or correct.
  */
 
 export const ANA_ONTHA_PROGRAM_AR = {
   slug: 'ana-ontha',
-  structure_type: 'transformation-journey',
+  structure_type: 'feminine-healing-journey',
   seo: {
     title: 'أنا انثي | Dr. Rana Mosaad',
     description: 'رحلة عودة الي فطرتك الأنثوية السليمة في ٦٠ يوم',
@@ -211,7 +211,7 @@ export const ANA_ONTHA_PROGRAM_AR = {
 
 export const ANA_ONTHA_PROGRAM_EN = {
   slug: 'ana-ontha',
-  structure_type: 'transformation-journey',
+  structure_type: 'feminine-healing-journey',
   seo: {
     title: 'I Am a Woman | Dr. Rana Mosaad',
     description: 'A 60-day journey back to your healthy feminine nature.',

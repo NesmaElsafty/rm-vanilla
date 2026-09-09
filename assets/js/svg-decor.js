@@ -10,8 +10,8 @@ const LIGHT_DOTS = [
 ];
 
 export function botanicalSVG({ id = 'botanical', bold = true, animated = true } = {}) {
-  const gradId = `goldGrad-${id}`;
-  const lightGradId = `goldLight-${id}`;
+  const gradId = `botanicalGrad-${id}`;
+  const lightGradId = `botanicalLight-${id}`;
   const strokeOpacity = bold ? [0.72, 0.62, 0.5] : [0.35, 0.28, 0.2];
   const strokeWidth = bold ? [1.1, 0.9, 0.85] : [0.75, 0.6, 0.5];
   const leafOpacity = bold ? 0.68 : 0.35;
@@ -30,34 +30,33 @@ export function botanicalSVG({ id = 'botanical', bold = true, animated = true } 
     : '';
 
   const dots = LIGHT_DOTS.map((dot) => {
-    const r = bold ? dot.r : dot.r - 0.5;
-    const fill = bold ? 'rgba(199,154,59,0.75)' : 'rgba(199,154,59,0.4)';
+    const r = bold ? dot.r : Math.max(0.5, dot.r - 0.5);
     const delay = animated ? ` style="animation-delay:${dot.delay}"` : '';
     const cls = animated ? ' class="vine-light-dot"' : '';
-    return `<circle cx="${dot.cx}" cy="${dot.cy}" r="${r}"${cls} fill="${fill}"${delay}/>`;
+    return `<circle cx="${dot.cx}" cy="${dot.cy}" r="${r}"${cls} fill="var(--botanical-dot)"${delay}/>`;
   }).join('');
 
   const lightGrad = animated
     ? `<linearGradient id="${lightGradId}" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stop-color="#F8F3EB" stop-opacity="0"/>
-        <stop offset="35%" stop-color="#D7BE7A" stop-opacity="0.35"/>
-        <stop offset="50%" stop-color="#F8F3EB" stop-opacity="1"/>
-        <stop offset="65%" stop-color="#D7BE7A" stop-opacity="0.35"/>
-        <stop offset="100%" stop-color="#F8F3EB" stop-opacity="0"/>
+        <stop offset="0%" style="stop-color:var(--botanical-light);stop-opacity:0"/>
+        <stop offset="35%" style="stop-color:var(--botanical-light-mid);stop-opacity:0.35"/>
+        <stop offset="50%" style="stop-color:var(--botanical-light);stop-opacity:1"/>
+        <stop offset="65%" style="stop-color:var(--botanical-light-mid);stop-opacity:0.35"/>
+        <stop offset="100%" style="stop-color:var(--botanical-light);stop-opacity:0"/>
       </linearGradient>`
     : '';
 
   return `<svg class="pointer-events-none botanical-line-art ${bold ? 'botanical-line-art--bold' : ''} ${animated ? 'botanical-line-art--animated' : ''}" viewBox="0 0 400 520" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     ${vines}
-    <path d="M380 150 C390 138, 395 122, 385 112 C375 125, 372 140, 380 150Z" stroke="url(#${gradId})" stroke-width="${leafStroke}" fill="${bold ? 'rgba(199,154,59,0.1)' : 'rgba(199,154,59,0.04)'}" opacity="${leafOpacity}"/>
-    <path d="M100 420 C88 408, 82 395, 92 382 C104 395, 108 410, 100 420Z" stroke="url(#${gradId})" stroke-width="${leafStroke}" fill="${bold ? 'rgba(199,154,59,0.08)' : 'rgba(199,154,59,0.03)'}" opacity="${bold ? 0.55 : 0.3}"/>
+    <path d="M380 150 C390 138, 395 122, 385 112 C375 125, 372 140, 380 150Z" stroke="url(#${gradId})" stroke-width="${leafStroke}" fill="var(--botanical-leaf-fill)" opacity="${leafOpacity}"/>
+    <path d="M100 420 C88 408, 82 395, 92 382 C104 395, 108 410, 100 420Z" stroke="url(#${gradId})" stroke-width="${leafStroke}" fill="var(--botanical-leaf-fill)" opacity="${bold ? 0.55 : 0.3}"/>
     ${lights}
     ${dots}
     <defs>
       <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="#D7BE7A" stop-opacity="${bold ? 0.95 : 0.6}"/>
-        <stop offset="45%" stop-color="#C79A3B" stop-opacity="${bold ? 0.88 : 0.5}"/>
-        <stop offset="100%" stop-color="${bold ? '#C79A3B' : '#B98FA2'}" stop-opacity="${bold ? 0.75 : 0.3}"/>
+        <stop offset="0%" style="stop-color:var(--botanical-vine-soft);stop-opacity:${bold ? 0.95 : 0.6}"/>
+        <stop offset="45%" style="stop-color:var(--botanical-vine);stop-opacity:${bold ? 0.88 : 0.5}"/>
+        <stop offset="100%" style="stop-color:var(--botanical-vine);stop-opacity:${bold ? 0.75 : 0.3}"/>
       </linearGradient>
       ${lightGrad}
     </defs>

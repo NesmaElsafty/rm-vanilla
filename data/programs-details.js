@@ -1,7 +1,7 @@
 /**
  * Rich Training Programs — registry + structure routing.
  *
- * Legacy data/programs.js + seeders remain for program-detail.html.
+ * Homepage cards / seeders remain in data/programs.js.
  * Rich Programs declare structure_type; getProgramDetailPage() resolves the page.
  *
  * Arabic is owner source-of-truth — do not rewrite, shorten, or correct.
@@ -10,11 +10,12 @@
  * structure_type → page
  * =============================================================================
  *
- *   master-program          → programs-details.html
- *   methodology-journey     → programs-methodology-details.html
- *   transformation-journey  → programs-transformation-details.html
- *   spiritual-journey       → programs-spiritual-details.html
- *   practical-course        → programs-practical-details.html
+ *   master-program             → programs-details.html
+ *   methodology-journey        → programs-methodology-details.html
+ *   transformation-journey     → programs-transformation-details.html
+ *   spiritual-journey          → programs-spiritual-details.html
+ *   practical-course           → programs-practical-details.html
+ *   feminine-healing-journey   → programs-feminine-details.html
  *
  * Future Laravel/Admin: client picks a Program Structure; fields follow that type.
  *
@@ -65,6 +66,11 @@
  * =============================================================================
  * See data/programs-details-self-confidence.js
  *
+ * =============================================================================
+ * Feminine Healing Journey schema (structure_type: 'feminine-healing-journey')
+ * =============================================================================
+ * See data/programs-details-ana-ontha.js
+ *
  * Styling / rendering depend on structure_type — never on slug.
  */
 
@@ -94,6 +100,7 @@ export const PROGRAM_STRUCTURE_PAGES = {
   'transformation-journey': 'programs-transformation-details.html',
   'spiritual-journey': 'programs-spiritual-details.html',
   'practical-course': 'programs-practical-details.html',
+  'feminine-healing-journey': 'programs-feminine-details.html',
 };
 
 const STRUCTURE_MASTER = 'master-program';
@@ -137,7 +144,8 @@ export const PROGRAM_NEW_TEMPLATE_SLUGS = new Set(
 );
 
 export function usesRichProgramTemplate(slug) {
-  return PROGRAM_NEW_TEMPLATE_SLUGS.has(slug);
+  const mapped = PROGRAM_SLUG_ALIASES[slug] || slug;
+  return PROGRAM_NEW_TEMPLATE_SLUGS.has(mapped);
 }
 
 /** Alias kept for call-site clarity. */
@@ -151,8 +159,8 @@ export function getProgramStructureType(slug) {
 
 export function getProgramDetailPage(slug) {
   const structureType = getProgramStructureType(slug);
-  if (!structureType) return 'program-detail.html';
-  return PROGRAM_STRUCTURE_PAGES[structureType] || 'program-detail.html';
+  if (!structureType) return 'index.html#programs';
+  return PROGRAM_STRUCTURE_PAGES[structureType] || 'index.html#programs';
 }
 
 export function getProgramDetailBySlug(slug, locale = 'ar') {

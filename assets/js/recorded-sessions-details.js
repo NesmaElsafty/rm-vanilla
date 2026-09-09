@@ -1,4 +1,5 @@
 import { getLocale } from './language.js';
+import { refreshReveals } from './animations.js';
 import {
   getRecordedSessionDetailBySlug,
 } from '../../data/recorded-sessions-details.js';
@@ -356,6 +357,7 @@ export function refreshRecordedSessionDetails() {
   }
 
   renderFound(root, session, locale);
+  refreshReveals(root);
 }
 
 export function initRecordedSessionDetails() {

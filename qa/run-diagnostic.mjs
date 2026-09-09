@@ -11,12 +11,12 @@ const pages = [
   '/about.html',
   '/policies.html',
   '/recorded-sessions.html',
-  '/program-detail.html?slug=apg',
-  '/workshop-detail.html?slug=you-first',
-  '/session-detail.html?slug=restore-confidence-self-worth',
-  '/recorded-session-detail.html?slug=forgiveness',
+  '/programs-methodology-details.html?slug=apg',
+  '/workshops-details.html?slug=you-first',
+  '/private-sessions-details.html?slug=restore-confidence-self-worth',
+  '/recorded-private-sessions-details.html?slug=forgiveness',
   '/retreat-detail.html?slug=upcoming',
-  '/program-detail.html?slug=missing-slug',
+  '/programs-details.html?slug=missing-slug',
 ];
 
 const widths = [320, 360, 375, 390, 430, 768, 1024, 1280, 1440, 1920];
@@ -95,7 +95,7 @@ for (const width of widths) {
 }
 
 await checkPage('/index.html', 375, 'en', 'cream-elegance');
-await checkPage('/program-detail.html?slug=apg', 375, 'en', 'luxury-rose');
+await checkPage('/programs-methodology-details.html?slug=apg', 375, 'en', 'luxury-rose');
 
 // Prefill check
 {
@@ -119,7 +119,7 @@ await checkPage('/program-detail.html?slug=apg', 375, 'en', 'luxury-rose');
   const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
   const page = await context.newPage();
   await page.goto(`${base}/index.html`, { waitUntil: 'networkidle' });
-  await page.locator('a[href*="program-detail.html?slug=apg"]').first().click();
+  await page.locator('a[href*="programs-methodology-details.html?slug=apg"]').first().click();
   await page.waitForURL(/program-detail\.html\?slug=apg/);
   const h1 = await page.locator('h1').first().textContent();
   if (!h1?.trim()) {

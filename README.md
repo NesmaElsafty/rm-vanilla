@@ -23,10 +23,15 @@ Open `http://localhost:8080`. Any static server works (Live Server, `npx serve`,
 | About | `about.html` |
 | Policies | `policies.html` |
 | Recorded sessions library | `recorded-sessions.html` |
-| Program detail | `program-detail.html?slug=apg` |
-| Workshop detail | `workshop-detail.html?slug=you-first` |
-| Private session detail | `session-detail.html?slug=restore-confidence-self-worth` |
-| Recorded session detail | `recorded-session-detail.html?slug=forgiveness` |
+| Master Program (NLP) | `programs-details.html?slug=nlp` |
+| Methodology Journey (APG) | `programs-methodology-details.html?slug=apg` |
+| Transformation Journey | `programs-transformation-details.html?slug=new-version-of-yourself` |
+| Spiritual Journey | `programs-spiritual-details.html?slug=mottasel` |
+| Practical Course | `programs-practical-details.html?slug=self-confidence` |
+| Feminine Healing Journey | `programs-feminine-details.html?slug=ana-ontha` |
+| Workshop detail | `workshops-details.html?slug=you-first` |
+| Private session detail | `private-sessions-details.html?slug=…` |
+| Recorded session detail | `recorded-sessions-details.html?slug=forgiveness` |
 | Retreat detail | `retreat-detail.html?slug=upcoming` |
 
 Homepage hashes: `#hero`, `#about`, `#programs`, `#testimonials`, `#final-cta`, `#contact`.  

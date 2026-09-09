@@ -10,30 +10,46 @@ test.describe('Navigation flows', () => {
     await page.locator('[data-open-modal="training"]').first().click();
     await expect(page.locator('#modal-training')).toBeVisible();
 
-    await page.locator('#modal-training .floating-program-card, #modal-training [data-slug]').first().click({ force: true }).catch(async () => {
-      // Fallback: navigate directly if card click is slider-dependent
-      await page.goto('/program-detail.html?slug=apg', { waitUntil: 'networkidle' });
-    });
+    await page
+      .locator('#modal-training .floating-program-card, #modal-training [data-slug]')
+      .first()
+      .click({ force: true })
+      .catch(async () => {
+        await page.goto('/programs-methodology-details.html?slug=apg', {
+          waitUntil: 'networkidle',
+        });
+      });
 
-    if (!page.url().includes('program-detail')) {
-      await page.goto('/program-detail.html?slug=apg', { waitUntil: 'networkidle' });
+    if (!/programs-.*-details\.html|programs-details\.html/.test(page.url())) {
+      await page.goto('/programs-methodology-details.html?slug=apg', {
+        waitUntil: 'networkidle',
+      });
     }
 
-    await expect(page.locator('[data-detail-title], h1')).toBeVisible();
-    await page.locator('[data-detail-hero-cta], .program-detail-cta-bar a').first().click();
+    await expect(page.locator('h1').first()).toBeVisible();
+    await page
+      .locator(
+        '[data-pd-primary-cta], [data-pt-primary-cta], [data-pm-primary-cta], [data-ps-primary-cta], [data-ppc-primary-cta], [data-pf-primary-cta], a.btn-luxury-primary',
+      )
+      .first()
+      .click();
     await expect(page).toHaveURL(/index\.html.*contact|scroll=contact/);
     await expect(page.locator('#booking-form-element, #contact')).toBeVisible();
     expect(errors.filter((e) => !/favicon/i.test(e))).toEqual([]);
   });
 
   test('Home → Workshop detail', async ({ page }) => {
-    await page.goto('/workshop-detail.html?slug=you-first', { waitUntil: 'networkidle' });
-    await expect(page.locator('[data-detail-found]:not([hidden]) h1, [data-detail-title]')).toBeVisible();
-    await expect(page.locator('[data-detail-not-found]')).toBeHidden();
+    await page.goto('/workshops-details.html?slug=you-first', {
+      waitUntil: 'networkidle',
+    });
+    await expect(page.locator('h1').first()).toBeVisible();
   });
 
   test('Home → Session detail', async ({ page }) => {
-    await page.goto('/session-detail.html?slug=restore-confidence-self-worth', { waitUntil: 'networkidle' });
+    await page.goto(
+      '/private-sessions-details.html?slug=restore-confidence-self-worth',
+      { waitUntil: 'networkidle' },
+    );
     await expect(page.locator('h1').first()).toBeVisible();
   });
 
@@ -42,12 +58,14 @@ test.describe('Navigation flows', () => {
     const card = page.locator('[data-recorded-grid] a, #recorded-sessions-grid a').first();
     await expect(card).toBeVisible();
     await card.click();
-    await expect(page).toHaveURL(/recorded-session-detail\.html\?slug=/);
+    await expect(page).toHaveURL(/recorded-sessions-details\.html\?slug=/);
     await expect(page.locator('h1').first()).toBeVisible();
   });
 
   test('Retreat detail', async ({ page }) => {
-    await page.goto('/retreat-detail.html?slug=upcoming', { waitUntil: 'networkidle' });
+    await page.goto('/retreat-detail.html?slug=upcoming', {
+      waitUntil: 'networkidle',
+    });
     await expect(page.locator('h1').first()).toBeVisible();
   });
 
@@ -59,8 +77,8 @@ test.describe('Navigation flows', () => {
 
   test('Footer program link → program detail', async ({ page }) => {
     await page.goto('/index.html', { waitUntil: 'networkidle' });
-    await page.locator('a[href*="program-detail.html?slug=apg"]').first().click();
-    await expect(page).toHaveURL(/program-detail\.html\?slug=apg/);
+    await page.locator('a[href*="programs-methodology-details.html?slug=apg"]').first().click();
+    await expect(page).toHaveURL(/programs-methodology-details\.html\?slug=apg/);
     await expect(page.locator('h1').first()).toBeVisible();
   });
 

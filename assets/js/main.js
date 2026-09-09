@@ -1,7 +1,7 @@
 import { initTheme } from './theme.js';
 import { initLanguage, applyI18n, getLocale } from './language.js';
 import { initNavigation } from './navigation.js';
-import { initAnimations } from './animations.js';
+import { initAnimations, refreshReveals } from './animations.js';
 import { initForms, initWhatsAppWidget } from './forms.js';
 import { initModals } from './modals.js';
 import { initGalleries } from './galleries.js';
@@ -38,6 +38,10 @@ import {
   initProgramPracticalDetails,
   refreshProgramPracticalDetails,
 } from './programs-practical-details.js';
+import {
+  initProgramFeminineDetails,
+  refreshProgramFeminineDetails,
+} from './programs-feminine-details.js';
 import { createTestimonialSlider, getHomepageTestimonials } from './sliders.js';
 import { initIcons, getIcon } from './icons.js';
 import { botanicalSVG, journeyCurveSVG } from './svg-decor.js';
@@ -154,13 +158,23 @@ function onLocaleChange() {
   refreshProgramMethodologyDetails();
   refreshProgramSpiritualDetails();
   refreshProgramPracticalDetails();
+  refreshProgramFeminineDetails();
   refreshPolicies();
   initHomepageTestimonials();
   initRecordedLibrary();
+  refreshReveals(document);
   // forms refresh via forms.js locale listener only
 }
 
 export function boot() {
+  document.addEventListener('themechange', () => {
+    try {
+      initDecor();
+    } catch (err) {
+      console.error('[themechange] initDecor failed', err);
+    }
+  });
+
   try {
     initTheme();
   } catch (err) {
@@ -216,6 +230,9 @@ export function boot() {
     }
     if (document.querySelector('[data-program-practical-root]')) {
       initProgramPracticalDetails();
+    }
+    if (document.querySelector('[data-program-feminine-root]')) {
+      initProgramFeminineDetails();
     }
     if (document.querySelector('[data-policies-root]')) initPolicies();
     if (document.getElementById('testimonials-slider')) initHomepageTestimonials();

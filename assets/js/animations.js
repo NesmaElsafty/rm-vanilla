@@ -1,35 +1,126 @@
+/**
+ * Shared section reveals + optional stagger for dynamic pages.
+ */
+
 function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 function revealAll(nodes) {
-  nodes.forEach((el) => el.classList.add('is-visible'));
+  nodes.forEach((el) => {
+    el.classList.add('is-visible');
+    el.style.transitionDelay = '';
+  });
 }
 
-function initReveals() {
-  const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
+/** Containers whose direct children should stagger into view. */
+const STAGGER_CONTAINER_SELECTORS = [
+  '[data-reveal-stagger]',
+  '.program-rich-curriculum__list',
+  '.program-rich-patterns__list',
+  '.program-rich-results__list',
+  '.program-rich-faq__list',
+  '.program-methodology-patterns',
+  '.program-methodology-curriculum__list',
+  '.program-transform-pillars__list',
+  '.program-transform-flows',
+  '.program-feminine-pillars__list',
+  '.program-feminine-flows',
+  '.program-spiritual-stages__list',
+  '.program-practical-steps__list',
+  '.workshop-rich-modules__list',
+  '.workshop-rich-benefits__list',
+  '.recorded-session-about__list',
+  '.recorded-session-flows',
+  '.recorded-session-fit__list',
+  '.private-session-journey__list',
+  '.private-session-pain__list',
+  '.private-session-flows',
+  '.retreat-rich-gallery__grid',
+];
+
+let revealObserver = null;
+const observedNodes = new WeakSet();
+
+function ensureObserver() {
+  if (revealObserver || prefersReducedMotion()) return revealObserver;
+  if (!('IntersectionObserver' in window)) return null;
+
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        // Tall sections (e.g. APG 14 patterns) can fail a high threshold and
+        // remain opacity:0 while still occupying layout — looks like empty space.
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const delay = el.getAttribute('data-reveal-delay');
+        if (delay) {
+          el.style.transitionDelay = /^\d+$/.test(delay) ? `${delay}ms` : delay;
+        }
+        el.classList.add('is-visible');
+        revealObserver.unobserve(el);
+      });
+    },
+    {
+      // Fire as soon as any meaningful slice enters the (slightly inset) viewport.
+      threshold: 0.01,
+      rootMargin: '0px 0px -4% 0px',
+    },
+  );
+  return revealObserver;
+}
+
+function prepareStaggerContainers(scope) {
+  scope.querySelectorAll(STAGGER_CONTAINER_SELECTORS.join(',')).forEach((container) => {
+    const children = [...container.children].filter(
+      (el) => el.nodeType === 1 && !el.hasAttribute('hidden'),
+    );
+    children.forEach((child, index) => {
+      if (!child.hasAttribute('data-reveal')) {
+        child.setAttribute('data-reveal', '');
+      }
+      if (!child.hasAttribute('data-reveal-delay')) {
+        const delay = Math.min(index, 3) * 50;
+        if (delay > 0) child.setAttribute('data-reveal-delay', String(delay));
+      }
+    });
+  });
+}
+
+/**
+ * Observe (or immediately show) reveal nodes. Safe to call after dynamic renders.
+ * @param {ParentNode} [scope=document]
+ */
+export function refreshReveals(scope = document) {
+  if (!scope?.querySelectorAll) return;
+
+  prepareStaggerContainers(scope);
+
+  const nodes = Array.from(scope.querySelectorAll('[data-reveal]')).filter(
+    (el) => !el.classList.contains('is-visible'),
+  );
   if (!nodes.length) return;
 
-  if (prefersReducedMotion()) {
+  if (prefersReducedMotion() || !('IntersectionObserver' in window)) {
     revealAll(nodes);
     return;
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const el = entry.target;
-        const delay = el.getAttribute('data-reveal-delay');
-        if (delay) el.style.transitionDelay = /^\d+$/.test(delay) ? `${delay}ms` : delay;
-        el.classList.add('is-visible');
-        observer.unobserve(el);
-      });
-    },
-    { threshold: 0.16, rootMargin: '0px 0px -8% 0px' },
-  );
+  const observer = ensureObserver();
+  if (!observer) {
+    revealAll(nodes);
+    return;
+  }
 
-  nodes.forEach((el) => observer.observe(el));
+  nodes.forEach((el) => {
+    if (observedNodes.has(el)) return;
+    observedNodes.add(el);
+    observer.observe(el);
+  });
+}
+
+function initReveals() {
+  refreshReveals(document);
 }
 
 function formatCounterValue(element, value) {
@@ -81,7 +172,6 @@ function initCounters() {
     return;
   }
 
-  // Keep final HTML values until the intentional trigger moment.
   let started = false;
   const run = () => {
     if (started) return;
@@ -121,7 +211,6 @@ function initHeroEntrance() {
     return;
   }
 
-  // Single rAF: paint initial hidden state, then start immediately.
   requestAnimationFrame(() => {
     hero.classList.add('hero-is-ready');
   });

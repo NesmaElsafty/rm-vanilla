@@ -1,10 +1,15 @@
 /**
  * Transformation Journey Program Structure renderer.
  * Driven by structure_type data — never by slug-specific branches.
+ * Data contract: programs-details-new-version.js
  */
 
 import { getLocale } from './language.js';
-import { getProgramDetailBySlug } from '../../data/programs-details.js';
+import { refreshReveals } from './animations.js';
+import {
+  getProgramDetailBySlug,
+  getProgramDetailPage,
+} from '../../data/programs-details.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
 
 const POPUP_SESSION_PREFIX = 'program-transform-continuation:';
@@ -52,10 +57,9 @@ function multilineHtml(text = '') {
   return escapeHtml(text).replace(/\n/g, '<br>');
 }
 
-function bulletListHtml(items = [], className = '') {
-  const cls = className ? ` class="${className}"` : '';
+function bulletListHtml(items = []) {
   return (items ?? [])
-    .map((item) => `<li${cls}>${escapeHtml(item)}</li>`)
+    .map((item) => `<li>${escapeHtml(item)}</li>`)
     .join('');
 }
 
@@ -148,19 +152,12 @@ function renderPain(root, pain) {
 function renderImportance(root, importance) {
   const section = root.querySelector('.program-transform-importance');
   const hasContent =
-    importance?.section_label ||
     importance?.heading ||
     (importance?.paragraphs ?? []).length > 0 ||
     (importance?.bullets ?? []).length > 0 ||
-    (importance?.action_intro ?? []).length > 0 ||
-    (importance?.action_items ?? []).length > 0 ||
     importance?.closing;
   if (section) section.hidden = !hasContent;
   if (!hasContent) return;
-
-  setText(root, '[data-pt-importance-label]', importance?.section_label);
-  const labelEl = root.querySelector('[data-pt-importance-label]');
-  if (labelEl) labelEl.hidden = !importance?.section_label;
 
   setText(root, '[data-pt-importance-heading]', importance?.heading);
   setHtml(
@@ -181,22 +178,6 @@ function renderImportance(root, importance) {
   setText(root, '[data-pt-importance-closing]', importance?.closing);
   const closingEl = root.querySelector('[data-pt-importance-closing]');
   if (closingEl) closingEl.hidden = !importance?.closing;
-
-  setHtml(
-    root,
-    '[data-pt-importance-action-intro]',
-    paragraphsHtml(importance?.action_intro),
-  );
-  const actionIntro = root.querySelector('[data-pt-importance-action-intro]');
-  if (actionIntro) actionIntro.hidden = !(importance?.action_intro ?? []).length;
-
-  setHtml(
-    root,
-    '[data-pt-importance-action-items]',
-    bulletListHtml(importance?.action_items),
-  );
-  const actionItems = root.querySelector('[data-pt-importance-action-items]');
-  if (actionItems) actionItems.hidden = !(importance?.action_items ?? []).length;
 }
 
 function renderTransformation(root, transformation, flowTo) {
@@ -279,38 +260,6 @@ function renderPillars(root, pillars) {
                 ? `<p class="program-transform-pillars__text">${multilineHtml(item.body)}</p>`
                 : ''
             }
-            ${
-              item.working_on_label
-                ? `<p class="program-transform-pillars__label">${escapeHtml(item.working_on_label)}</p>`
-                : ''
-            }
-            ${
-              (item.working_on_items ?? []).length
-                ? `<ul class="program-transform-bullet-list">${bulletListHtml(item.working_on_items)}</ul>`
-                : ''
-            }
-            ${
-              item.examples_label
-                ? `<p class="program-transform-pillars__label">${escapeHtml(item.examples_label)}</p>`
-                : ''
-            }
-            ${
-              (item.examples ?? []).length
-                ? `<ul class="program-transform-pillars__examples">${bulletListHtml(item.examples)}</ul>`
-                : ''
-            }
-            ${
-              item.result
-                ? `<div class="program-transform-pillars__result">
-                    ${
-                      item.result_label
-                        ? `<p class="program-transform-pillars__result-label">${escapeHtml(item.result_label)}</p>`
-                        : ''
-                    }
-                    <p class="program-transform-pillars__result-text">${escapeHtml(item.result)}</p>
-                  </div>`
-                : ''
-            }
           </div>
         </li>`,
       )
@@ -364,7 +313,9 @@ function renderTrainer(root, trainer) {
     trainer?.subheading ||
     (trainer?.paragraphs ?? []).length > 0 ||
     (trainer?.bullets ?? []).length > 0 ||
-    (Array.isArray(trainer?.closing) ? trainer.closing.length > 0 : Boolean(trainer?.closing));
+    (Array.isArray(trainer?.closing)
+      ? trainer.closing.length > 0
+      : Boolean(trainer?.closing));
   if (section) section.hidden = !hasContent;
   if (!hasContent) return;
 
@@ -485,7 +436,7 @@ function closeContinuationPopup() {
 }
 
 function openContinuationPopup(program) {
-  const popupData = program?.popup || program?.continuation_popup;
+  const popupData = program?.continuation_popup;
   if (!popupData?.enabled) return;
 
   const slug = program?.slug || currentSlug();
@@ -495,9 +446,8 @@ function openContinuationPopup(program) {
   const dialog = popup?.querySelector('[data-pt-popup-dialog]');
   if (!popup || !dialog) return;
 
-  const bodyText = popupData.message || popupData.body;
   setText(popup, '[data-pt-popup-title]', popupData.title);
-  setText(popup, '[data-pt-popup-body]', bodyText);
+  setText(popup, '[data-pt-popup-body]', popupData.body);
   setText(popup, '[data-pt-popup-primary-label]', popupData.primary_cta);
   setText(popup, '[data-pt-popup-secondary-label]', popupData.secondary_cta);
 
@@ -506,27 +456,26 @@ function openContinuationPopup(program) {
 
   const title = popup.querySelector('[data-pt-popup-title]');
   const body = popup.querySelector('[data-pt-popup-body]');
-  const dialog = popup.querySelector('[data-pt-popup-dialog]');
-  const closeBtn = popup.querySelector('[data-pt-popup-close]');
   const actions = popup.querySelector('[data-pt-popup-actions]');
   const primaryBtn = popup.querySelector('[data-pt-popup-primary]');
   const secondaryBtn = popup.querySelector('[data-pt-popup-secondary]');
 
   if (title) title.hidden = !popupData.title;
-  if (body) body.hidden = !bodyText;
+  if (body) body.hidden = !popupData.body;
   if (dialog) {
     if (popupData.title) {
       dialog.removeAttribute('aria-label');
       dialog.setAttribute('aria-labelledby', 'program-transform-popup-title');
     } else {
       dialog.removeAttribute('aria-labelledby');
-      dialog.setAttribute('aria-label', bodyText || 'Notice');
+      dialog.setAttribute('aria-label', popupData.body || 'Notice');
     }
   }
   if (primaryBtn) primaryBtn.hidden = !popupData.primary_cta;
   if (secondaryBtn) secondaryBtn.hidden = !popupData.secondary_cta;
-  if (actions) actions.hidden = !popupData.primary_cta && !popupData.secondary_cta;
-  if (closeBtn) closeBtn.hidden = false;
+  if (actions) {
+    actions.hidden = !popupData.primary_cta && !popupData.secondary_cta;
+  }
 
   lastFocusBeforePopup = document.activeElement;
   markPopupShown(slug);
@@ -541,7 +490,7 @@ function openContinuationPopup(program) {
 }
 
 function bindContinuationPopup(program) {
-  const popupData = program?.popup || program?.continuation_popup;
+  const popupData = program?.continuation_popup;
   const popup = getPopupRoot();
   const triggerSection =
     document.querySelector('.program-transform-pain') ||
@@ -619,12 +568,11 @@ function bindContinuationPopup(program) {
 
 function renderPopupContent(program) {
   const popup = getPopupRoot();
-  const popupData = program?.popup || program?.continuation_popup;
+  const popupData = program?.continuation_popup;
   if (!popup || !popupData) return;
 
-  const bodyText = popupData.message || popupData.body;
   setText(popup, '[data-pt-popup-title]', popupData.title);
-  setText(popup, '[data-pt-popup-body]', bodyText);
+  setText(popup, '[data-pt-popup-body]', popupData.body);
   setText(popup, '[data-pt-popup-primary-label]', popupData.primary_cta);
   setText(popup, '[data-pt-popup-secondary-label]', popupData.secondary_cta);
 
@@ -643,19 +591,21 @@ function renderPopupContent(program) {
   const primaryBtn = popup.querySelector('[data-pt-popup-primary]');
   const secondaryBtn = popup.querySelector('[data-pt-popup-secondary]');
   if (title) title.hidden = !popupData.title;
-  if (body) body.hidden = !bodyText;
+  if (body) body.hidden = !popupData.body;
   if (dialog) {
     if (popupData.title) {
       dialog.removeAttribute('aria-label');
       dialog.setAttribute('aria-labelledby', 'program-transform-popup-title');
     } else {
       dialog.removeAttribute('aria-labelledby');
-      dialog.setAttribute('aria-label', bodyText || 'Notice');
+      dialog.setAttribute('aria-label', popupData.body || 'Notice');
     }
   }
   if (primaryBtn) primaryBtn.hidden = !popupData.primary_cta;
   if (secondaryBtn) secondaryBtn.hidden = !popupData.secondary_cta;
-  if (actions) actions.hidden = !popupData.primary_cta && !popupData.secondary_cta;
+  if (actions) {
+    actions.hidden = !popupData.primary_cta && !popupData.secondary_cta;
+  }
 }
 
 function renderNotFound(root) {
@@ -709,9 +659,15 @@ function renderProgram(root, program) {
   bindContinuationPopup(program);
   updateDocumentMeta(program);
 
-  root.querySelectorAll('[data-reveal]').forEach((el) => {
-    el.classList.add('is-visible');
-  });
+  refreshReveals(root);
+}
+
+function redirectIfWrongStructure(program) {
+  if (!program?.structure_type) return false;
+  if (program.structure_type === 'transformation-journey') return false;
+  const page = getProgramDetailPage(program.slug);
+  location.replace(`${page}?slug=${encodeURIComponent(program.slug)}`);
+  return true;
 }
 
 export function refreshProgramTransformationDetails() {
@@ -722,14 +678,16 @@ export function refreshProgramTransformationDetails() {
   const slug = currentSlug();
   const program = getProgramDetailBySlug(slug, locale);
 
-  if (!program || program.structure_type !== 'transformation-journey') {
+  if (!program) {
     renderNotFound(root);
     return;
   }
 
+  if (redirectIfWrongStructure(program)) return;
+
   if (slug && program.slug && slug !== program.slug) {
-    const url = `programs-transformation-details.html?slug=${encodeURIComponent(program.slug)}`;
-    location.replace(url);
+    const page = getProgramDetailPage(program.slug);
+    location.replace(`${page}?slug=${encodeURIComponent(program.slug)}`);
     return;
   }
 

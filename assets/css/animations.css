@@ -11,14 +11,14 @@
 @keyframes gold-border-pulse {
   0%, 100% {
     box-shadow:
-      0 0 10px color-mix(in srgb, var(--theme-gold) 12%, transparent),
-      inset 0 0 8px color-mix(in srgb, var(--theme-gold) 5%, transparent);
+      0 0 10px color-mix(in srgb, var(--theme-border-glow) 12%, transparent),
+      inset 0 0 8px color-mix(in srgb, var(--theme-border-glow) 5%, transparent);
   }
   50% {
     box-shadow:
-      0 0 22px color-mix(in srgb, var(--theme-gold) 30%, transparent),
-      0 0 40px color-mix(in srgb, var(--theme-soft-gold) 12%, transparent),
-      inset 0 0 16px color-mix(in srgb, var(--theme-gold) 12%, transparent);
+      0 0 22px color-mix(in srgb, var(--theme-border-glow) 30%, transparent),
+      0 0 40px color-mix(in srgb, var(--theme-border-glow-soft) 12%, transparent),
+      inset 0 0 16px color-mix(in srgb, var(--theme-border-glow) 12%, transparent);
   }
 }
 

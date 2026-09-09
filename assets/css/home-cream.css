@@ -1,0 +1,581 @@
+/**
+ * Homepage cream-elegance color chapters.
+ * Scoped to: html[data-theme="cream-elegance"] body.home-page
+ * Uses ONLY existing brand palette values. Does not alter Luxury Rose.
+ */
+
+html[data-theme='cream-elegance'] body.home-page {
+  --home-light-primary: #f8f3eb;
+  --home-light-alt: #ede8df;
+  --home-dark-chapter: #2b103f;
+  --home-deepest-dark: #071424;
+  --home-ink: #2b103f;
+  --home-ink-strong: #4b146d;
+  --home-ink-muted: rgba(43, 16, 63, 0.68);
+  --home-cream: #f8f3eb;
+  --home-cream-muted: rgba(248, 243, 235, 0.76);
+  --home-gold: #c79a3b;
+  --home-soft-gold: #d7be7a;
+  --home-accent: #7a3eb1;
+  --home-primary: #4b146d;
+  --home-mauve: #9d81a0;
+  --home-rose: #b98fa2;
+}
+
+/* Continuous page canvas for light chapters */
+html[data-theme='cream-elegance'] body.home-page {
+  background-color: var(--home-light-primary);
+}
+
+html[data-theme='cream-elegance'] body.home-page .nav-luxury,
+html[data-theme='cream-elegance'] body.home-page .nav-luxury-scrolled {
+  background: var(--home-light-primary);
+  border-bottom-color: color-mix(in srgb, var(--home-ink) 14%, transparent);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Chapter helpers                                                            */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] body.home-page .slide-section {
+  background-color: transparent;
+}
+
+/* Soften / hide separators inside continuous chapters */
+html[data-theme='cream-elegance'] body.home-page #opening.slide-section::before,
+html[data-theme='cream-elegance'] body.home-page #stats.slide-section::before,
+html[data-theme='cream-elegance'] body.home-page #final-cta.slide-section::before {
+  display: none;
+}
+
+/* Chapter boundary lines stay subtle, not decorative waves */
+html[data-theme='cream-elegance'] body.home-page #about.slide-section::before,
+html[data-theme='cream-elegance'] body.home-page #philosophy.slide-section::before,
+html[data-theme='cream-elegance'] body.home-page #programs.slide-section::before,
+html[data-theme='cream-elegance'] body.home-page #testimonials.slide-section::before,
+html[data-theme='cream-elegance'] body.home-page #contact.slide-section::before {
+  opacity: 0.55;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CHAPTER 1 — Primary Light: Hero + Opening                                  */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] body.home-page #hero,
+html[data-theme='cream-elegance'] body.home-page #opening {
+  background-color: var(--home-light-primary);
+  color: var(--home-ink);
+}
+
+html[data-theme='cream-elegance'] body.home-page #hero .keynote-label {
+  color: var(--home-ink-strong);
+  background: color-mix(in srgb, var(--home-ink) 6%, transparent);
+  border-color: color-mix(in srgb, var(--home-ink) 20%, transparent);
+}
+
+/* Hero title: swapped mix — former gold phrases → dark purple, rest → gold */
+html[data-theme='cream-elegance'] body.home-page #hero .hero-title {
+  background: linear-gradient(135deg, #f8f3eb 0%, #d7be7a 45%, #c79a3b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+html[data-theme='cream-elegance'] body.home-page #hero .hero-title .text-gold-gradient {
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: var(--home-ink-strong);
+  color: var(--home-ink-strong);
+}
+
+html[data-theme='cream-elegance'] body.home-page #opening {
+  padding-block: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+html[data-theme='cream-elegance'] body.home-page #opening .opening-statement-text {
+  color: var(--home-ink-strong);
+}
+
+/* -------------------------------------------------------------------------- */
+/* CHAPTER 1b — Light Alt: About + Stats                                      */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] body.home-page #about,
+html[data-theme='cream-elegance'] body.home-page #stats {
+  background-color: var(--home-light-alt);
+  color: var(--home-ink);
+}
+
+html[data-theme='cream-elegance'] body.home-page #about {
+  padding-block: clamp(2.5rem, 5vw, 4.25rem);
+}
+
+html[data-theme='cream-elegance'] body.home-page #stats {
+  padding-block: clamp(0.75rem, 2vw, 1.75rem) clamp(2.25rem, 4.5vw, 3.5rem);
+  margin-top: 0;
+}
+
+html[data-theme='cream-elegance'] body.home-page #about .about-rana-title.text-gold-gradient,
+html[data-theme='cream-elegance'] body.home-page #about .about-rana-title {
+  background: none;
+  -webkit-text-fill-color: var(--home-ink-strong);
+  color: var(--home-ink-strong);
+}
+
+html[data-theme='cream-elegance'] body.home-page #about .about-rana-intro {
+  color: var(--home-ink-strong);
+}
+
+html[data-theme='cream-elegance'] body.home-page #about .about-rana-body {
+  color: var(--home-ink-muted);
+}
+
+html[data-theme='cream-elegance'] body.home-page #about .about-rana-frame {
+  background: color-mix(in srgb, var(--home-cream) 82%, var(--home-light-alt));
+  border: 1px solid color-mix(in srgb, var(--home-ink) 18%, transparent);
+  box-shadow: 0 24px 48px -22px color-mix(in srgb, var(--home-ink) 18%, transparent);
+}
+
+/* Stats as floating band on Light Alt — not a full dark section */
+html[data-theme='cream-elegance'] body.home-page #stats .home-stats-row {
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--home-cream) 88%, var(--home-light-alt)) 0%,
+    color-mix(in srgb, var(--home-cream) 78%, var(--home-rose)) 48%,
+    color-mix(in srgb, var(--home-cream) 88%, var(--home-soft-gold)) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--home-ink) 16%, transparent);
+  box-shadow:
+    0 18px 40px -24px color-mix(in srgb, var(--home-ink) 16%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--home-cream) 70%, transparent);
+}
+
+html[data-theme='cream-elegance'] body.home-page #stats .home-stat-label {
+  color: var(--home-ink-muted);
+}
+
+html[data-theme='cream-elegance'] body.home-page #stats .home-stat-value,
+html[data-theme='cream-elegance'] body.home-page #stats .home-stat-value.text-gold-gradient {
+  background: none;
+  -webkit-text-fill-color: var(--home-ink-strong);
+  color: var(--home-ink-strong);
+}
+
+html[data-theme='cream-elegance'] body.home-page #stats .home-stat-icon {
+  background: color-mix(in srgb, var(--home-ink) 8%, var(--home-cream));
+  border-color: color-mix(in srgb, var(--home-ink) 22%, transparent);
+  color: var(--home-ink-strong);
+}
+
+/* -------------------------------------------------------------------------- */
+/* CHAPTER 2 — First Dark: Philosophy                                         */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] body.home-page #philosophy {
+  --theme-cream: var(--home-cream);
+  --theme-cream-muted: var(--home-cream-muted);
+  background-color: var(--home-dark-chapter);
+  color: var(--home-cream);
+  padding-block: clamp(2.75rem, 6vw, 5rem);
+  overflow: hidden;
+}
+
+html[data-theme='cream-elegance'] body.home-page #philosophy::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background:
+    radial-gradient(
+      ellipse 70% 55% at 85% 20%,
+      color-mix(in srgb, var(--home-accent) 22%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 55% 50% at 10% 80%,
+      color-mix(in srgb, var(--home-gold) 14%, transparent) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 50% 50%,
+      color-mix(in srgb, var(--home-rose) 10%, transparent) 0%,
+      transparent 70%
+    );
+}
+
+html[data-theme='cream-elegance'] body.home-page #philosophy > .slide-inner {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme='cream-elegance'] body.home-page #philosophy .philosophy-p,
+html[data-theme='cream-elegance'] body.home-page #philosophy .keynote-body {
+  color: var(--home-cream-muted);
+}
+
+html[data-theme='cream-elegance'] body.home-page #philosophy .philosophy-close {
+  color: var(--home-cream);
+}
+
+/* Graded gold title on dark philosophy chapter */
+html[data-theme='cream-elegance'] body.home-page #philosophy .philosophy-title.text-gold-gradient,
+html[data-theme='cream-elegance'] body.home-page #philosophy .philosophy-title {
+  background: var(--theme-gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+html[data-theme='cream-elegance'] body.home-page #philosophy .philosophy-frame.glass-slide,
+html[data-theme='cream-elegance'] body.home-page #philosophy .philosophy-frame {
+  background: color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-primary));
+  border: 1px solid color-mix(in srgb, var(--home-cream) 22%, transparent);
+  box-shadow:
+    0 28px 56px -18px color-mix(in srgb, var(--home-deepest-dark) 55%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--home-accent) 24%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CHAPTER 3 — Primary Light: Services                                        */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] body.home-page #programs {
+  background-color: var(--home-light-primary);
+  color: var(--home-ink);
+  padding-block: clamp(2.75rem, 5.5vw, 4.75rem);
+}
+
+html[data-theme='cream-elegance'] body.home-page #programs .section-keynote-title.text-gold-gradient,
+html[data-theme='cream-elegance'] body.home-page #programs .section-keynote-title {
+  background: none;
+  -webkit-text-fill-color: var(--home-ink-strong);
+  color: var(--home-ink-strong);
+}
+
+html[data-theme='cream-elegance'] body.home-page #programs .program-card.glass-slide,
+html[data-theme='cream-elegance'] body.home-page #programs .program-card {
+  background: color-mix(in srgb, var(--home-cream) 90%, var(--home-light-alt));
+  border: 1px solid color-mix(in srgb, var(--home-ink) 16%, transparent);
+  box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--home-ink) 14%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html[data-theme='cream-elegance'] body.home-page #programs .program-card h3 {
+  color: var(--home-ink-strong);
+}
+
+html[data-theme='cream-elegance'] body.home-page #programs .program-card p {
+  color: var(--home-ink-muted);
+}
+
+html[data-theme='cream-elegance'] body.home-page #programs .program-card.glass-slide::after {
+  opacity: 0.35;
+}
+
+/* -------------------------------------------------------------------------- */
+/* CHAPTER 4 — Second Dark: Testimonials + Final CTA (continuous)             */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] body.home-page #testimonials,
+html[data-theme='cream-elegance'] body.home-page #final-cta {
+  --theme-cream: var(--home-cream);
+  --theme-cream-muted: var(--home-cream-muted);
+  background-color: var(--home-dark-chapter);
+  color: var(--home-cream);
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials {
+  padding-block: clamp(2.75rem, 5.5vw, 4.5rem) clamp(1.25rem, 2.5vw, 2rem);
+  overflow: hidden;
+}
+
+html[data-theme='cream-elegance'] body.home-page #final-cta {
+  padding-block: clamp(1rem, 2.5vw, 1.75rem) clamp(2.75rem, 5.5vw, 4.5rem);
+  overflow: hidden;
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials::after,
+html[data-theme='cream-elegance'] body.home-page #final-cta::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials::after {
+  background:
+    radial-gradient(
+      ellipse 60% 50% at 20% 15%,
+      color-mix(in srgb, var(--home-accent) 18%, transparent) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 50% 45% at 90% 70%,
+      color-mix(in srgb, var(--home-gold) 10%, transparent) 0%,
+      transparent 70%
+    );
+}
+
+html[data-theme='cream-elegance'] body.home-page #final-cta::after {
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 50% 100%,
+      color-mix(in srgb, var(--home-rose) 20%, transparent) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 55% 50% at 50% 30%,
+      color-mix(in srgb, var(--home-accent) 24%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 40% 35% at 70% 20%,
+      color-mix(in srgb, var(--home-gold) 16%, transparent) 0%,
+      transparent 68%
+    );
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials > .slide-inner,
+html[data-theme='cream-elegance'] body.home-page #final-cta > .slide-inner {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials .section-keynote-title.text-gold-gradient,
+html[data-theme='cream-elegance'] body.home-page #testimonials .section-keynote-title {
+  background: none;
+  -webkit-text-fill-color: var(--home-cream);
+  color: var(--home-cream);
+}
+
+html[data-theme='cream-elegance'] body.home-page #final-cta .final-cta-title {
+  color: var(--home-cream);
+}
+
+html[data-theme='cream-elegance'] body.home-page #final-cta .final-cta-title .text-gold-gradient {
+  background: var(--theme-gold-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials .keynote-label {
+  color: var(--home-soft-gold);
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-slide.glass-slide,
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-slide {
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--home-primary) 55%, var(--home-dark-chapter)) 0%,
+    color-mix(in srgb, var(--home-dark-chapter) 78%, var(--home-accent)) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--home-cream) 20%, transparent);
+  box-shadow: 0 22px 48px -24px color-mix(in srgb, var(--home-deepest-dark) 55%, transparent);
+  color: var(--home-cream);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-wrap::before {
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--home-rose) 18%, transparent) 0%,
+    transparent 68%
+  );
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-quote,
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-name,
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-role,
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-programs-summary {
+  color: var(--home-cream);
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-role,
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-programs-summary {
+  color: var(--home-cream-muted);
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-quote-icon {
+  color: var(--home-soft-gold);
+}
+
+html[data-theme='cream-elegance'] body.home-page #testimonials .testimonials-nav-btn {
+  border-color: color-mix(in srgb, var(--home-cream) 28%, transparent);
+  color: var(--home-cream);
+  background: color-mix(in srgb, var(--home-primary) 40%, transparent);
+}
+
+html[data-theme='cream-elegance'] body.home-page #final-cta .final-cta-panel.glass-slide,
+html[data-theme='cream-elegance'] body.home-page #final-cta .final-cta-panel {
+  background: linear-gradient(
+    155deg,
+    color-mix(in srgb, var(--home-primary) 50%, var(--home-dark-chapter)) 0%,
+    color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-accent)) 55%,
+    color-mix(in srgb, var(--home-dark-chapter) 85%, var(--home-rose)) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--home-cream) 24%, transparent);
+  box-shadow:
+    0 28px 56px -20px color-mix(in srgb, var(--home-deepest-dark) 55%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--home-soft-gold) 18%, transparent);
+  color: var(--home-cream);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html[data-theme='cream-elegance'] body.home-page #final-cta .final-cta-glow {
+  background:
+    radial-gradient(
+      ellipse at 50% 85%,
+      color-mix(in srgb, var(--home-rose) 28%, transparent) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse at 50% 35%,
+      color-mix(in srgb, var(--home-gold) 18%, transparent),
+      transparent 68%
+    );
+}
+
+/* -------------------------------------------------------------------------- */
+/* CHAPTER 5 — Primary Light: Contact                                         */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] body.home-page #contact {
+  background-color: var(--home-light-primary);
+  color: var(--home-ink);
+  padding-block: clamp(2.75rem, 5.5vw, 4.75rem);
+}
+
+html[data-theme='cream-elegance'] body.home-page #contact .section-keynote-title.text-gold-gradient,
+html[data-theme='cream-elegance'] body.home-page #contact .section-keynote-title {
+  background: none;
+  -webkit-text-fill-color: var(--home-ink-strong);
+  color: var(--home-ink-strong);
+}
+
+html[data-theme='cream-elegance'] body.home-page #contact .section-keynote-subtitle {
+  color: var(--home-ink-muted);
+}
+
+html[data-theme='cream-elegance'] body.home-page #contact .contact-info.glass-panel,
+html[data-theme='cream-elegance'] body.home-page #contact .contact-form-panel.glass-panel,
+html[data-theme='cream-elegance'] body.home-page #contact .contact-info,
+html[data-theme='cream-elegance'] body.home-page #contact .contact-form-panel {
+  background: color-mix(in srgb, var(--home-cream) 92%, var(--home-light-alt));
+  border: 1px solid color-mix(in srgb, var(--home-ink) 16%, transparent);
+  box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--home-ink) 12%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+html[data-theme='cream-elegance'] body.home-page #contact .contact-info-title {
+  color: var(--home-ink-strong);
+}
+
+html[data-theme='cream-elegance'] body.home-page #contact .contact-info-label {
+  color: var(--home-ink-muted);
+}
+
+html[data-theme='cream-elegance'] body.home-page #contact .contact-info-value,
+html[data-theme='cream-elegance'] body.home-page #contact .keynote-body,
+html[data-theme='cream-elegance'] body.home-page #contact .contact-field-label {
+  color: var(--home-ink);
+}
+
+html[data-theme='cream-elegance'] body.home-page #contact .contact-icon-wrap {
+  color: var(--home-gold);
+  background: color-mix(in srgb, var(--home-gold) 12%, var(--home-cream));
+}
+
+/* -------------------------------------------------------------------------- */
+/* Footer — deepest dark close (homepage cream only)                          */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury {
+  background: var(--home-deepest-dark);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-top: 1px solid color-mix(in srgb, var(--home-cream) 14%, transparent);
+  color: var(--home-cream);
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-text,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-label,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-link,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-made-with-love,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-charter-row p {
+  color: var(--home-cream-muted);
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-heading {
+  color: var(--home-soft-gold);
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-link:hover,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-link:focus-visible {
+  color: var(--home-cream);
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-charter-box,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon {
+  background: color-mix(in srgb, var(--home-deepest-dark) 72%, var(--home-ink));
+  border-color: color-mix(in srgb, var(--home-cream) 16%, transparent);
+  color: var(--home-cream);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Gold rules → dark on light surfaces; keep gold on dark chapters            */
+/* -------------------------------------------------------------------------- */
+
+html[data-theme='cream-elegance'] .gold-rule-short {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, #4b146d 70%, transparent),
+    color-mix(in srgb, #2b103f 90%, transparent),
+    transparent
+  );
+}
+
+html[data-theme='cream-elegance'] body.home-page #philosophy .gold-rule-short,
+html[data-theme='cream-elegance'] body.home-page #testimonials .gold-rule-short,
+html[data-theme='cream-elegance'] body.home-page #final-cta .gold-rule-short,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .gold-rule-short {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--home-gold) 55%, transparent),
+    color-mix(in srgb, var(--home-soft-gold) 85%, transparent),
+    transparent
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/* Mobile: keep chapter rhythm without oversized empty bands                  */
+/* -------------------------------------------------------------------------- */
+
+@media (max-width: 640px) {
+  html[data-theme='cream-elegance'] body.home-page #about,
+  html[data-theme='cream-elegance'] body.home-page #philosophy,
+  html[data-theme='cream-elegance'] body.home-page #programs,
+  html[data-theme='cream-elegance'] body.home-page #testimonials,
+  html[data-theme='cream-elegance'] body.home-page #contact {
+    padding-block: clamp(2rem, 8vw, 3rem);
+  }
+
+  html[data-theme='cream-elegance'] body.home-page #stats {
+    padding-block: 0.75rem 2rem;
+  }
+
+  html[data-theme='cream-elegance'] body.home-page #final-cta {
+    padding-block: 0.75rem 2.5rem;
+  }
+}

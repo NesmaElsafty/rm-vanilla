@@ -6,6 +6,7 @@ const IMAGE_BY_SLUG = {
   nlp: 'assets/images/programs/program-nlp.png',
   'new-version-of-yourself': 'assets/images/programs/program-new-version.png',
   'i-am-female': 'assets/images/programs/program-ana-ontha.png',
+  'ana-ontha': 'assets/images/programs/program-ana-ontha.png',
   'self-confidence': 'assets/images/programs/program-confidence.png',
   mottasel: 'assets/images/programs/program-mottasel.png',
 };

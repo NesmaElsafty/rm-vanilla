@@ -4,6 +4,7 @@
  */
 
 import { getLocale } from './language.js';
+import { refreshReveals } from './animations.js';
 import {
   getProgramDetailBySlug,
   getProgramDetailPage,
@@ -448,9 +449,7 @@ function renderProgram(root, program) {
   renderFinalCta(root, program.final_cta, slug);
   updateDocumentMeta(program);
 
-  root.querySelectorAll('[data-reveal]').forEach((el) => {
-    el.classList.add('is-visible');
-  });
+  refreshReveals(root);
 }
 
 function redirectIfWrongStructure(program) {

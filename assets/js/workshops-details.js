@@ -1,4 +1,5 @@
 import { getLocale } from './language.js';
+import { refreshReveals } from './animations.js';
 import { getWorkshopBySlug } from '../../data/workshops.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
 
@@ -239,9 +240,7 @@ function renderWorkshop(root, workshop, locale) {
   }
 
   // Keep reveal observers working after locale refresh.
-  root.querySelectorAll('[data-reveal]').forEach((el) => {
-    el.classList.add('is-visible');
-  });
+  refreshReveals(root);
 }
 
 export function refreshWorkshopDetails() {

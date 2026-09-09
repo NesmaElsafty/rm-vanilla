@@ -46,7 +46,7 @@ await withPage(async (page, errors) => {
 });
 
 await withPage(async (page) => {
-  await page.goto(`${base}/program-detail.html?slug=apg`, { waitUntil: 'networkidle' });
+  await page.goto(`${base}/programs-methodology-details.html?slug=apg`, { waitUntil: 'networkidle' });
   const found = await page.locator('[data-detail-found]:not([hidden])').isVisible();
   const title = (await page.locator('[data-detail-title]').textContent())?.trim();
   ok('program apg found', found && Boolean(title), { title });
@@ -59,17 +59,17 @@ await withPage(async (page) => {
 });
 
 await withPage(async (page) => {
-  await page.goto(`${base}/program-detail.html?slug=nope`, { waitUntil: 'networkidle' });
+  await page.goto(`${base}/programs-details.html?slug=nope`, { waitUntil: 'networkidle' });
   ok('invalid slug 404', await page.locator('[data-detail-not-found]:not([hidden])').isVisible());
 });
 
 await withPage(async (page) => {
-  await page.goto(`${base}/workshop-detail.html?slug=you-first`, { waitUntil: 'networkidle' });
+  await page.goto(`${base}/workshops-details.html?slug=you-first`, { waitUntil: 'networkidle' });
   ok('workshop detail', await page.locator('[data-detail-found]:not([hidden]) h1').isVisible());
 });
 
 await withPage(async (page) => {
-  await page.goto(`${base}/session-detail.html?slug=restore-confidence-self-worth`, { waitUntil: 'networkidle' });
+  await page.goto(`${base}/private-sessions-details.html?slug=restore-confidence-self-worth`, { waitUntil: 'networkidle' });
   ok('session detail', await page.locator('[data-detail-found]:not([hidden]) h1').isVisible());
 });
 
@@ -112,7 +112,7 @@ await withPage(
 
 await withPage(async (page) => {
   await page.addInitScript(() => localStorage.setItem('rana-site-locale', 'ar'));
-  await page.goto(`${base}/program-detail.html?slug=apg`, { waitUntil: 'networkidle' });
+  await page.goto(`${base}/programs-methodology-details.html?slug=apg`, { waitUntil: 'networkidle' });
   await page.locator('[data-locale-toggle]').first().click();
   await page.waitForTimeout(300);
   const lang = await page.getAttribute('html', 'lang');

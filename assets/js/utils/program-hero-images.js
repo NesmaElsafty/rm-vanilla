@@ -12,6 +12,17 @@ export const PROGRAM_HERO_IMAGES = [
   'assets/images/programs/program-self-leadership.png',
 ];
 
+/** Prefer exact brand art for known program slugs when available. */
+const HERO_BY_SLUG = {
+  'ana-ontha': 'assets/images/programs/program-ana-ontha.png',
+  'i-am-female': 'assets/images/programs/program-ana-ontha.png',
+  'new-version-of-yourself': 'assets/images/programs/program-new-version.png',
+  'self-confidence': 'assets/images/programs/program-confidence.png',
+  mottasel: 'assets/images/programs/program-mottasel.png',
+  nlp: 'assets/images/programs/program-nlp.png',
+  apg: 'assets/images/programs/program-self-leadership.png',
+};
+
 const FALLBACK_PROGRAM_HERO = 'assets/images/programs/program-new-version.png';
 
 function hashString(value) {
@@ -33,6 +44,7 @@ export function getProgramHeroImage(slug = '') {
   if (!key || !PROGRAM_HERO_IMAGES.length) {
     return PROGRAM_HERO_IMAGES[0] || FALLBACK_PROGRAM_HERO;
   }
+  if (HERO_BY_SLUG[key]) return HERO_BY_SLUG[key];
   const index = hashString(key) % PROGRAM_HERO_IMAGES.length;
   return PROGRAM_HERO_IMAGES[index] || FALLBACK_PROGRAM_HERO;
 }

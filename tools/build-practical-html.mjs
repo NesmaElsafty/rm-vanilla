@@ -187,9 +187,5 @@ const main = `    <main id="main-content" class="page-main page-main--padded">
 `;
 
 html = html.slice(0, start) + main + html.slice(footer);
-html = html.replaceAll(
-  'program-detail.html?slug=self-confidence',
-  'programs-practical-details.html?slug=self-confidence',
-);
 fs.writeFileSync(path, html);
 console.log('practical HTML ready');

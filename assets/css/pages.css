@@ -5297,12 +5297,6 @@ html[data-theme='cream-elegance'] .program-transform-page {
   color: var(--pt-ink);
 }
 
-.program-transform-section-label {
-  margin: 0 0 0.7rem;
-  color: var(--pt-gold);
-  font-size: 0.92rem;
-  letter-spacing: 0.06em;
-}
 
 .program-transform-subheading {
   font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
@@ -5667,59 +5661,12 @@ html[data-theme='cream-elegance'] .program-transform-hero__fade {
   color: var(--pt-muted);
 }
 
-.program-transform-pillars__label {
-  margin: 0.9rem 0 0.5rem;
-  color: var(--pt-gold);
-  font-weight: 560;
-  line-height: 1.55;
-}
 
-.program-transform-pillars__examples {
-  list-style: none;
-  margin: 0 0 0.75rem;
-  padding: 0;
-  display: grid;
-  gap: 0.45rem;
-}
 
-.program-transform-pillars__examples li {
-  position: relative;
-  padding-inline-start: 1.1rem;
-  line-height: 1.6;
-  color: var(--pt-ink);
-}
 
-.program-transform-pillars__examples li::before {
-  content: '';
-  position: absolute;
-  inset-inline-start: 0;
-  top: 0.7em;
-  width: 0.32rem;
-  height: 0.32rem;
-  border-radius: 50%;
-  background: var(--pt-gold);
-}
 
-.program-transform-pillars__result {
-  margin-top: 0.85rem;
-  padding: 0.85rem 0.95rem;
-  border-radius: 0.85rem;
-  border-inline-start: 2px solid var(--pt-gold);
-  background: linear-gradient(135deg, rgba(199, 154, 59, 0.12), transparent 70%);
-}
 
-.program-transform-pillars__result-label {
-  margin: 0 0 0.3rem;
-  color: var(--pt-gold);
-  font-weight: 560;
-  font-size: 0.92rem;
-}
 
-.program-transform-pillars__result-text {
-  margin: 0;
-  color: var(--pt-ink);
-  line-height: 1.6;
-}
 
 /* Differentiator */
 .program-transform-differentiator__inner {
@@ -5996,6 +5943,774 @@ html[data-theme='cream-elegance'] .program-transform-popup__dialog {
     transition: none;
   }
 }
+
+
+/* =============================================================================
+   Feminine Healing Journey Program Structure
+   Namespace: .program-feminine-*
+   ============================================================================= */
+
+.program-feminine-page {
+  --pf-ink: rgba(248, 243, 235, 0.94);
+  --pf-muted: rgba(248, 243, 235, 0.72);
+  --pf-gold: rgba(215, 190, 122, 0.9);
+  --pf-line: rgba(199, 154, 59, 0.28);
+  --pf-panel: rgba(13, 27, 52, 0.42);
+  --pf-panel-soft: rgba(7, 20, 36, 0.35);
+  color: var(--pf-ink);
+}
+
+html[data-theme='cream-elegance'] .program-feminine-page {
+  --pf-ink: rgba(20, 28, 44, 0.94);
+  --pf-muted: rgba(40, 48, 64, 0.72);
+  --pf-gold: rgba(140, 100, 28, 0.92);
+  --pf-line: rgba(122, 62, 177, 0.18);
+  --pf-panel: rgba(255, 252, 247, 0.72);
+  --pf-panel-soft: rgba(248, 243, 235, 0.88);
+}
+
+.program-feminine-page-inner {
+  display: grid;
+  gap: clamp(3.5rem, 7vw, 5.75rem);
+  padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.program-feminine-section-title {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.85rem, 3.2vw, 2.65rem);
+  font-weight: 560;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  max-width: 18ch;
+  margin: 0 0 1rem;
+  color: var(--pf-ink);
+}
+
+.program-feminine-section-label {
+  margin: 0 0 0.7rem;
+  color: var(--pf-gold);
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+}
+
+.program-feminine-subheading {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+  font-weight: 560;
+  margin: 0 0 0.85rem;
+  color: var(--pf-gold);
+}
+
+.program-feminine-lead,
+.program-feminine-intro,
+.program-feminine-closing,
+.program-feminine-importance__prose p,
+.program-feminine-differentiator__prose p,
+.program-feminine-trainer__prose p,
+.program-feminine-trainer__closing p {
+  margin: 0 0 1rem;
+  font-size: clamp(1.02rem, 1.35vw, 1.12rem);
+  line-height: 1.75;
+  color: var(--pf-muted);
+}
+
+.program-feminine-closing {
+  color: var(--pf-ink);
+  font-weight: 500;
+}
+
+.program-feminine-bullet-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.program-feminine-bullet-list li {
+  position: relative;
+  padding-inline-start: 1.15rem;
+  line-height: 1.65;
+  color: var(--pf-ink);
+}
+
+.program-feminine-bullet-list li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.7em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--pf-gold);
+  box-shadow: 0 0 0 3px rgba(199, 154, 59, 0.12);
+}
+
+.program-feminine-bullet-list--muted li {
+  color: var(--pf-muted);
+}
+
+.program-feminine-page [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.program-feminine-page [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Hero */
+.program-feminine-hero {
+  position: relative;
+  padding: clamp(1.5rem, 4vw, 2.75rem) 0 clamp(2.5rem, 5vw, 4rem);
+  overflow: hidden;
+}
+
+.program-feminine-hero__atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.program-feminine-hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+}
+
+.program-feminine-hero__glow--media {
+  inset-inline-end: -8%;
+  top: 8%;
+  width: min(48vw, 420px);
+  height: min(48vw, 420px);
+  background: radial-gradient(circle, rgba(185, 143, 162, 0.28) 0%, transparent 70%);
+}
+
+.program-feminine-hero__glow--copy {
+  inset-inline-start: -6%;
+  bottom: 10%;
+  width: min(42vw, 360px);
+  height: min(42vw, 360px);
+  background: radial-gradient(circle, rgba(199, 154, 59, 0.18) 0%, transparent 72%);
+}
+
+.program-feminine-hero__grid {
+  position: absolute;
+  inset: 8% 4%;
+  opacity: 0.09;
+  background-image:
+    linear-gradient(rgba(215, 190, 122, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(215, 190, 122, 0.35) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(ellipse at 60% 40%, black 20%, transparent 75%);
+}
+
+.program-feminine-hero__layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+.program-feminine-hero__title {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2.4rem, 5vw, 3.75rem);
+  font-weight: 560;
+  line-height: 1.12;
+  margin: 0 0 0.85rem;
+  color: var(--pf-ink);
+}
+
+.program-feminine-hero__supporting {
+  margin: 0 0 1.1rem;
+  font-size: clamp(1.12rem, 1.8vw, 1.35rem);
+  line-height: 1.55;
+  color: var(--pf-gold);
+  max-width: 34ch;
+}
+
+.program-feminine-hero__description {
+  margin: 0 0 1.6rem;
+  font-size: clamp(1.02rem, 1.4vw, 1.12rem);
+  line-height: 1.75;
+  color: var(--pf-muted);
+  max-width: 42ch;
+}
+
+.program-feminine-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.program-feminine-hero__media {
+  position: relative;
+}
+
+.program-feminine-hero__frame {
+  position: absolute;
+  inset: 6% -4% -4% 8%;
+  border: 1px solid var(--pf-line);
+  border-radius: 1.35rem;
+  transform: rotate(-1.5deg);
+}
+
+.program-feminine-hero__figure {
+  position: relative;
+  margin: 0;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--pf-panel-soft);
+  box-shadow: 0 24px 60px rgba(4, 10, 20, 0.35);
+}
+
+.program-feminine-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.program-feminine-hero__fade {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 4rem;
+  background: linear-gradient(to top, rgba(7, 20, 36, 0.55), transparent);
+  pointer-events: none;
+}
+
+html[data-theme='cream-elegance'] .program-feminine-hero__fade {
+  background: linear-gradient(to top, rgba(248, 243, 235, 0.85), transparent);
+}
+
+/* Pain */
+.program-feminine-pain__inner {
+  max-width: 48rem;
+}
+
+.program-feminine-pain__lead {
+  color: var(--pf-ink);
+  font-size: clamp(1.08rem, 1.5vw, 1.22rem);
+}
+
+.program-feminine-pain__list {
+  margin-top: 1.25rem;
+  padding: 1.25rem 1.35rem;
+  border-inline-start: 2px solid var(--pf-line);
+  background: linear-gradient(
+    135deg,
+    rgba(185, 143, 162, 0.08),
+    transparent 55%
+  );
+}
+
+/* Importance */
+.program-feminine-importance__inner {
+  max-width: 46rem;
+}
+
+.program-feminine-importance__action-intro {
+  margin-top: 1.35rem;
+}
+
+.program-feminine-importance__action-items {
+  margin-top: 0.85rem;
+  padding: 1.1rem 1.2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--pf-line);
+  background: linear-gradient(
+    135deg,
+    rgba(185, 143, 162, 0.1),
+    transparent 60%
+  );
+}
+
+.program-feminine-pill-list {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.program-feminine-pill-list__item {
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--pf-line);
+  border-radius: 999px;
+  color: var(--pf-ink);
+  background: var(--pf-panel);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+/* Flows / transformation */
+.program-feminine-flows-section__inner {
+  max-width: 52rem;
+}
+
+.program-feminine-flows {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.program-feminine-flows__item {
+  padding: 1rem 1.15rem;
+  border-radius: 1rem;
+  border: 1px solid var(--pf-line);
+  background: var(--pf-panel);
+}
+
+.program-feminine-flows__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.program-feminine-flows__from {
+  color: var(--pf-muted);
+  font-size: 1.02rem;
+}
+
+.program-feminine-flows__to {
+  color: var(--pf-ink);
+  font-weight: 560;
+  font-size: 1.08rem;
+}
+
+.program-feminine-flows__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  color: var(--pf-gold);
+  font-weight: 600;
+}
+
+.program-feminine-flows__connector {
+  letter-spacing: 0.04em;
+}
+
+/* Audience */
+.program-feminine-audience__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.program-feminine-audience__for,
+.program-feminine-audience__not {
+  padding: 1.35rem 1.4rem;
+  border-radius: 1.15rem;
+  border: 1px solid var(--pf-line);
+  background: var(--pf-panel-soft);
+}
+
+.program-feminine-audience__not {
+  background: linear-gradient(
+    160deg,
+    rgba(75, 20, 109, 0.12),
+    transparent 60%
+  );
+}
+
+/* Pillars */
+.program-feminine-pillars__header {
+  max-width: 40rem;
+  margin-bottom: 1.5rem;
+}
+
+.program-feminine-pillars__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+}
+
+.program-feminine-pillars__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.15rem;
+  padding: 1.55rem 1.55rem;
+  border-radius: 1.2rem;
+  border: 1px solid var(--pf-line);
+  background: var(--pf-panel);
+  min-height: 0;
+}
+
+.program-feminine-pillars__num {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.35rem;
+  color: var(--pf-gold);
+  line-height: 1;
+  padding-top: 0.2rem;
+}
+
+.program-feminine-pillars__title {
+  margin: 0 0 0.65rem;
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  font-weight: 600;
+  color: var(--pf-ink);
+}
+
+.program-feminine-pillars__text {
+  margin: 0;
+  line-height: 1.7;
+  color: var(--pf-muted);
+}
+
+.program-feminine-pillars__label {
+  margin: 0.9rem 0 0.5rem;
+  color: var(--pf-gold);
+  font-weight: 560;
+  line-height: 1.55;
+}
+
+.program-feminine-pillars__examples {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.program-feminine-pillars__examples li {
+  position: relative;
+  padding-inline-start: 1.1rem;
+  line-height: 1.6;
+  color: var(--pf-ink);
+}
+
+.program-feminine-pillars__examples li::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.7em;
+  width: 0.32rem;
+  height: 0.32rem;
+  border-radius: 50%;
+  background: var(--pf-gold);
+}
+
+.program-feminine-pillars__result {
+  margin-top: 0.85rem;
+  padding: 0.85rem 0.95rem;
+  border-radius: 0.85rem;
+  border-inline-start: 2px solid var(--pf-gold);
+  background: linear-gradient(135deg, rgba(199, 154, 59, 0.12), transparent 70%);
+}
+
+.program-feminine-pillars__result-label {
+  margin: 0 0 0.3rem;
+  color: var(--pf-gold);
+  font-weight: 560;
+  font-size: 0.92rem;
+}
+
+.program-feminine-pillars__result-text {
+  margin: 0;
+  color: var(--pf-ink);
+  line-height: 1.6;
+}
+
+/* Differentiator */
+.program-feminine-differentiator__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.5rem, 4vw, 2.75rem);
+  align-items: start;
+}
+
+.program-feminine-differentiator__features {
+  padding: 1.5rem 1.45rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--pf-line);
+  background: linear-gradient(
+    155deg,
+    rgba(199, 154, 59, 0.12),
+    rgba(13, 27, 52, 0.28) 55%
+  );
+}
+
+html[data-theme='cream-elegance'] .program-feminine-differentiator__features {
+  background: linear-gradient(
+    155deg,
+    rgba(199, 154, 59, 0.14),
+    rgba(255, 252, 247, 0.9) 55%
+  );
+}
+
+.program-feminine-feature-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.program-feminine-feature-list__item {
+  position: relative;
+  padding-inline-start: 1.35rem;
+  line-height: 1.65;
+  color: var(--pf-ink);
+}
+
+.program-feminine-feature-list__item::before {
+  content: '';
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.55em;
+  width: 0.55rem;
+  height: 0.55rem;
+  border: 1px solid var(--pf-gold);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+/* Trainer */
+.program-feminine-trainer__inner {
+  max-width: 46rem;
+}
+
+.program-feminine-trainer__closing {
+  margin-top: 1.15rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--pf-line);
+}
+
+/* Delivery */
+.program-feminine-delivery__inner {
+  max-width: 40rem;
+  padding: 1.5rem 1.5rem 1.35rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--pf-line);
+  background: var(--pf-panel);
+}
+
+.program-feminine-delivery__list {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.program-feminine-delivery__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  line-height: 1.6;
+  color: var(--pf-ink);
+}
+
+.program-feminine-delivery__item::before {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  margin-top: 0.45em;
+  border-radius: 50%;
+  background: var(--pf-gold);
+}
+
+/* Final CTA */
+.program-feminine-final-cta {
+  position: relative;
+  padding: clamp(2.25rem, 5vw, 3.5rem) 1.25rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--pf-line);
+  text-align: center;
+}
+
+.program-feminine-final-cta__atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(185, 143, 162, 0.22), transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(199, 154, 59, 0.14), transparent 50%);
+  pointer-events: none;
+}
+
+.program-feminine-final-cta__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 38rem;
+  margin-inline: auto;
+}
+
+.program-feminine-final-cta__heading {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+  margin: 0 0 1rem;
+  color: var(--pf-ink);
+}
+
+.program-feminine-bullet-list--cta {
+  text-align: start;
+  margin: 1rem auto 1.25rem;
+  max-width: 28rem;
+}
+
+.program-feminine-final-cta__button {
+  display: inline-flex;
+  margin-top: 0.5rem;
+}
+
+.program-feminine-not-found {
+  padding: 2.5rem 1.25rem;
+  text-align: center;
+}
+
+/* Structure popup */
+.program-feminine-popup {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+}
+
+.program-feminine-popup[hidden] {
+  display: none !important;
+}
+
+.program-feminine-popup__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(4, 10, 20, 0.62);
+  backdrop-filter: blur(4px);
+}
+
+.program-feminine-popup__dialog {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 26rem);
+  padding: 1.5rem 1.45rem 1.35rem;
+  border-radius: 1.15rem;
+  border: 1px solid var(--pf-line);
+  background: rgba(10, 22, 40, 0.94);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  outline: none;
+}
+
+.program-feminine-popup__close {
+  position: absolute;
+  inset-inline-end: 0.8rem;
+  top: 0.65rem;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--pf-line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--pf-ink);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+html[data-theme='cream-elegance'] .program-feminine-popup__dialog {
+  background: rgba(255, 252, 247, 0.97);
+}
+
+.program-feminine-popup__title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 1.45rem;
+  color: var(--pf-ink);
+}
+
+.program-feminine-popup__body,
+.program-feminine-popup__message {
+  margin: 0 0 1.25rem;
+  line-height: 1.65;
+  color: var(--pf-muted);
+}
+
+.program-feminine-popup__message {
+  margin: 0.35rem 1.75rem 0.15rem 0;
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  color: var(--pf-ink);
+  text-align: center;
+}
+
+.program-feminine-popup__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+@media (max-width: 1024px) {
+  .program-feminine-hero__layout,
+  .program-feminine-audience__grid,
+  .program-feminine-pillars__list,
+  .program-feminine-differentiator__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .program-feminine-section-title,
+  .program-feminine-hero__supporting,
+  .program-feminine-hero__description {
+    max-width: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .program-feminine-flows__row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+    text-align: start;
+  }
+
+  .program-feminine-flows__arrow {
+    justify-content: flex-start;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .program-feminine-hero__actions,
+  .program-feminine-popup__actions {
+    flex-direction: column;
+  }
+
+  .program-feminine-hero__cta,
+  .program-feminine-hero__secondary,
+  .program-feminine-final-cta__button,
+  .program-feminine-popup__primary,
+  .program-feminine-popup__secondary {
+    width: 100%;
+  }
+
+  .program-feminine-pillars__item {
+    grid-template-columns: auto minmax(0, 1fr);
+    min-height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .program-feminine-page [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 
 /* =============================================================================
    Methodology Journey Program Structure
@@ -8004,6 +8719,394 @@ html[data-theme='cream-elegance'] .program-practical-page {
   }
 
   .program-practical-faq__icon {
+    transition: none;
+  }
+}
+
+/* =============================================================================
+   Shared service-detail hover + Retreat rich presentation
+   ============================================================================= */
+
+.service-hover-surface,
+.program-rich-pain__item,
+.program-rich-flows__item,
+.program-rich-modules__item,
+.program-rich-results__item,
+.program-rich-faq__item,
+.program-methodology-pain__item,
+.program-methodology-flows__item,
+.program-methodology-results__item,
+.program-methodology-faq__item,
+.program-transform-flows__item,
+.program-transform-pillars__item,
+.program-transform-audience__for,
+.program-transform-audience__not,
+.program-feminine-flows__item,
+.program-feminine-pillars__item,
+.program-feminine-audience__for,
+.program-feminine-audience__not,
+.program-spiritual-flows__item,
+.program-spiritual-audience__item,
+.program-spiritual-diff__item,
+.program-spiritual-faq__item,
+.program-practical-pain__item,
+.program-practical-flows__item,
+.program-practical-results__item,
+.program-practical-delivery__item,
+.program-practical-faq__item,
+.workshop-rich-modules__item,
+.workshop-rich-benefits__item,
+.recorded-session-about__item,
+.recorded-session-flow__item,
+.recorded-session-fit__item,
+.private-session-journey__item,
+.private-session-pain__item,
+.private-session-flow__item,
+.private-session-fit__item,
+.retreat-rich-gallery .program-detail-gallery-thumb {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    background-color 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .program-rich-pain__item:hover,
+  .program-rich-flows__item:hover,
+  .program-rich-modules__item:hover,
+  .program-rich-results__item:hover,
+  .program-methodology-pain__item:hover,
+  .program-methodology-flows__item:hover,
+  .program-methodology-results__item:hover,
+  .program-transform-flows__item:hover,
+  .program-transform-pillars__item:hover,
+  .program-transform-audience__for:hover,
+  .program-transform-audience__not:hover,
+  .program-feminine-flows__item:hover,
+  .program-feminine-pillars__item:hover,
+  .program-feminine-audience__for:hover,
+  .program-feminine-audience__not:hover,
+  .program-spiritual-flows__item:hover,
+  .program-spiritual-audience__item:hover,
+  .program-spiritual-diff__item:hover,
+  .program-practical-pain__item:hover,
+  .program-practical-flows__item:hover,
+  .program-practical-results__item:hover,
+  .program-practical-delivery__item:hover,
+  .workshop-rich-modules__item:hover,
+  .workshop-rich-benefits__item:hover,
+  .recorded-session-about__item:hover,
+  .recorded-session-flow__item:hover,
+  .recorded-session-fit__item:hover,
+  .private-session-journey__item:hover,
+  .private-session-pain__item:hover,
+  .private-session-flow__item:hover,
+  .private-session-fit__item:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--theme-gold) 45%, transparent);
+    box-shadow: 0 16px 36px rgba(4, 10, 20, 0.22);
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-thumb:hover {
+    transform: translateY(-3px);
+    border-color: color-mix(in srgb, var(--theme-gold) 50%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-hover-surface,
+  .program-rich-pain__item,
+  .program-rich-flows__item,
+  .program-rich-modules__item,
+  .program-rich-results__item,
+  .program-rich-faq__item,
+  .program-methodology-pain__item,
+  .program-methodology-flows__item,
+  .program-methodology-results__item,
+  .program-methodology-faq__item,
+  .program-transform-flows__item,
+  .program-transform-pillars__item,
+  .program-transform-audience__for,
+  .program-transform-audience__not,
+  .program-feminine-flows__item,
+  .program-feminine-pillars__item,
+  .program-feminine-audience__for,
+  .program-feminine-audience__not,
+  .program-spiritual-flows__item,
+  .program-spiritual-audience__item,
+  .program-spiritual-diff__item,
+  .program-spiritual-faq__item,
+  .program-practical-pain__item,
+  .program-practical-flows__item,
+  .program-practical-results__item,
+  .program-practical-delivery__item,
+  .program-practical-faq__item,
+  .workshop-rich-modules__item,
+  .workshop-rich-benefits__item,
+  .recorded-session-about__item,
+  .recorded-session-flow__item,
+  .recorded-session-fit__item,
+  .private-session-journey__item,
+  .private-session-pain__item,
+  .private-session-flow__item,
+  .private-session-fit__item,
+  .retreat-rich-gallery .program-detail-gallery-thumb {
+    transition: none;
+  }
+
+  .program-rich-pain__item:hover,
+  .program-rich-flows__item:hover,
+  .program-rich-modules__item:hover,
+  .program-rich-results__item:hover,
+  .program-methodology-pain__item:hover,
+  .program-methodology-flows__item:hover,
+  .program-methodology-results__item:hover,
+  .program-transform-flows__item:hover,
+  .program-transform-pillars__item:hover,
+  .program-transform-audience__for:hover,
+  .program-transform-audience__not:hover,
+  .program-feminine-flows__item:hover,
+  .program-feminine-pillars__item:hover,
+  .program-feminine-audience__for:hover,
+  .program-feminine-audience__not:hover,
+  .program-spiritual-flows__item:hover,
+  .program-spiritual-audience__item:hover,
+  .program-spiritual-diff__item:hover,
+  .program-practical-pain__item:hover,
+  .program-practical-flows__item:hover,
+  .program-practical-results__item:hover,
+  .program-practical-delivery__item:hover,
+  .workshop-rich-modules__item:hover,
+  .workshop-rich-benefits__item:hover,
+  .recorded-session-about__item:hover,
+  .recorded-session-flow__item:hover,
+  .recorded-session-fit__item:hover,
+  .private-session-journey__item:hover,
+  .private-session-pain__item:hover,
+  .private-session-flow__item:hover,
+  .private-session-fit__item:hover,
+  .retreat-rich-gallery .program-detail-gallery-thumb:hover {
+    transform: none;
+  }
+}
+
+/* Retreat rich page */
+.retreat-rich-page {
+  --rr-ink: rgba(248, 243, 235, 0.94);
+  --rr-muted: rgba(248, 243, 235, 0.72);
+  --rr-gold: rgba(215, 190, 122, 0.92);
+  --rr-line: rgba(199, 154, 59, 0.28);
+  --rr-panel: rgba(13, 27, 52, 0.42);
+  color: var(--rr-ink);
+}
+
+html[data-theme='cream-elegance'] .retreat-rich-page {
+  --rr-ink: rgba(20, 28, 44, 0.94);
+  --rr-muted: rgba(40, 48, 64, 0.72);
+  --rr-gold: rgba(140, 100, 28, 0.92);
+  --rr-line: rgba(122, 62, 177, 0.18);
+  --rr-panel: rgba(255, 252, 247, 0.72);
+}
+
+.retreat-rich-page-inner {
+  display: grid;
+  gap: clamp(2.75rem, 6vw, 4.5rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.retreat-rich-back {
+  width: fit-content;
+}
+
+.retreat-rich-hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2.5rem) 0 clamp(1.5rem, 3vw, 2.75rem);
+}
+
+.retreat-rich-hero__atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.retreat-rich-hero__glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+}
+
+.retreat-rich-hero__glow--media {
+  inset-inline-end: -8%;
+  top: 6%;
+  width: min(48vw, 420px);
+  height: min(48vw, 420px);
+  background: radial-gradient(circle, rgba(185, 143, 162, 0.28) 0%, transparent 70%);
+}
+
+.retreat-rich-hero__glow--copy {
+  inset-inline-start: -6%;
+  bottom: 8%;
+  width: min(40vw, 340px);
+  height: min(40vw, 340px);
+  background: radial-gradient(circle, rgba(199, 154, 59, 0.18) 0%, transparent 72%);
+}
+
+.retreat-rich-hero__layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.5rem, 4vw, 3.25rem);
+  align-items: center;
+}
+
+.retreat-rich-hero__eyebrow {
+  margin: 0 0 0.85rem;
+}
+
+.retreat-rich-hero__title {
+  margin: 0 0 1rem;
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-weight: 560;
+  line-height: 1.18;
+  color: var(--rr-ink);
+}
+
+.retreat-rich-hero__lead {
+  margin: 0 0 1.5rem;
+  max-width: 42ch;
+  font-size: clamp(1.02rem, 1.4vw, 1.14rem);
+  line-height: 1.75;
+  color: var(--rr-muted);
+}
+
+.retreat-rich-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.retreat-rich-hero__media {
+  position: relative;
+}
+
+.retreat-rich-hero__frame {
+  position: absolute;
+  inset: 5% -4% -4% 7%;
+  border: 1px solid var(--rr-line);
+  border-radius: 1.35rem;
+  transform: rotate(-1.4deg);
+}
+
+.retreat-rich-hero__figure {
+  position: relative;
+  margin: 0;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--rr-panel);
+  box-shadow: 0 24px 60px rgba(4, 10, 20, 0.35);
+}
+
+.retreat-rich-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.retreat-rich-gallery {
+  margin: 0;
+}
+
+.retreat-rich-gallery .program-detail-gallery-head {
+  margin-bottom: 1.25rem;
+}
+
+.retreat-rich-gallery .program-detail-gallery-title {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  color: var(--rr-ink);
+}
+
+.retreat-rich-gallery .program-detail-gallery-subtitle {
+  color: var(--rr-muted);
+}
+
+.retreat-rich-gallery .program-detail-gallery-viewer {
+  border-radius: 1.25rem;
+  border: 1px solid var(--rr-line);
+  overflow: hidden;
+}
+
+.retreat-rich-final-cta {
+  position: relative;
+  padding: clamp(2.1rem, 4.5vw, 3.25rem) 1.25rem;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--rr-line);
+  text-align: center;
+}
+
+.retreat-rich-final-cta__atmosphere {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(185, 143, 162, 0.22), transparent 55%),
+    radial-gradient(ellipse at 80% 100%, rgba(199, 154, 59, 0.14), transparent 50%);
+  pointer-events: none;
+}
+
+.retreat-rich-final-cta__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 40rem;
+  margin-inline: auto;
+}
+
+.retreat-rich-final-cta__heading {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+  color: var(--rr-ink);
+}
+
+.retreat-rich-final-cta__text {
+  margin: 0 0 1.35rem;
+  line-height: 1.7;
+  color: var(--rr-muted);
+}
+
+@media (max-width: 1024px) {
+  .retreat-rich-hero__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .retreat-rich-hero__lead {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .retreat-rich-hero__actions,
+  .retreat-rich-final-cta__button {
+    width: 100%;
+  }
+
+  .retreat-rich-hero__cta,
+  .retreat-rich-final-cta__button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .retreat-rich-page [data-reveal] {
+    opacity: 1;
+    transform: none;
     transition: none;
   }
 }

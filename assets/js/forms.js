@@ -397,7 +397,10 @@ function renderWhatsAppPresets(presetsHost, presets, chatbox) {
   presetsHost.querySelectorAll('[data-whatsapp-preset]').forEach((btn) => {
     btn.addEventListener('click', () => {
       sendWhatsApp(decodeURIComponent(btn.getAttribute('data-msg') || ''));
-      if (chatbox) chatbox.hidden = true;
+      if (chatbox) {
+        chatbox.hidden = true;
+        chatbox.classList.remove('is-open');
+      }
     });
   });
 }
@@ -412,6 +415,7 @@ export function initWhatsAppWidget() {
 
   if (chatbox) {
     chatbox.hidden = true;
+    chatbox.classList.remove('is-open');
     const presetsHost = chatbox.querySelector('[data-whatsapp-presets]');
     renderWhatsAppPresets(presetsHost, w.presets, chatbox);
 
@@ -423,6 +427,7 @@ export function initWhatsAppWidget() {
       sendWhatsApp(input?.value?.trim());
       if (input) input.value = '';
       chatbox.hidden = true;
+      chatbox.classList.remove('is-open');
     };
 
     sendBtn?.addEventListener('click', sendTyped);
@@ -437,6 +442,7 @@ export function initWhatsAppWidget() {
       if (!btn.querySelector('svg')) btn.innerHTML = iconX('icon icon-sm');
       btn.addEventListener('click', () => {
         chatbox.hidden = true;
+        chatbox.classList.remove('is-open');
       });
     });
   }
@@ -450,7 +456,9 @@ export function initWhatsAppWidget() {
         sendWhatsApp();
         return;
       }
-      chatbox.hidden = !chatbox.hidden;
+      const willOpen = chatbox.hidden;
+      chatbox.hidden = !willOpen;
+      chatbox.classList.toggle('is-open', willOpen);
     });
   }
 

@@ -3,17 +3,29 @@ export const PAGES = [
   { path: '/about.html', name: 'about' },
   { path: '/policies.html', name: 'policies' },
   { path: '/recorded-sessions.html', name: 'recorded-library' },
-  { path: '/program-detail.html?slug=apg', name: 'program-detail' },
-  { path: '/workshop-detail.html?slug=you-first', name: 'workshop-detail' },
-  { path: '/session-detail.html?slug=restore-confidence-self-worth', name: 'session-detail' },
-  { path: '/recorded-session-detail.html?slug=forgiveness', name: 'recorded-detail' },
+  { path: '/programs-methodology-details.html?slug=apg', name: 'program-methodology' },
+  { path: '/workshops-details.html?slug=you-first', name: 'workshop-rich' },
+  {
+    path: '/private-sessions-details.html?slug=restore-confidence-self-worth',
+    name: 'private-session-rich',
+  },
+  { path: '/recorded-sessions-details.html?slug=forgiveness', name: 'recorded-rich' },
   { path: '/retreat-detail.html?slug=upcoming', name: 'retreat-detail' },
+  { path: '/programs-details.html?slug=nlp', name: 'program-master' },
+  { path: '/programs-feminine-details.html?slug=ana-ontha', name: 'program-feminine' },
 ];
 
 export const VIEWPORTS = [320, 360, 375, 390, 430, 768, 1024, 1280, 1440, 1920];
 
 export const DETAIL_SLUGS = {
-  program: ['apg', 'nlp', 'mottasel', 'self-confidence', 'i-am-female', 'new-version-of-yourself'],
+  program: [
+    'apg',
+    'nlp',
+    'mottasel',
+    'self-confidence',
+    'ana-ontha',
+    'new-version-of-yourself',
+  ],
   workshop: ['you-first', 'emotional-management-secret', 'feminine-code'],
   session: [
     'restore-confidence-self-worth',

@@ -1,6 +1,6 @@
 /**
  * Rich Recorded Sessions detail schema (new audio-first template).
- * Legacy data/recorded-sessions.js + seeders remain for recorded-session-detail.html.
+ * Homepage/library cards remain in data/recorded-sessions.js + seeders.
  *
  * Locale notes:
  * - Arabic (ar) remains owner source-of-truth for migrated sessions.
@@ -462,10 +462,8 @@ export function usesRecordedSessionNewTemplate(slug) {
   return RECORDED_SESSION_NEW_TEMPLATE_SLUGS.has(slug);
 }
 
-export function getRecordedSessionDetailPage(slug) {
-  return usesRecordedSessionNewTemplate(slug)
-    ? 'recorded-sessions-details.html'
-    : 'recorded-session-detail.html';
+export function getRecordedSessionDetailPage(_slug) {
+  return 'recorded-sessions-details.html';
 }
 
 export function getRecordedSessionDetailBySlug(slug, locale = 'ar') {

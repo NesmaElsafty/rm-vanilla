@@ -1,4 +1,5 @@
 import { getLocale } from './language.js';
+import { refreshReveals } from './animations.js';
 import { getContent } from '../../data/content.js';
 import {
   getProgramDetailBySlug,
@@ -666,9 +667,7 @@ function renderProgram(root, program, locale) {
 
   updateDocumentMeta(program);
 
-  root.querySelectorAll('[data-reveal]').forEach((el) => {
-    el.classList.add('is-visible');
-  });
+  refreshReveals(root);
 }
 
 export function refreshProgramDetails() {

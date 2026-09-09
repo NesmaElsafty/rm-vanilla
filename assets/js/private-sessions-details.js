@@ -1,4 +1,5 @@
 import { getLocale } from './language.js';
+import { refreshReveals } from './animations.js';
 import {
   getPrivateSessionDetailBySlug,
 } from '../../data/private-sessions-details.js';
@@ -413,6 +414,7 @@ export function refreshPrivateSessionDetails() {
   }
 
   renderFound(root, session, locale);
+  refreshReveals(root);
 }
 
 export function initPrivateSessionDetails() {

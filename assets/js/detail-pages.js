@@ -1,4 +1,5 @@
 import { getLocale } from './language.js';
+import { refreshReveals } from './animations.js';
 import { getContent, getDir } from '../../data/content.js';
 import { getProgramBySlug, getProgramCards, getProgramDuration } from '../../data/programs.js';
 import { getWorkshopBySlug, getWorkshopCards, getWorkshopDuration } from '../../data/workshops.js';
@@ -704,7 +705,7 @@ function renderSession(root) {
     populateTabs(root, tabs, pd.sessionSectionsAria, panelsHtml);
     populateGalleryHost(root, '');
     populateCtaBar(root, ctaTitle, ctaText, session.hero.primary_cta, session.slug);
-    populateRelated(root, pd.relatedSessions, related, 'session-detail.html');
+    populateRelated(root, pd.relatedSessions, related, 'private-sessions-details.html');
     mountExtras(root, testimonials);
     updateDocumentMeta(session.page_title, session.page_subtitle || session.hero?.subheading, session.image);
     return;
@@ -739,7 +740,7 @@ function renderSession(root) {
     </div>
     <div data-detail-testimonials></div>
     ${ctaBar(ctaTitle, ctaText, session.hero.primary_cta, session.slug)}
-    ${relatedMarkup(pd.relatedSessions, related, 'session-detail.html')}
+    ${relatedMarkup(pd.relatedSessions, related, 'private-sessions-details.html')}
   `;
 
   mountExtras(root, testimonials);
@@ -862,49 +863,69 @@ function renderRetreat(root) {
   if (!retreat) return renderNotFound(root, 'retreat');
 
   const titleHtml = (rd.titleParts ?? [])
-    .map((part) => (part.gold ? `<span class="text-gold-gradient">${escapeHtml(part.text)}</span>` : escapeHtml(part.text)))
+    .map((part) =>
+      part.gold
+        ? `<span class="text-gold-gradient">${escapeHtml(part.text)}</span>`
+        : escapeHtml(part.text),
+    )
     .join('');
-  const galleryHtml = galleryMarkup(retreat.gallery, rd.galleryTitle, rd.gallerySubtitle, rd.eyebrow);
-
-  if (hasDetailShell(root)) {
-    toggleFoundState(root, true);
-    populateBack(root, 'index.html#programs', rd.backToHome, rtl);
-    populateImage(root, retreat.hero, rd.eyebrow);
-    setSlotText(root, '[data-detail-eyebrow]', rd.eyebrow);
-    setSlotHtml(root, '[data-detail-title]', titleHtml);
-    setSlotText(root, '[data-detail-lead]', rd.heroSubtitle);
-    populateHeroCta(root, rd.primaryCta, 'upcoming');
-    populateGalleryHost(root, galleryHtml);
-    populateCtaBar(root, rd.pageTitle, rd.heroSubtitle, rd.primaryCta, 'upcoming');
-    mountExtras(root, []);
-    updateDocumentMeta(rd.pageTitle || rd.eyebrow, rd.heroSubtitle, retreat.hero);
-    return;
-  }
+  const galleryHtml = galleryMarkup(
+    retreat.gallery,
+    rd.galleryTitle,
+    rd.gallerySubtitle,
+    rd.eyebrow,
+  ).replace(
+    'class="program-detail-gallery"',
+    'class="program-detail-gallery retreat-rich-gallery" data-reveal',
+  );
 
   root.innerHTML = `
-    ${backLink('index.html#programs', rd.backToHome, rtl)}
-    <section class="program-detail-hero program-detail-hero--compact retreat-detail-hero glass-slide">
-      <div class="program-detail-hero-grid retreat-detail-hero-grid">
-        <span class="keynote-label program-detail-hero-badge retreat-detail-hero-eyebrow">
-          <span class="program-detail-hero-badge-text">${escapeHtml(rd.eyebrow)}</span>
-        </span>
-        <div class="program-detail-hero-visual program-detail-hero-visual--photo">
-          <div class="program-detail-image-ring" aria-hidden="true"></div>
-          <img src="${escapeHtml(retreat.hero)}" alt="${escapeHtml(rd.eyebrow)}" class="program-detail-image" decoding="async"/>
+    <div class="retreat-rich-page-inner" data-detail-found>
+      <a class="detail-back program-detail-back retreat-rich-back" href="index.html#programs">
+        <span>${rtl ? iconArrowRight('icon icon-sm') : iconArrowLeft('icon icon-sm')}</span>
+        <span>${escapeHtml(rd.backToHome)}</span>
+      </a>
+
+      <section class="retreat-rich-hero" data-reveal>
+        <div class="retreat-rich-hero__atmosphere" aria-hidden="true">
+          <span class="retreat-rich-hero__glow retreat-rich-hero__glow--media"></span>
+          <span class="retreat-rich-hero__glow retreat-rich-hero__glow--copy"></span>
         </div>
-        <div class="program-detail-hero-content retreat-detail-hero-content">
-          <h1 class="keynote-display program-detail-hero-title retreat-detail-hero-title">${titleHtml}</h1>
-          <p class="keynote-body program-detail-hero-lead">${escapeHtml(rd.heroSubtitle)}</p>
-          <a href="${contactHref('upcoming')}" class="btn-luxury-primary btn-luxury-primary--compact">${escapeHtml(rd.primaryCta)}</a>
+        <div class="retreat-rich-hero__layout">
+          <div class="retreat-rich-hero__copy">
+            <p class="retreat-rich-hero__eyebrow keynote-label">${escapeHtml(rd.eyebrow)}</p>
+            <h1 class="retreat-rich-hero__title">${titleHtml}</h1>
+            <p class="retreat-rich-hero__lead">${escapeHtml(rd.heroSubtitle)}</p>
+            <div class="retreat-rich-hero__actions">
+              <a href="${contactHref('upcoming')}" class="btn-luxury-primary retreat-rich-hero__cta">${escapeHtml(rd.primaryCta)}</a>
+            </div>
+          </div>
+          <div class="retreat-rich-hero__media">
+            <div class="retreat-rich-hero__frame" aria-hidden="true"></div>
+            <figure class="retreat-rich-hero__figure">
+              <img src="${escapeHtml(retreat.hero)}" alt="${escapeHtml(rd.eyebrow)}" class="retreat-rich-hero__image" width="960" height="1200" decoding="async">
+            </figure>
+          </div>
         </div>
-      </div>
-    </section>
-    ${galleryHtml}
-    ${ctaBar(rd.pageTitle, rd.heroSubtitle, rd.primaryCta, 'upcoming')}
+      </section>
+
+      ${galleryHtml}
+
+      <section class="retreat-rich-final-cta" data-reveal>
+        <div class="retreat-rich-final-cta__atmosphere" aria-hidden="true"></div>
+        <div class="retreat-rich-final-cta__inner">
+          <h2 class="retreat-rich-final-cta__heading">${escapeHtml(rd.pageTitle)}</h2>
+          <p class="retreat-rich-final-cta__text">${escapeHtml(rd.heroSubtitle)}</p>
+          <a href="${contactHref('upcoming')}" class="btn-luxury-primary retreat-rich-final-cta__button">${escapeHtml(rd.primaryCta)}</a>
+        </div>
+      </section>
+    </div>
   `;
 
-  mountExtras(root, []);
+  const gallery = root.querySelector('.program-detail-gallery');
+  if (gallery) initGallery(gallery);
   updateDocumentMeta(rd.pageTitle || rd.eyebrow, rd.heroSubtitle, retreat.hero);
+  refreshReveals(root);
 }
 
 function mountExtras(root, testimonials) {

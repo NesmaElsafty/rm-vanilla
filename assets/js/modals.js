@@ -18,10 +18,9 @@ const MODAL_IDS = {
 };
 
 const DETAIL_PAGES = {
-  training: 'program-detail.html',
   workshops: 'workshops-details.html',
-  private: 'session-detail.html',
-  recorded: 'recorded-session-detail.html',
+  private: 'private-sessions-details.html',
+  recorded: 'recorded-sessions-details.html',
 };
 
 const sliders = new Map();
