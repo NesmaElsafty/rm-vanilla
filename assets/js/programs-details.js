@@ -4,6 +4,8 @@ import { getProgramDetailBySlug } from '../../data/programs-details.js';
 import { getProgramBySlug } from '../../data/programs.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
 import { createTestimonialSlider, getTestimonialsForProgram } from './sliders.js';
+import { initGallery } from './galleries.js';
+import { iconArrowLeft, iconArrowRight } from './icons.js';
 
 let testimonialSlider = null;
 
@@ -39,16 +41,26 @@ function setHtml(root, selector, value) {
   el.innerHTML = value ?? '';
 }
 
+function setHidden(root, selector, hidden) {
+  const el = root.querySelector(selector);
+  if (!el) return;
+  el.hidden = Boolean(hidden);
+}
+
+function asLines(value) {
+  if (value == null || value === '') return [];
+  return Array.isArray(value) ? value.filter((line) => line != null && line !== '') : [value];
+}
+
 function paragraphsHtml(lines = []) {
-  return (lines ?? [])
+  return asLines(lines)
     .map((line) => `<p>${escapeHtml(line)}</p>`)
     .join('');
 }
 
-function bulletsHtml(items = [], itemClass = '') {
-  const cls = itemClass ? ` class="${itemClass}"` : '';
+function bulletsHtml(items = []) {
   return (items ?? [])
-    .map((item) => `<li${cls}>${escapeHtml(item)}</li>`)
+    .map((item) => `<li>${escapeHtml(item)}</li>`)
     .join('');
 }
 
@@ -56,11 +68,111 @@ function bodyWithBreaks(text = '') {
   return escapeHtml(text).replace(/\n/g, '<br>');
 }
 
+function answerHtml(item) {
+  if (item?.answer_intro || item?.bullets?.length) {
+    return `${paragraphsHtml(item.answer_intro)}
+      <ul class="program-rich-faq__answer-list">${bulletsHtml(item.bullets)}</ul>`;
+  }
+  if (Array.isArray(item?.answer)) {
+    return paragraphsHtml(item.answer);
+  }
+  const text = String(item?.answer ?? '');
+  if (text.includes('\n')) {
+    return paragraphsHtml(text.split(/\n+/).map((part) => part.trim()).filter(Boolean));
+  }
+  return `<p>${escapeHtml(text)}</p>`;
+}
+
+function contentBlocksHtml(blocks = []) {
+  return (blocks ?? [])
+    .map((block) => {
+      if (!block || !block.type) return '';
+      if (block.type === 'paragraph') {
+        return `<p class="program-rich-block-paragraph">${escapeHtml(block.text ?? '')}</p>`;
+      }
+      if (block.type === 'label') {
+        return `<p class="program-rich-block-label">${escapeHtml(block.text ?? '')}</p>`;
+      }
+      if (block.type === 'highlight') {
+        return `<p class="program-rich-block-highlight">${escapeHtml(block.text ?? '')}</p>`;
+      }
+      if (block.type === 'bullets') {
+        return `<ul class="program-rich-bullet-list">${bulletsHtml(block.items)}</ul>`;
+      }
+      return '';
+    })
+    .join('');
+}
+
+function galleryLabels(locale = getLocale()) {
+  const g = getContent(locale)?.gallery || {};
+  const fill = (template, vars) =>
+    String(template || '')
+      .replace(/\{n\}/g, String(vars.n ?? ''))
+      .replace(/\{prefix\}/g, String(vars.prefix ?? ''));
+
+  const isAr = locale === 'ar';
+  return {
+    openImage: (n) =>
+      fill(g.openImage, { n }) || (isAr ? `فتح الصورة ${n}` : `Open image ${n}`),
+    previousImage: g.previousImage || (isAr ? 'الصورة السابقة' : 'Previous image'),
+    nextImage: g.nextImage || (isAr ? 'الصورة التالية' : 'Next image'),
+    thumbnailAlt: (prefix, n) =>
+      fill(g.thumbnailAlt, { prefix, n }) ||
+      (isAr ? `${prefix} صورة مصغرة ${n}` : `${prefix} thumbnail ${n}`),
+    mainAlt: (prefix, n) =>
+      fill(g.mainAlt, { prefix, n }) || `${prefix} ${n}`.trim(),
+  };
+}
+
+function galleryMarkup(images, title, subtitle, altPrefix, locale) {
+  if (!images.length) return '';
+  const labels = galleryLabels(locale);
+  const thumbs =
+    images.length > 1
+      ? `<div class="program-detail-gallery-thumbs">${images
+          .map(
+            (src, index) =>
+              `<button type="button" class="program-detail-gallery-thumb${index === 0 ? ' program-detail-gallery-thumb--active' : ''}" data-gallery-src="${escapeHtml(src)}" aria-label="${escapeHtml(labels.openImage(index + 1))}">
+              <img src="${escapeHtml(src)}" alt="${escapeHtml(labels.thumbnailAlt(altPrefix, index + 1))}" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image"/>
+            </button>`,
+          )
+          .join('')}</div>`
+      : '';
+
+  const nav =
+    images.length > 1
+      ? `<button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--prev" aria-label="${escapeHtml(labels.previousImage)}">${iconArrowLeft('icon icon-sm')}</button>
+       <button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--next" aria-label="${escapeHtml(labels.nextImage)}">${iconArrowRight('icon icon-sm')}</button>`
+      : '';
+
+  return `<section class="program-detail-gallery program-rich-gallery" aria-label="${escapeHtml(title)}" data-gallery-alt="${escapeHtml(altPrefix)}" data-reveal>
+    <div class="program-detail-gallery-head">
+      <h2 class="program-detail-gallery-title">${escapeHtml(title)}</h2>
+      <p class="program-detail-gallery-subtitle">${escapeHtml(subtitle)}</p>
+    </div>
+    <div class="program-detail-gallery-viewer glass-slide">
+      <div class="program-detail-gallery-stage">
+        ${nav}
+        <figure class="program-detail-gallery-main">
+          <img src="${escapeHtml(images[0])}" alt="${escapeHtml(labels.mainAlt(altPrefix, 1))}" loading="lazy" decoding="async" class="program-detail-gallery-main-image"/>
+        </figure>
+      </div>
+      ${thumbs}
+      <div class="program-detail-gallery-counter">1 / ${images.length}</div>
+    </div>
+  </section>`;
+}
+
 function updateDocumentMeta(program) {
   const title = program?.seo?.title || document.title;
   document.title = title;
 
-  const description = program?.seo?.description || program?.hero?.description || '';
+  const description =
+    program?.seo?.description ||
+    program?.hero?.description_paragraphs?.[0] ||
+    program?.hero?.description ||
+    '';
 
   const setMeta = (selector, attr, value) => {
     if (!value) return;
@@ -91,6 +203,36 @@ function updateDocumentMeta(program) {
   }
 }
 
+function renderHero(root, hero, slug) {
+  const primaryHref = contactHref(slug);
+  setText(root, '[data-pd-eyebrow]', hero?.eyebrow);
+  setText(root, '[data-pd-title]', hero?.title);
+  setText(root, '[data-pd-supporting]', hero?.supporting_line);
+
+  const descriptionLines = hero?.description_paragraphs?.length
+    ? hero.description_paragraphs
+    : asLines(hero?.description);
+  setHtml(root, '[data-pd-description]', paragraphsHtml(descriptionLines));
+
+  setText(root, '[data-pd-primary-cta-label]', hero?.primary_cta);
+  setText(root, '[data-pd-secondary-cta-label]', hero?.secondary_cta);
+
+  const primaryCta = root.querySelector('[data-pd-primary-cta]');
+  if (primaryCta) primaryCta.setAttribute('href', primaryHref);
+
+  const secondaryCta = root.querySelector('[data-pd-secondary-cta]');
+  if (secondaryCta) {
+    secondaryCta.hidden = !hero?.secondary_cta;
+    secondaryCta.setAttribute('href', '#program-pain');
+  }
+
+  const heroImage = root.querySelector('[data-pd-hero-image]');
+  if (heroImage) {
+    heroImage.src = getProgramHeroImage(slug);
+    heroImage.alt = hero?.title || hero?.eyebrow || '';
+  }
+}
+
 function renderPain(root, pain) {
   setText(root, '[data-pd-pain-heading]', pain?.heading);
   setText(root, '[data-pd-pain-intro]', pain?.intro);
@@ -117,28 +259,53 @@ function renderImportance(root, importance) {
     '[data-pd-importance-paragraphs]',
     paragraphsHtml(importance?.paragraphs),
   );
+
+  const loop = importance?.loop ?? [];
+  const loopEl = root.querySelector('[data-pd-importance-loop]');
+  if (loopEl) {
+    loopEl.hidden = !loop.length;
+    loopEl.innerHTML = loop.length
+      ? loop
+          .map(
+            (line, index) =>
+              `<p class="program-rich-importance__loop-step" data-step="${index + 1}">${escapeHtml(line)}</p>`,
+          )
+          .join(
+            '<span class="program-rich-importance__loop-arrow" aria-hidden="true">→</span>',
+          )
+      : '';
+  }
+
+  const loopQuestion = importance?.loop_question || '';
+  setText(root, '[data-pd-importance-loop-question]', loopQuestion);
+  setHidden(root, '[data-pd-importance-loop-question]', !loopQuestion);
+
   setHtml(
     root,
-    '[data-pd-importance-loop]',
-    (importance?.loop ?? [])
+    '[data-pd-importance-groups]',
+    (importance?.groups ?? [])
       .map(
-        (line, index) =>
-          `<p class="program-rich-importance__loop-step" data-step="${index + 1}">${escapeHtml(line)}</p>`,
+        (group) => `<div class="program-rich-importance__group">
+          <h3 class="program-rich-subheading">${escapeHtml(group.heading ?? '')}</h3>
+          <ul class="program-rich-bullet-list">${bulletsHtml(group.bullets)}</ul>
+        </div>`,
       )
-      .join('<span class="program-rich-importance__loop-arrow" aria-hidden="true">→</span>'),
+      .join(''),
   );
-  setText(root, '[data-pd-importance-loop-question]', importance?.loop_question);
+  setHidden(root, '[data-pd-importance-groups]', !(importance?.groups ?? []).length);
+
   setHtml(
     root,
     '[data-pd-importance-bridge]',
     paragraphsHtml(importance?.bridge),
   );
-  setHtml(
-    root,
-    '[data-pd-importance-bullets]',
-    bulletsHtml(importance?.bullets),
-  );
+
+  const bullets = importance?.bullets ?? [];
+  setHtml(root, '[data-pd-importance-bullets]', bulletsHtml(bullets));
+  setHidden(root, '[data-pd-importance-bullets]', !bullets.length);
+
   setText(root, '[data-pd-importance-simplified]', importance?.simplified_label);
+  setHidden(root, '[data-pd-importance-simplified]', !importance?.simplified_label);
   setHtml(
     root,
     '[data-pd-importance-closing]',
@@ -193,8 +360,34 @@ function renderAudience(root, audience) {
   );
 }
 
+function renderModuleBody(module) {
+  if (module.blocks?.length) {
+    return contentBlocksHtml(module.blocks);
+  }
+
+  const bullets = module.bullets?.length
+    ? `<ul class="program-rich-modules__bullets">${bulletsHtml(module.bullets)}</ul>`
+    : '';
+  const closing = module.closing
+    ? `<p class="program-rich-modules__closing">${escapeHtml(module.closing)}</p>`
+    : '';
+  const body = module.body
+    ? `<p class="program-rich-modules__text">${bodyWithBreaks(module.body)}</p>`
+    : '';
+  return `${body}${bullets}${closing}`;
+}
+
 function renderCurriculum(root, curriculum) {
   setText(root, '[data-pd-curriculum-heading]', curriculum?.heading);
+  setText(root, '[data-pd-curriculum-supporting]', curriculum?.supporting_title);
+  setHidden(root, '[data-pd-curriculum-supporting]', !curriculum?.supporting_title);
+  setHtml(
+    root,
+    '[data-pd-curriculum-intro]',
+    paragraphsHtml(curriculum?.intro),
+  );
+  setHidden(root, '[data-pd-curriculum-intro]', !asLines(curriculum?.intro).length);
+
   const modules = [...(curriculum?.modules ?? [])].sort(
     (a, b) => (a.order ?? 0) - (b.order ?? 0),
   );
@@ -203,19 +396,16 @@ function renderCurriculum(root, curriculum) {
     '[data-pd-curriculum-modules]',
     modules
       .map((module, index) => {
-        const bullets = module.bullets?.length
-          ? `<ul class="program-rich-modules__bullets">${bulletsHtml(module.bullets)}</ul>`
-          : '';
-        const closing = module.closing
-          ? `<p class="program-rich-modules__closing">${escapeHtml(module.closing)}</p>`
+        const title = module.heading || module.title || '';
+        const subtitle = module.subtitle
+          ? `<p class="program-rich-modules__subtitle">${escapeHtml(module.subtitle)}</p>`
           : '';
         return `<li class="program-rich-modules__item">
           <span class="program-rich-modules__num" aria-hidden="true">${padIndex(module.order ?? index + 1)}</span>
           <div class="program-rich-modules__body">
-            <h3 class="program-rich-modules__title">${escapeHtml(module.heading)}</h3>
-            <p class="program-rich-modules__text">${bodyWithBreaks(module.body)}</p>
-            ${bullets}
-            ${closing}
+            <h3 class="program-rich-modules__title">${escapeHtml(title)}</h3>
+            ${subtitle}
+            ${renderModuleBody(module)}
           </div>
         </li>`;
       })
@@ -227,39 +417,91 @@ function renderDifferentiator(root, differentiator) {
   setText(root, '[data-pd-differentiator-heading]', differentiator?.heading);
   setText(
     root,
-    '[data-pd-differentiator-intro-before]',
-    differentiator?.intro_before,
+    '[data-pd-differentiator-supporting-line]',
+    differentiator?.supporting_line,
   );
-  const quotes = differentiator?.quotes ?? [];
-  const connector = differentiator?.quote_connector ?? '';
-  setHtml(
+  setHidden(
     root,
-    '[data-pd-differentiator-quotes]',
-    quotes
-      .map((quote, index) => {
-        const connectorHtml =
-          index < quotes.length - 1
-            ? `<span class="program-rich-differentiator__or">${escapeHtml(connector)}</span>`
-            : '';
-        return `<blockquote class="program-rich-differentiator__quote">${escapeHtml(quote)}</blockquote>${connectorHtml}`;
-      })
-      .join(''),
+    '[data-pd-differentiator-supporting-line]',
+    !differentiator?.supporting_line,
   );
-  setHtml(
-    root,
-    '[data-pd-differentiator-intro-after]',
-    paragraphsHtml(differentiator?.intro_after),
-  );
-  setText(
-    root,
-    '[data-pd-differentiator-supporting]',
-    differentiator?.supporting_heading,
-  );
-  setHtml(
-    root,
-    '[data-pd-differentiator-bullets]',
-    bulletsHtml(differentiator?.bullets),
-  );
+  setText(root, '[data-pd-differentiator-subheading]', differentiator?.subheading);
+  setHidden(root, '[data-pd-differentiator-subheading]', !differentiator?.subheading);
+
+  if (differentiator?.blocks?.length) {
+    setHtml(
+      root,
+      '[data-pd-differentiator-body]',
+      contentBlocksHtml(differentiator.blocks),
+    );
+    setHidden(root, '[data-pd-differentiator-classic]', true);
+    setHidden(root, '[data-pd-differentiator-body]', false);
+  } else {
+    setText(
+      root,
+      '[data-pd-differentiator-intro-before]',
+      differentiator?.intro_before,
+    );
+    const quotes = differentiator?.quotes ?? [];
+    const connector = differentiator?.quote_connector ?? '';
+    setHtml(
+      root,
+      '[data-pd-differentiator-quotes]',
+      quotes
+        .map((quote, index) => {
+          const connectorHtml =
+            index < quotes.length - 1
+              ? `<span class="program-rich-differentiator__or">${escapeHtml(connector)}</span>`
+              : '';
+          return `<blockquote class="program-rich-differentiator__quote">${escapeHtml(quote)}</blockquote>${connectorHtml}`;
+        })
+        .join(''),
+    );
+    setHtml(
+      root,
+      '[data-pd-differentiator-intro-after]',
+      paragraphsHtml(differentiator?.intro_after),
+    );
+    setText(
+      root,
+      '[data-pd-differentiator-supporting]',
+      differentiator?.supporting_heading,
+    );
+    setHidden(
+      root,
+      '[data-pd-differentiator-supporting]',
+      !differentiator?.supporting_heading,
+    );
+    setHtml(
+      root,
+      '[data-pd-differentiator-bullets]',
+      bulletsHtml(differentiator?.bullets),
+    );
+    setHidden(root, '[data-pd-differentiator-classic]', false);
+    setHtml(root, '[data-pd-differentiator-body]', '');
+    setHidden(root, '[data-pd-differentiator-body]', true);
+  }
+
+  const secondary = differentiator?.secondary_block;
+  const secondaryHost = root.querySelector('[data-pd-differentiator-secondary]');
+  if (secondaryHost) {
+    if (secondary) {
+      secondaryHost.hidden = false;
+      setText(
+        root,
+        '[data-pd-differentiator-secondary-heading]',
+        secondary.heading,
+      );
+      setHtml(
+        root,
+        '[data-pd-differentiator-secondary-body]',
+        contentBlocksHtml(secondary.blocks),
+      );
+    } else {
+      secondaryHost.hidden = true;
+      setHtml(root, '[data-pd-differentiator-secondary-body]', '');
+    }
+  }
 }
 
 function renderResults(root, results) {
@@ -282,20 +524,24 @@ function renderResults(root, results) {
 
 function renderWhy(root, why) {
   setText(root, '[data-pd-why-heading]', why?.heading);
-  setText(root, '[data-pd-why-intro]', why?.intro);
+  setHtml(root, '[data-pd-why-intro]', paragraphsHtml(why?.intro));
   setHtml(root, '[data-pd-why-bullets]', bulletsHtml(why?.bullets));
+  setText(root, '[data-pd-why-simplified]', why?.simplified_label);
+  setHidden(root, '[data-pd-why-simplified]', !why?.simplified_label);
   setHtml(root, '[data-pd-why-closing]', paragraphsHtml(why?.closing));
 }
 
 function renderTrainer(root, trainer) {
   setText(root, '[data-pd-trainer-heading]', trainer?.heading);
   setText(root, '[data-pd-trainer-subheading]', trainer?.subheading);
+  setHidden(root, '[data-pd-trainer-subheading]', !trainer?.subheading);
   setHtml(
     root,
     '[data-pd-trainer-paragraphs]',
     paragraphsHtml(trainer?.paragraphs),
   );
   setHtml(root, '[data-pd-trainer-bullets]', bulletsHtml(trainer?.bullets));
+  setHidden(root, '[data-pd-trainer-bullets]', !(trainer?.bullets ?? []).length);
   setHtml(root, '[data-pd-trainer-closing]', paragraphsHtml(trainer?.closing));
 }
 
@@ -310,13 +556,6 @@ function renderFaq(root, faq) {
         const panelId = `program-faq-panel-${index}`;
         const buttonId = `program-faq-button-${index}`;
         const expanded = index === 0;
-        let answerHtml = '';
-        if (item.answer_intro || item.bullets?.length) {
-          answerHtml = `<p>${escapeHtml(item.answer_intro ?? '')}</p>
-            <ul class="program-rich-faq__answer-list">${bulletsHtml(item.bullets)}</ul>`;
-        } else {
-          answerHtml = `<p>${escapeHtml(item.answer ?? '')}</p>`;
-        }
         return `<div class="program-rich-faq__item${expanded ? ' is-open' : ''}">
           <h3 class="program-rich-faq__question">
             <button
@@ -338,7 +577,7 @@ function renderFaq(root, faq) {
             aria-labelledby="${buttonId}"
             ${expanded ? '' : 'hidden'}
           >
-            <div class="program-rich-faq__answer">${answerHtml}</div>
+            <div class="program-rich-faq__answer">${answerHtml(item)}</div>
           </div>
         </div>`;
       })
@@ -372,14 +611,31 @@ function bindFaq(root) {
 }
 
 function renderFinalCta(root, finalCta, slug) {
+  const href = contactHref(slug);
   setText(root, '[data-pd-cta-heading]', finalCta?.heading);
-  setText(root, '[data-pd-cta-intro]', finalCta?.intro);
+  setText(root, '[data-pd-cta-supporting]', finalCta?.supporting_line);
+  setHidden(root, '[data-pd-cta-supporting]', !finalCta?.supporting_line);
+
+  const preLabel = finalCta?.pre_bullets_label || finalCta?.intro || '';
+  setText(root, '[data-pd-cta-intro]', preLabel);
+  setHidden(root, '[data-pd-cta-intro]', !preLabel);
+
   setHtml(root, '[data-pd-cta-bullets]', bulletsHtml(finalCta?.bullets));
-  setText(root, '[data-pd-cta-closing]', finalCta?.closing);
+  setHtml(root, '[data-pd-cta-closing]', paragraphsHtml(finalCta?.closing));
+
+  const buttonLabel = finalCta?.button || finalCta?.primary_cta || '';
   const button = root.querySelector('[data-pd-cta-button]');
   if (button) {
-    button.setAttribute('href', contactHref(slug));
-    button.textContent = finalCta?.button ?? '';
+    button.setAttribute('href', href);
+    button.textContent = buttonLabel;
+  }
+
+  const secondary = root.querySelector('[data-pd-cta-secondary]');
+  if (secondary) {
+    const secondaryLabel = finalCta?.secondary_cta || '';
+    secondary.hidden = !secondaryLabel;
+    secondary.setAttribute('href', href);
+    secondary.textContent = secondaryLabel;
   }
 }
 
@@ -410,33 +666,61 @@ function renderTestimonials(root, slug, locale) {
   testimonialSlider = createTestimonialSlider(host, items);
 }
 
-function renderNotFound(root, program) {
+function renderGallery(root, program, locale) {
+  const section = root.querySelector('[data-pd-gallery-section]');
+  const host = root.querySelector('[data-pd-gallery]');
+  if (!section || !host) return;
+
+  const images = (program.gallery?.images ?? []).filter(Boolean);
+  if (!images.length) {
+    section.hidden = true;
+    host.innerHTML = '';
+    return;
+  }
+
+  const content = getContent(locale);
+  const pd = content.programDetail ?? {};
+  const altPrefix = program.hero?.eyebrow || program.slug;
+
+  section.hidden = false;
+  host.innerHTML = galleryMarkup(
+    images,
+    pd.galleryTitle || '',
+    pd.gallerySubtitle || '',
+    altPrefix,
+    locale,
+  );
+
+  const gallery = host.querySelector('.program-detail-gallery');
+  if (gallery) {
+    delete gallery.dataset.galleryReady;
+    initGallery(gallery);
+  }
+}
+
+function renderNotFound(root) {
   const found = root.querySelector('[data-pd-found]');
   const missing = root.querySelector('[data-pd-not-found]');
   if (found) found.hidden = true;
   if (missing) missing.hidden = false;
 
-  const display = program?.display;
   const locale = getLocale();
   setText(
     root,
     '[data-pd-404-title]',
-    display?.not_found_title ||
-      (locale === 'en' ? 'Program not found' : 'البرنامج غير موجود'),
+    locale === 'en' ? 'Program not found' : 'البرنامج غير موجود',
   );
   setText(
     root,
     '[data-pd-404-body]',
-    display?.not_found_body ||
-      (locale === 'en'
-        ? 'The program you are looking for is not available.'
-        : 'البرنامج الذي تبحث عنه غير متاح.'),
+    locale === 'en'
+      ? 'The program you are looking for is not available.'
+      : 'البرنامج الذي تبحث عنه غير متاح.',
   );
   setText(
     root,
     '[data-pd-404-back-label]',
-    display?.not_found_back ||
-      (locale === 'en' ? 'Back to programs' : 'العودة إلى البرامج'),
+    locale === 'en' ? 'Back to programs' : 'العودة إلى البرامج',
   );
 
   document.title =
@@ -451,32 +735,9 @@ function renderProgram(root, program, locale) {
   if (found) found.hidden = false;
   if (missing) missing.hidden = true;
 
-  const hero = program.hero ?? {};
   const slug = program.purchase?.target || program.slug;
-  const primaryHref = contactHref(slug);
 
-  setText(root, '[data-pd-eyebrow]', hero.eyebrow);
-  setText(root, '[data-pd-title]', hero.title);
-  setText(root, '[data-pd-supporting]', hero.supporting_line);
-  setText(root, '[data-pd-description]', hero.description);
-  setText(root, '[data-pd-primary-cta-label]', hero.primary_cta);
-  setText(root, '[data-pd-secondary-cta-label]', hero.secondary_cta);
-
-  const primaryCta = root.querySelector('[data-pd-primary-cta]');
-  if (primaryCta) primaryCta.setAttribute('href', primaryHref);
-
-  const secondaryCta = root.querySelector('[data-pd-secondary-cta]');
-  if (secondaryCta) {
-    secondaryCta.hidden = !hero.secondary_cta;
-    secondaryCta.setAttribute('href', '#program-pain');
-  }
-
-  const heroImage = root.querySelector('[data-pd-hero-image]');
-  if (heroImage) {
-    heroImage.src = getProgramHeroImage(program.slug);
-    heroImage.alt = hero.title || hero.eyebrow || '';
-  }
-
+  renderHero(root, program.hero, slug);
   renderPain(root, program.pain);
   renderImportance(root, program.importance);
   renderTransformation(root, program.transformation, program.display?.flow_to);
@@ -488,6 +749,7 @@ function renderProgram(root, program, locale) {
   renderTrainer(root, program.trainer);
   renderFaq(root, program.faq);
   renderTestimonials(root, program.slug, locale);
+  renderGallery(root, program, locale);
   renderFinalCta(root, program.final_cta, slug);
 
   updateDocumentMeta(program);

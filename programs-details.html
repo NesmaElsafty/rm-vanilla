@@ -125,7 +125,7 @@
                   <p class="program-rich-hero__eyebrow" data-pd-eyebrow></p>
                   <h1 class="program-rich-hero__title" data-pd-title></h1>
                   <p class="program-rich-hero__supporting" data-pd-supporting></p>
-                  <p class="program-rich-hero__description" data-pd-description></p>
+                  <div class="program-rich-hero__description" data-pd-description></div>
                   <div class="program-rich-hero__actions">
                     <a class="btn-luxury-primary program-rich-hero__cta" data-pd-primary-cta href="index.html#contact">
                       <span data-pd-primary-cta-label></span>
@@ -168,8 +168,9 @@
               <div class="program-rich-importance__inner">
                 <h2 class="program-rich-section-title" data-pd-importance-heading></h2>
                 <div class="program-rich-importance__prose" data-pd-importance-paragraphs></div>
-                <div class="program-rich-importance__loop" data-pd-importance-loop aria-hidden="false"></div>
-                <p class="program-rich-importance__question" data-pd-importance-loop-question></p>
+                <div class="program-rich-importance__loop" data-pd-importance-loop hidden></div>
+                <p class="program-rich-importance__question" data-pd-importance-loop-question hidden></p>
+                <div class="program-rich-importance__groups" data-pd-importance-groups hidden></div>
                 <div class="program-rich-importance__bridge" data-pd-importance-bridge></div>
                 <ul class="program-rich-bullet-list" data-pd-importance-bullets></ul>
                 <p class="program-rich-simplified" data-pd-importance-simplified></p>
@@ -210,6 +211,8 @@
             <section class="program-rich-curriculum" data-reveal>
               <div class="program-rich-curriculum__header">
                 <h2 class="program-rich-section-title" data-pd-curriculum-heading></h2>
+                <p class="program-rich-curriculum__supporting" data-pd-curriculum-supporting hidden></p>
+                <div class="program-rich-curriculum__intro" data-pd-curriculum-intro hidden></div>
               </div>
               <ol class="program-rich-modules" data-pd-curriculum-modules></ol>
             </section>
@@ -218,11 +221,20 @@
             <section class="program-rich-differentiator" data-reveal>
               <div class="program-rich-differentiator__inner">
                 <h2 class="program-rich-section-title" data-pd-differentiator-heading></h2>
-                <p class="program-rich-lead" data-pd-differentiator-intro-before></p>
-                <div class="program-rich-differentiator__quotes" data-pd-differentiator-quotes></div>
-                <div class="program-rich-differentiator__after" data-pd-differentiator-intro-after></div>
-                <h3 class="program-rich-subheading" data-pd-differentiator-supporting></h3>
-                <ul class="program-rich-bullet-list" data-pd-differentiator-bullets></ul>
+                <p class="program-rich-differentiator__supporting-line" data-pd-differentiator-supporting-line hidden></p>
+                <h3 class="program-rich-subheading" data-pd-differentiator-subheading hidden></h3>
+                <div data-pd-differentiator-classic>
+                  <p class="program-rich-lead" data-pd-differentiator-intro-before></p>
+                  <div class="program-rich-differentiator__quotes" data-pd-differentiator-quotes></div>
+                  <div class="program-rich-differentiator__after" data-pd-differentiator-intro-after></div>
+                  <h3 class="program-rich-subheading" data-pd-differentiator-supporting hidden></h3>
+                  <ul class="program-rich-bullet-list" data-pd-differentiator-bullets></ul>
+                </div>
+                <div class="program-rich-differentiator__body" data-pd-differentiator-body hidden></div>
+                <aside class="program-rich-differentiator__secondary" data-pd-differentiator-secondary hidden>
+                  <h3 class="program-rich-subheading" data-pd-differentiator-secondary-heading></h3>
+                  <div data-pd-differentiator-secondary-body></div>
+                </aside>
               </div>
             </section>
 
@@ -239,8 +251,9 @@
             <section class="program-rich-why" data-reveal>
               <div class="program-rich-why__inner">
                 <h2 class="program-rich-section-title" data-pd-why-heading></h2>
-                <p class="program-rich-lead" data-pd-why-intro></p>
+                <div class="program-rich-why__intro" data-pd-why-intro></div>
                 <ul class="program-rich-bullet-list" data-pd-why-bullets></ul>
+                <p class="program-rich-simplified" data-pd-why-simplified hidden></p>
                 <div class="program-rich-closing-block" data-pd-why-closing></div>
               </div>
             </section>
@@ -250,7 +263,7 @@
               <div class="program-rich-trainer__inner">
                 <h2 class="program-rich-section-title" data-pd-trainer-heading></h2>
                 <div class="program-rich-trainer__copy">
-                  <h3 class="program-rich-subheading" data-pd-trainer-subheading></h3>
+                  <h3 class="program-rich-subheading" data-pd-trainer-subheading hidden></h3>
                   <div data-pd-trainer-paragraphs></div>
                   <ul class="program-rich-bullet-list" data-pd-trainer-bullets></ul>
                   <div class="program-rich-closing-block" data-pd-trainer-closing></div>
@@ -274,15 +287,24 @@
               </div>
             </section>
 
-            <!-- 13. Final CTA -->
+            <!-- 13. Gallery (conditional) -->
+            <section class="program-rich-gallery-section" data-pd-gallery-section hidden data-reveal>
+              <div data-pd-gallery></div>
+            </section>
+
+            <!-- 14. Final CTA -->
             <section class="program-rich-final-cta" data-reveal>
               <div class="program-rich-final-cta__atmosphere" aria-hidden="true"></div>
               <div class="program-rich-final-cta__inner">
                 <h2 class="program-rich-final-cta__heading" data-pd-cta-heading></h2>
+                <p class="program-rich-final-cta__supporting" data-pd-cta-supporting hidden></p>
                 <p class="program-rich-lead" data-pd-cta-intro></p>
                 <ul class="program-rich-bullet-list program-rich-bullet-list--cta" data-pd-cta-bullets></ul>
-                <p class="program-rich-final-cta__closing" data-pd-cta-closing></p>
-                <a class="btn-luxury-primary program-rich-final-cta__button" data-pd-cta-button href="index.html#contact"></a>
+                <div class="program-rich-final-cta__closing" data-pd-cta-closing></div>
+                <div class="program-rich-final-cta__actions">
+                  <a class="btn-luxury-primary program-rich-final-cta__button" data-pd-cta-button href="index.html#contact"></a>
+                  <a class="btn-luxury-ghost program-rich-final-cta__secondary" data-pd-cta-secondary href="index.html#contact" hidden></a>
+                </div>
               </div>
             </section>
           </div>

@@ -4424,6 +4424,14 @@ html[data-theme='cream-elegance'] .program-rich-page {
   max-width: 48ch;
 }
 
+.program-rich-hero__description p {
+  margin: 0 0 0.85rem;
+}
+
+.program-rich-hero__description p:last-child {
+  margin-bottom: 0;
+}
+
 .program-rich-hero__actions {
   display: flex;
   flex-wrap: wrap;
@@ -4576,6 +4584,128 @@ html[dir='rtl'] .program-rich-pain__closing {
   font-size: clamp(1.1rem, 0.4vw + 1rem, 1.35rem);
   color: var(--pr-gold);
   line-height: 1.55;
+}
+
+.program-rich-importance__groups {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.program-rich-importance__group {
+  padding: 1.15rem 1.2rem;
+  border-radius: 1rem;
+  border: 1px solid var(--pr-panel-edge);
+  background: var(--pr-panel);
+}
+
+.program-rich-block-label {
+  margin: 1rem 0 0.55rem;
+  font-family: var(--font-display, Georgia, serif);
+  color: var(--pr-gold);
+  font-size: 1.02rem;
+}
+
+.program-rich-block-highlight {
+  margin: 0.65rem 0 1rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.25rem, 0.6vw + 1.05rem, 1.65rem);
+  color: var(--pr-ink);
+}
+
+.program-rich-block-paragraph {
+  margin: 0 0 0.85rem;
+  color: var(--pr-muted);
+  line-height: 1.8;
+}
+
+.program-rich-curriculum__supporting {
+  margin: 0 0 0.85rem;
+  font-family: var(--font-display, Georgia, serif);
+  color: var(--pr-gold);
+  font-size: clamp(1.05rem, 0.35vw + 0.95rem, 1.25rem);
+}
+
+.program-rich-curriculum__intro {
+  margin-bottom: 0.5rem;
+  max-width: 62ch;
+}
+
+.program-rich-curriculum__intro p {
+  margin: 0 0 0.75rem;
+  color: var(--pr-muted);
+  line-height: 1.8;
+}
+
+.program-rich-modules__subtitle {
+  margin: 0 0 0.75rem;
+  color: var(--pr-gold);
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.program-rich-differentiator__supporting-line {
+  margin: -0.35rem 0 1.15rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.05rem, 0.35vw + 0.95rem, 1.25rem);
+  color: var(--pr-gold);
+  line-height: 1.55;
+}
+
+.program-rich-differentiator__body {
+  margin-top: 0.75rem;
+}
+
+.program-rich-differentiator__secondary {
+  margin-top: 2rem;
+  padding: 1.35rem 1.4rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--pr-panel-edge);
+  background: var(--pr-panel);
+}
+
+.program-rich-why__intro p {
+  margin: 0 0 0.85rem;
+  color: var(--pr-muted);
+  line-height: 1.85;
+  max-width: 62ch;
+}
+
+.program-rich-final-cta__supporting {
+  margin: 0 0 1rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(1.05rem, 0.35vw + 0.95rem, 1.2rem);
+  color: var(--pr-gold);
+  line-height: 1.55;
+}
+
+.program-rich-final-cta__closing {
+  margin: 1.35rem 0 1.75rem;
+}
+
+.program-rich-final-cta__closing p {
+  margin: 0 0 0.65rem;
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 1.1rem;
+  color: var(--pr-gold);
+  line-height: 1.6;
+}
+
+.program-rich-final-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  justify-content: center;
+}
+
+.program-rich-gallery-section[hidden],
+.program-rich-testimonials[hidden],
+.program-rich-importance__loop[hidden],
+.program-rich-importance__groups[hidden] {
+  display: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 /* —— Transformation —— */
@@ -4985,14 +5115,6 @@ html[data-theme='cream-elegance'] .program-rich-differentiator__quote {
   text-align: start;
 }
 
-.program-rich-final-cta__closing {
-  margin: 1.35rem 0 1.75rem;
-  font-family: var(--font-display, Georgia, serif);
-  font-size: 1.1rem;
-  color: var(--pr-gold);
-  line-height: 1.6;
-}
-
 .program-rich-not-found {
   padding: 2.5rem 1.25rem;
   text-align: center;
@@ -5002,7 +5124,8 @@ html[data-theme='cream-elegance'] .program-rich-differentiator__quote {
   .program-rich-hero__layout,
   .program-rich-audience__grid,
   .program-rich-modules,
-  .program-rich-results__list {
+  .program-rich-results__list,
+  .program-rich-importance__groups {
     grid-template-columns: 1fr;
   }
 
@@ -5041,7 +5164,8 @@ html[data-theme='cream-elegance'] .program-rich-differentiator__quote {
 
   .program-rich-hero__cta,
   .program-rich-hero__secondary,
-  .program-rich-final-cta__button {
+  .program-rich-final-cta__button,
+  .program-rich-final-cta__secondary {
     width: 100%;
   }
 

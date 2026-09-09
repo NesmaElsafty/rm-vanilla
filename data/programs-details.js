@@ -6,6 +6,8 @@
  * Arabic is owner source-of-truth — do not rewrite, shorten, or correct.
  */
 
+import { APG_PROGRAM_AR, APG_PROGRAM_EN } from './programs-details-apg.js';
+
 const PROGRAMS_DETAILS_AR = [
   {
     slug: 'nlp',
@@ -276,6 +278,9 @@ const PROGRAMS_DETAILS_AR = [
     purchase: {
       target: 'nlp',
     },
+    gallery: {
+      images: [],
+    },
     display: {
       flow_to: 'إلى',
       not_found_title: 'البرنامج غير موجود',
@@ -283,6 +288,7 @@ const PROGRAMS_DETAILS_AR = [
       not_found_back: 'العودة إلى البرامج',
     },
   },
+  APG_PROGRAM_AR,
 ];
 
 const PROGRAMS_DETAILS_EN = [
@@ -582,6 +588,9 @@ const PROGRAMS_DETAILS_EN = [
     purchase: {
       target: 'nlp',
     },
+    gallery: {
+      images: [],
+    },
     display: {
       flow_to: 'to',
       not_found_title: 'Program not found',
@@ -589,6 +598,7 @@ const PROGRAMS_DETAILS_EN = [
       not_found_back: 'Back to programs',
     },
   },
+  APG_PROGRAM_EN,
 ];
 
 const bySlug = {
