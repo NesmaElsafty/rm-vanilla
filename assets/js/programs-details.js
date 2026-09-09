@@ -1,6 +1,9 @@
 import { getLocale } from './language.js';
 import { getContent } from '../../data/content.js';
-import { getProgramDetailBySlug } from '../../data/programs-details.js';
+import {
+  getProgramDetailBySlug,
+  getProgramDetailPage,
+} from '../../data/programs-details.js';
 import { getProgramBySlug } from '../../data/programs.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
 import { createTestimonialSlider, getTestimonialsForProgram } from './sliders.js';
@@ -678,6 +681,13 @@ export function refreshProgramDetails() {
 
   if (!program) {
     renderNotFound(root);
+    return;
+  }
+
+  // Route non-master rich Programs to their structure page (central registry).
+  if (program.structure_type && program.structure_type !== 'master-program') {
+    const page = getProgramDetailPage(program.slug);
+    location.replace(`${page}?slug=${encodeURIComponent(program.slug)}`);
     return;
   }
 

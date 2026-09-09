@@ -1,102 +1,137 @@
 /**
- * Rich Training Programs — Master schema registry.
+ * Rich Training Programs — registry + structure routing.
  *
  * Legacy data/programs.js + seeders remain for program-detail.html.
- * Only migrated slugs use programs-details.html via getProgramDetailPage().
+ * Rich Programs declare structure_type; getProgramDetailPage() resolves the page.
  *
  * Arabic is owner source-of-truth — do not rewrite, shorten, or correct.
  *
  * =============================================================================
- * Master ProgramDetail schema (ALL rich Programs share this shape)
+ * structure_type → page
+ * =============================================================================
+ *
+ *   master-program          → programs-details.html
+ *   methodology-journey     → programs-methodology-details.html
+ *   transformation-journey  → programs-transformation-details.html
+ *   spiritual-journey       → programs-spiritual-details.html
+ *   practical-course        → programs-practical-details.html
+ *
+ * Future Laravel/Admin: client picks a Program Structure; fields follow that type.
+ *
+ * =============================================================================
+ * Master ProgramDetail schema (structure_type: 'master-program')
+ * =============================================================================
+ * See data/programs-details-nlp.js
+ *
+ * =============================================================================
+ * Methodology Journey schema (structure_type: 'methodology-journey')
  * =============================================================================
  *
  * ProgramDetail {
- *   slug: string
- *   seo: { title, description }
- *   hero: {
- *     eyebrow, title, supporting_line,
- *     description_blocks: ContentBlock[],
- *     primary_cta, secondary_cta?
- *   }
- *   pain: {
- *     heading, intro, bullets: string[],
- *     closing_blocks: ContentBlock[]
- *   }
- *   importance: {
- *     heading,
- *     content_blocks: ContentBlock[]
- *   }
- *   transformation: {
- *     heading, intro,
- *     flows: [{ from, to }],
- *     simplified_label?,
- *     closing_blocks: ContentBlock[]
- *   }
- *   audience: {
- *     heading, intro, bullets: string[],
- *     not_for: { heading, intro, bullets: string[] }
- *   }
+ *   slug, structure_type,
+ *   seo, hero, pain,
+ *   perspective: { heading, content_blocks },
+ *   promise: { heading, intro, flows, simplified_label?, closing_blocks? },
+ *   audience,
  *   curriculum: {
- *     heading, supporting_title?,
- *     intro_blocks?: ContentBlock[],
- *     modules: [{
- *       order, title, subtitle?,
- *       content_blocks: ContentBlock[]
- *     }]
- *   }
+ *     heading, supporting_title?, intro_blocks?,
+ *     modules: [{ order, title, subtitle?, content_blocks }],
+ *     powerful_block?: {
+ *       heading, intro_blocks?, bullets?, simplified_label?, closing_blocks?
+ *     }
+ *   },
  *   differentiator: {
- *     heading, supporting_line?, subheading?,
- *     content_blocks: ContentBlock[],
- *     secondary_block?: { heading, content_blocks: ContentBlock[] }
- *   }
- *   results: { heading, intro?, bullets: string[] }
- *   why_choose: {
- *     heading,
- *     intro_blocks: ContentBlock[],
- *     bullets: string[],
- *     simplified_label?,
- *     closing_blocks: ContentBlock[]
- *   }
- *   trainer: {
- *     heading, subheading?,
- *     content_blocks: ContentBlock[]
- *   }
- *   faq: {
- *     heading,
- *     items: [{ question, answer_blocks: ContentBlock[] }]
- *   }
- *   gallery: { images: string[] }   // empty → section hidden
- *   final_cta: {
- *     heading, supporting_line?, pre_bullets_label?,
- *     bullets?: string[],
- *     closing_blocks?: ContentBlock[],
- *     primary_cta, secondary_cta?
- *   }
- *   purchase: { target: string }
- *   display: { flow_to, not_found_title, not_found_body, not_found_back }
+ *     heading, supporting_line?, subheading?, content_blocks
+ *   },
+ *   methodology_description: { heading, content_blocks },
+ *   trainer: { heading, content_blocks },
+ *   results: { heading, intro?, bullets },
+ *   faq: { heading, items: [{ question, answer_blocks }] },
+ *   final_cta, purchase, display
  * }
  *
- * ContentBlock {
- *   type: 'paragraph' | 'label' | 'highlight' | 'quote' | 'bullets'
- *   text?: string          // paragraph | label | highlight | quote
- *   items?: string[]       // bullets
- * }
+ * =============================================================================
+ * Transformation Journey schema (structure_type: 'transformation-journey')
+ * =============================================================================
+ * See data/programs-details-new-version.js
  *
- * Styling depends on block.type / component / theme / viewport — never on slug.
+ * =============================================================================
+ * Spiritual Journey schema (structure_type: 'spiritual-journey')
+ * =============================================================================
+ * See data/programs-details-mottasel.js
+ *
+ * =============================================================================
+ * Practical Course schema (structure_type: 'practical-course')
+ * =============================================================================
+ * See data/programs-details-self-confidence.js
+ *
+ * Styling / rendering depend on structure_type — never on slug.
  */
 
 import { NLP_PROGRAM_AR, NLP_PROGRAM_EN } from './programs-details-nlp.js';
 import { APG_PROGRAM_AR, APG_PROGRAM_EN } from './programs-details-apg.js';
+import {
+  NEW_VERSION_PROGRAM_AR,
+  NEW_VERSION_PROGRAM_EN,
+} from './programs-details-new-version.js';
+import {
+  MOTTASEL_PROGRAM_AR,
+  MOTTASEL_PROGRAM_EN,
+} from './programs-details-mottasel.js';
+import {
+  SELF_CONFIDENCE_PROGRAM_AR,
+  SELF_CONFIDENCE_PROGRAM_EN,
+} from './programs-details-self-confidence.js';
+import {
+  ANA_ONTHA_PROGRAM_AR,
+  ANA_ONTHA_PROGRAM_EN,
+} from './programs-details-ana-ontha.js';
 
-const PROGRAMS_DETAILS_AR = [NLP_PROGRAM_AR, APG_PROGRAM_AR];
-const PROGRAMS_DETAILS_EN = [NLP_PROGRAM_EN, APG_PROGRAM_EN];
+/** Maps structure_type → HTML template. Extend when adding new structures. */
+export const PROGRAM_STRUCTURE_PAGES = {
+  'master-program': 'programs-details.html',
+  'methodology-journey': 'programs-methodology-details.html',
+  'transformation-journey': 'programs-transformation-details.html',
+  'spiritual-journey': 'programs-spiritual-details.html',
+  'practical-course': 'programs-practical-details.html',
+};
+
+const STRUCTURE_MASTER = 'master-program';
+
+function withStructureType(record, structure_type) {
+  if (record?.structure_type) return record;
+  return { ...record, structure_type };
+}
+
+const PROGRAMS_DETAILS_AR = [
+  withStructureType(NLP_PROGRAM_AR, STRUCTURE_MASTER),
+  APG_PROGRAM_AR,
+  NEW_VERSION_PROGRAM_AR,
+  ANA_ONTHA_PROGRAM_AR,
+  MOTTASEL_PROGRAM_AR,
+  SELF_CONFIDENCE_PROGRAM_AR,
+];
+
+const PROGRAMS_DETAILS_EN = [
+  withStructureType(NLP_PROGRAM_EN, STRUCTURE_MASTER),
+  APG_PROGRAM_EN,
+  NEW_VERSION_PROGRAM_EN,
+  ANA_ONTHA_PROGRAM_EN,
+  MOTTASEL_PROGRAM_EN,
+  SELF_CONFIDENCE_PROGRAM_EN,
+];
 
 const bySlug = {
   ar: Object.fromEntries(PROGRAMS_DETAILS_AR.map((item) => [item.slug, item])),
   en: Object.fromEntries(PROGRAMS_DETAILS_EN.map((item) => [item.slug, item])),
 };
 
-/** Slugs that use the new rich programs-details template. */
+/** Legacy slug redirects for backward URL compatibility. */
+const PROGRAM_SLUG_ALIASES = {
+  'i-am-female': 'ana-ontha',
+};
+
+/** Slugs registered in any rich Program structure. */
 export const PROGRAM_NEW_TEMPLATE_SLUGS = new Set(
   PROGRAMS_DETAILS_AR.map((item) => item.slug),
 );
@@ -110,16 +145,21 @@ export function usesProgramNewTemplate(slug) {
   return usesRichProgramTemplate(slug);
 }
 
+export function getProgramStructureType(slug) {
+  return getProgramDetailBySlug(slug, 'ar')?.structure_type;
+}
+
 export function getProgramDetailPage(slug) {
-  return usesRichProgramTemplate(slug)
-    ? 'programs-details.html'
-    : 'program-detail.html';
+  const structureType = getProgramStructureType(slug);
+  if (!structureType) return 'program-detail.html';
+  return PROGRAM_STRUCTURE_PAGES[structureType] || 'program-detail.html';
 }
 
 export function getProgramDetailBySlug(slug, locale = 'ar') {
   if (!slug) return undefined;
   const resolved = locale === 'en' ? 'en' : 'ar';
-  return bySlug[resolved][slug] ?? bySlug.ar[slug];
+  const mappedSlug = PROGRAM_SLUG_ALIASES[slug] || slug;
+  return bySlug[resolved][mappedSlug] ?? bySlug.ar[mappedSlug];
 }
 
 export function getProgramDetails(locale = 'ar') {

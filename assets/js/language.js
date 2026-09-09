@@ -32,14 +32,26 @@ export function applyLocale(locale) {
     || Boolean(document.querySelector('[data-recorded-session-root]'))
     || Boolean(document.querySelector('[data-workshop-rich-root]'))
     || Boolean(document.querySelector('[data-program-rich-root]'))
+    || Boolean(document.querySelector('[data-program-transform-root]'))
+    || Boolean(document.querySelector('[data-program-methodology-root]'))
+    || Boolean(document.querySelector('[data-program-spiritual-root]'))
+    || Boolean(document.querySelector('[data-program-practical-root]'))
     || /-detail\.html?/i.test(location.pathname)
     || /private-sessions-details\.html/i.test(location.pathname)
     || /recorded-sessions-details\.html/i.test(location.pathname)
     || /workshops-details\.html/i.test(location.pathname)
-    || /programs-details\.html/i.test(location.pathname);
+    || /programs-details\.html/i.test(location.pathname)
+    || /programs-transformation-details\.html/i.test(location.pathname)
+    || /programs-methodology-details\.html/i.test(location.pathname)
+    || /programs-spiritual-details\.html/i.test(location.pathname)
+    || /programs-practical-details\.html/i.test(location.pathname);
   const notFoundShowing = Boolean(
     document.querySelector('[data-detail-not-found]:not([hidden])')
       || document.querySelector('[data-pd-not-found]:not([hidden])')
+      || document.querySelector('[data-pt-not-found]:not([hidden])')
+      || document.querySelector('[data-pm-not-found]:not([hidden])')
+      || document.querySelector('[data-ps-not-found]:not([hidden])')
+      || document.querySelector('[data-ppc-not-found]:not([hidden])')
       || document.querySelector('[data-wd-not-found]:not([hidden])'),
   );
   if (content?.meta?.title && (!onDetail || notFoundShowing)) {

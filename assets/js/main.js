@@ -22,6 +22,22 @@ import {
   initProgramDetails,
   refreshProgramDetails,
 } from './programs-details.js';
+import {
+  initProgramTransformationDetails,
+  refreshProgramTransformationDetails,
+} from './programs-transformation-details.js';
+import {
+  initProgramMethodologyDetails,
+  refreshProgramMethodologyDetails,
+} from './programs-methodology-details.js';
+import {
+  initProgramSpiritualDetails,
+  refreshProgramSpiritualDetails,
+} from './programs-spiritual-details.js';
+import {
+  initProgramPracticalDetails,
+  refreshProgramPracticalDetails,
+} from './programs-practical-details.js';
 import { createTestimonialSlider, getHomepageTestimonials } from './sliders.js';
 import { initIcons, getIcon } from './icons.js';
 import { botanicalSVG, journeyCurveSVG } from './svg-decor.js';
@@ -134,6 +150,10 @@ function onLocaleChange() {
   refreshRecordedSessionDetails();
   refreshWorkshopDetails();
   refreshProgramDetails();
+  refreshProgramTransformationDetails();
+  refreshProgramMethodologyDetails();
+  refreshProgramSpiritualDetails();
+  refreshProgramPracticalDetails();
   refreshPolicies();
   initHomepageTestimonials();
   initRecordedLibrary();
@@ -185,6 +205,18 @@ export function boot() {
     if (document.querySelector('[data-recorded-session-root]')) initRecordedSessionDetails();
     if (document.querySelector('[data-workshop-rich-root]')) initWorkshopDetails();
     if (document.querySelector('[data-program-rich-root]')) initProgramDetails();
+    if (document.querySelector('[data-program-transform-root]')) {
+      initProgramTransformationDetails();
+    }
+    if (document.querySelector('[data-program-methodology-root]')) {
+      initProgramMethodologyDetails();
+    }
+    if (document.querySelector('[data-program-spiritual-root]')) {
+      initProgramSpiritualDetails();
+    }
+    if (document.querySelector('[data-program-practical-root]')) {
+      initProgramPracticalDetails();
+    }
     if (document.querySelector('[data-policies-root]')) initPolicies();
     if (document.getElementById('testimonials-slider')) initHomepageTestimonials();
     if (document.querySelector('[data-recorded-grid], #recorded-sessions-grid')) initRecordedLibrary();
