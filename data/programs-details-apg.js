@@ -1,6 +1,7 @@
 /**
  * Rich Training Program records for slug `apg` (APG | Accessing Personal Genius).
  * Arabic is owner source-of-truth — do not rewrite, shorten, or correct.
+ * Uses the Master ProgramDetail schema (see data/programs-details.js).
  */
 
 export const APG_PROGRAM_AR = {
@@ -13,9 +14,15 @@ export const APG_PROGRAM_AR = {
     eyebrow: "APG | Accessing Personal Genius",
     title: "قيادة الذات",
     supporting_line: "رحلة لقيادة عالمك الداخلي في ٨ أسابيع …",
-    description_paragraphs: [
-      "قيادة الذات هو النسخة العملية والتطبيقية من APG – Accessing Personal Genius، بشهادة معتمدة دولية من مدرسة Neuro-semantics.",
-      "برنامج عميق يساعدك على إدارة حالتك الداخلية، تركيزك، نيتك، أفكارك، ومشاعرك، حتى تنتقل من التشتت وضعف الثقة إلى الوضوح، التدفق، والإنجاز."
+    description_blocks: [
+      {
+        type: "paragraph",
+        text: "قيادة الذات هو النسخة العملية والتطبيقية من APG – Accessing Personal Genius، بشهادة معتمدة دولية من مدرسة Neuro-semantics."
+      },
+      {
+        type: "paragraph",
+        text: "برنامج عميق يساعدك على إدارة حالتك الداخلية، تركيزك، نيتك، أفكارك، ومشاعرك، حتى تنتقل من التشتت وضعف الثقة إلى الوضوح، التدفق، والإنجاز."
+      }
     ],
     primary_cta: "احجز مكانك الآن",
     secondary_cta: "اكتشف البرنامج"
@@ -32,49 +39,93 @@ export const APG_PROGRAM_AR = {
       "تملك أفكارًا عظيمة… لكن لا تعرف كيف تحولها إلى سلوك وواقع متجسد",
       "تشعر أن عندك إمكانيات أكبر مما يظهر في واقعك."
     ],
-    closing: [
-      "وهنا المشكلة ليست في نقص الموهبة…",
-      "بل في أنك لم تتعلم بعد كيف تقود عالمك الداخلي بالأنماط والأدوات التي تفتح لك حالة القيادة الحقيقية لذاتك."
+    closing_blocks: [
+      {
+        type: "paragraph",
+        text: "وهنا المشكلة ليست في نقص الموهبة…"
+      },
+      {
+        type: "paragraph",
+        text: "بل في أنك لم تتعلم بعد كيف تقود عالمك الداخلي بالأنماط والأدوات التي تفتح لك حالة القيادة الحقيقية لذاتك."
+      }
     ]
   },
   importance: {
     heading: "لماذا لا يتغيّر أداؤك رغم الوعي؟",
-    paragraphs: [
-      "لأن المشكلة ليست دائمًا في نقص المعرفة…",
-      "بل في أن الداخل الذي يُفترض أن يقود هذه المعرفة",
-      "ما زال غير منظم بما يكفي."
-    ],
-    groups: [
+    content_blocks: [
       {
-        heading: "قد يكون عندك:",
-        bullets: [
+        type: "paragraph",
+        text: "لأن المشكلة ليست دائمًا في نقص المعرفة…"
+      },
+      {
+        type: "paragraph",
+        text: "بل في أن الداخل الذي يُفترض أن يقود هذه المعرفة"
+      },
+      {
+        type: "paragraph",
+        text: "ما زال غير منظم بما يكفي."
+      },
+      {
+        type: "label",
+        text: "قد يكون عندك:"
+      },
+      {
+        type: "bullets",
+        items: [
           "فهم",
           "أهداف",
           "وخطوات واضحة"
         ]
       },
       {
-        heading: "لكن من الداخل ما زال هناك:",
-        bullets: [
+        type: "label",
+        text: "لكن من الداخل ما زال هناك:"
+      },
+      {
+        type: "bullets",
+        items: [
           "تشتت",
           "تردد",
           "معتقدات تعطل",
           "ومشاعر تسحبك بعيدًا عن أفضل ما لديك"
         ]
+      },
+      {
+        type: "paragraph",
+        text: "ولهذا لا يكفي أن تعرف أكثر…"
+      },
+      {
+        type: "paragraph",
+        text: "أنت تحتاج أن تتعلم كيف تقود نفسك من الداخل"
+      },
+      {
+        type: "paragraph",
+        text: "في قيادة الذات | APG"
+      },
+      {
+        type: "paragraph",
+        text: "لن تأخذ معلومات إضافية فقط،"
+      },
+      {
+        type: "paragraph",
+        text: "بل ستتعلم كيف تبني الحالة الداخلية"
+      },
+      {
+        type: "paragraph",
+        text: "التي تجعل الأداء العالي ممكنًا، ثابتًا، وقابلًا للاستدعاء."
+      },
+      {
+        type: "label",
+        text: "بمعنى أوضح:"
+      },
+      {
+        type: "paragraph",
+        text: "المشكلة ليست أنك لا تعرف…"
+      },
+      {
+        type: "paragraph",
+        text: "المشكلة أنك لم تتعلم بعد كيف تقود عالمك الداخلي."
       }
-    ],
-    bridge: [
-      "ولهذا لا يكفي أن تعرف أكثر…",
-      "أنت تحتاج أن تتعلم كيف تقود نفسك من الداخل",
-      "في قيادة الذات | APG",
-      "لن تأخذ معلومات إضافية فقط،",
-      "بل ستتعلم كيف تبني الحالة الداخلية",
-      "التي تجعل الأداء العالي ممكنًا، ثابتًا، وقابلًا للاستدعاء."
-    ],
-    simplified_label: "بمعنى أوضح:",
-    closing: [
-      "المشكلة ليست أنك لا تعرف…",
-      "المشكلة أنك لم تتعلم بعد كيف تقود عالمك الداخلي."
     ]
   },
   transformation: {
@@ -107,9 +158,15 @@ export const APG_PROGRAM_AR = {
       }
     ],
     simplified_label: "بمعنى أبسط:",
-    closing: [
-      "ستتعلم كيف تقود نفسك من الداخل…",
-      "حتى تعمل، تنجز، وتُبدع من أفضل نسخة منك."
+    closing_blocks: [
+      {
+        type: "paragraph",
+        text: "ستتعلم كيف تقود نفسك من الداخل…"
+      },
+      {
+        type: "paragraph",
+        text: "حتى تعمل، تنجز، وتُبدع من أفضل نسخة منك."
+      }
     ]
   },
   audience: {
@@ -138,17 +195,26 @@ export const APG_PROGRAM_AR = {
   curriculum: {
     heading: "ماذا يحدث داخل قيادة الذات | APG؟",
     supporting_title: "The 14 Core Patterns of Self-Leadership",
-    intro: [
-      "في قيادة الذات | APG",
-      "أنت لا تحصل على معلومات فقط…",
-      "بل تتعلّم 14 Pattern عملي، كل واحد منهم يبني جزءًا أساسيًا من قيادتك لعالمك الداخلي، ويقربك من حالة Personal Genius بشكل واضح وملموس."
+    intro_blocks: [
+      {
+        type: "paragraph",
+        text: "في قيادة الذات | APG"
+      },
+      {
+        type: "paragraph",
+        text: "أنت لا تحصل على معلومات فقط…"
+      },
+      {
+        type: "paragraph",
+        text: "بل تتعلّم 14 Pattern عملي، كل واحد منهم يبني جزءًا أساسيًا من قيادتك لعالمك الداخلي، ويقربك من حالة Personal Genius بشكل واضح وملموس."
+      }
     ],
     modules: [
       {
         order: 1,
         title: "Ownership of Power Zone",
         subtitle: "استعادة منطقة قوتك",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "تتعلّم كيف تمتلك:"
@@ -180,7 +246,7 @@ export const APG_PROGRAM_AR = {
         order: 2,
         title: "Setting Genius Intentionality",
         subtitle: "بناء نيتك العليا وBig Why",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "تتعلّم كيف تربط الانتباه بالنية،"
@@ -215,7 +281,7 @@ export const APG_PROGRAM_AR = {
         order: 3,
         title: "Meta-Stating Self",
         subtitle: "بناء Self قوية من الداخل",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "هنا تبدأ في بناء:"
@@ -258,7 +324,7 @@ export const APG_PROGRAM_AR = {
         order: 4,
         title: "Meta-Yes / Belief Change",
         subtitle: "تغيير المعتقدات التي تعيقك",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "تتعلّم كيف تتحول الفكرة إلى معتقد…"
@@ -293,7 +359,7 @@ export const APG_PROGRAM_AR = {
         order: 5,
         title: "Pleasuring",
         subtitle: "إعادة ربط الأداء بالمتعة والاندماج",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "بدل أن يصبح الإنجاز:"
@@ -332,7 +398,7 @@ export const APG_PROGRAM_AR = {
         order: 6,
         title: "De-Pleasuring",
         subtitle: "فك الشحنات المبالغ فيها",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "أحيانًا لا تكون المشكلة في الشيء نفسه…"
@@ -363,7 +429,7 @@ export const APG_PROGRAM_AR = {
         order: 7,
         title: "Meta-Stating Emotions",
         subtitle: "إدارة المشاعر بدل أن تستهلكك",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "تتعلّم كيف:"
@@ -399,7 +465,7 @@ export const APG_PROGRAM_AR = {
         order: 8,
         title: "Meta-Stating Concepts",
         subtitle: "فك البرمجة المفاهيمية",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "هناك أفكار ومفاهيم كثيرة تضغط على أزرارك من الداخل،"
@@ -434,7 +500,7 @@ export const APG_PROGRAM_AR = {
         order: 9,
         title: "Dragon Dancing",
         subtitle: "تحويل التخريب الذاتي إلى طاقة في صالحك",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "واحد من أقوى الأنماط في البرنامج."
@@ -475,7 +541,7 @@ export const APG_PROGRAM_AR = {
         order: 10,
         title: "Mind-to-Muscle",
         subtitle: "إغلاق فجوة المعرفة والتطبيق",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "هذه من أهم النقاط التي يحتاجها أغلب الناس."
@@ -526,7 +592,7 @@ export const APG_PROGRAM_AR = {
         order: 11,
         title: "Miracle Question",
         subtitle: "إطلاق الإمكانات والإبداع",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "هذا النمط يساعدك أن تخرج من:"
@@ -565,7 +631,7 @@ export const APG_PROGRAM_AR = {
         order: 12,
         title: "Meta-Stating Intentionality / Attractor Frames",
         subtitle: "بناء attractor داخلي ينظمك من الداخل",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "هذا أعمق من مجرد “هدف”."
@@ -609,7 +675,7 @@ export const APG_PROGRAM_AR = {
         order: 13,
         title: "Accessing Personal Genius + Excuse Blow-Out",
         subtitle: "الدخول الواعي إلى Flow State وكسر الأعذار",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "هنا تتعلّم كيف:"
@@ -652,7 +718,7 @@ export const APG_PROGRAM_AR = {
         order: 14,
         title: "Spinning Icons + Congruence / Integrity",
         subtitle: "حل الصراع الداخلي وبناء التوافق والاتساق",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "تتعلّم هنا كيف:"
@@ -697,7 +763,7 @@ export const APG_PROGRAM_AR = {
     heading: "لأنك لا تحتاج فقط أن تتعلم أكثر…",
     supporting_line: "بل أن تتنظم من الداخل بشكل مختلف",
     subheading: "الفرق الحقيقي في قيادة الذات | APG",
-    blocks: [
+    content_blocks: [
       {
         type: "paragraph",
         text: "إنه لا يشتغل على السلوك من الخارج فقط…"
@@ -809,7 +875,7 @@ export const APG_PROGRAM_AR = {
     ],
     secondary_block: {
       heading: "ما هو Accessing Personal Genius؟",
-      blocks: [
+      content_blocks: [
         {
           type: "paragraph",
           text: "APG هو برنامج تدريبي عميق"
@@ -875,10 +941,19 @@ export const APG_PROGRAM_AR = {
   },
   why_choose: {
     heading: "What makes this powerful?",
-    intro: [
-      "هذه الـ 14 Patterns ليست مجرد عناوين داخل المنهج…",
-      "بل هي الأدوات الفعلية التي تعمل بها على نفسك أو مع عملائك،",
-      "حتى تصل إلى نتيجة واضحة:"
+    intro_blocks: [
+      {
+        type: "paragraph",
+        text: "هذه الـ 14 Patterns ليست مجرد عناوين داخل المنهج…"
+      },
+      {
+        type: "paragraph",
+        text: "بل هي الأدوات الفعلية التي تعمل بها على نفسك أو مع عملائك،"
+      },
+      {
+        type: "paragraph",
+        text: "حتى تصل إلى نتيجة واضحة:"
+      }
     ],
     bullets: [
       "قيادة أعلى للذات",
@@ -888,27 +963,52 @@ export const APG_PROGRAM_AR = {
       "وتحوّل حقيقي من الداخل إلى الخارج"
     ],
     simplified_label: "بمعنى أبسط:",
-    closing: [
-      "أنا لا أقدّم لك وعيًا فقط…",
-      "أنا أقدّم لك أدوات تعمل بها فعلًا،",
-      "حتى تصل إلى النتيجة."
+    closing_blocks: [
+      {
+        type: "paragraph",
+        text: "أنا لا أقدّم لك وعيًا فقط…"
+      },
+      {
+        type: "paragraph",
+        text: "أنا أقدّم لك أدوات تعمل بها فعلًا،"
+      },
+      {
+        type: "paragraph",
+        text: "حتى تصل إلى النتيجة."
+      }
     ]
   },
   trainer: {
     heading: "من تقودك في هذه الرحلة؟",
-    paragraphs: [
-      "أنا د. رنا مسعد، وأقدّم هذا البرنامج ليس فقط كشرح لنموذج قوي،",
-      "بل كرحلة عملية تساعدك على أن:"
-    ],
-    bullets: [
-      "تفهم كيف يعمل عالمك الداخلي",
-      "تتوقف عن إعطاء مفاتيحك للتشتت أو الانفعال أو الأعذار",
-      "وتبدأ في قيادة نفسك من الداخل بوعي وتمكين"
-    ],
-    closing: [
-      "أنا لا أقدّم لك معلومات تستهلكها ثم تتركها،",
-      "بل أقدّم لك طريقًا يربط بين:",
-      "الوعي + التطبيق + التحول الحقيقي"
+    content_blocks: [
+      {
+        type: "paragraph",
+        text: "أنا د. رنا مسعد، وأقدّم هذا البرنامج ليس فقط كشرح لنموذج قوي،"
+      },
+      {
+        type: "paragraph",
+        text: "بل كرحلة عملية تساعدك على أن:"
+      },
+      {
+        type: "bullets",
+        items: [
+          "تفهم كيف يعمل عالمك الداخلي",
+          "تتوقف عن إعطاء مفاتيحك للتشتت أو الانفعال أو الأعذار",
+          "وتبدأ في قيادة نفسك من الداخل بوعي وتمكين"
+        ]
+      },
+      {
+        type: "paragraph",
+        text: "أنا لا أقدّم لك معلومات تستهلكها ثم تتركها،"
+      },
+      {
+        type: "paragraph",
+        text: "بل أقدّم لك طريقًا يربط بين:"
+      },
+      {
+        type: "paragraph",
+        text: "الوعي + التطبيق + التحول الحقيقي"
+      }
     ]
   },
   faq: {
@@ -916,21 +1016,56 @@ export const APG_PROGRAM_AR = {
     items: [
       {
         question: "هل هذا البرنامج مناسب إذا كنت أعرف كثيرًا بالفعل؟",
-        answer: "نعم.\n\nلأن مشكلتك غالبًا ليست في نقص المعرفة، بل في أن المعرفة لم تتحول بعد إلى حالة داخلية وأداء متسق."
+        answer_blocks: [
+          {
+            type: "paragraph",
+            text: "نعم."
+          },
+          {
+            type: "paragraph",
+            text: "لأن مشكلتك غالبًا ليست في نقص المعرفة، بل في أن المعرفة لم تتحول بعد إلى حالة داخلية وأداء متسق."
+          }
+        ]
       },
       {
         question: "هل البرنامج عملي أم نظري؟",
-        answer: "عملي جدًا.\n\nلأنه قائم على patterns وprocesses تساعدك على إعادة تنظيم تجربتك الداخلية، لا مجرد فهمها فقط."
+        answer_blocks: [
+          {
+            type: "paragraph",
+            text: "عملي جدًا."
+          },
+          {
+            type: "paragraph",
+            text: "لأنه قائم على patterns وprocesses تساعدك على إعادة تنظيم تجربتك الداخلية، لا مجرد فهمها فقط."
+          }
+        ]
       },
       {
         question: "هل APG مناسب للمدربين وأصحاب المشاريع والقادة؟",
-        answer: "نعم جدًا.\n\nلأن البرنامج يعمل على التركيز، intentionality، ownership، congruence، والقدرة على الوصول إلى أفضل أداء."
+        answer_blocks: [
+          {
+            type: "paragraph",
+            text: "نعم جدًا."
+          },
+          {
+            type: "paragraph",
+            text: "لأن البرنامج يعمل على التركيز، intentionality، ownership، congruence، والقدرة على الوصول إلى أفضل أداء."
+          }
+        ]
       },
       {
         question: "ما الفرق بينه وبين أي كورس تطوير ذات آخر؟",
-        answer: "الفرق أنه لا يكتفي بإلهامك أو إعطائك أدوات متناثرة، بل يبني لك architecture داخلية للوصول إلى personal genius وقيادة الذات."
+        answer_blocks: [
+          {
+            type: "paragraph",
+            text: "الفرق أنه لا يكتفي بإلهامك أو إعطائك أدوات متناثرة، بل يبني لك architecture داخلية للوصول إلى personal genius وقيادة الذات."
+          }
+        ]
       }
     ]
+  },
+  gallery: {
+    images: []
   },
   final_cta: {
     heading: "إذا كنت مستعدًا أن تقود نفسك من الداخل…",
@@ -943,16 +1078,18 @@ export const APG_PROGRAM_AR = {
       "ضعف التركيز",
       "وعدم الوصول إلى أفضل ما لديك"
     ],
-    closing: [
-      "فربما حان الوقت أن تدخل رحلة:",
-      "قيادة الذات | APG"
+    closing_blocks: [
+      {
+        type: "paragraph",
+        text: "فربما حان الوقت أن تدخل رحلة:"
+      },
+      {
+        type: "paragraph",
+        text: "قيادة الذات | APG"
+      }
     ],
     primary_cta: "احجز مكانك الآن",
-    button: "احجز مكانك الآن",
     secondary_cta: "ابدأ رحلة قيادة الذات"
-  },
-  gallery: {
-    images: []
   },
   purchase: {
     target: "apg"
@@ -975,9 +1112,15 @@ export const APG_PROGRAM_EN = {
     eyebrow: "APG | Accessing Personal Genius",
     title: "Self-Leadership",
     supporting_line: "An 8-week journey to lead your inner world…",
-    description_paragraphs: [
-      "Self-Leadership is the practical and applied version of APG – Accessing Personal Genius, with an internationally accredited certificate from the Neuro-Semantics school.",
-      "A deep program that helps you manage your internal state, focus, intention, thoughts, and emotions, so you can move from distraction and low confidence to clarity, flow, and achievement."
+    description_blocks: [
+      {
+        type: "paragraph",
+        text: "Self-Leadership is the practical and applied version of APG – Accessing Personal Genius, with an internationally accredited certificate from the Neuro-Semantics school."
+      },
+      {
+        type: "paragraph",
+        text: "A deep program that helps you manage your internal state, focus, intention, thoughts, and emotions, so you can move from distraction and low confidence to clarity, flow, and achievement."
+      }
     ],
     primary_cta: "Reserve Your Spot Now",
     secondary_cta: "Explore the Program"
@@ -994,49 +1137,93 @@ export const APG_PROGRAM_EN = {
       "Have powerful ideas… but do not know how to turn them into embodied behavior and reality.",
       "Feel that you have greater potential than what currently appears in your reality."
     ],
-    closing: [
-      "The problem here is not a lack of talent…",
-      "It is that you have not yet learned how to lead your inner world using the patterns and tools that open the door to true self-leadership."
+    closing_blocks: [
+      {
+        type: "paragraph",
+        text: "The problem here is not a lack of talent…"
+      },
+      {
+        type: "paragraph",
+        text: "It is that you have not yet learned how to lead your inner world using the patterns and tools that open the door to true self-leadership."
+      }
     ]
   },
   importance: {
     heading: "Why Doesn't Your Performance Change Despite Your Awareness?",
-    paragraphs: [
-      "Because the problem is not always a lack of knowledge…",
-      "It is that the inner system that is supposed to lead that knowledge",
-      "is still not organized enough."
-    ],
-    groups: [
+    content_blocks: [
       {
-        heading: "You may already have:",
-        bullets: [
+        type: "paragraph",
+        text: "Because the problem is not always a lack of knowledge…"
+      },
+      {
+        type: "paragraph",
+        text: "It is that the inner system that is supposed to lead that knowledge"
+      },
+      {
+        type: "paragraph",
+        text: "is still not organized enough."
+      },
+      {
+        type: "label",
+        text: "You may already have:"
+      },
+      {
+        type: "bullets",
+        items: [
           "Understanding",
           "Goals",
           "Clear steps"
         ]
       },
       {
-        heading: "But internally, there may still be:",
-        bullets: [
+        type: "label",
+        text: "But internally, there may still be:"
+      },
+      {
+        type: "bullets",
+        items: [
           "Distraction",
           "Hesitation",
           "Limiting beliefs",
           "Emotions that pull you away from your best"
         ]
+      },
+      {
+        type: "paragraph",
+        text: "That is why knowing more is not enough…"
+      },
+      {
+        type: "paragraph",
+        text: "You need to learn how to lead yourself from within."
+      },
+      {
+        type: "paragraph",
+        text: "In Self-Leadership | APG"
+      },
+      {
+        type: "paragraph",
+        text: "you will not simply receive more information,"
+      },
+      {
+        type: "paragraph",
+        text: "you will learn how to build the internal state"
+      },
+      {
+        type: "paragraph",
+        text: "that makes high performance possible, stable, and consciously accessible."
+      },
+      {
+        type: "label",
+        text: "Put more clearly:"
+      },
+      {
+        type: "paragraph",
+        text: "The problem is not that you do not know…"
+      },
+      {
+        type: "paragraph",
+        text: "The problem is that you have not yet learned how to lead your inner world."
       }
-    ],
-    bridge: [
-      "That is why knowing more is not enough…",
-      "You need to learn how to lead yourself from within.",
-      "In Self-Leadership | APG",
-      "you will not simply receive more information,",
-      "you will learn how to build the internal state",
-      "that makes high performance possible, stable, and consciously accessible."
-    ],
-    simplified_label: "Put more clearly:",
-    closing: [
-      "The problem is not that you do not know…",
-      "The problem is that you have not yet learned how to lead your inner world."
     ]
   },
   transformation: {
@@ -1069,9 +1256,15 @@ export const APG_PROGRAM_EN = {
       }
     ],
     simplified_label: "Put simply:",
-    closing: [
-      "You will learn how to lead yourself from within…",
-      "so you can work, achieve, and create from the best version of yourself."
+    closing_blocks: [
+      {
+        type: "paragraph",
+        text: "You will learn how to lead yourself from within…"
+      },
+      {
+        type: "paragraph",
+        text: "so you can work, achieve, and create from the best version of yourself."
+      }
     ]
   },
   audience: {
@@ -1100,17 +1293,26 @@ export const APG_PROGRAM_EN = {
   curriculum: {
     heading: "What Happens Inside Self-Leadership | APG?",
     supporting_title: "The 14 Core Patterns of Self-Leadership",
-    intro: [
-      "In Self-Leadership | APG",
-      "you do not simply receive information…",
-      "You learn 14 practical Patterns, each of which builds an essential part of your leadership of your inner world and brings you closer to the state of Personal Genius in a clear and tangible way."
+    intro_blocks: [
+      {
+        type: "paragraph",
+        text: "In Self-Leadership | APG"
+      },
+      {
+        type: "paragraph",
+        text: "you do not simply receive information…"
+      },
+      {
+        type: "paragraph",
+        text: "You learn 14 practical Patterns, each of which builds an essential part of your leadership of your inner world and brings you closer to the state of Personal Genius in a clear and tangible way."
+      }
     ],
     modules: [
       {
         order: 1,
         title: "Ownership of Power Zone",
         subtitle: "Reclaiming Your Zone of Power",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "You learn how to own:"
@@ -1142,7 +1344,7 @@ export const APG_PROGRAM_EN = {
         order: 2,
         title: "Setting Genius Intentionality",
         subtitle: "Building Your Higher Intention and Big Why",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "You learn how to connect attention with intention,"
@@ -1177,7 +1379,7 @@ export const APG_PROGRAM_EN = {
         order: 3,
         title: "Meta-Stating Self",
         subtitle: "Building a Strong Self from Within",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "Here you begin to build:"
@@ -1220,7 +1422,7 @@ export const APG_PROGRAM_EN = {
         order: 4,
         title: "Meta-Yes / Belief Change",
         subtitle: "Changing the Beliefs That Hold You Back",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "You learn how an idea becomes a belief…"
@@ -1255,7 +1457,7 @@ export const APG_PROGRAM_EN = {
         order: 5,
         title: "Pleasuring",
         subtitle: "Reconnect Performance with Enjoyment and Engagement",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "Instead of achievement becoming:"
@@ -1294,7 +1496,7 @@ export const APG_PROGRAM_EN = {
         order: 6,
         title: "De-Pleasuring",
         subtitle: "Releasing Excessive Emotional Charge",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "Sometimes the problem is not the thing itself…"
@@ -1325,7 +1527,7 @@ export const APG_PROGRAM_EN = {
         order: 7,
         title: "Meta-Stating Emotions",
         subtitle: "Managing Emotions Instead of Being Consumed by Them",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "You learn how to:"
@@ -1361,7 +1563,7 @@ export const APG_PROGRAM_EN = {
         order: 8,
         title: "Meta-Stating Concepts",
         subtitle: "Releasing Conceptual Programming",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "There are many ideas and concepts that push your internal buttons,"
@@ -1396,7 +1598,7 @@ export const APG_PROGRAM_EN = {
         order: 9,
         title: "Dragon Dancing",
         subtitle: "Turning Self-Sabotage into Energy That Works for You",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "One of the most powerful patterns in the program."
@@ -1437,7 +1639,7 @@ export const APG_PROGRAM_EN = {
         order: 10,
         title: "Mind-to-Muscle",
         subtitle: "Closing the Knowing–Doing Gap",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "This is one of the most important areas most people need."
@@ -1488,7 +1690,7 @@ export const APG_PROGRAM_EN = {
         order: 11,
         title: "Miracle Question",
         subtitle: "Unlocking Potential and Creativity",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "This pattern helps you move out of:"
@@ -1527,7 +1729,7 @@ export const APG_PROGRAM_EN = {
         order: 12,
         title: "Meta-Stating Intentionality / Attractor Frames",
         subtitle: "Building an Inner Attractor That Organizes You from Within",
-        blocks: [
+        content_blocks: [
           {
             type: "paragraph",
             text: "This goes deeper than simply having a “goal.”"
@@ -1571,7 +1773,7 @@ export const APG_PROGRAM_EN = {
         order: 13,
         title: "Accessing Personal Genius + Excuse Blow-Out",
         subtitle: "Consciously Entering Flow State and Breaking Through Excuses",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "Here you learn how to:"
@@ -1614,7 +1816,7 @@ export const APG_PROGRAM_EN = {
         order: 14,
         title: "Spinning Icons + Congruence / Integrity",
         subtitle: "Resolving Inner Conflict and Building Congruence and Integrity",
-        blocks: [
+        content_blocks: [
           {
             type: "label",
             text: "Here you learn how to:"
@@ -1659,7 +1861,7 @@ export const APG_PROGRAM_EN = {
     heading: "Because You Don't Only Need to Learn More…",
     supporting_line: "You need to become organized differently from within.",
     subheading: "The Real Difference in Self-Leadership | APG",
-    blocks: [
+    content_blocks: [
       {
         type: "paragraph",
         text: "It does not work only on behavior from the outside…"
@@ -1771,7 +1973,7 @@ export const APG_PROGRAM_EN = {
     ],
     secondary_block: {
       heading: "What Is Accessing Personal Genius?",
-      blocks: [
+      content_blocks: [
         {
           type: "paragraph",
           text: "APG is a deep training program"
@@ -1837,10 +2039,19 @@ export const APG_PROGRAM_EN = {
   },
   why_choose: {
     heading: "What Makes This Powerful?",
-    intro: [
-      "These 14 Patterns are not simply titles inside a curriculum…",
-      "They are the actual tools you work with on yourself or with your clients,",
-      "to reach clear outcomes:"
+    intro_blocks: [
+      {
+        type: "paragraph",
+        text: "These 14 Patterns are not simply titles inside a curriculum…"
+      },
+      {
+        type: "paragraph",
+        text: "They are the actual tools you work with on yourself or with your clients,"
+      },
+      {
+        type: "paragraph",
+        text: "to reach clear outcomes:"
+      }
     ],
     bullets: [
       "Stronger self-leadership",
@@ -1850,27 +2061,52 @@ export const APG_PROGRAM_EN = {
       "Real transformation from the inside out"
     ],
     simplified_label: "Put simply:",
-    closing: [
-      "I am not giving you awareness alone…",
-      "I am giving you tools you can actually work with,",
-      "so you can reach the result."
+    closing_blocks: [
+      {
+        type: "paragraph",
+        text: "I am not giving you awareness alone…"
+      },
+      {
+        type: "paragraph",
+        text: "I am giving you tools you can actually work with,"
+      },
+      {
+        type: "paragraph",
+        text: "so you can reach the result."
+      }
     ]
   },
   trainer: {
     heading: "Who Guides You on This Journey?",
-    paragraphs: [
-      "I am Dr. Rana Mosaad, and I present this program not simply as an explanation of a powerful model,",
-      "but as a practical journey that helps you:"
-    ],
-    bullets: [
-      "Understand how your inner world works.",
-      "Stop handing your keys over to distraction, emotional reaction, or excuses.",
-      "Begin leading yourself from within with awareness and empowerment."
-    ],
-    closing: [
-      "I do not give you information that you consume and then leave behind.",
-      "I give you a path that connects:",
-      "awareness + application + real transformation"
+    content_blocks: [
+      {
+        type: "paragraph",
+        text: "I am Dr. Rana Mosaad, and I present this program not simply as an explanation of a powerful model,"
+      },
+      {
+        type: "paragraph",
+        text: "but as a practical journey that helps you:"
+      },
+      {
+        type: "bullets",
+        items: [
+          "Understand how your inner world works.",
+          "Stop handing your keys over to distraction, emotional reaction, or excuses.",
+          "Begin leading yourself from within with awareness and empowerment."
+        ]
+      },
+      {
+        type: "paragraph",
+        text: "I do not give you information that you consume and then leave behind."
+      },
+      {
+        type: "paragraph",
+        text: "I give you a path that connects:"
+      },
+      {
+        type: "paragraph",
+        text: "awareness + application + real transformation"
+      }
     ]
   },
   faq: {
@@ -1878,21 +2114,56 @@ export const APG_PROGRAM_EN = {
     items: [
       {
         question: "Is This Program Suitable If I Already Know a Lot?",
-        answer: "Yes.\n\nBecause your problem is probably not a lack of knowledge, but that your knowledge has not yet become an internal state and consistent performance."
+        answer_blocks: [
+          {
+            type: "paragraph",
+            text: "Yes."
+          },
+          {
+            type: "paragraph",
+            text: "Because your problem is probably not a lack of knowledge, but that your knowledge has not yet become an internal state and consistent performance."
+          }
+        ]
       },
       {
         question: "Is the Program Practical or Theoretical?",
-        answer: "Highly practical.\n\nIt is built around patterns and processes that help you reorganize your internal experience rather than merely understand it."
+        answer_blocks: [
+          {
+            type: "paragraph",
+            text: "Highly practical."
+          },
+          {
+            type: "paragraph",
+            text: "It is built around patterns and processes that help you reorganize your internal experience rather than merely understand it."
+          }
+        ]
       },
       {
         question: "Is APG Suitable for Trainers, Business Owners, and Leaders?",
-        answer: "Absolutely.\n\nThe program works on focus, intentionality, ownership, congruence, and the ability to access your best performance."
+        answer_blocks: [
+          {
+            type: "paragraph",
+            text: "Absolutely."
+          },
+          {
+            type: "paragraph",
+            text: "The program works on focus, intentionality, ownership, congruence, and the ability to access your best performance."
+          }
+        ]
       },
       {
         question: "How Is It Different from Any Other Personal Development Course?",
-        answer: "The difference is that it does not merely inspire you or give you scattered tools. It builds an internal architecture for accessing Personal Genius and self-leadership."
+        answer_blocks: [
+          {
+            type: "paragraph",
+            text: "The difference is that it does not merely inspire you or give you scattered tools. It builds an internal architecture for accessing Personal Genius and self-leadership."
+          }
+        ]
       }
     ]
+  },
+  gallery: {
+    images: []
   },
   final_cta: {
     heading: "If You're Ready to Lead Yourself from Within…",
@@ -1905,16 +2176,18 @@ export const APG_PROGRAM_EN = {
       "Weak focus",
       "Not reaching the best of what you are capable of"
     ],
-    closing: [
-      "Then it may be time to enter the journey of:",
-      "Self-Leadership | APG"
+    closing_blocks: [
+      {
+        type: "paragraph",
+        text: "Then it may be time to enter the journey of:"
+      },
+      {
+        type: "paragraph",
+        text: "Self-Leadership | APG"
+      }
     ],
     primary_cta: "Reserve Your Spot Now",
-    button: "Reserve Your Spot Now",
     secondary_cta: "Start the Self-Leadership Journey"
-  },
-  gallery: {
-    images: []
   },
   purchase: {
     target: "apg"
@@ -1926,3 +2199,4 @@ export const APG_PROGRAM_EN = {
     not_found_back: "Back to programs"
   }
 };
+
