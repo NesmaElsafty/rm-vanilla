@@ -1022,6 +1022,10 @@
 
 .logo-white-highlight { animation: glow-pulse-white 2.8s ease-in-out infinite; }
 [data-theme="cream-elegance"] .logo-white-highlight { animation-name: glow-pulse-purple; }
+/* Dark Footer surface in Light Mode: keep white logo glow (match Dark Mode footer). */
+[data-theme="cream-elegance"] .footer-luxury .footer-logo {
+  animation-name: glow-pulse-white;
+}
 
 .whatsapp-green-highlight { animation: glow-pulse-green 2.4s ease-in-out infinite; }
 
