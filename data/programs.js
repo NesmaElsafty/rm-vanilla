@@ -12,8 +12,8 @@ const IMAGE_BY_SLUG = {
 };
 
 const BUTTON_TEXT_AR = {
-  'i-am-female': 'اعرفي التفاصيل',
-  mottasel: 'اعرفي التفاصيل',
+  'i-am-female': 'اعرف التفاصيل',
+  mottasel: 'اعرف التفاصيل',
 };
 
 const FLOATING_PROGRAMS_ORDER = [
@@ -74,7 +74,7 @@ export function getProgramCards(locale = 'ar') {
   }));
 }
 
-/** Arabic: "في ٣ شهور" → "٣ شهور". English: "An 8-week journey..." → "8 weeks" */
+/** Arabic: "في 3 شهور" → "3 شهور". English: "An 8-week journey..." → "8 weeks" */
 export function getProgramDuration(pageSubtitle, locale = 'ar') {
   if (!pageSubtitle) return null;
 

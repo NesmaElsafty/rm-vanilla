@@ -1,9 +1,10 @@
 import workshopsSeeder from './workshops-seeder.js';
 import workshopsSeederEn from './workshops-seeder.en.js';
+import { getProgramHeroImage } from '../assets/js/utils/program-hero-images.js';
 
+/** Prefer brand art when available; otherwise use the shared programs image pool. */
 const IMAGE_BY_SLUG = {
   'you-first': 'assets/images/programs/program-confidence.png',
-  'emotional-management-secret': 'assets/images/sessions/session-emotional-attachment.png',
   'feminine-code': 'assets/images/programs/program-ana-ontha.png',
 };
 
@@ -28,7 +29,7 @@ function buildWorkshop(record, locale) {
 
   return {
     ...content,
-    image: IMAGE_BY_SLUG[record.slug] ?? IMAGE_BY_SLUG['you-first'],
+    image: IMAGE_BY_SLUG[record.slug] ?? getProgramHeroImage(record.slug),
     button_text: card?.button_text ?? (locale === 'en' ? 'Learn More' : 'اعرف التفاصيل'),
   };
 }

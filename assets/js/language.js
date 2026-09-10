@@ -1,4 +1,5 @@
 import { getContent, resolveLocale, getDir } from '../../data/content.js';
+import { normalizeWesternDigits } from './utils/western-digits.js';
 
 const STORAGE_KEY = 'rana-site-locale';
 
@@ -101,7 +102,7 @@ function escapeHtml(value) {
 
 function setText(el, value) {
   if (value == null || typeof value === 'object') return;
-  el.textContent = String(value);
+  el.textContent = normalizeWesternDigits(String(value));
 }
 
 function syncLocaleControls(locale) {
@@ -141,22 +142,28 @@ export function applyI18n(root = document) {
 
   root.querySelectorAll('[data-i18n-html]').forEach((el) => {
     const value = lookup(el.getAttribute('data-i18n-html'), locale);
-    if (typeof value === 'string') el.innerHTML = value;
+    if (typeof value === 'string') el.innerHTML = normalizeWesternDigits(value);
   });
 
   root.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
     const value = lookup(el.getAttribute('data-i18n-placeholder'), locale);
-    if (value != null && typeof value !== 'object') el.setAttribute('placeholder', String(value));
+    if (value != null && typeof value !== 'object') {
+      el.setAttribute('placeholder', normalizeWesternDigits(String(value)));
+    }
   });
 
   root.querySelectorAll('[data-i18n-aria]').forEach((el) => {
     const value = lookup(el.getAttribute('data-i18n-aria'), locale);
-    if (value != null && typeof value !== 'object') el.setAttribute('aria-label', String(value));
+    if (value != null && typeof value !== 'object') {
+      el.setAttribute('aria-label', normalizeWesternDigits(String(value)));
+    }
   });
 
   root.querySelectorAll('[data-i18n-title]').forEach((el) => {
     const value = lookup(el.getAttribute('data-i18n-title'), locale);
-    if (value != null && typeof value !== 'object') el.setAttribute('title', String(value));
+    if (value != null && typeof value !== 'object') {
+      el.setAttribute('title', normalizeWesternDigits(String(value)));
+    }
   });
 
   root.querySelectorAll('[data-i18n-gold-parts]').forEach((el) => {
@@ -164,7 +171,7 @@ export function applyI18n(root = document) {
     if (!Array.isArray(parts)) return;
     el.innerHTML = parts
       .map((part) => {
-        const text = escapeHtml(part?.text ?? '');
+        const text = escapeHtml(normalizeWesternDigits(part?.text ?? ''));
         const marked = part?.gold ? `<span class="text-gold-gradient">${text}</span>` : text;
         return part?.breakAfter ? `${marked}<br>` : marked;
       })

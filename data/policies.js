@@ -412,7 +412,7 @@ export const policySections = [
       {
         type: 'p',
         html: {
-          ar: 'مدة الوصول إلى البرامج التدريبية المباشرة ٦ شهور.',
+          ar: 'مدة الوصول إلى البرامج التدريبية المباشرة 6 شهور.',
           en: 'Access duration for live training programs is 6 months.',
         },
       },

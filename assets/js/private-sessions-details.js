@@ -11,8 +11,6 @@ import {
 } from './icons.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
 
-const ARABIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -25,13 +23,8 @@ function currentSlug() {
   return new URLSearchParams(location.search).get('slug') || '';
 }
 
-function toDisplayNum(n, useArabic) {
-  const raw = String(n).padStart(2, '0');
-  if (!useArabic) return raw;
-  return raw
-    .split('')
-    .map((d) => ARABIC_DIGITS[Number(d)] ?? d)
-    .join('');
+function toDisplayNum(n) {
+  return String(n).padStart(2, '0');
 }
 
 function bookingHref(target) {
@@ -199,7 +192,7 @@ function renderFound(root, session, locale) {
 
   setText('[data-ps-journey-heading]', session.journey?.heading);
   const sessionCount = Number(session.journey?.session_count) || 4;
-  setText('[data-ps-journey-badge-num]', toDisplayNum(sessionCount, rtl));
+  setText('[data-ps-journey-badge-num]', toDisplayNum(sessionCount));
   const badgePhrase =
     (display.journey_intro_emphasis && display.journey_intro_emphasis[0]) ||
     (locale === 'en'
@@ -224,7 +217,7 @@ function renderFound(root, session, locale) {
     const bullets = session.journey?.bullets ?? [];
     journeyList.innerHTML = bullets
       .map((bullet, index) => {
-        const num = toDisplayNum(index + 1, rtl);
+        const num = toDisplayNum(index + 1);
         return `<li class="private-session-journey__item">
           <span class="private-session-journey__num">${num}</span>
           <span class="private-session-journey__connector" aria-hidden="true"></span>

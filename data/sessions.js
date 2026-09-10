@@ -1,16 +1,6 @@
 import sessionsSeeder from './sessions-seeder.js';
 import sessionsSeederEn from './sessions-seeder.en.js';
-
-const IMAGE_BY_SLUG = {
-  'restore-confidence-self-worth': 'assets/images/sessions/session-restore-confidence.png',
-  'emotional-need-attachment-release': 'assets/images/sessions/session-emotional-attachment.png',
-  'private-journey-1-to-1': 'assets/images/sessions/session-private-journey.png',
-  'return-to-god-inner-peace': 'assets/images/sessions/session-return-to-god.png',
-  'clarity-inner-doubt-release': 'assets/images/sessions/session-clarity-inner-doubt.png',
-  'healing-roots-old-wounds': 'assets/images/sessions/session-healing-roots.png',
-};
-
-const DEFAULT_SESSION_IMAGE = 'assets/images/session-detail-hero-portrait.png';
+import { getProgramHeroImage } from '../assets/js/utils/program-hero-images.js';
 
 const landingPages = sessionsSeeder.private_sessions_landing_pages;
 const homeCards = sessionsSeeder.private_sessions_home_cards;
@@ -35,7 +25,7 @@ function buildSession(record, locale) {
 
   return {
     ...content,
-    image: IMAGE_BY_SLUG[record.slug] ?? DEFAULT_SESSION_IMAGE,
+    image: getProgramHeroImage(record.slug),
     button_text: resolveSessionButtonText(record.slug, locale),
   };
 }
@@ -51,6 +41,13 @@ export function getSessionBySlug(slug, locale = 'ar') {
 }
 
 export function getSessionCards(locale = 'ar') {
-  if (locale === 'en') return sessionsSeederEn.private_sessions_home_cards;
-  return homeCards;
+  const cards = locale === 'en' ? sessionsSeederEn.private_sessions_home_cards : homeCards;
+
+  return cards.map((card) => ({
+    slug: card.slug,
+    title: card.title,
+    description: card.description,
+    button_text: card.button_text ?? resolveSessionButtonText(card.slug, locale),
+    image: getProgramHeroImage(card.slug),
+  }));
 }

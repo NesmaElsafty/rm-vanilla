@@ -159,7 +159,7 @@ export const testimonials = [
     image: 'assets/images/testimonials/afnan-mohamed.png',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
-    role: { ar: 'سيلز · ٢٨ سنة · من مصر', en: 'Sales · 28 · Egypt' },
+    role: { ar: 'سيلز · 28 سنة · من مصر', en: 'Sales · 28 · Egypt' },
     content: {
       ar: 'برنامج متصل وده كان الشفاء ليا، وكان ليه دور فعال حقيقي في تغيير معتقداتي وتقوية عضلة التسليم لله عندي.',
       en: 'The Mottasel program was healing for me. It played a real, active role in changing my beliefs and strengthening my surrender to Allah.',
@@ -172,7 +172,7 @@ export const testimonials = [
     image: 'assets/images/testimonials/afnan-mohamed.png',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
-    role: { ar: 'سيلز · ٢٨ سنة · من مصر', en: 'Sales · 28 · Egypt' },
+    role: { ar: 'سيلز · 28 سنة · من مصر', en: 'Sales · 28 · Egypt' },
     content: {
       ar: 'ورشة أنت أولًا، ودي كانت من أجمل الورش اللي فيها تعبير عن الذات وتظبيط الحدود بالنسبة لي.',
       en: 'The You First workshop was one of the most beautiful workshops for self-expression and setting boundaries, for me.',
@@ -185,7 +185,7 @@ export const testimonials = [
     image: 'assets/images/testimonials/afnan-mohamed.png',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
-    role: { ar: 'سيلز · ٢٨ سنة · من مصر', en: 'Sales · 28 · Egypt' },
+    role: { ar: 'سيلز · 28 سنة · من مصر', en: 'Sales · 28 · Egypt' },
     content: {
       ar: 'ميني كورس الثقة بالنفس، وده أول معرفة لي بمعنى القوى الذاتية وإزاي مفاتيحي تكون في إيدي.',
       en: 'The self-confidence mini course was my first introduction to what personal power really means — and how the keys can be in my own hands.',
@@ -198,7 +198,7 @@ export const testimonials = [
     image: 'assets/images/testimonials/afnan-mohamed.png',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
-    role: { ar: 'سيلز · ٢٨ سنة · من مصر', en: 'Sales · 28 · Egypt' },
+    role: { ar: 'سيلز · 28 سنة · من مصر', en: 'Sales · 28 · Egypt' },
     content: {
       ar: 'ورشة المشاعر كان لها عمق كبير، واكتشفت إن الشعور ده رسول جاي برسالة، ودوري إني أستقبلها وأسيبه يمشي، وإزاي عقلي مليان صور مبنية ممكن متكنش أصلاً حقيقية.',
       en: 'The emotions workshop had great depth. I discovered that a feeling is a messenger carrying a message — my role is to receive it and let it pass. I also saw how my mind can be full of constructed images that may not even be real.',

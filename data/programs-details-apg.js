@@ -13,7 +13,7 @@ export const APG_PROGRAM_AR = {
   "hero": {
     "eyebrow": "APG | Accessing Personal Genius",
     "title": "قيادة الذات",
-    "supporting_line": "رحلة لقيادة عالمك الداخلي في ٨ أسابيع …",
+    "supporting_line": "رحلة لقيادة عالمك الداخلي في 8 أسابيع …",
     "description_blocks": [
       {
         "type": "paragraph",

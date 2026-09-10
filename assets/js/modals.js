@@ -70,13 +70,13 @@ function ensureSlider(kind) {
     },
     private: {
       items: getSessionCards(locale),
-      textOnly: true,
+      textOnly: false,
       dotsLabel: copy.privateModalTitle ?? '',
       page: getPrivateSessionDetailPage,
     },
     recorded: {
       items: getRecordedSessionCards(locale),
-      textOnly: true,
+      textOnly: false,
       dotsLabel: copy.recordedModalTitle ?? '',
       page: getRecordedSessionDetailPage,
     },

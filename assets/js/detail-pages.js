@@ -14,8 +14,6 @@ import { policyTitle, policySections } from '../../data/policies.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
 import { getProgramDetailPage } from '../../data/programs-details.js';
 
-const ARABIC_DIGITS = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
-
 const APG_MAIN = 'assets/images/gallery/apg/apg-main.png';
 const APG_SUP = [1, 2, 3, 4, 5, 6].map((n) => `assets/images/gallery/apg/apg-sup-${n}.png`);
 
@@ -65,12 +63,8 @@ function escapeHtml(value) {
     .replace(/"/g, '&quot;');
 }
 
-function toDisplayNum(n, useArabic) {
-  if (!useArabic) return String(n);
-  return String(n)
-    .split('')
-    .map((d) => ARABIC_DIGITS[Number(d)] ?? d)
-    .join('');
+function toDisplayNum(n) {
+  return String(n);
 }
 
 function currentSlug() {
@@ -285,7 +279,7 @@ function modulesStrip(items, useArabic, childrenByParent = new Map()) {
             .join('')}</ul>`
         : '';
       return `<article class="program-detail-module-chip glass-panel">
-        <span class="program-detail-module-chip-num">${toDisplayNum(module.order, useArabic)}</span>
+        <span class="program-detail-module-chip-num">${toDisplayNum(module.order)}</span>
         <h4 class="program-detail-module-chip-title">${escapeHtml(module.heading)}</h4>
         <p class="program-detail-module-chip-text">${escapeHtml(module.subheading)}</p>
         ${childList}

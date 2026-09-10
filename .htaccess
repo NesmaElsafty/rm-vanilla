@@ -1,28 +1,43 @@
 # Hostinger / Apache — static vanilla site
 
-Options -MultiViews
-RewriteEngine On
-
-# Force HTTPS (uncomment if SSL is active on the domain)
-# RewriteCond %{HTTPS} !=on
-# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
-# Prefer index.html
 DirectoryIndex index.html
+
+# Correct MIME types (ES modules need this)
+<IfModule mod_mime.c>
+  AddType text/css .css
+  AddType text/javascript .js
+  AddType text/javascript .mjs
+  AddType application/javascript .js
+  AddType image/svg+xml .svg
+  AddType image/webp .webp
+  AddType font/woff2 .woff2
+</IfModule>
+
+# Allow CORS for module scripts if needed on same host
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|mjs|css)$">
+    Header set Access-Control-Allow-Origin "*"
+  </FilesMatch>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Do not rewrite asset requests
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+</IfModule>
 
 # Cache static assets
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css "access plus 7 days"
+  ExpiresByType text/javascript "access plus 7 days"
   ExpiresByType application/javascript "access plus 7 days"
   ExpiresByType image/png "access plus 30 days"
   ExpiresByType image/jpeg "access plus 30 days"
   ExpiresByType image/webp "access plus 30 days"
   ExpiresByType image/svg+xml "access plus 30 days"
-</IfModule>
-
-# Security headers (safe defaults)
-<IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>

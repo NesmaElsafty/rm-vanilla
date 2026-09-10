@@ -1,14 +1,6 @@
 import recordedSessionsSeeder from './recorded-sessions-seeder.js';
 import recordedSessionsSeederEn from './recorded-sessions-seeder.en.js';
-
-const IMAGE_BY_SLUG = {
-  'surrender-facing-challenges': 'assets/images/sessions/session-return-to-god.png',
-  'reconcile-with-yourself': 'assets/images/sessions/session-restore-confidence.png',
-  forgiveness: 'assets/images/sessions/session-healing-roots.png',
-  'future-self-meeting': 'assets/images/sessions/session-clarity-inner-doubt.png',
-};
-
-const DEFAULT_IMAGE = 'assets/images/session-detail-hero-portrait.png';
+import { getProgramHeroImage } from '../assets/js/utils/program-hero-images.js';
 
 const landingPages = recordedSessionsSeeder.recorded_sessions_landing_pages;
 const homeCards = recordedSessionsSeeder.recorded_sessions_home_cards;
@@ -23,7 +15,7 @@ function resolveButtonText(slug, locale) {
   if (locale === 'en') {
     return enHomeCardsBySlug[slug]?.button_text ?? 'Learn More';
   }
-  return homeCards.find((item) => item.slug === slug)?.button_text ?? 'اعرفي التفاصيل';
+  return homeCards.find((item) => item.slug === slug)?.button_text ?? 'اعرف التفاصيل';
 }
 
 function buildSession(record, locale) {
@@ -34,7 +26,7 @@ function buildSession(record, locale) {
 
   return {
     ...content,
-    image: IMAGE_BY_SLUG[record.slug] ?? DEFAULT_IMAGE,
+    image: getProgramHeroImage(record.slug),
     button_text: resolveButtonText(record.slug, locale),
   };
 }
@@ -55,6 +47,13 @@ export function getRecordedSessionBySlug(slug, locale = 'ar') {
 }
 
 export function getRecordedSessionCards(locale = 'ar') {
-  if (locale === 'en') return recordedSessionsSeederEn.recorded_sessions_home_cards;
-  return homeCards;
+  const cards = locale === 'en' ? recordedSessionsSeederEn.recorded_sessions_home_cards : homeCards;
+
+  return cards.map((card) => ({
+    slug: card.slug,
+    title: card.title,
+    description: card.description,
+    button_text: card.button_text ?? resolveButtonText(card.slug, locale),
+    image: getProgramHeroImage(card.slug),
+  }));
 }
