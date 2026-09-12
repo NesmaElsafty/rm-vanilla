@@ -89,7 +89,7 @@ function ensureSlider(kind) {
       textOnly: config.textOnly,
       dotsLabel: config.dotsLabel,
       detailPage: config.page,
-      autoplay: true,
+      autoplay: !window.matchMedia('(hover: none), (pointer: coarse)').matches,
       onSelect(slug) {
         closeModal(kind);
         const page =
@@ -105,7 +105,8 @@ export function closeModal(kind) {
   if (!modal || modal.hidden) return;
   modal.hidden = true;
   modal.classList.remove('is-open');
-  sliders.get(kind)?.pause?.();
+  sliders.get(kind)?.destroy?.();
+  sliders.delete(kind);
   unlockBody();
 }
 

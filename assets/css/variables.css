@@ -140,13 +140,13 @@
   --theme-footer-social-bg: rgba(199, 154, 59, 0.1);
   --theme-footer-social-hover-text: #2B103F;
   --theme-footer-modal-bg: #F8F3EB;
-  /* Light Mode footer: dark navy + ambient lights (dark-hero language) */
-  --theme-footer-bg: #071424;
+  /* Light Mode footer: philosophy-chapter purple + ambient lights */
+  --theme-footer-bg: #2B103F;
   --theme-footer-ink: #F8F3EB;
   --theme-footer-ink-muted: rgba(248, 243, 235, 0.76);
   --theme-footer-heading: #D7BE7A;
   --theme-footer-border: rgba(199, 154, 59, 0.18);
-  --theme-footer-panel: color-mix(in srgb, #071424 72%, #12051A);
+  --theme-footer-panel: color-mix(in srgb, #2B103F 70%, #4B146D);
   --botanical-vine: #7e5a9b;
   --botanical-vine-soft: #7e5a9b;
   --botanical-light: #f8f5f0;

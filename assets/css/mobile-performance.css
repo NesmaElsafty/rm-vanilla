@@ -1,0 +1,133 @@
+/**
+ * Mobile / coarse-pointer performance layer.
+ * Desktop hover+fine pointer visual identity is unchanged.
+ */
+
+@media (max-width: 767px), (hover: none) and (pointer: coarse) {
+  /* ── Floating slider: no continuous bob on duplicated cards ── */
+  .floating-programs-slide,
+  .floating-programs-slide--active {
+    animation: none;
+  }
+
+  .floating-programs-slide {
+    scroll-snap-stop: normal;
+  }
+
+  /* Spinning rings: never run on every duplicated slide */
+  .floating-program-card-image-ring,
+  .floating-programs-ring,
+  .floating-programs-sparkle {
+    animation: none;
+  }
+
+  /* Static glass instead of live backdrop blur on slider + modal cards */
+  .floating-program-card.glass-slide,
+  .floating-program-card.glass-panel,
+  .modal-dialog.glass-slide,
+  .modal-dialog.glass-panel {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  [data-theme='luxury-rose'] .floating-program-card.glass-slide,
+  [data-theme='luxury-rose'] .modal-dialog.glass-slide {
+    background: linear-gradient(
+      160deg,
+      color-mix(in srgb, #0d1b34 78%, #2b103f) 0%,
+      color-mix(in srgb, #071424 86%, #4b146d) 100%
+    );
+  }
+
+  [data-theme='cream-elegance'] .floating-program-card.glass-slide,
+  [data-theme='cream-elegance'] .modal-dialog.glass-slide {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.96) 0%,
+      rgba(248, 243, 235, 0.96) 50%,
+      rgba(237, 232, 223, 0.96) 100%
+    );
+  }
+
+  .modal-backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(0, 0, 0, 0.72);
+  }
+
+  /* Static gold edge — no infinite shimmer/pulse on slider cards */
+  .floating-program-card.glass-slide,
+  .floating-program-card.glass-panel,
+  .modal-dialog.glass-slide {
+    animation: none;
+  }
+
+  .floating-program-card.glass-slide::after,
+  .floating-program-card.glass-panel::after,
+  .modal-dialog.glass-slide::after {
+    animation: none;
+  }
+
+  .floating-programs-slide--active .floating-program-card {
+    box-shadow: 0 16px 28px -14px rgba(0, 0, 0, 0.48);
+  }
+
+  .floating-program-card-halo {
+    opacity: 0.35;
+    transform: none;
+  }
+
+  .floating-programs-slide--active .floating-program-card-halo {
+    opacity: 0.55;
+    transform: none;
+  }
+
+  .glow-card {
+    will-change: auto;
+  }
+
+  .glow-card:hover,
+  .session-detail-modal-card:hover {
+    transform: none;
+  }
+
+  /* ── Page scroll: stop simultaneous decorative loops ── */
+  .glass-slide:not(.gold-border-light),
+  .glass-panel:not(.gold-border-light),
+  .gold-border-light,
+  .glass-slide:not(.gold-border-light)::after,
+  .glass-panel:not(.gold-border-light)::after,
+  .gold-border-light::after,
+  .gold-rule,
+  .gold-rule-short,
+  .portrait-name-bar,
+  .portrait-name-bar::after,
+  .keynote-label::after,
+  .btn-luxury-ghost::after,
+  .animate-spin-slow {
+    animation: none;
+  }
+
+  .backdrop-glow-animated {
+    animation: none;
+    will-change: auto;
+    transform: none;
+  }
+
+  .footer-logo-btn::before {
+    animation: none;
+    will-change: auto;
+  }
+
+  .journey-curve-light,
+  .journey-circle--animated::before,
+  .journey-circle--animated::after,
+  .journey-circle-dot,
+  .journey-arrow-wrap {
+    animation: none;
+  }
+
+  .program-detail-image-ring {
+    animation: none;
+  }
+}

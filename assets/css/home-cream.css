@@ -164,9 +164,10 @@ html[data-theme='cream-elegance'] body.home-page #stats .home-stat-value.text-go
 }
 
 html[data-theme='cream-elegance'] body.home-page #stats .home-stat-icon {
-  background: color-mix(in srgb, var(--home-ink) 8%, var(--home-cream));
-  border-color: color-mix(in srgb, var(--home-ink) 22%, transparent);
+  background: none;
+  border: none;
   color: var(--home-ink-strong);
+  opacity: 0.18;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -498,15 +499,27 @@ html[data-theme='cream-elegance'] body.home-page #contact .contact-icon-wrap {
 }
 
 /* -------------------------------------------------------------------------- */
-/* Footer — dark navy + hero-style ambient lights                             */
+/* Footer — philosophy-chapter purple + matching ambient lights                 */
 /* -------------------------------------------------------------------------- */
 
 html[data-theme='cream-elegance'] body.home-page .footer-luxury {
   background:
-    radial-gradient(ellipse 70% 65% at 58% 42%, rgba(194, 153, 173, 0.34) 0%, rgba(185, 143, 162, 0.18) 28%, rgba(215, 190, 122, 0.07) 42%, transparent 72%),
-    radial-gradient(circle at 18% 78%, rgba(199, 154, 59, 0.16) 0%, rgba(215, 190, 122, 0.07) 40%, transparent 70%),
-    radial-gradient(ellipse 60% 55% at 88% 18%, rgba(122, 62, 177, 0.22) 0%, rgba(75, 20, 109, 0.14) 38%, transparent 72%),
-    linear-gradient(155deg, #040a14 0%, #071424 28%, #0a1628 55%, #071424 82%, #040a14 100%);
+    radial-gradient(
+      ellipse 70% 55% at 85% 20%,
+      color-mix(in srgb, var(--home-accent) 22%, transparent) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 55% 50% at 10% 80%,
+      color-mix(in srgb, var(--home-gold) 14%, transparent) 0%,
+      transparent 65%
+    ),
+    radial-gradient(
+      ellipse 45% 40% at 50% 50%,
+      color-mix(in srgb, var(--home-rose) 10%, transparent) 0%,
+      transparent 70%
+    ),
+    var(--home-dark-chapter);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border-top: 1px solid color-mix(in srgb, var(--home-gold) 18%, transparent);
@@ -533,7 +546,7 @@ html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-link:foc
 
 html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-charter-box,
 html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon {
-  background: color-mix(in srgb, var(--home-deepest-dark) 72%, var(--home-ink));
+  background: color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-primary));
   border-color: color-mix(in srgb, var(--home-cream) 16%, transparent);
   color: var(--home-cream);
 }

@@ -49,6 +49,10 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+function isCoarsePointer() {
+  return window.matchMedia('(hover: none), (pointer: coarse)').matches;
+}
+
 function scrollToPhysical(container, index, smooth = true) {
   const card = container.children[index];
   if (!card) return;
@@ -57,7 +61,6 @@ function scrollToPhysical(container, index, smooth = true) {
   const cardRect = card.getBoundingClientRect();
   const delta = cardRect.left + cardRect.width / 2 - (containerRect.left + containerRect.width / 2);
   const previous = container.style.scrollBehavior;
-
   if (!smooth) container.style.scrollBehavior = 'auto';
   container.scrollBy({ left: delta, behavior: smooth ? 'smooth' : 'auto' });
   if (!smooth) {
@@ -67,30 +70,12 @@ function scrollToPhysical(container, index, smooth = true) {
   }
 }
 
-function closestPhysicalIndex(container) {
-  const cards = Array.from(container.children);
-  if (!cards.length) return 0;
-  const containerRect = container.getBoundingClientRect();
-  const center = containerRect.left + containerRect.width / 2;
-  let closest = 0;
-  let minDistance = Number.POSITIVE_INFINITY;
-  cards.forEach((card, index) => {
-    const rect = card.getBoundingClientRect();
-    const distance = Math.abs(rect.left + rect.width / 2 - center);
-    if (distance < minDistance) {
-      minDistance = distance;
-      closest = index;
-    }
-  });
-  return closest;
-}
-
 function cardMarkup(item, textOnly, isActive, ctaIcon, detailHref = '') {
   const visual = textOnly
     ? ''
     : `<div class="floating-program-card-visual">
         <div class="floating-program-card-image-ring" aria-hidden="true"></div>
-        <img src="${escapeHtml(item.image ?? '')}" alt="" class="floating-program-card-image" loading="lazy" decoding="async"/>
+        <img src="${escapeHtml(item.image ?? '')}" alt="" class="floating-program-card-image" width="152" height="152" loading="lazy" decoding="async"/>
       </div>`;
 
   const articleClass = textOnly
@@ -127,20 +112,31 @@ export function createFloatingSlider(container, items, options = {}) {
   const nextIcon = rtl ? iconChevronLeft('icon icon-sm') : iconChevronRight('icon icon-sm');
   const ctaIcon = rtl ? iconChevronLeft('icon icon-xs') : iconChevronRight('icon icon-xs');
   const content = getContent(getLocale());
+  const allowAutoplay = Boolean(autoplay) && !isCoarsePointer() && !prefersReducedMotion();
 
   let physicalIndex = count;
   let activeIndex = 0;
   let isPaused = false;
   let isNormalizing = false;
+  let isAnimating = false;
+  let isUserInteracting = false;
+  let isPointerDown = false;
+  let isVisible = true;
   let autoplayId = 0;
   let resumeTimer = 0;
+  let settleTimer = 0;
+  let revealTimer = 0;
+  let scrollRaf = 0;
+  let resizeRaf = 0;
+  let slideCenters = [];
+  let viewportWidth = 0;
 
   const looped = [0, 1, 2].flatMap((copy) =>
     items.map((item, idx) => ({ item, copy, idx })),
   );
 
   const slides = looped
-    .map(({ item, copy, idx }, physical) => {
+    .map(({ item, copy, idx }) => {
       const isActive = idx === activeIndex;
       return `<div class="floating-programs-slide${isActive ? ' floating-programs-slide--active' : ''}" style="--float-delay: ${(idx % count) * 0.55}s" data-slide-copy="${copy}" data-slide-index="${idx}">
         ${cardMarkup(item, textOnly, isActive, ctaIcon, detailPage)}
@@ -155,7 +151,7 @@ export function createFloatingSlider(container, items, options = {}) {
     )
     .join('');
 
-  container.innerHTML = `<div class="floating-programs-scene" dir="${dir}">
+  container.innerHTML = `<div class="floating-programs-scene is-pending" dir="${dir}" aria-busy="true">
     <div class="floating-programs-slider-wrap">
       <div class="floating-programs-slider programs-slider">${slides}</div>
       <div class="floating-programs-nav">
@@ -166,63 +162,132 @@ export function createFloatingSlider(container, items, options = {}) {
     </div>
   </div>`;
 
+  const sceneEl = container.querySelector('.floating-programs-scene');
   const scrollEl = container.querySelector('.floating-programs-slider');
   const wrapEl = container.querySelector('.floating-programs-slider-wrap');
   const prevBtn = container.querySelector('[data-slider-prev]');
   const nextBtn = container.querySelector('[data-slider-next]');
+  const slideEls = Array.from(scrollEl.children);
+  const dotEls = Array.from(container.querySelectorAll('[data-slider-dot]'));
+  const textCardEls = slideEls.map((slide) => slide.querySelector('.session-detail-modal-card'));
+  const selectBtns = Array.from(container.querySelectorAll('[data-slider-select]'));
 
-  const syncActive = () => {
-    container.querySelectorAll('.floating-programs-slide').forEach((slide, idx) => {
-      const logical = idx % count;
-      slide.classList.toggle('floating-programs-slide--active', logical === activeIndex);
-      slide.querySelector('.session-detail-modal-card')?.classList.toggle(
-        'session-detail-modal-card--active',
-        logical === activeIndex,
-      );
+  const cacheGeometry = () => {
+    const containerRect = scrollEl.getBoundingClientRect();
+    const scrollLeft = scrollEl.scrollLeft;
+    viewportWidth = scrollEl.clientWidth;
+    slideCenters = slideEls.map((slide) => {
+      const rect = slide.getBoundingClientRect();
+      return rect.left + rect.width / 2 - containerRect.left + scrollLeft;
     });
-    container.querySelectorAll('[data-slider-dot]').forEach((dot) => {
-      const idx = Number(dot.getAttribute('data-slider-dot'));
-      const selected = idx === activeIndex;
-      dot.classList.toggle('floating-programs-dot--active', selected);
-      dot.setAttribute('aria-selected', selected ? 'true' : 'false');
-    });
+  };
+
+  const closestCachedIndex = () => {
+    if (!slideCenters.length) return physicalIndex;
+    const viewCenter = scrollEl.scrollLeft + viewportWidth / 2;
+    let closest = 0;
+    let minDistance = Number.POSITIVE_INFINITY;
+    for (let i = 0; i < slideCenters.length; i += 1) {
+      const distance = Math.abs(slideCenters[i] - viewCenter);
+      if (distance < minDistance) {
+        minDistance = distance;
+        closest = i;
+      }
+    }
+    return closest;
+  };
+
+  const applyScroll = (dest, smooth) => {
+    if (!smooth) {
+      const previous = scrollEl.style.scrollBehavior;
+      scrollEl.style.scrollBehavior = 'auto';
+      scrollEl.scrollLeft = dest;
+      scrollEl.style.scrollBehavior = previous;
+      isAnimating = false;
+      return;
+    }
+    isAnimating = true;
+    scrollEl.scrollTo({ left: dest, behavior: 'smooth' });
   };
 
   const goPhysical = (index, smooth = true) => {
-    scrollToPhysical(scrollEl, index, smooth);
+    if (index < 0 || index >= slideEls.length) return;
     physicalIndex = index;
+    if (!slideCenters.length) {
+      scrollToPhysical(scrollEl, index, smooth);
+      if (smooth) isAnimating = true;
+      return;
+    }
+    applyScroll(slideCenters[index] - viewportWidth / 2, smooth);
+  };
+
+  const syncActive = (nextIndex) => {
+    if (nextIndex === activeIndex) return;
+    const previous = activeIndex;
+    activeIndex = nextIndex;
+
+    for (let i = 0; i < slideEls.length; i += 1) {
+      const logical = Number(slideEls[i].dataset.slideIndex);
+      if (logical === previous) {
+        slideEls[i].classList.remove('floating-programs-slide--active');
+        textCardEls[i]?.classList.remove('session-detail-modal-card--active');
+      } else if (logical === activeIndex) {
+        slideEls[i].classList.add('floating-programs-slide--active');
+        textCardEls[i]?.classList.add('session-detail-modal-card--active');
+      }
+    }
+
+    if (dotEls[previous]) {
+      dotEls[previous].classList.remove('floating-programs-dot--active');
+      dotEls[previous].setAttribute('aria-selected', 'false');
+    }
+    if (dotEls[activeIndex]) {
+      dotEls[activeIndex].classList.add('floating-programs-dot--active');
+      dotEls[activeIndex].setAttribute('aria-selected', 'true');
+    }
   };
 
   const normalizeLoop = () => {
-    if (isNormalizing) return;
-    if (physicalIndex < count) {
+    if (isNormalizing || isAnimating || isPointerDown) return;
+    const idx = closestCachedIndex();
+    physicalIndex = idx;
+    if (idx < count) {
       isNormalizing = true;
-      goPhysical(physicalIndex + count, false);
+      goPhysical(idx + count, false);
       isNormalizing = false;
-    } else if (physicalIndex > count * 2 - 1) {
+    } else if (idx > count * 2 - 1) {
       isNormalizing = true;
-      goPhysical(physicalIndex - count, false);
+      goPhysical(idx - count, false);
       isNormalizing = false;
     }
   };
 
   const syncFromScroll = () => {
     if (isNormalizing) return;
-    physicalIndex = closestPhysicalIndex(scrollEl);
-    activeIndex = physicalIndex % count;
-    syncActive();
+    physicalIndex = closestCachedIndex();
+    syncActive(physicalIndex % count);
   };
 
+  const canNavigate = () => !isNormalizing && !isAnimating;
+
   const next = () => {
-    if (physicalIndex >= count * 2 - 1) goPhysical(physicalIndex - count, false);
+    if (!canNavigate()) return;
+    if (physicalIndex >= count * 2 - 1) {
+      isNormalizing = true;
+      goPhysical((physicalIndex % count) + count, false);
+      isNormalizing = false;
+    }
     goPhysical(physicalIndex + 1, true);
-    window.setTimeout(normalizeLoop, 500);
   };
 
   const prev = () => {
-    if (physicalIndex <= count) goPhysical(physicalIndex + count - 1, false);
+    if (!canNavigate()) return;
+    if (physicalIndex <= count) {
+      isNormalizing = true;
+      goPhysical((physicalIndex % count) + count * 2, false);
+      isNormalizing = false;
+    }
     goPhysical(physicalIndex - 1, true);
-    window.setTimeout(normalizeLoop, 500);
   };
 
   const stopAutoplay = () => {
@@ -232,8 +297,20 @@ export function createFloatingSlider(container, items, options = {}) {
 
   const startAutoplay = () => {
     stopAutoplay();
-    if (!autoplay || isPaused || prefersReducedMotion()) return;
-    autoplayId = window.setInterval(next, AUTOPLAY_MS);
+    if (
+      !allowAutoplay ||
+      isPaused ||
+      isUserInteracting ||
+      isNormalizing ||
+      !isVisible ||
+      document.visibilityState !== 'visible'
+    ) {
+      return;
+    }
+    autoplayId = window.setInterval(() => {
+      if (isUserInteracting || isNormalizing || isAnimating || !isVisible) return;
+      next();
+    }, AUTOPLAY_MS);
   };
 
   const pause = () => {
@@ -246,28 +323,72 @@ export function createFloatingSlider(container, items, options = {}) {
     startAutoplay();
   };
 
-  const onScroll = () => syncFromScroll();
-  const onScrollEnd = () => normalizeLoop();
-  const onResize = () => syncFromScroll();
-
-  scrollEl.addEventListener('scroll', onScroll, { passive: true });
-  scrollEl.addEventListener('scrollend', onScrollEnd);
-  window.addEventListener('resize', onResize);
-
-  wrapEl.addEventListener('mouseenter', pause);
-  wrapEl.addEventListener('mouseleave', resume);
-  wrapEl.addEventListener('focusin', pause);
-  wrapEl.addEventListener('focusout', (event) => {
-    if (!wrapEl.contains(event.relatedTarget)) resume();
-  });
-  wrapEl.addEventListener('touchstart', pause, { passive: true });
-  wrapEl.addEventListener('touchend', () => {
+  const scheduleResume = () => {
     window.clearTimeout(resumeTimer);
-    resumeTimer = window.setTimeout(resume, 3000);
-  });
+    resumeTimer = window.setTimeout(() => {
+      isUserInteracting = false;
+      resume();
+    }, 3000);
+  };
 
-  prevBtn.addEventListener('click', prev);
-  nextBtn.addEventListener('click', next);
+  const settle = () => {
+    isAnimating = false;
+    if (!isPointerDown) normalizeLoop();
+  };
+
+  const scheduleSettle = () => {
+    window.clearTimeout(settleTimer);
+    settleTimer = window.setTimeout(settle, 160);
+  };
+
+  const onScroll = () => {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => {
+      scrollRaf = 0;
+      syncFromScroll();
+      scheduleSettle();
+    });
+  };
+
+  const onScrollEnd = () => {
+    window.clearTimeout(settleTimer);
+    settle();
+  };
+
+  const onResize = () => {
+    if (resizeRaf) return;
+    resizeRaf = requestAnimationFrame(() => {
+      resizeRaf = 0;
+      cacheGeometry();
+      goPhysical(count + activeIndex, false);
+    });
+  };
+
+  const onPointerDown = (event) => {
+    if (event.target.closest('.floating-programs-nav, a, button')) return;
+    isPointerDown = true;
+    isUserInteracting = true;
+    isAnimating = false;
+    pause();
+  };
+
+  const onPointerUp = () => {
+    isPointerDown = false;
+    scheduleSettle();
+    scheduleResume();
+  };
+
+  const onFocusOut = (event) => {
+    if (!wrapEl.contains(event.relatedTarget)) resume();
+  };
+
+  const onVisibility = () => {
+    if (document.visibilityState !== 'visible') {
+      stopAutoplay();
+      return;
+    }
+    if (!isPaused && !isUserInteracting && isVisible) startAutoplay();
+  };
 
   const onNavKey = (event) => {
     if (event.key === 'ArrowLeft') {
@@ -279,34 +400,116 @@ export function createFloatingSlider(container, items, options = {}) {
       rtl ? prev() : next();
     }
   };
+
+  const onDotClick = (event) => {
+    const idx = Number(event.currentTarget.getAttribute('data-slider-dot'));
+    if (!Number.isFinite(idx) || !canNavigate()) return;
+    pause();
+    goPhysical(count + idx, true);
+    scheduleResume();
+  };
+
+  const onSelectClick = (event) => {
+    const slug = event.currentTarget.getAttribute('data-slider-select');
+    if (!slug) return;
+    if (typeof onSelect === 'function') {
+      event.preventDefault();
+      onSelect(slug);
+    }
+  };
+
+  scrollEl.addEventListener('scroll', onScroll, { passive: true });
+  scrollEl.addEventListener('scrollend', onScrollEnd);
+  window.addEventListener('resize', onResize, { passive: true });
+  document.addEventListener('visibilitychange', onVisibility);
+
+  wrapEl.addEventListener('mouseenter', pause);
+  wrapEl.addEventListener('mouseleave', resume);
+  wrapEl.addEventListener('focusin', pause);
+  wrapEl.addEventListener('focusout', onFocusOut);
+  wrapEl.addEventListener('pointerdown', onPointerDown, { passive: true });
+  wrapEl.addEventListener('pointerup', onPointerUp, { passive: true });
+  wrapEl.addEventListener('pointercancel', onPointerUp, { passive: true });
+  wrapEl.addEventListener('touchstart', onPointerDown, { passive: true });
+  wrapEl.addEventListener('touchend', onPointerUp, { passive: true });
+
+  prevBtn.addEventListener('click', prev);
+  nextBtn.addEventListener('click', next);
   prevBtn.addEventListener('keydown', onNavKey);
   nextBtn.addEventListener('keydown', onNavKey);
+  dotEls.forEach((dot) => dot.addEventListener('click', onDotClick));
+  selectBtns.forEach((btn) => btn.addEventListener('click', onSelectClick));
 
-  container.querySelectorAll('[data-slider-dot]').forEach((dot) => {
-    dot.addEventListener('click', () => goPhysical(count + Number(dot.getAttribute('data-slider-dot')), true));
-  });
+  const resizeObserver =
+    typeof ResizeObserver === 'function'
+      ? new ResizeObserver(() => onResize())
+      : null;
+  resizeObserver?.observe(scrollEl);
 
-  container.querySelectorAll('[data-slider-select]').forEach((btn) => {
-    btn.addEventListener('click', (event) => {
-      const slug = btn.getAttribute('data-slider-select');
-      if (!slug) return;
-      if (typeof onSelect === 'function') {
-        event.preventDefault();
-        onSelect(slug);
-      }
+  const intersectionObserver =
+    typeof IntersectionObserver === 'function'
+      ? new IntersectionObserver(
+          (entries) => {
+            isVisible = entries.some((entry) => entry.isIntersecting);
+            if (!isVisible) {
+              stopAutoplay();
+              return;
+            }
+            if (!isPaused && !isUserInteracting) startAutoplay();
+          },
+          { threshold: 0.2 },
+        )
+      : null;
+  intersectionObserver?.observe(scrollEl);
+
+  const revealSlider = () => {
+    sceneEl.classList.remove('is-pending');
+    sceneEl.classList.add('is-ready');
+    sceneEl.setAttribute('aria-busy', 'false');
+  };
+
+  requestAnimationFrame(() => {
+    cacheGeometry();
+    goPhysical(count, false);
+    requestAnimationFrame(() => {
+      cacheGeometry();
+      goPhysical(count, false);
+      revealSlider();
+      startAutoplay();
     });
   });
-
-  requestAnimationFrame(() => goPhysical(count, false));
-  startAutoplay();
+  revealTimer = window.setTimeout(revealSlider, 180);
 
   return {
     destroy() {
       stopAutoplay();
       window.clearTimeout(resumeTimer);
+      window.clearTimeout(settleTimer);
+      window.clearTimeout(revealTimer);
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
       scrollEl.removeEventListener('scroll', onScroll);
       scrollEl.removeEventListener('scrollend', onScrollEnd);
       window.removeEventListener('resize', onResize);
+      document.removeEventListener('visibilitychange', onVisibility);
+      wrapEl.removeEventListener('mouseenter', pause);
+      wrapEl.removeEventListener('mouseleave', resume);
+      wrapEl.removeEventListener('focusin', pause);
+      wrapEl.removeEventListener('focusout', onFocusOut);
+      wrapEl.removeEventListener('pointerdown', onPointerDown);
+      wrapEl.removeEventListener('pointerup', onPointerUp);
+      wrapEl.removeEventListener('pointercancel', onPointerUp);
+      wrapEl.removeEventListener('touchstart', onPointerDown);
+      wrapEl.removeEventListener('touchend', onPointerUp);
+      prevBtn.removeEventListener('click', prev);
+      nextBtn.removeEventListener('click', next);
+      prevBtn.removeEventListener('keydown', onNavKey);
+      nextBtn.removeEventListener('keydown', onNavKey);
+      dotEls.forEach((dot) => dot.removeEventListener('click', onDotClick));
+      selectBtns.forEach((btn) => btn.removeEventListener('click', onSelectClick));
+      resizeObserver?.disconnect();
+      intersectionObserver?.disconnect();
+      container.innerHTML = '';
     },
     refresh() {
       const nextRtl = isRtl();
@@ -315,7 +518,9 @@ export function createFloatingSlider(container, items, options = {}) {
       const nextContent = getContent(getLocale());
       prevBtn.setAttribute('aria-label', nextContent.programs?.prevProgram ?? '');
       nextBtn.setAttribute('aria-label', nextContent.programs?.nextProgram ?? '');
-      container.querySelector('.floating-programs-scene')?.setAttribute('dir', getDir(getLocale()));
+      sceneEl.setAttribute('dir', getDir(getLocale()));
+      cacheGeometry();
+      goPhysical(count + activeIndex, false);
     },
     pause,
     resume,
