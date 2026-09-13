@@ -1,0 +1,492 @@
+[
+  {
+    "src": "assets/images/dr_rana_portrait.png",
+    "src_bytes": 535071,
+    "dest": "assets/images/dr_rana_portrait.webp",
+    "dest_bytes": 24710,
+    "width": null
+  },
+  {
+    "src": "assets/images/dr_rana_portrait.png",
+    "src_bytes": 535071,
+    "dest": "assets/images/dr_rana_portrait-480.webp",
+    "dest_bytes": 15960,
+    "width": 480
+  },
+  {
+    "src": "assets/images/dr_rana_portrait.png",
+    "src_bytes": 535071,
+    "dest": "assets/images/dr_rana_portrait-720.webp",
+    "dest_bytes": 24710,
+    "width": 680
+  },
+  {
+    "src": "assets/images/about.png",
+    "src_bytes": 2305238,
+    "dest": "assets/images/about.webp",
+    "dest_bytes": 105716,
+    "width": 1362
+  },
+  {
+    "src": "assets/images/about.png",
+    "src_bytes": 2305238,
+    "dest": "assets/images/about-800.webp",
+    "dest_bytes": 39310,
+    "width": 800
+  },
+  {
+    "src": "assets/images/about.png",
+    "src_bytes": 2305238,
+    "dest": "assets/images/about-1400.webp",
+    "dest_bytes": 105716,
+    "width": 1362
+  },
+  {
+    "src": "assets/images/about-hero-portrait.png",
+    "src_bytes": 441066,
+    "dest": "assets/images/about-hero-portrait.webp",
+    "dest_bytes": 24668,
+    "width": 800
+  },
+  {
+    "src": "assets/images/rana-about.jpg",
+    "src_bytes": 208160,
+    "dest": "assets/images/rana-about.webp",
+    "dest_bytes": 98348,
+    "width": 800
+  },
+  {
+    "src": "assets/images/philosophy-tall.png",
+    "src_bytes": 68578,
+    "dest": "assets/images/philosophy-tall.webp",
+    "dest_bytes": 51740,
+    "width": null
+  },
+  {
+    "src": "assets/images/philosophy.jpg",
+    "src_bytes": 54620,
+    "dest": "assets/images/philosophy.webp",
+    "dest_bytes": 39704,
+    "width": null
+  },
+  {
+    "src": "assets/images/rana-logo.png",
+    "src_bytes": 96872,
+    "dest": "assets/images/rana-logo.webp",
+    "dest_bytes": 13928,
+    "width": 256
+  },
+  {
+    "src": "assets/images/programs/program-ana-ontha.png",
+    "src_bytes": 174401,
+    "dest": "assets/images/programs/program-ana-ontha.webp",
+    "dest_bytes": 74394,
+    "width": 900
+  },
+  {
+    "src": "assets/images/programs/program-ana-ontha.png",
+    "src_bytes": 174401,
+    "dest": "assets/images/programs/program-ana-ontha-304.webp",
+    "dest_bytes": 15792,
+    "width": 304
+  },
+  {
+    "src": "assets/images/programs/program-confidence.png",
+    "src_bytes": 176303,
+    "dest": "assets/images/programs/program-confidence.webp",
+    "dest_bytes": 72200,
+    "width": 900
+  },
+  {
+    "src": "assets/images/programs/program-confidence.png",
+    "src_bytes": 176303,
+    "dest": "assets/images/programs/program-confidence-304.webp",
+    "dest_bytes": 15398,
+    "width": 304
+  },
+  {
+    "src": "assets/images/programs/program-mottasel.png",
+    "src_bytes": 176303,
+    "dest": "assets/images/programs/program-mottasel.webp",
+    "dest_bytes": 72200,
+    "width": 900
+  },
+  {
+    "src": "assets/images/programs/program-mottasel.png",
+    "src_bytes": 176303,
+    "dest": "assets/images/programs/program-mottasel-304.webp",
+    "dest_bytes": 15398,
+    "width": 304
+  },
+  {
+    "src": "assets/images/programs/program-new-version.png",
+    "src_bytes": 220869,
+    "dest": "assets/images/programs/program-new-version.webp",
+    "dest_bytes": 107068,
+    "width": 900
+  },
+  {
+    "src": "assets/images/programs/program-new-version.png",
+    "src_bytes": 220869,
+    "dest": "assets/images/programs/program-new-version-304.webp",
+    "dest_bytes": 22184,
+    "width": 304
+  },
+  {
+    "src": "assets/images/programs/program-nlp.png",
+    "src_bytes": 183298,
+    "dest": "assets/images/programs/program-nlp.webp",
+    "dest_bytes": 80376,
+    "width": 900
+  },
+  {
+    "src": "assets/images/programs/program-nlp.png",
+    "src_bytes": 183298,
+    "dest": "assets/images/programs/program-nlp-304.webp",
+    "dest_bytes": 14748,
+    "width": 304
+  },
+  {
+    "src": "assets/images/programs/program-self-leadership.png",
+    "src_bytes": 163672,
+    "dest": "assets/images/programs/program-self-leadership.webp",
+    "dest_bytes": 67640,
+    "width": 900
+  },
+  {
+    "src": "assets/images/programs/program-self-leadership.png",
+    "src_bytes": 163672,
+    "dest": "assets/images/programs/program-self-leadership-304.webp",
+    "dest_bytes": 13348,
+    "width": 304
+  },
+  {
+    "src": "assets/images/sessions/program-ana-ontha.png",
+    "src_bytes": 174401,
+    "dest": "assets/images/sessions/program-ana-ontha.webp",
+    "dest_bytes": 74394,
+    "width": 900
+  },
+  {
+    "src": "assets/images/sessions/program-ana-ontha.png",
+    "src_bytes": 174401,
+    "dest": "assets/images/sessions/program-ana-ontha-304.webp",
+    "dest_bytes": 15792,
+    "width": 304
+  },
+  {
+    "src": "assets/images/sessions/program-confidence.png",
+    "src_bytes": 176303,
+    "dest": "assets/images/sessions/program-confidence.webp",
+    "dest_bytes": 72200,
+    "width": 900
+  },
+  {
+    "src": "assets/images/sessions/program-confidence.png",
+    "src_bytes": 176303,
+    "dest": "assets/images/sessions/program-confidence-304.webp",
+    "dest_bytes": 15398,
+    "width": 304
+  },
+  {
+    "src": "assets/images/sessions/program-mottasel.png",
+    "src_bytes": 176303,
+    "dest": "assets/images/sessions/program-mottasel.webp",
+    "dest_bytes": 72200,
+    "width": 900
+  },
+  {
+    "src": "assets/images/sessions/program-mottasel.png",
+    "src_bytes": 176303,
+    "dest": "assets/images/sessions/program-mottasel-304.webp",
+    "dest_bytes": 15398,
+    "width": 304
+  },
+  {
+    "src": "assets/images/sessions/program-new-version.png",
+    "src_bytes": 220869,
+    "dest": "assets/images/sessions/program-new-version.webp",
+    "dest_bytes": 107068,
+    "width": 900
+  },
+  {
+    "src": "assets/images/sessions/program-new-version.png",
+    "src_bytes": 220869,
+    "dest": "assets/images/sessions/program-new-version-304.webp",
+    "dest_bytes": 22184,
+    "width": 304
+  },
+  {
+    "src": "assets/images/sessions/program-nlp.png",
+    "src_bytes": 183298,
+    "dest": "assets/images/sessions/program-nlp.webp",
+    "dest_bytes": 80376,
+    "width": 900
+  },
+  {
+    "src": "assets/images/sessions/program-nlp.png",
+    "src_bytes": 183298,
+    "dest": "assets/images/sessions/program-nlp-304.webp",
+    "dest_bytes": 14748,
+    "width": 304
+  },
+  {
+    "src": "assets/images/sessions/program-self-leadership.png",
+    "src_bytes": 163672,
+    "dest": "assets/images/sessions/program-self-leadership.webp",
+    "dest_bytes": 67640,
+    "width": 900
+  },
+  {
+    "src": "assets/images/sessions/program-self-leadership.png",
+    "src_bytes": 163672,
+    "dest": "assets/images/sessions/program-self-leadership-304.webp",
+    "dest_bytes": 13348,
+    "width": 304
+  },
+  {
+    "src": "assets/images/floating/motmain-icon.png",
+    "src_bytes": 289305,
+    "dest": "assets/images/floating/motmain-icon.webp",
+    "dest_bytes": 23760,
+    "width": 512
+  },
+  {
+    "src": "assets/images/floating/motmain-icon.png",
+    "src_bytes": 289305,
+    "dest": "assets/images/floating/motmain-icon-304.webp",
+    "dest_bytes": 14118,
+    "width": 304
+  },
+  {
+    "src": "assets/images/gallery/about/about-certification-group.png",
+    "src_bytes": 109037,
+    "dest": "assets/images/gallery/about/about-certification-group.webp",
+    "dest_bytes": 38612,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/about/about-certification-trainer.png",
+    "src_bytes": 108234,
+    "dest": "assets/images/gallery/about/about-certification-trainer.webp",
+    "dest_bytes": 39368,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/about/about-nstt-2025-group.png",
+    "src_bytes": 154122,
+    "dest": "assets/images/gallery/about/about-nstt-2025-group.webp",
+    "dest_bytes": 84914,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/about/about-nstt-speaking.png",
+    "src_bytes": 176233,
+    "dest": "assets/images/gallery/about/about-nstt-speaking.webp",
+    "dest_bytes": 83952,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/about/about-pre-certification.png",
+    "src_bytes": 129247,
+    "dest": "assets/images/gallery/about/about-pre-certification.webp",
+    "dest_bytes": 49114,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/about/about-retreat-casual.png",
+    "src_bytes": 129329,
+    "dest": "assets/images/gallery/about/about-retreat-casual.webp",
+    "dest_bytes": 57872,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/about/about-speaking-event.png",
+    "src_bytes": 91939,
+    "dest": "assets/images/gallery/about/about-speaking-event.webp",
+    "dest_bytes": 29868,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/apg/apg-main.png",
+    "src_bytes": 209400,
+    "dest": "assets/images/gallery/apg/apg-main.webp",
+    "dest_bytes": 97230,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/apg/apg-sup-1.png",
+    "src_bytes": 210210,
+    "dest": "assets/images/gallery/apg/apg-sup-1.webp",
+    "dest_bytes": 111344,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/apg/apg-sup-2.png",
+    "src_bytes": 214017,
+    "dest": "assets/images/gallery/apg/apg-sup-2.webp",
+    "dest_bytes": 113402,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/apg/apg-sup-3.png",
+    "src_bytes": 218436,
+    "dest": "assets/images/gallery/apg/apg-sup-3.webp",
+    "dest_bytes": 120532,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/apg/apg-sup-4.png",
+    "src_bytes": 189500,
+    "dest": "assets/images/gallery/apg/apg-sup-4.webp",
+    "dest_bytes": 92106,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/apg/apg-sup-5.png",
+    "src_bytes": 206649,
+    "dest": "assets/images/gallery/apg/apg-sup-5.webp",
+    "dest_bytes": 95696,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/apg/apg-sup-6.png",
+    "src_bytes": 204992,
+    "dest": "assets/images/gallery/apg/apg-sup-6.webp",
+    "dest_bytes": 94122,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-1.png",
+    "src_bytes": 101497,
+    "dest": "assets/images/gallery/retreat/retreat-1.webp",
+    "dest_bytes": 39434,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-2.png",
+    "src_bytes": 166376,
+    "dest": "assets/images/gallery/retreat/retreat-2.webp",
+    "dest_bytes": 88556,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-3.png",
+    "src_bytes": 142156,
+    "dest": "assets/images/gallery/retreat/retreat-3.webp",
+    "dest_bytes": 67276,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-4.png",
+    "src_bytes": 173378,
+    "dest": "assets/images/gallery/retreat/retreat-4.webp",
+    "dest_bytes": 94588,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-5.png",
+    "src_bytes": 157824,
+    "dest": "assets/images/gallery/retreat/retreat-5.webp",
+    "dest_bytes": 82432,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-6.png",
+    "src_bytes": 158201,
+    "dest": "assets/images/gallery/retreat/retreat-6.webp",
+    "dest_bytes": 84576,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-7.png",
+    "src_bytes": 192623,
+    "dest": "assets/images/gallery/retreat/retreat-7.webp",
+    "dest_bytes": 107604,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-8.png",
+    "src_bytes": 242270,
+    "dest": "assets/images/gallery/retreat/retreat-8.webp",
+    "dest_bytes": 135962,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/gallery/retreat/retreat-hero.png",
+    "src_bytes": 188599,
+    "dest": "assets/images/gallery/retreat/retreat-hero.webp",
+    "dest_bytes": 90768,
+    "width": 1000
+  },
+  {
+    "src": "assets/images/testimonials/afnan-mohamed.png",
+    "src_bytes": 214897,
+    "dest": "assets/images/testimonials/afnan-mohamed.webp",
+    "dest_bytes": 124070,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/apg-feedback-rana-1.png",
+    "src_bytes": 136819,
+    "dest": "assets/images/testimonials/apg-feedback-rana-1.webp",
+    "dest_bytes": 35502,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/apg-feedback-rana-2.png",
+    "src_bytes": 169306,
+    "dest": "assets/images/testimonials/apg-feedback-rana-2.webp",
+    "dest_bytes": 72902,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/apg-feedback-rana-3.png",
+    "src_bytes": 59697,
+    "dest": "assets/images/testimonials/apg-feedback-rana-3.webp",
+    "dest_bytes": 14876,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/apg-feedback-rana-4.png",
+    "src_bytes": 708132,
+    "dest": "assets/images/testimonials/apg-feedback-rana-4.webp",
+    "dest_bytes": 23136,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/bashayer-karim.png",
+    "src_bytes": 65832,
+    "dest": "assets/images/testimonials/bashayer-karim.webp",
+    "dest_bytes": 17200,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/fadia-bdour.png",
+    "src_bytes": 79334,
+    "dest": "assets/images/testimonials/fadia-bdour.webp",
+    "dest_bytes": 28194,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/hajar-ait-nasser.png",
+    "src_bytes": 188784,
+    "dest": "assets/images/testimonials/hajar-ait-nasser.webp",
+    "dest_bytes": 69618,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/mervat-galal.png",
+    "src_bytes": 74851,
+    "dest": "assets/images/testimonials/mervat-galal.webp",
+    "dest_bytes": 27476,
+    "width": 800
+  },
+  {
+    "src": "assets/images/testimonials/wissam-sami-mohamed.png",
+    "src_bytes": 65722,
+    "dest": "assets/images/testimonials/wissam-sami-mohamed.webp",
+    "dest_bytes": 18016,
+    "width": 800
+  }
+]

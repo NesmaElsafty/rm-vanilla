@@ -130,4 +130,39 @@
   .program-detail-image-ring {
     animation: none;
   }
+
+  /* ── Backdrop: drop stacked live blurs ── */
+  .luxury-backdrop .backdrop-glow-2,
+  .luxury-backdrop .backdrop-glow-3,
+  .luxury-backdrop .backdrop-glow-4,
+  .luxury-backdrop .backdrop-glow-5,
+  .luxury-backdrop .backdrop-glow-6,
+  .luxury-backdrop .backdrop-glow-7 {
+    display: none !important;
+  }
+
+  .luxury-backdrop .backdrop-glow-1 {
+    filter: none !important;
+    opacity: 0.7;
+  }
+
+  .hero-portrait-glow,
+  .about-rana-glow,
+  .philosophy-glow {
+    filter: none !important;
+  }
+
+  /* ── Skip painting long below-fold chapters until needed ── */
+  body.home-page #opening,
+  body.home-page #about,
+  body.home-page #stats,
+  body.home-page #philosophy,
+  body.home-page #programs,
+  body.home-page #testimonials,
+  body.home-page #contact,
+  body.home-page #final-cta,
+  body.home-page .footer-luxury {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 640px;
+  }
 }

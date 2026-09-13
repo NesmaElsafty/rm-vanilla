@@ -11,6 +11,21 @@
   <meta property="og:image" content="assets/images/dr_rana_portrait.png">
   <link rel="canonical" href="index.html">
   <link rel="icon" href="assets/images/rana-logo.png">
+  <link rel="preload" as="image" type="image/webp" href="assets/images/dr_rana_portrait-720.webp" imagesrcset="assets/images/dr_rana_portrait-480.webp 480w, assets/images/dr_rana_portrait-720.webp 720w" imagesizes="(max-width: 767px) 280px, 360px">
+  <style id="page-loader-critical">
+    html.page-loading{background-color:var(--theme-bg,#071424)}
+    html.page-loading body{overflow:hidden}
+    .page-loader{position:fixed;inset:0;z-index:4000;display:flex;align-items:center;justify-content:center;background:#071424;transition:opacity .25s ease}
+    html[data-theme="cream-elegance"] .page-loader{background:#F8F3EB}
+    .page-loader-inner{display:flex;flex-direction:column;align-items:center;gap:1rem}
+    .page-loader-logo{width:5.5rem;height:auto;display:block}
+    .page-loader-spinner{width:1.35rem;height:1.35rem;border:1.5px solid rgba(199,154,59,.28);border-top-color:#C79A3B;border-radius:50%;animation:page-loader-spin .85s linear infinite}
+    .page-loader-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)} html[lang=en] .page-loader-label [lang=ar],html:not([lang=en]) .page-loader-label [lang=en]{display:none}
+    html.page-is-ready .page-loader{opacity:0;pointer-events:none}
+    html.page-loading-reduce .page-loader-spinner,html.page-is-ready .page-loader{animation:none}
+    @keyframes page-loader-spin{to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion:reduce){.page-loader-spinner,html.page-is-ready .page-loader{animation:none;transition:none}}
+  </style>
   <link rel="stylesheet" href="assets/css/main.css">
   <script>
     (function () {
@@ -28,6 +43,8 @@
         if (l !== 'en') l = 'ar';
         document.documentElement.lang = l;
         document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.classList.add('page-loading');
+        setTimeout(function () { document.documentElement.classList.remove('page-loading'); document.documentElement.classList.add('page-is-ready'); }, 3000);
         document.documentElement.classList.add('js');
         setTimeout(function () {
           var hero = document.getElementById('hero');
@@ -39,8 +56,18 @@
     })();
   </script>
 </head>
-<body class="home-page">
+<body data-critical-image="#hero img" class="home-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="page-loader" class="page-loader" role="status" aria-live="polite">
+    <div class="page-loader-inner">
+      <img src="assets/images/rana-logo.webp" alt="" class="page-loader-logo" width="96" height="96">
+      <span class="page-loader-spinner" aria-hidden="true"></span>
+      <span class="page-loader-label">
+        <span lang="ar">جاري التحميل...</span>
+        <span lang="en">Loading...</span>
+      </span>
+    </div>
+  </div>
   <div class="luxury-backdrop" aria-hidden="true">
     <div class="backdrop-set backdrop-set--dark">
       <div class="backdrop-layer" style="background: linear-gradient(155deg, #040a14 0%, #071424 22%, #0a1628 45%, #0d1b34 62%, #071424 82%, #040a14 100%);"></div>
@@ -76,7 +103,7 @@
         <div class="nav-grid">
           <div class="nav-brand">
             <a href="index.html" class="nav-logo-btn" data-home aria-label="Dr. Rana Mosaad">
-              <img src="assets/images/rana-logo.png" alt="Dr. Rana Mosaad" class="logo-white-highlight">
+              <img src="assets/images/rana-logo.png" alt="Dr. Rana Mosaad" class="logo-white-highlight" width="96" height="96">
             </a>
           </div>
           <div class="nav-links">
@@ -143,7 +170,21 @@
                   <div class="portrait-vine portrait-vine--back" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
                   <div class="portrait-arch glass-slide">
                     <div class="portrait-frame">
-                      <img src="assets/images/dr_rana_portrait.png" alt="Dr. Rana Mosaad" data-i18n-aria="hero.portraitAlt">
+                      <picture>
+                        <source
+                          type="image/webp"
+                          srcset="assets/images/dr_rana_portrait-480.webp 480w, assets/images/dr_rana_portrait-720.webp 720w"
+                          sizes="(max-width: 767px) 280px, 360px">
+                        <img
+                          src="assets/images/dr_rana_portrait.png"
+                          alt="Dr. Rana Mosaad"
+                          data-i18n-aria="hero.portraitAlt"
+                          width="680"
+                          height="1024"
+                          loading="eager"
+                          fetchpriority="high"
+                          decoding="async">
+                      </picture>
                       <div class="portrait-shade" aria-hidden="true" style="background: linear-gradient(to top, rgba(4,10,20,0.75) 0%, rgba(4,10,20,0.25) 35%, transparent 58%);"></div>
                     </div>
                     <div class="portrait-name-bar portrait-name">
@@ -192,13 +233,18 @@
               <div class="about-rana-glow" aria-hidden="true" style="background: var(--theme-portrait-glow); filter: blur(28px);"></div>
               <div class="about-rana-frame portrait-arch glass-slide">
                 <div class="portrait-frame">
-                  <img
-                    src="assets/images/rana-about.jpg"
-                    alt="Dr. Rana Mosaad"
-                    data-i18n-aria="hero.portraitAlt"
-                    loading="lazy"
-                    decoding="async"
-                  >
+                  <picture>
+                    <source type="image/webp" srcset="assets/images/rana-about.webp" >
+                    <img
+                      src="assets/images/rana-about.jpg"
+                      alt="Dr. Rana Mosaad"
+                      data-i18n-aria="hero.portraitAlt"
+                      width="800"
+                      height="1067"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </picture>
                 </div>
               </div>
             </div>
@@ -285,13 +331,18 @@
               <div class="philosophy-glow" aria-hidden="true" style="background: var(--theme-portrait-glow); filter: blur(28px);"></div>
               <div class="philosophy-frame portrait-arch glass-slide">
                 <div class="portrait-frame">
-                  <img
-                    src="assets/images/philosophy-tall.png"
-                    alt="Dr. Rana Mosaad"
-                    data-i18n-aria="hero.portraitAlt"
-                    loading="lazy"
-                    decoding="async"
-                  >
+                  <picture>
+                    <source type="image/webp" srcset="assets/images/philosophy-tall.webp">
+                    <img
+                      src="assets/images/philosophy-tall.png"
+                      alt="Dr. Rana Mosaad"
+                      data-i18n-aria="hero.portraitAlt"
+                      width="680"
+                      height="1024"
+                      loading="lazy"
+                      decoding="async"
+                    >
+                  </picture>
                 </div>
               </div>
             </div>

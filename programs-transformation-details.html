@@ -11,6 +11,20 @@
   <meta property="og:image" content="assets/images/dr_rana_portrait.png">
   <link rel="canonical" href="programs-transformation-details.html?slug=new-version-of-yourself">
   <link rel="icon" href="assets/images/rana-logo.png">
+  <style id="page-loader-critical">
+    html.page-loading{background-color:var(--theme-bg,#071424)}
+    html.page-loading body{overflow:hidden}
+    .page-loader{position:fixed;inset:0;z-index:4000;display:flex;align-items:center;justify-content:center;background:#071424;transition:opacity .25s ease}
+    html[data-theme="cream-elegance"] .page-loader{background:#F8F3EB}
+    .page-loader-inner{display:flex;flex-direction:column;align-items:center;gap:1rem}
+    .page-loader-logo{width:5.5rem;height:auto;display:block}
+    .page-loader-spinner{width:1.35rem;height:1.35rem;border:1.5px solid rgba(199,154,59,.28);border-top-color:#C79A3B;border-radius:50%;animation:page-loader-spin .85s linear infinite}
+    .page-loader-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)} html[lang=en] .page-loader-label [lang=ar],html:not([lang=en]) .page-loader-label [lang=en]{display:none}
+    html.page-is-ready .page-loader{opacity:0;pointer-events:none}
+    html.page-loading-reduce .page-loader-spinner,html.page-is-ready .page-loader{animation:none}
+    @keyframes page-loader-spin{to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion:reduce){.page-loader-spinner,html.page-is-ready .page-loader{animation:none;transition:none}}
+  </style>
   <link rel="stylesheet" href="assets/css/main.css">
   <script>
     (function () {
@@ -28,12 +42,24 @@
         if (l !== 'en') l = 'ar';
         document.documentElement.lang = l;
         document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.classList.add('page-loading');
+        setTimeout(function () { document.documentElement.classList.remove('page-loading'); document.documentElement.classList.add('page-is-ready'); }, 3000);
       } catch (e) {}
     })();
   </script>
 </head>
-<body class="program-transform-page">
+<body data-critical-image=".program-transform-hero__image" class="program-transform-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="page-loader" class="page-loader" role="status" aria-live="polite">
+    <div class="page-loader-inner">
+      <img src="assets/images/rana-logo.webp" alt="" class="page-loader-logo" width="96" height="96">
+      <span class="page-loader-spinner" aria-hidden="true"></span>
+      <span class="page-loader-label">
+        <span lang="ar">جاري التحميل...</span>
+        <span lang="en">Loading...</span>
+      </span>
+    </div>
+  </div>
   <div class="luxury-backdrop" aria-hidden="true">
     <div class="backdrop-set backdrop-set--dark">
       <div class="backdrop-layer" style="background: linear-gradient(155deg, #040a14 0%, #071424 22%, #0a1628 45%, #0d1b34 62%, #071424 82%, #040a14 100%);"></div>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ar" dir="rtl" data-theme="luxury-rose" data-color-mode="dark">
 <head>
   <meta charset="UTF-8">
@@ -11,6 +11,21 @@
   <meta property="og:image" content="assets/images/about.png">
   <link rel="canonical" href="about.html">
   <link rel="icon" href="assets/images/rana-logo.png">
+  <link rel="preload" as="image" type="image/webp" href="assets/images/about-800.webp" imagesrcset="assets/images/about-800.webp 800w, assets/images/about-1400.webp 1362w" imagesizes="(max-width: 767px) 70vw, 420px">
+  <style id="page-loader-critical">
+    html.page-loading{background-color:var(--theme-bg,#071424)}
+    html.page-loading body{overflow:hidden}
+    .page-loader{position:fixed;inset:0;z-index:4000;display:flex;align-items:center;justify-content:center;background:#071424;transition:opacity .25s ease}
+    html[data-theme="cream-elegance"] .page-loader{background:#F8F3EB}
+    .page-loader-inner{display:flex;flex-direction:column;align-items:center;gap:1rem}
+    .page-loader-logo{width:5.5rem;height:auto;display:block}
+    .page-loader-spinner{width:1.35rem;height:1.35rem;border:1.5px solid rgba(199,154,59,.28);border-top-color:#C79A3B;border-radius:50%;animation:page-loader-spin .85s linear infinite}
+    .page-loader-label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)} html[lang=en] .page-loader-label [lang=ar],html:not([lang=en]) .page-loader-label [lang=en]{display:none}
+    html.page-is-ready .page-loader{opacity:0;pointer-events:none}
+    html.page-loading-reduce .page-loader-spinner,html.page-is-ready .page-loader{animation:none}
+    @keyframes page-loader-spin{to{transform:rotate(360deg)}}
+    @media (prefers-reduced-motion:reduce){.page-loader-spinner,html.page-is-ready .page-loader{animation:none;transition:none}}
+  </style>
   <link rel="stylesheet" href="assets/css/main.css">
   <script>
     (function () {
@@ -28,12 +43,24 @@
         if (l !== 'en') l = 'ar';
         document.documentElement.lang = l;
         document.documentElement.dir = l === 'ar' ? 'rtl' : 'ltr';
+        document.documentElement.classList.add('page-loading');
+        setTimeout(function () { document.documentElement.classList.remove('page-loading'); document.documentElement.classList.add('page-is-ready'); }, 3000);
       } catch (e) {}
     })();
   </script>
 </head>
-<body class="program-detail-page">
+<body data-critical-image=".about-s1 img" class="program-detail-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
+  <div id="page-loader" class="page-loader" role="status" aria-live="polite">
+    <div class="page-loader-inner">
+      <img src="assets/images/rana-logo.webp" alt="" class="page-loader-logo" width="96" height="96">
+      <span class="page-loader-spinner" aria-hidden="true"></span>
+      <span class="page-loader-label">
+        <span lang="ar">جاري التحميل...</span>
+        <span lang="en">Loading...</span>
+      </span>
+    </div>
+  </div>
   <div class="luxury-backdrop" aria-hidden="true">
     <div class="backdrop-set backdrop-set--dark">
       <div class="backdrop-layer" style="background: linear-gradient(155deg, #040a14 0%, #071424 22%, #0a1628 45%, #0d1b34 62%, #071424 82%, #040a14 100%);"></div>
@@ -119,12 +146,22 @@
               <div class="portrait-vine portrait-vine--back" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
               <div class="about-s1-frame portrait-arch">
                 <div class="portrait-frame">
-                  <img
-                    src="assets/images/about.png"
-                    alt="Dr. Rana Mosaad"
-                    data-i18n-aria="aboutPage.portraitAlt"
-                    decoding="async"
-                  >
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/images/about-800.webp 800w, assets/images/about-1400.webp 1362w"
+                      sizes="(max-width: 767px) 70vw, 420px">
+                    <img
+                      src="assets/images/about.png"
+                      alt="Dr. Rana Mosaad"
+                      data-i18n-aria="aboutPage.portraitAlt"
+                      width="800"
+                      height="1204"
+                      loading="eager"
+                      fetchpriority="high"
+                      decoding="async"
+                    >
+                  </picture>
                 </div>
               </div>
               <div class="portrait-vine portrait-vine--front" data-botanical data-botanical-bold="true" data-botanical-animated="true"></div>
@@ -249,8 +286,9 @@
                 <button type="button" class="program-detail-gallery-nav program-detail-gallery-nav--next" data-i18n-aria="gallery.nextImage" aria-label="الصورة التالية"></button>
                 <figure class="program-detail-gallery-main about-gallery-main">
                   <img
-                    src="assets/images/gallery/about/about-certification-group.png"
+                    src="assets/images/gallery/about/about-certification-group.webp"
                     alt="لحظات من مسيرتي 1"
+                    loading="lazy"
                     decoding="async"
                     class="program-detail-gallery-main-image about-gallery-main-image"
                   >
@@ -258,26 +296,26 @@
               </div>
 
               <div class="program-detail-gallery-thumbs about-gallery-thumbs">
-                <button type="button" class="program-detail-gallery-thumb program-detail-gallery-thumb--active" data-gallery-src="assets/images/gallery/about/about-certification-group.png" aria-label="1">
-                  <img src="assets/images/gallery/about/about-certification-group.png" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
+                <button type="button" class="program-detail-gallery-thumb program-detail-gallery-thumb--active" data-gallery-src="assets/images/gallery/about/about-certification-group.webp" aria-label="1">
+                  <img src="assets/images/gallery/about/about-certification-group.webp" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
                 </button>
-                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-certification-trainer.png" aria-label="2">
-                  <img src="assets/images/gallery/about/about-certification-trainer.png" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
+                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-certification-trainer.webp" aria-label="2">
+                  <img src="assets/images/gallery/about/about-certification-trainer.webp" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
                 </button>
-                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-nstt-2025-group.png" aria-label="3">
-                  <img src="assets/images/gallery/about/about-nstt-2025-group.png" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
+                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-nstt-2025-group.webp" aria-label="3">
+                  <img src="assets/images/gallery/about/about-nstt-2025-group.webp" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
                 </button>
-                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-nstt-speaking.png" aria-label="4">
-                  <img src="assets/images/gallery/about/about-nstt-speaking.png" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
+                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-nstt-speaking.webp" aria-label="4">
+                  <img src="assets/images/gallery/about/about-nstt-speaking.webp" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
                 </button>
-                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-pre-certification.png" aria-label="5">
-                  <img src="assets/images/gallery/about/about-pre-certification.png" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
+                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-pre-certification.webp" aria-label="5">
+                  <img src="assets/images/gallery/about/about-pre-certification.webp" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
                 </button>
-                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-retreat-casual.png" aria-label="6">
-                  <img src="assets/images/gallery/about/about-retreat-casual.png" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
+                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-retreat-casual.webp" aria-label="6">
+                  <img src="assets/images/gallery/about/about-retreat-casual.webp" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
                 </button>
-                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-speaking-event.png" aria-label="7">
-                  <img src="assets/images/gallery/about/about-speaking-event.png" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
+                <button type="button" class="program-detail-gallery-thumb" data-gallery-src="assets/images/gallery/about/about-speaking-event.webp" aria-label="7">
+                  <img src="assets/images/gallery/about/about-speaking-event.webp" alt="" loading="lazy" decoding="async" class="program-detail-gallery-thumb-image">
                 </button>
               </div>
 

@@ -1,4 +1,5 @@
 import { iconChevronLeft, iconChevronRight, iconQuote } from './icons.js';
+import { cardImageMarkup } from './utils/images.js';
 import { getLocale } from './language.js';
 import { getContent, getDir } from '../../data/content.js';
 import {
@@ -75,7 +76,7 @@ function cardMarkup(item, textOnly, isActive, ctaIcon, detailHref = '') {
     ? ''
     : `<div class="floating-program-card-visual">
         <div class="floating-program-card-image-ring" aria-hidden="true"></div>
-        <img src="${escapeHtml(item.image ?? '')}" alt="" class="floating-program-card-image" width="152" height="152" loading="lazy" decoding="async"/>
+        ${cardImageMarkup(item.image)}
       </div>`;
 
   const articleClass = textOnly
@@ -112,9 +113,11 @@ export function createFloatingSlider(container, items, options = {}) {
   const nextIcon = rtl ? iconChevronLeft('icon icon-sm') : iconChevronRight('icon icon-sm');
   const ctaIcon = rtl ? iconChevronLeft('icon icon-xs') : iconChevronRight('icon icon-xs');
   const content = getContent(getLocale());
-  const allowAutoplay = Boolean(autoplay) && !isCoarsePointer() && !prefersReducedMotion();
+  const finite = isCoarsePointer();
+  const copies = finite ? 1 : 3;
+  const allowAutoplay = Boolean(autoplay) && !finite && !prefersReducedMotion();
 
-  let physicalIndex = count;
+  let physicalIndex = finite ? 0 : count;
   let activeIndex = 0;
   let isPaused = false;
   let isNormalizing = false;
@@ -130,10 +133,11 @@ export function createFloatingSlider(container, items, options = {}) {
   let resizeRaf = 0;
   let slideCenters = [];
   let viewportWidth = 0;
+  let geometryDirty = false;
 
-  const looped = [0, 1, 2].flatMap((copy) =>
+  const looped = Array.from({ length: copies }, (_, copy) =>
     items.map((item, idx) => ({ item, copy, idx })),
-  );
+  ).flat();
 
   const slides = looped
     .map(({ item, copy, idx }) => {
@@ -247,8 +251,16 @@ export function createFloatingSlider(container, items, options = {}) {
     }
   };
 
+  const logicalFromPhysical = (index) => (finite ? index : index % count);
+
+  const syncFromScroll = () => {
+    if (isNormalizing) return;
+    physicalIndex = closestCachedIndex();
+    syncActive(logicalFromPhysical(physicalIndex));
+  };
+
   const normalizeLoop = () => {
-    if (isNormalizing || isAnimating || isPointerDown) return;
+    if (finite || isNormalizing || isAnimating || isPointerDown) return;
     const idx = closestCachedIndex();
     physicalIndex = idx;
     if (idx < count) {
@@ -262,16 +274,15 @@ export function createFloatingSlider(container, items, options = {}) {
     }
   };
 
-  const syncFromScroll = () => {
-    if (isNormalizing) return;
-    physicalIndex = closestCachedIndex();
-    syncActive(physicalIndex % count);
-  };
-
   const canNavigate = () => !isNormalizing && !isAnimating;
 
   const next = () => {
     if (!canNavigate()) return;
+    if (finite) {
+      if (physicalIndex >= count - 1) return;
+      goPhysical(physicalIndex + 1, true);
+      return;
+    }
     if (physicalIndex >= count * 2 - 1) {
       isNormalizing = true;
       goPhysical((physicalIndex % count) + count, false);
@@ -282,6 +293,11 @@ export function createFloatingSlider(container, items, options = {}) {
 
   const prev = () => {
     if (!canNavigate()) return;
+    if (finite) {
+      if (physicalIndex <= 0) return;
+      goPhysical(physicalIndex - 1, true);
+      return;
+    }
     if (physicalIndex <= count) {
       isNormalizing = true;
       goPhysical((physicalIndex % count) + count * 2, false);
@@ -333,6 +349,10 @@ export function createFloatingSlider(container, items, options = {}) {
 
   const settle = () => {
     isAnimating = false;
+    if (geometryDirty && !isPointerDown) {
+      geometryDirty = false;
+      recacheAndMaybeAlign();
+    }
     if (!isPointerDown) normalizeLoop();
   };
 
@@ -355,12 +375,21 @@ export function createFloatingSlider(container, items, options = {}) {
     settle();
   };
 
+  const recacheAndMaybeAlign = () => {
+    cacheGeometry();
+    if (finite) return;
+    goPhysical(count + activeIndex, false);
+  };
+
   const onResize = () => {
     if (resizeRaf) return;
     resizeRaf = requestAnimationFrame(() => {
       resizeRaf = 0;
-      cacheGeometry();
-      goPhysical(count + activeIndex, false);
+      if (isPointerDown || isUserInteracting || isAnimating || isNormalizing) {
+        geometryDirty = true;
+        return;
+      }
+      recacheAndMaybeAlign();
     });
   };
 
@@ -405,7 +434,7 @@ export function createFloatingSlider(container, items, options = {}) {
     const idx = Number(event.currentTarget.getAttribute('data-slider-dot'));
     if (!Number.isFinite(idx) || !canNavigate()) return;
     pause();
-    goPhysical(count + idx, true);
+    goPhysical(finite ? idx : count + idx, true);
     scheduleResume();
   };
 
@@ -427,11 +456,14 @@ export function createFloatingSlider(container, items, options = {}) {
   wrapEl.addEventListener('mouseleave', resume);
   wrapEl.addEventListener('focusin', pause);
   wrapEl.addEventListener('focusout', onFocusOut);
-  wrapEl.addEventListener('pointerdown', onPointerDown, { passive: true });
-  wrapEl.addEventListener('pointerup', onPointerUp, { passive: true });
-  wrapEl.addEventListener('pointercancel', onPointerUp, { passive: true });
-  wrapEl.addEventListener('touchstart', onPointerDown, { passive: true });
-  wrapEl.addEventListener('touchend', onPointerUp, { passive: true });
+  if ('PointerEvent' in window) {
+    wrapEl.addEventListener('pointerdown', onPointerDown, { passive: true });
+    wrapEl.addEventListener('pointerup', onPointerUp, { passive: true });
+    wrapEl.addEventListener('pointercancel', onPointerUp, { passive: true });
+  } else {
+    wrapEl.addEventListener('touchstart', onPointerDown, { passive: true });
+    wrapEl.addEventListener('touchend', onPointerUp, { passive: true });
+  }
 
   prevBtn.addEventListener('click', prev);
   nextBtn.addEventListener('click', next);
@@ -470,10 +502,10 @@ export function createFloatingSlider(container, items, options = {}) {
 
   requestAnimationFrame(() => {
     cacheGeometry();
-    goPhysical(count, false);
+    goPhysical(finite ? 0 : count, false);
     requestAnimationFrame(() => {
       cacheGeometry();
-      goPhysical(count, false);
+      goPhysical(finite ? 0 : count, false);
       revealSlider();
       startAutoplay();
     });
@@ -520,7 +552,7 @@ export function createFloatingSlider(container, items, options = {}) {
       nextBtn.setAttribute('aria-label', nextContent.programs?.nextProgram ?? '');
       sceneEl.setAttribute('dir', getDir(getLocale()));
       cacheGeometry();
-      goPhysical(count + activeIndex, false);
+      goPhysical(finite ? activeIndex : count + activeIndex, false);
     },
     pause,
     resume,

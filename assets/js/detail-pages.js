@@ -12,6 +12,7 @@ import { initGallery } from './galleries.js';
 import { iconArrowLeft, iconArrowRight, iconChevronDown } from './icons.js';
 import { policyTitle, policySections } from '../../data/policies.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
+import { toWebp } from './utils/images.js';
 import { getProgramDetailPage } from '../../data/programs-details.js';
 
 const APG_MAIN = 'assets/images/gallery/apg/apg-main.png';
@@ -153,7 +154,7 @@ function populateBack(root, href, label, rtl) {
 function populateImage(root, src, alt) {
   const img = root.querySelector('[data-detail-image]');
   if (!img) return;
-  img.src = src || '';
+  img.src = toWebp(src) || src || '';
   img.alt = alt || '';
 }
 
@@ -349,6 +350,7 @@ function galleryLabels(locale = getLocale()) {
 
 function galleryMarkup(images, title, subtitle, altPrefix) {
   if (!images.length) return '';
+  images = images.map((src) => toWebp(src) || src);
   const labels = galleryLabels();
   const thumbs = images.length > 1
     ? `<div class="program-detail-gallery-thumbs">${images
@@ -527,7 +529,7 @@ function renderProgram(root) {
       <div class="program-detail-hero-grid">
         <div class="program-detail-hero-visual">
           <div class="program-detail-image-ring" aria-hidden="true"></div>
-          <img src="${escapeHtml(heroSrc)}" alt="${escapeHtml(program.page_title)}" class="program-detail-image" decoding="async"/>
+          <img src="${escapeHtml(toWebp(heroSrc) || heroSrc)}" alt="${escapeHtml(program.page_title)}" class="program-detail-image" width="900" height="1125" decoding="async"/>
         </div>
         <div class="program-detail-hero-content">
           <span class="keynote-label program-detail-hero-badge">
@@ -622,7 +624,7 @@ function renderWorkshop(root) {
       <div class="program-detail-hero-grid">
         <div class="program-detail-hero-visual">
           <div class="program-detail-image-ring" aria-hidden="true"></div>
-          <img src="${escapeHtml(workshop.image)}" alt="${escapeHtml(workshop.page_title)}" class="program-detail-image" decoding="async"/>
+          <img src="${escapeHtml(toWebp(workshop.image) || workshop.image)}" alt="${escapeHtml(workshop.page_title)}" class="program-detail-image" width="900" height="1125" decoding="async"/>
         </div>
         <div class="program-detail-hero-content">
           <span class="keynote-label program-detail-hero-badge">
@@ -713,7 +715,7 @@ function renderSession(root) {
         <div class="session-hero__media">
           <div class="session-hero__photo-card">
             <div class="session-hero__photo-shine" aria-hidden="true"></div>
-            <img src="${escapeHtml(session.image)}" alt="${escapeHtml(session.page_title)}" class="session-hero__photo" decoding="async"/>
+            <img src="${escapeHtml(toWebp(session.image) || session.image)}" alt="${escapeHtml(session.page_title)}" class="session-hero__photo" width="900" height="1125" decoding="async"/>
             <span class="session-hero__photo-badge">${escapeHtml(session.hero.eyebrow)}</span>
           </div>
         </div>

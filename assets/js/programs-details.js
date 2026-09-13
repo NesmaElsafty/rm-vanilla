@@ -7,6 +7,7 @@ import {
 } from '../../data/programs-details.js';
 import { getProgramBySlug } from '../../data/programs.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
+import { toWebp } from './utils/images.js';
 import { createTestimonialSlider, getTestimonialsForProgram } from './sliders.js';
 import { initGallery } from './galleries.js';
 import { iconArrowLeft, iconArrowRight } from './icons.js';
@@ -129,6 +130,7 @@ function galleryLabels(locale = getLocale()) {
 
 function galleryMarkup(images, title, subtitle, altPrefix, locale) {
   if (!images.length) return '';
+  images = images.map((src) => toWebp(src) || src);
   const labels = galleryLabels(locale);
   const thumbs =
     images.length > 1

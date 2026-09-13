@@ -1,3 +1,4 @@
+import { initPageLoader } from './page-loader.js';
 import { initTheme } from './theme.js';
 import { initLanguage, applyI18n, getLocale } from './language.js';
 import { initNavigation } from './navigation.js';
@@ -241,6 +242,15 @@ export function boot() {
     document.addEventListener('localechange', onLocaleChange);
   } catch (err) {
     console.error('[boot] secondary init failed', err);
+  }
+
+  try {
+    initPageLoader();
+  } catch (err) {
+    console.error('[boot] initPageLoader failed', err);
+    document.documentElement.classList.remove('page-loading');
+    document.documentElement.classList.add('page-is-ready');
+    document.getElementById('page-loader')?.remove();
   }
 }
 
