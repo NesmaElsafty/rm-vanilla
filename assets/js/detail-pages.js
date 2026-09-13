@@ -891,16 +891,18 @@ function renderRetreat(root) {
           <div class="retreat-rich-hero__copy">
             <p class="retreat-rich-hero__eyebrow keynote-label">${escapeHtml(rd.eyebrow)}</p>
             <h1 class="retreat-rich-hero__title">${titleHtml}</h1>
-            <p class="retreat-rich-hero__lead">${escapeHtml(rd.heroSubtitle)}</p>
-            <div class="retreat-rich-hero__actions">
-              <a href="${contactHref('upcoming')}" class="btn-luxury-primary retreat-rich-hero__cta">${escapeHtml(rd.primaryCta)}</a>
-            </div>
           </div>
           <div class="retreat-rich-hero__media">
             <div class="retreat-rich-hero__frame" aria-hidden="true"></div>
             <figure class="retreat-rich-hero__figure">
-              <img src="${escapeHtml(retreat.hero)}" alt="${escapeHtml(rd.eyebrow)}" class="retreat-rich-hero__image" width="960" height="1200" decoding="async">
+              <img src="${escapeHtml(retreat.hero)}" alt="${escapeHtml(rd.eyebrow)}" class="retreat-rich-hero__image" width="960" height="1200" decoding="async" data-critical-hero>
             </figure>
+          </div>
+          <div class="retreat-rich-hero__body">
+            <p class="retreat-rich-hero__lead">${escapeHtml(rd.heroSubtitle)}</p>
+            <div class="retreat-rich-hero__actions">
+              <a href="${contactHref('upcoming')}" class="btn-luxury-primary retreat-rich-hero__cta">${escapeHtml(rd.primaryCta)}</a>
+            </div>
           </div>
         </div>
       </section>

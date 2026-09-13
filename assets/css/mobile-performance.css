@@ -4,14 +4,32 @@
  */
 
 @media (max-width: 767px), (hover: none) and (pointer: coarse) {
-  /* ── Floating slider: no continuous bob on duplicated cards ── */
+  /* ── Floating slider: native horizontal swipe ── */
+  .floating-programs-slider {
+    scroll-snap-type: x proximity;
+  }
+
   .floating-programs-slide,
   .floating-programs-slide--active {
     animation: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
   }
 
   .floating-programs-slide {
     scroll-snap-stop: normal;
+  }
+
+  .floating-program-card-halo {
+    transition: opacity 0.18s ease;
+  }
+
+  .floating-programs-slide--active .floating-program-card {
+    transition: none;
+  }
+
+  .slider-is-scrolling .floating-programs-slide,
+  .slider-is-scrolling .floating-program-card-halo {
+    transition: none !important;
   }
 
   /* Spinning rings: never run on every duplicated slide */

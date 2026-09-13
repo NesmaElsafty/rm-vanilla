@@ -8911,18 +8911,22 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
 
 .retreat-rich-page-inner {
   display: grid;
-  gap: clamp(2.75rem, 6vw, 4.5rem);
+  gap: clamp(2rem, 5.5vw, 4.5rem);
   padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 .retreat-rich-back {
   width: fit-content;
+  max-width: 100%;
 }
 
 .retreat-rich-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(1.25rem, 3vw, 2.5rem) 0 clamp(1.5rem, 3vw, 2.75rem);
+  padding: clamp(0.85rem, 2.4vw, 2.5rem) 0 clamp(1.15rem, 2.8vw, 2.75rem);
 }
 
 .retreat-rich-hero__atmosphere {
@@ -8957,30 +8961,59 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  gap: clamp(1.5rem, 4vw, 3.25rem);
-  align-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    'copy'
+    'media'
+    'body';
+  gap: clamp(1.1rem, 2.8vw, 1.75rem);
+  align-items: start;
+}
+
+.retreat-rich-hero__copy,
+.retreat-rich-hero__body,
+.retreat-rich-hero__media {
+  min-width: 0;
+}
+
+.retreat-rich-hero__copy {
+  grid-area: copy;
+}
+
+.retreat-rich-hero__media {
+  grid-area: media;
+  position: relative;
+  width: 100%;
+  max-width: min(100%, 32rem);
+  margin-inline: auto;
+}
+
+.retreat-rich-hero__body {
+  grid-area: body;
 }
 
 .retreat-rich-hero__eyebrow {
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.75rem;
 }
 
 .retreat-rich-hero__title {
-  margin: 0 0 1rem;
+  margin: 0;
   font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+  font-size: clamp(1.7rem, 1.15rem + 2.6vw, 3.4rem);
   font-weight: 560;
-  line-height: 1.18;
+  line-height: 1.28;
   color: var(--rr-ink);
+  overflow-wrap: break-word;
+  text-wrap: pretty;
 }
 
 .retreat-rich-hero__lead {
-  margin: 0 0 1.5rem;
-  max-width: 42ch;
-  font-size: clamp(1.02rem, 1.4vw, 1.14rem);
-  line-height: 1.75;
+  margin: 0 0 1.25rem;
+  max-width: none;
+  font-size: clamp(0.98rem, 0.2vw + 0.95rem, 1.14rem);
+  line-height: 1.8;
   color: var(--rr-muted);
+  overflow-wrap: break-word;
 }
 
 .retreat-rich-hero__actions {
@@ -8989,16 +9022,26 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
   gap: 0.85rem;
 }
 
-.retreat-rich-hero__media {
-  position: relative;
+.retreat-rich-hero__cta,
+.retreat-rich-final-cta__button {
+  max-width: 100%;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.45;
+  padding-inline: clamp(1rem, 3.5vw, 2.1rem);
 }
 
 .retreat-rich-hero__frame {
   position: absolute;
-  inset: 5% -4% -4% 7%;
+  inset: 8% -4% -4% 8%;
   border: 1px solid var(--rr-line);
   border-radius: 1.35rem;
   transform: rotate(-1.4deg);
+  pointer-events: none;
+}
+
+html[dir='rtl'] .retreat-rich-hero__frame {
+  inset: 8% 8% -4% -4%;
 }
 
 .retreat-rich-hero__figure {
@@ -9006,6 +9049,7 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
   margin: 0;
   border-radius: 1.25rem;
   overflow: hidden;
+  width: 100%;
   aspect-ratio: 4 / 5;
   background: var(--rr-panel);
   box-shadow: 0 24px 60px rgba(4, 10, 20, 0.35);
@@ -9015,11 +9059,13 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 22%;
   display: block;
 }
 
 .retreat-rich-gallery {
   margin: 0;
+  min-width: 0;
 }
 
 .retreat-rich-gallery .program-detail-gallery-head {
@@ -9028,8 +9074,9 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
 
 .retreat-rich-gallery .program-detail-gallery-title {
   font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-size: clamp(1.45rem, 2.6vw + 0.7rem, 2.35rem);
   color: var(--rr-ink);
+  overflow-wrap: break-word;
 }
 
 .retreat-rich-gallery .program-detail-gallery-subtitle {
@@ -9042,10 +9089,15 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
   overflow: hidden;
 }
 
+.retreat-rich-gallery .program-detail-gallery-thumbs {
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
 .retreat-rich-final-cta {
   position: relative;
-  padding: clamp(2.1rem, 4.5vw, 3.25rem) 1.25rem;
-  border-radius: 1.5rem;
+  padding: clamp(1.5rem, 4.5vw, 3.25rem) clamp(1rem, 3vw, 1.5rem);
+  border-radius: clamp(1.1rem, 2vw, 1.5rem);
   overflow: hidden;
   border: 1px solid var(--rr-line);
   text-align: center;
@@ -9065,34 +9117,110 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
   z-index: 1;
   max-width: 40rem;
   margin-inline: auto;
+  min-width: 0;
 }
 
 .retreat-rich-final-cta__heading {
   margin: 0 0 0.85rem;
   font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+  font-size: clamp(1.4rem, 2.4vw + 0.7rem, 2.4rem);
+  line-height: 1.35;
   color: var(--rr-ink);
+  overflow-wrap: break-word;
+  text-wrap: pretty;
 }
 
 .retreat-rich-final-cta__text {
   margin: 0 0 1.35rem;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--rr-muted);
+  overflow-wrap: break-word;
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 640px) and (max-width: 959px) {
+  .retreat-rich-hero__media {
+    max-width: min(100%, 24rem);
+  }
+}
+
+@media (min-width: 960px) {
   .retreat-rich-hero__layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-areas:
+      'copy media'
+      'body media';
+    column-gap: clamp(1.75rem, 4vw, 3.25rem);
+    row-gap: 1rem;
+    align-items: center;
+  }
+
+  .retreat-rich-hero__copy {
+    align-self: end;
+  }
+
+  .retreat-rich-hero__body {
+    align-self: start;
+  }
+
+  .retreat-rich-hero__media {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+
+  .retreat-rich-hero__title {
+    line-height: 1.2;
   }
 
   .retreat-rich-hero__lead {
-    max-width: none;
+    max-width: 42ch;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .retreat-rich-gallery .program-detail-gallery-viewer {
+    padding: 0.65rem;
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-main {
+    min-height: min(58vw, 18rem);
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-main-image {
+    max-height: min(58vw, 18rem);
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-nav {
+    width: 2.15rem;
+    height: 2.15rem;
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-nav--prev {
+    left: 0.35rem;
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-nav--next {
+    right: 0.35rem;
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-thumbs {
+    justify-content: flex-start;
+    gap: 0.4rem;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 0.35rem;
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-thumb {
+    flex: 0 0 3.4rem;
+    height: 2.55rem;
+    scroll-snap-align: start;
   }
 }
 
 @media (max-width: 640px) {
-  .retreat-rich-hero__actions,
-  .retreat-rich-final-cta__button {
+  .retreat-rich-hero__actions {
+    flex-direction: column;
     width: 100%;
   }
 
@@ -9100,6 +9228,46 @@ html[data-theme='cream-elegance'] .retreat-rich-page {
   .retreat-rich-final-cta__button {
     width: 100%;
     justify-content: center;
+  }
+
+  .retreat-rich-hero__frame {
+    inset: 5%;
+    transform: none;
+  }
+
+  html[dir='rtl'] .retreat-rich-hero__frame {
+    inset: 5%;
+  }
+
+  .retreat-rich-hero__glow {
+    filter: blur(36px);
+  }
+
+  .retreat-rich-hero__glow--media,
+  .retreat-rich-hero__glow--copy {
+    width: min(70vw, 16rem);
+    height: min(70vw, 16rem);
+  }
+}
+
+@media (max-width: 374px) {
+  .retreat-rich-hero__title {
+    font-size: 1.55rem;
+  }
+
+  .retreat-rich-gallery .program-detail-gallery-viewer {
+    padding: 0.5rem;
+  }
+
+  .retreat-rich-final-cta {
+    padding: 1.25rem 0.85rem;
+  }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .retreat-rich-hero__figure {
+    aspect-ratio: auto;
+    height: min(16rem, 62vh);
   }
 }
 

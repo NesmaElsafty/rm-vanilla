@@ -131,6 +131,7 @@ export function createFloatingSlider(container, items, options = {}) {
   let revealTimer = 0;
   let scrollRaf = 0;
   let resizeRaf = 0;
+  let isSliderScrolling = false;
   let slideCenters = [];
   let viewportWidth = 0;
   let geometryDirty = false;
@@ -217,6 +218,7 @@ export function createFloatingSlider(container, items, options = {}) {
   const goPhysical = (index, smooth = true) => {
     if (index < 0 || index >= slideEls.length) return;
     physicalIndex = index;
+    if (finite && smooth) beginSliderScroll();
     if (!slideCenters.length) {
       scrollToPhysical(scrollEl, index, smooth);
       if (smooth) isAnimating = true;
@@ -257,6 +259,26 @@ export function createFloatingSlider(container, items, options = {}) {
     if (isNormalizing) return;
     physicalIndex = closestCachedIndex();
     syncActive(logicalFromPhysical(physicalIndex));
+  };
+
+  const beginSliderScroll = () => {
+    if (isSliderScrolling) return;
+    isSliderScrolling = true;
+    wrapEl.classList.add('slider-is-scrolling');
+  };
+
+  const endSliderScroll = () => {
+    if (!isSliderScrolling) return;
+    isSliderScrolling = false;
+    wrapEl.classList.remove('slider-is-scrolling');
+  };
+
+  const settleMobileSlider = () => {
+    cacheGeometry();
+    const nextPhysical = closestCachedIndex();
+    physicalIndex = nextPhysical;
+    syncActive(logicalFromPhysical(nextPhysical));
+    endSliderScroll();
   };
 
   const normalizeLoop = () => {
@@ -349,6 +371,14 @@ export function createFloatingSlider(container, items, options = {}) {
 
   const settle = () => {
     isAnimating = false;
+    if (finite) {
+      if (geometryDirty && !isPointerDown) {
+        geometryDirty = false;
+        cacheGeometry();
+      }
+      if (!isPointerDown) settleMobileSlider();
+      return;
+    }
     if (geometryDirty && !isPointerDown) {
       geometryDirty = false;
       recacheAndMaybeAlign();
@@ -358,10 +388,15 @@ export function createFloatingSlider(container, items, options = {}) {
 
   const scheduleSettle = () => {
     window.clearTimeout(settleTimer);
-    settleTimer = window.setTimeout(settle, 160);
+    settleTimer = window.setTimeout(settle, finite ? 120 : 160);
   };
 
   const onScroll = () => {
+    if (finite) {
+      beginSliderScroll();
+      scheduleSettle();
+      return;
+    }
     if (scrollRaf) return;
     scrollRaf = requestAnimationFrame(() => {
       scrollRaf = 0;
@@ -398,6 +433,7 @@ export function createFloatingSlider(container, items, options = {}) {
     isPointerDown = true;
     isUserInteracting = true;
     isAnimating = false;
+    if (finite) beginSliderScroll();
     pause();
   };
 
@@ -541,6 +577,7 @@ export function createFloatingSlider(container, items, options = {}) {
       selectBtns.forEach((btn) => btn.removeEventListener('click', onSelectClick));
       resizeObserver?.disconnect();
       intersectionObserver?.disconnect();
+      wrapEl?.classList.remove('slider-is-scrolling');
       container.innerHTML = '';
     },
     refresh() {
