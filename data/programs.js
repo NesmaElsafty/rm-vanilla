@@ -2,13 +2,13 @@ import programsSeeder from './programs-seeder.js';
 import programsSeederEn from './programs-seeder.en.js';
 
 const IMAGE_BY_SLUG = {
-  apg: 'assets/images/programs/program-self-leadership.png',
-  nlp: 'assets/images/programs/program-nlp.png',
-  'new-version-of-yourself': 'assets/images/programs/program-new-version.png',
-  'i-am-female': 'assets/images/programs/program-ana-ontha.png',
-  'ana-ontha': 'assets/images/programs/program-ana-ontha.png',
-  'self-confidence': 'assets/images/programs/program-confidence.png',
-  mottasel: 'assets/images/programs/program-mottasel.png',
+  apg: 'assets/images/programs/program-self-leadership.webp',
+  nlp: 'assets/images/programs/program-nlp.webp',
+  'new-version-of-yourself': 'assets/images/programs/program-new-version.webp',
+  'i-am-female': 'assets/images/programs/program-ana-ontha.webp',
+  'ana-ontha': 'assets/images/programs/program-ana-ontha.webp',
+  'self-confidence': 'assets/images/programs/program-confidence.webp',
+  mottasel: 'assets/images/programs/program-mottasel.webp',
 };
 
 const BUTTON_TEXT_AR = {
@@ -72,20 +72,4 @@ export function getProgramCards(locale = 'ar') {
     button_text: program.button_text,
     image: program.image,
   }));
-}
-
-/** Arabic: "في 3 شهور" → "3 شهور". English: "An 8-week journey..." → "8 weeks" */
-export function getProgramDuration(pageSubtitle, locale = 'ar') {
-  if (!pageSubtitle) return null;
-
-  if (locale === 'en') {
-    const inMatch = pageSubtitle.match(/\bin\s+(\d[\d\s-]*(?:weeks?|days?|months?))/i);
-    if (inMatch) return inMatch[1].trim();
-    const anMatch = pageSubtitle.match(/\b(?:an|a)\s+(\d[\d-]*(?:week|day|month)[\w-]*)/i);
-    if (anMatch) return anMatch[1].trim();
-    return null;
-  }
-
-  const match = pageSubtitle.match(/في\s+(.+)$/);
-  return match?.[1]?.trim() ?? null;
 }

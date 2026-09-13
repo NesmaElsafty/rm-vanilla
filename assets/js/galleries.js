@@ -52,15 +52,36 @@ export function initGallery(root) {
     }
   };
 
+  const preloadAdjacentFull = () => {
+    if (images.length < 2) return;
+    const nextSrc = images[wrapIndex(activeIndex + 1, images.length)];
+    if (!nextSrc) return;
+    const img = new Image();
+    img.decoding = 'async';
+    img.src = nextSrc;
+  };
+
+  const scheduleIdlePreload = () => {
+    if (typeof window.requestIdleCallback === 'function') {
+      window.requestIdleCallback(() => preloadAdjacentFull(), { timeout: 2500 });
+      return;
+    }
+    window.setTimeout(preloadAdjacentFull, 700);
+  };
+
   const render = () => {
     activeIndex = wrapIndex(activeIndex, images.length);
     gallery.setAttribute('data-gallery-index', String(activeIndex));
     updateChrome();
 
-    if (!stageImage) return;
+    if (!stageImage) {
+      scheduleIdlePreload();
+      return;
+    }
 
     if (prefersReducedMotion()) {
       applyStageImage();
+      scheduleIdlePreload();
       return;
     }
 
@@ -68,6 +89,7 @@ export function initGallery(root) {
     window.setTimeout(() => {
       applyStageImage();
       stageImage.classList.remove('is-gallery-fading');
+      scheduleIdlePreload();
     }, 160);
   };
 
@@ -140,6 +162,7 @@ export function initGallery(root) {
 
   applyStageImage();
   updateChrome();
+  scheduleIdlePreload();
 }
 
 export function initGalleries(root = document) {

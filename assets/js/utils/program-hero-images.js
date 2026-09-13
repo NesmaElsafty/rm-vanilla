@@ -1,29 +1,24 @@
-/**
- * Deterministic detail-page Hero images from the Programs visual pool.
- * Same slug → same image (AR/EN, refresh, theme). No Math.random().
- */
-
 export const PROGRAM_HERO_IMAGES = [
-  'assets/images/programs/program-ana-ontha.png',
-  'assets/images/programs/program-confidence.png',
-  'assets/images/programs/program-mottasel.png',
-  'assets/images/programs/program-new-version.png',
-  'assets/images/programs/program-nlp.png',
-  'assets/images/programs/program-self-leadership.png',
+  'assets/images/programs/program-ana-ontha.webp',
+  'assets/images/programs/program-confidence.webp',
+  'assets/images/programs/program-mottasel.webp',
+  'assets/images/programs/program-new-version.webp',
+  'assets/images/programs/program-nlp.webp',
+  'assets/images/programs/program-self-leadership.webp',
 ];
 
 /** Prefer exact brand art for known program slugs when available. */
 const HERO_BY_SLUG = {
-  'ana-ontha': 'assets/images/programs/program-ana-ontha.png',
-  'i-am-female': 'assets/images/programs/program-ana-ontha.png',
-  'new-version-of-yourself': 'assets/images/programs/program-new-version.png',
-  'self-confidence': 'assets/images/programs/program-confidence.png',
-  mottasel: 'assets/images/programs/program-mottasel.png',
-  nlp: 'assets/images/programs/program-nlp.png',
-  apg: 'assets/images/programs/program-self-leadership.png',
+  'ana-ontha': 'assets/images/programs/program-ana-ontha.webp',
+  'i-am-female': 'assets/images/programs/program-ana-ontha.webp',
+  'new-version-of-yourself': 'assets/images/programs/program-new-version.webp',
+  'self-confidence': 'assets/images/programs/program-confidence.webp',
+  mottasel: 'assets/images/programs/program-mottasel.webp',
+  nlp: 'assets/images/programs/program-nlp.webp',
+  apg: 'assets/images/programs/program-self-leadership.webp',
 };
 
-const FALLBACK_PROGRAM_HERO = 'assets/images/programs/program-new-version.png';
+const FALLBACK_PROGRAM_HERO = 'assets/images/programs/program-new-version.webp';
 
 function hashString(value) {
   let hash = 0;

@@ -219,4 +219,49 @@
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
+
+  /* Botanical vines: keep artwork, stop continuous SVG animation on mobile */
+  .botanical-line-art--animated .vine-light-trace,
+  .botanical-line-art--animated .vine-light-dot,
+  .botanical-line-art--animated.portrait-vine--front,
+  .portrait-vine--front.botanical-line-art--animated,
+  .botanical-line-art--animated.portrait-vine--back,
+  .portrait-vine--back.botanical-line-art--animated,
+  .hero-botanical-between.botanical-line-art--animated {
+    animation: none !important;
+  }
+
+  .botanical-line-art--animated .vine-light-trace {
+    opacity: 0.45;
+    stroke-dashoffset: 50;
+  }
+
+  .botanical-line-art--bold {
+    filter: none;
+  }
+
+  /* Retreat hero: soft radial only — no live CSS blur filter on mobile */
+  .retreat-rich-hero__glow {
+    filter: none !important;
+  }
+
+  .retreat-rich-hero__glow--media {
+    background: radial-gradient(
+      circle,
+      rgba(185, 143, 162, 0.34) 0%,
+      rgba(185, 143, 162, 0.12) 42%,
+      transparent 72%
+    );
+    opacity: 0.9;
+  }
+
+  .retreat-rich-hero__glow--copy {
+    background: radial-gradient(
+      circle,
+      rgba(199, 154, 59, 0.24) 0%,
+      rgba(199, 154, 59, 0.08) 45%,
+      transparent 74%
+    );
+    opacity: 0.9;
+  }
 }

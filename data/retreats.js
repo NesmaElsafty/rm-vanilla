@@ -2,17 +2,17 @@ import { getContent, resolveLocale } from './content.js';
 
 export const RETREAT_SLUG = 'upcoming';
 
-export const RETREAT_HERO_IMAGE = 'assets/images/gallery/retreat/retreat-hero.png';
+export const RETREAT_HERO_IMAGE = 'assets/images/gallery/retreat/retreat-hero.webp';
 
 export const RETREAT_GALLERY_IMAGES = [
-  'assets/images/gallery/retreat/retreat-1.png',
-  'assets/images/gallery/retreat/retreat-2.png',
-  'assets/images/gallery/retreat/retreat-3.png',
-  'assets/images/gallery/retreat/retreat-4.png',
-  'assets/images/gallery/retreat/retreat-5.png',
-  'assets/images/gallery/retreat/retreat-6.png',
-  'assets/images/gallery/retreat/retreat-7.png',
-  'assets/images/gallery/retreat/retreat-8.png',
+  'assets/images/gallery/retreat/retreat-1.webp',
+  'assets/images/gallery/retreat/retreat-2.webp',
+  'assets/images/gallery/retreat/retreat-3.webp',
+  'assets/images/gallery/retreat/retreat-4.webp',
+  'assets/images/gallery/retreat/retreat-5.webp',
+  'assets/images/gallery/retreat/retreat-6.webp',
+  'assets/images/gallery/retreat/retreat-7.webp',
+  'assets/images/gallery/retreat/retreat-8.webp',
 ];
 
 function buildRetreat() {

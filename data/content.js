@@ -276,7 +276,7 @@ export const translations = {
       { id: 'retreats', label: 'Retreats & Events' },
     ],
     contactPrograms: [
-      { slug: 'new-version-of-yourself', label: 'النسخة الجديدة من نفسك' },
+      { slug: 'stronger-version-of-yourself', label: 'النسخة الاقوى من نفسك' },
       { slug: 'self-confidence', label: 'كورس الثقة بالنفس' },
       { slug: 'i-am-female', label: 'أنا أنثى' },
       { slug: 'mottasel', label: 'متصل' },
@@ -310,7 +310,7 @@ export const translations = {
       aboutCoach: 'عن رنا',
       successStories: 'الآراء وقصص النجاح',
       empowermentPrograms: 'برامج التمكين',
-      programNewVersion: 'النسخة الجديدة من نفسك',
+      programStrongerVersion: 'النسخة الاقوى من نفسك',
       programConfidence: 'كورس عمق الثقة بالنفس',
       programAnaOntha: 'أنا أنثى (طاقة شفاء ذاتي)',
       programMottasel: 'برنامج متصل للذكاء العاطفي',
@@ -494,21 +494,21 @@ export const translations = {
           role: 'مهندسة ومدربة · المغرب',
           quote:
             'خضت مع رنا دورات كثيرة: أنا أنثى، ديتوكس، APG وحاليا NLP وكذلك حصص كوتشينغ شخصية. الجميل في رنا هي سلاسة الشرح وعمق التعبير الذي يوصل الفكرة والمفهوم بوضوح وعمق. قدرة رنا على الاتصال خطيرة وهي تعطي حسب ما أنت تحتاجه بالضبط كأنها تفهمك على طول ماذا تريد وماذا تحتاج وهذه سمة نادرة عند الكثير من الكوتشز. في الجلسات بتحس رنا بتخاطب الروح مباشرة دون واسطات وهذا ما يجعل الأثر مضاعف. كل التوفيق لكِ يا أحلى كوتش ومرشد.',
-          image: 'assets/images/testimonials/hajar-ait-nasser.png',
+          image: 'assets/images/testimonials/hajar-ait-nasser.webp',
         },
         {
           name: 'ميرفت جلال',
           role: 'ربة منزل',
           quote:
             'درست مع د. رنا كورس أنا أنثى وكورس الثقة بالنفس وبرنامج ديتوكس وبرنامج متصل ومبادرة مطمئن كل جمعة. د. رنا من أكثر المدربين المؤثرين فعلاً؛ كل كورس ترك بصمات قوية في حياتي وغيّرني ولله الحمد تغييراً جذرياً. شكراً لعطائك وخبرتك وتنظيمك وسلاسة أسلوبك وصدقك في كل كلمة، شكراً من القلب.',
-          image: 'assets/images/testimonials/mervat-galal.png',
+          image: 'assets/images/testimonials/mervat-galal.webp',
         },
         {
           name: 'فاديا بدور',
           role: 'محامية · سوريا',
           quote:
             'مبادرة مطمئن المجانية رااااائعة وفيها صدق من القلب كعادة الدكتورة رنا.',
-          image: 'assets/images/testimonials/fadia-bdour.png',
+          image: 'assets/images/testimonials/fadia-bdour.webp',
         },
       ],
       closingLead: 'أنا لا أعمل على “جانب واحد” منك،',
@@ -546,8 +546,8 @@ export const translations = {
         description: 'احتراف أدوات البرمجة اللغوية العصبية لتغيير الأنماط وصناعة واقع جديد.',
         buttonText: 'اعرف التفاصيل',
       },
-      'new-version-of-yourself': {
-        title: 'النسخة الجديدة من نفسك',
+      'stronger-version-of-yourself': {
+        title:'النسخة الاقوى من نفسك',
         description: 'مسار تحولي متكامل لإعادة بناء الهوية والعادات والحياة التي تستحقها.',
         buttonText: 'اعرف التفاصيل',
       },
@@ -1058,21 +1058,21 @@ export const translations = {
           role: 'Engineer & Trainer · Morocco',
           quote:
             "I have taken many courses with Rana: I Am Female, Detox, APG, and currently NLP, as well as private coaching sessions. What is beautiful about Rana is the smoothness of her explanation and the depth of expression that conveys ideas and concepts with clarity and depth. Rana's ability to connect is remarkable — she gives you exactly what you need, as if she instantly understands what you want and what you need, and that is a rare quality among many coaches. In sessions, you feel Rana speaks directly to the soul without intermediaries, and that is what multiplies the impact. All the best to you, the most wonderful coach and guide.",
-          image: 'assets/images/testimonials/hajar-ait-nasser.png',
+          image: 'assets/images/testimonials/hajar-ait-nasser.webp',
         },
         {
           name: 'Mervat Galal',
           role: 'Homemaker',
           quote:
             "I studied with Dr. Rana the I Am Woman course, the self-confidence course, the Detox program, the Connected program, and the Mutma'en Friday initiative. Dr. Rana is truly one of the most impactful trainers; every course left a strong mark on my life and, thank God, changed me at the root. Thank you for your giving, your expertise, your organization, the ease of your style, and your honesty in every word — thank you from the heart.",
-          image: 'assets/images/testimonials/mervat-galal.png',
+          image: 'assets/images/testimonials/mervat-galal.webp',
         },
         {
           name: 'Fadia Bdour',
           role: 'Lawyer · Syria',
           quote:
             'The free Motmain initiative is wonderful — full of heartfelt sincerity, as is always the case with Dr. Rana.',
-          image: 'assets/images/testimonials/fadia-bdour.png',
+          image: 'assets/images/testimonials/fadia-bdour.webp',
         },
       ],
       closingLead: 'I do not work on “one side” of you,',

@@ -16,7 +16,7 @@ export const MOTTASEL_PROGRAM_AR = {
   hero: {
     eyebrow: 'متصل',
     title: 'رحلة روحية وعميقة\nمتصل',
-    supporting_line: '3 شهور لاتصال عميق بالله',
+    supporting_line: 'لاتصال عميق بالله',
     description:
       'رحلة عودة نفكك فيها العوائق التي تقف بينك وبين تواصل عميق مع الله، فيهدأ دخلك وتعيش بتسليم لله',
     supporting_lines: [
@@ -30,7 +30,6 @@ export const MOTTASEL_PROGRAM_AR = {
   },
   journey_summary: {
     brand: 'متصل',
-    duration_line: '3 شهور للعودة إلى الله',
     stages_line: '3 مراحل للعودة إلى الله',
     value_pairs: [
       {
@@ -74,7 +73,7 @@ export const MOTTASEL_PROGRAM_AR = {
       'في متصل… لا تحصل على معلومات فقط، بل تدخل رحلة تحول في علاقتك بالله',
       'رحلة تعيدك إلى الله، وإلى سلامك، وإلى نفسك.',
     ],
-    intro: 'تخيل ان خلال 30 يوم في متصل، ستنتقل من:',
+    intro: 'تخيل أنك في متصل، ستنتقل من:',
     flows: [
       { from: 'من القلق', to: 'الاعتماد' },
       { from: 'من الخوف', to: 'الأمان' },
@@ -108,7 +107,7 @@ export const MOTTASEL_PROGRAM_AR = {
   journey: {
     heading: 'ماذا يحدث داخل برنامج متصل؟',
     intro:
-      'رحلة متكاملة، 3 شهور ، 3 مراحل ، متدرجة تأخذك من الداخل خطوة بخطوة — الي التسليم والأنس بالله.',
+      'رحلة متكاملة عبر 3 مراحل، متدرجة تأخذك من الداخل خطوة بخطوة — الي التسليم والأنس بالله.',
     stages: [
       {
         order: 1,
@@ -322,7 +321,7 @@ export const MOTTASEL_PROGRAM_EN = {
   hero: {
     eyebrow: 'Mottasel',
     title: 'A Deep Spiritual Journey\nMottasel',
-    supporting_line: '3 Months Toward a Deeper Connection With God',
+    supporting_line: 'Toward a Deeper Connection With God',
     description:
       'A journey of returning, where we work through the barriers standing between you and a deep connection with God, so your inner world becomes calmer and you live with greater surrender to God.',
     supporting_lines: [
@@ -336,7 +335,6 @@ export const MOTTASEL_PROGRAM_EN = {
   },
   journey_summary: {
     brand: 'Mottasel',
-    duration_line: '3 Months to Return to God',
     stages_line: '3 Stages to Return to God',
     value_pairs: [
       {
@@ -380,7 +378,7 @@ export const MOTTASEL_PROGRAM_EN = {
       'In Mottasel… you do not simply receive information. You enter a journey of transformation in your relationship with God.',
       'A journey that brings you back to God, to your peace, and to yourself.',
     ],
-    intro: 'Imagine that during 30 days in Mottasel, you will move from:',
+    intro: 'Imagine that in Mottasel, you will move from:',
     flows: [
       { from: 'Anxiety', to: 'Reliance' },
       { from: 'Fear', to: 'Safety' },
@@ -414,7 +412,7 @@ export const MOTTASEL_PROGRAM_EN = {
   journey: {
     heading: 'What Happens Inside the Mottasel Program?',
     intro:
-      'An integrated journey — 3 months, 3 stages — gradual steps that take you from within, step by step, toward surrender and companionship with God.',
+      'An integrated journey across 3 stages — gradual steps that take you from within, step by step, toward surrender and companionship with God.',
     stages: [
       {
         order: 1,

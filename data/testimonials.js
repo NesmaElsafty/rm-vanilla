@@ -24,7 +24,7 @@ export const TESTIMONIAL_ENTITY_LINKS = {
 export const testimonials = [
   {
     id: 'test-8',
-    image: 'assets/images/testimonials/hajar-ait-nasser.png',
+    image: 'assets/images/testimonials/hajar-ait-nasser.webp',
     rating: 5,
     name: { ar: 'هاجر ايت ناصر', en: 'Hajar Ait Nasser' },
     role: { ar: 'مهندسة ومدربة · المغرب', en: 'Engineer & Trainer · Morocco' },
@@ -37,7 +37,7 @@ export const testimonials = [
   },
   {
     id: 'test-9',
-    image: 'assets/images/testimonials/wissam-sami-mohamed.png',
+    image: 'assets/images/testimonials/wissam-sami-mohamed.webp',
     rating: 5,
     name: { ar: 'وسام سامى محمد', en: 'Wissam Sami Mohamed' },
     role: {
@@ -53,7 +53,7 @@ export const testimonials = [
   },
   {
     id: 'test-10',
-    image: 'assets/images/testimonials/wissam-sami-mohamed.png',
+    image: 'assets/images/testimonials/wissam-sami-mohamed.webp',
     rating: 5,
     name: { ar: 'وسام سامى محمد', en: 'Wissam Sami Mohamed' },
     role: {
@@ -69,7 +69,7 @@ export const testimonials = [
   },
   {
     id: 'test-11',
-    image: 'assets/images/testimonials/wissam-sami-mohamed.png',
+    image: 'assets/images/testimonials/wissam-sami-mohamed.webp',
     rating: 5,
     name: { ar: 'وسام سامى محمد', en: 'Wissam Sami Mohamed' },
     role: {
@@ -85,7 +85,7 @@ export const testimonials = [
   },
   {
     id: 'test-12',
-    image: 'assets/images/testimonials/bashayer-karim.png',
+    image: 'assets/images/testimonials/bashayer-karim.webp',
     rating: 5,
     name: { ar: 'بشائر كريم', en: 'Bashaer Kareem' },
     role: {
@@ -101,7 +101,7 @@ export const testimonials = [
   },
   {
     id: 'test-13',
-    image: 'assets/images/programs/program-mottasel.png',
+    image: 'assets/images/programs/program-mottasel.webp',
     rating: 5,
     name: { ar: 'سلمي الشعراوي', en: 'Salma El-Shaarawi' },
     role: { ar: 'صاحبة بزنس للأكل الصحي · مصر', en: 'Healthy Food Business Owner · Egypt' },
@@ -114,7 +114,7 @@ export const testimonials = [
   },
   {
     id: 'test-14',
-    image: 'assets/images/floating/motmain-icon.png',
+    image: 'assets/images/floating/motmain-icon.webp',
     rating: 5,
     name: { ar: 'سلمي الشعراوي', en: 'Salma El-Shaarawi' },
     role: { ar: 'صاحبة بزنس للأكل الصحي · مصر', en: 'Healthy Food Business Owner · Egypt' },
@@ -127,7 +127,7 @@ export const testimonials = [
   },
   {
     id: 'test-15',
-    image: 'assets/images/testimonials/mervat-galal.png',
+    image: 'assets/images/testimonials/mervat-galal.webp',
     rating: 5,
     name: { ar: 'ميرفت جلال', en: 'Mervat Galal' },
     role: { ar: 'ربة منزل', en: 'Homemaker' },
@@ -143,7 +143,7 @@ export const testimonials = [
   },
   {
     id: 'test-16',
-    image: 'assets/images/testimonials/afnan-mohamed.png',
+    image: 'assets/images/testimonials/afnan-mohamed.webp',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
     role: { ar: 'سيلز · مصر', en: 'Sales · Egypt' },
@@ -156,7 +156,7 @@ export const testimonials = [
   },
   {
     id: 'test-17',
-    image: 'assets/images/testimonials/afnan-mohamed.png',
+    image: 'assets/images/testimonials/afnan-mohamed.webp',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
     role: { ar: 'سيلز · 28 سنة · من مصر', en: 'Sales · 28 · Egypt' },
@@ -169,7 +169,7 @@ export const testimonials = [
   },
   {
     id: 'test-18',
-    image: 'assets/images/testimonials/afnan-mohamed.png',
+    image: 'assets/images/testimonials/afnan-mohamed.webp',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
     role: { ar: 'سيلز · 28 سنة · من مصر', en: 'Sales · 28 · Egypt' },
@@ -182,7 +182,7 @@ export const testimonials = [
   },
   {
     id: 'test-19',
-    image: 'assets/images/testimonials/afnan-mohamed.png',
+    image: 'assets/images/testimonials/afnan-mohamed.webp',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
     role: { ar: 'سيلز · 28 سنة · من مصر', en: 'Sales · 28 · Egypt' },
@@ -195,7 +195,7 @@ export const testimonials = [
   },
   {
     id: 'test-20',
-    image: 'assets/images/testimonials/afnan-mohamed.png',
+    image: 'assets/images/testimonials/afnan-mohamed.webp',
     rating: 5,
     name: { ar: 'أفنان محمد', en: 'Afnan Mohamed' },
     role: { ar: 'سيلز · 28 سنة · من مصر', en: 'Sales · 28 · Egypt' },
@@ -208,7 +208,7 @@ export const testimonials = [
   },
   {
     id: 'test-21',
-    image: 'assets/images/testimonials/fadia-bdour.png',
+    image: 'assets/images/testimonials/fadia-bdour.webp',
     rating: 5,
     name: { ar: 'فاديا بدور', en: 'Fadia Bdour' },
     role: { ar: 'محامية · سوريا', en: 'Lawyer · Syria' },
@@ -221,7 +221,7 @@ export const testimonials = [
   },
   {
     id: 'test-22',
-    image: 'assets/images/testimonials/fadia-bdour.png',
+    image: 'assets/images/testimonials/fadia-bdour.webp',
     rating: 5,
     name: { ar: 'فاديا بدور', en: 'Fadia Bdour' },
     role: { ar: 'محامية · سوريا', en: 'Lawyer · Syria' },
@@ -234,7 +234,7 @@ export const testimonials = [
   },
   {
     id: 'test-23',
-    image: 'assets/images/testimonials/fadia-bdour.png',
+    image: 'assets/images/testimonials/fadia-bdour.webp',
     rating: 5,
     name: { ar: 'فاديا بدور', en: 'Fadia Bdour' },
     role: { ar: 'محامية · سوريا', en: 'Lawyer · Syria' },
@@ -247,7 +247,7 @@ export const testimonials = [
   },
   {
     id: 'test-4',
-    image: 'assets/images/testimonials/apg-feedback-rana-1.png',
+    image: 'assets/images/testimonials/apg-feedback-rana-1.webp',
     rating: 5,
     name: { ar: 'مشاركة من برنامج APG', en: 'APG Program Participant' },
     role: { ar: 'متدربة في APG', en: 'APG Trainee' },
@@ -260,7 +260,7 @@ export const testimonials = [
   },
   {
     id: 'test-5',
-    image: 'assets/images/testimonials/apg-feedback-rana-2.png',
+    image: 'assets/images/testimonials/apg-feedback-rana-2.webp',
     rating: 5,
     name: { ar: 'مشاركة من برنامج APG', en: 'APG Program Participant' },
     role: { ar: 'متدربة في APG', en: 'APG Trainee' },
@@ -273,7 +273,7 @@ export const testimonials = [
   },
   {
     id: 'test-6',
-    image: 'assets/images/testimonials/apg-feedback-rana-3.png',
+    image: 'assets/images/testimonials/apg-feedback-rana-3.webp',
     rating: 5,
     name: { ar: 'مشاركة من برنامج APG', en: 'APG Program Participant' },
     role: { ar: 'متدربة في APG', en: 'APG Trainee' },
@@ -286,7 +286,7 @@ export const testimonials = [
   },
   {
     id: 'test-7',
-    image: 'assets/images/testimonials/apg-feedback-rana-4.png',
+    image: 'assets/images/testimonials/apg-feedback-rana-4.webp',
     rating: 5,
     name: { ar: 'مشاركة من برنامج APG', en: 'APG Program Participant' },
     role: { ar: 'متدربة في APG', en: 'APG Trainee' },

@@ -181,6 +181,10 @@ function initCounters() {
   const run = () => {
     if (started) return;
     started = true;
+    if (isCoarsePointer()) {
+      counters.forEach(setCounterFinal);
+      return;
+    }
     counters.forEach((element, index) => {
       const target = Number(element.getAttribute('data-count'));
       if (!Number.isFinite(target)) return;

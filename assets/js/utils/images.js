@@ -11,8 +11,11 @@ export function toWebp(src) {
   return String(src ?? '').replace(/\.(png|jpe?g)$/i, '.webp');
 }
 
+/** Card thumbnail: foo.png|jpg|webp → foo-304.webp (slider card architecture). */
 export function toCardWebp(src) {
-  return String(src ?? '').replace(/\.(png|jpe?g)$/i, '-304.webp');
+  const value = String(src ?? '');
+  if (/-304\.webp$/i.test(value)) return value;
+  return value.replace(/\.(png|jpe?g|webp)$/i, '-304.webp');
 }
 
 export function cardImageMarkup(src, className = 'floating-program-card-image') {

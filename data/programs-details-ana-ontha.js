@@ -10,11 +10,11 @@ export const ANA_ONTHA_PROGRAM_AR = {
   structure_type: 'feminine-healing-journey',
   seo: {
     title: 'أنا انثي | Dr. Rana Mosaad',
-    description: 'رحلة عودة الي فطرتك الأنثوية السليمة في 60 يوم',
+    description: 'رحلة عودة الي فطرتك الأنثوية السليمة',
   },
   hero: {
     title: 'أنا انثي',
-    supporting_line: 'رحلة عودة الي فطرتك الأنثوية السليمة في 60 يوم ',
+    supporting_line: 'رحلة عودة الي فطرتك الأنثوية السليمة',
     primary_cta: 'ابدأ رحلة العودة إلى أنوثتك الآن',
   },
   popup: {
@@ -214,11 +214,11 @@ export const ANA_ONTHA_PROGRAM_EN = {
   structure_type: 'feminine-healing-journey',
   seo: {
     title: 'I Am a Woman | Dr. Rana Mosaad',
-    description: 'A 60-day journey back to your healthy feminine nature.',
+    description: 'A journey back to your healthy feminine nature.',
   },
   hero: {
     title: 'I Am a Woman',
-    supporting_line: 'A 60-Day Journey Back to Your Healthy Feminine Nature',
+    supporting_line: 'A Journey Back to Your Healthy Feminine Nature',
     primary_cta: 'Begin Your Journey Back to Your Femininity',
   },
   popup: {

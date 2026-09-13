@@ -132,7 +132,6 @@ function renderHero(root, hero, slug) {
 
 function renderJourneySummary(root, summary) {
   setText(root, '[data-ps-summary-brand]', summary?.brand);
-  setText(root, '[data-ps-summary-duration]', summary?.duration_line);
   setText(root, '[data-ps-summary-stages]', summary?.stages_line);
   setHtml(
     root,

@@ -4,8 +4,8 @@ import { getProgramHeroImage } from '../assets/js/utils/program-hero-images.js';
 
 /** Prefer brand art when available; otherwise use the shared programs image pool. */
 const IMAGE_BY_SLUG = {
-  'you-first': 'assets/images/programs/program-confidence.png',
-  'feminine-code': 'assets/images/programs/program-ana-ontha.png',
+  'you-first': 'assets/images/programs/program-confidence.webp',
+  'feminine-code': 'assets/images/programs/program-ana-ontha.webp',
 };
 
 const WORKSHOPS_ORDER = ['you-first', 'emotional-management-secret', 'feminine-code'];

@@ -9240,7 +9240,7 @@ html[dir='rtl'] .retreat-rich-hero__frame {
   }
 
   .retreat-rich-hero__glow {
-    filter: blur(36px);
+    filter: none;
   }
 
   .retreat-rich-hero__glow--media,

@@ -16,7 +16,7 @@ export const NEW_VERSION_PROGRAM_AR = {
   hero: {
     title: 'النسخة الجديدة من نفسك',
     supporting_line:
-      'رحلة تحوّل من النسخة الضعيفة… إلى النسخة القوية من نفسك في 45 يومًا',
+      'رحلة تحوّل من النسخة الضعيفة… إلى النسخة القوية من نفسك',
     description:
       'النسخة الجديدة من نفسك هو برنامج تحولي يساعدك على الانتقال من الضعف، الشك، وسيطرة المشاعر… إلى القوة، الثقة، والقيادة، من خلال منهج عملي يعيد بناءك من الداخل.',
     primary_cta: 'احجز مكانك في البرنامج',
@@ -50,7 +50,7 @@ export const NEW_VERSION_PROGRAM_AR = {
   },
   transformation: {
     intro:
-      'تخيل أنه خلال 45 يومًا في النسخة الجديدة من نفسك، ستنتقل من:',
+      'تخيل أنك في النسخة الجديدة من نفسك، ستنتقل من:',
     flows: [
       { from: 'من الضعف', to: 'القوة' },
       { from: 'من التشتت', to: 'الثقة والتمكين' },
@@ -197,7 +197,7 @@ export const NEW_VERSION_PROGRAM_EN = {
   hero: {
     title: 'The New Version of Yourself',
     supporting_line:
-      'A transformation journey from the weaker version of yourself… to the stronger version of yourself in 45 days',
+      'A transformation journey from the weaker version of yourself… to the stronger version of yourself',
     description:
       'The New Version of Yourself is a transformational program that helps you move from weakness, doubt, and being controlled by your emotions… to strength, confidence, and leadership, through a practical methodology that rebuilds you from within.',
     primary_cta: 'Reserve Your Place in the Program',
@@ -231,7 +231,7 @@ export const NEW_VERSION_PROGRAM_EN = {
   },
   transformation: {
     intro:
-      'Imagine that during 45 days in The New Version of Yourself, you will move from:',
+      'Imagine that in The New Version of Yourself, you will move from:',
     flows: [
       { from: 'Weakness', to: 'Strength' },
       { from: 'Distraction', to: 'Confidence and empowerment' },

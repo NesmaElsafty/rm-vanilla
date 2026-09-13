@@ -13,7 +13,7 @@ export const APG_PROGRAM_AR = {
   "hero": {
     "eyebrow": "APG | Accessing Personal Genius",
     "title": "قيادة الذات",
-    "supporting_line": "رحلة لقيادة عالمك الداخلي في 8 أسابيع …",
+    "supporting_line": "رحلة لقيادة عالمك الداخلي …",
     "description_blocks": [
       {
         "type": "paragraph",
@@ -1109,7 +1109,7 @@ export const APG_PROGRAM_EN = {
   "hero": {
     "eyebrow": "APG | Accessing Personal Genius",
     "title": "Self-Leadership",
-    "supporting_line": "An 8-week journey to lead your inner world…",
+    "supporting_line": "A journey to lead your inner world…",
     "description_blocks": [
       {
         "type": "paragraph",

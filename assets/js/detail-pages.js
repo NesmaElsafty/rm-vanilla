@@ -1,7 +1,7 @@
 import { getLocale } from './language.js';
 import { refreshReveals } from './animations.js';
 import { getContent, getDir } from '../../data/content.js';
-import { getProgramBySlug, getProgramCards, getProgramDuration } from '../../data/programs.js';
+import { getProgramBySlug, getProgramCards } from '../../data/programs.js';
 import { getWorkshopBySlug, getWorkshopCards, getWorkshopDuration } from '../../data/workshops.js';
 import { getSessionBySlug, getSessionCards } from '../../data/sessions.js';
 import { getRecordedSessionBySlug, getRecordedSessionCards } from '../../data/recorded-sessions.js';
@@ -15,8 +15,8 @@ import { getProgramHeroImage } from './utils/program-hero-images.js';
 import { toWebp } from './utils/images.js';
 import { getProgramDetailPage } from '../../data/programs-details.js';
 
-const APG_MAIN = 'assets/images/gallery/apg/apg-main.png';
-const APG_SUP = [1, 2, 3, 4, 5, 6].map((n) => `assets/images/gallery/apg/apg-sup-${n}.png`);
+const APG_MAIN = 'assets/images/gallery/apg/apg-main.webp';
+const APG_SUP = [1, 2, 3, 4, 5, 6].map((n) => `assets/images/gallery/apg/apg-sup-${n}.webp`);
 
 const TAB_MAP = {
   program: {
@@ -463,7 +463,6 @@ function renderProgram(root) {
   const buckets = groupSections(sections, TAB_MAP.program);
   const faq = program.sections.find((s) => s.key === 'faq');
   const finalCta = program.sections.find((s) => s.key === 'final_cta');
-  const duration = getProgramDuration(program.page_subtitle, locale);
   const related = getProgramCards(locale).filter((item) => item.slug !== program.slug).slice(0, 3);
   const { items: testimonials } = getTestimonialsForProgram(program, locale);
   const galleryFromTestimonials = uniqueImages(testimonials.map((item) => item.image)).slice(0, 6);
@@ -509,7 +508,7 @@ function renderProgram(root) {
     populateBack(root, 'index.html#programs', pd.backToPrograms, rtl);
     populateImage(root, heroSrc, program.page_title);
     setSlotText(root, '[data-detail-eyebrow]', program.hero.eyebrow);
-    populateDuration(root, duration);
+    populateDuration(root, null);
     setSlotText(root, '[data-detail-title]', program.page_title);
     setSlotText(root, '[data-detail-subtitle]', program.page_subtitle);
     setSlotText(root, '[data-detail-lead]', program.hero.subheading);
@@ -534,7 +533,6 @@ function renderProgram(root) {
         <div class="program-detail-hero-content">
           <span class="keynote-label program-detail-hero-badge">
             <span class="program-detail-hero-badge-text">${escapeHtml(program.hero.eyebrow)}</span>
-            ${duration ? `<span class="program-detail-hero-badge-sep" aria-hidden="true">·</span><span class="program-detail-hero-badge-duration">${escapeHtml(duration)}</span>` : ''}
           </span>
           <h1 class="keynote-display program-detail-hero-title">${escapeHtml(program.page_title)}</h1>
           <p class="text-gold-gradient program-detail-hero-subtitle">${escapeHtml(program.page_subtitle)}</p>
@@ -895,7 +893,7 @@ function renderRetreat(root) {
           <div class="retreat-rich-hero__media">
             <div class="retreat-rich-hero__frame" aria-hidden="true"></div>
             <figure class="retreat-rich-hero__figure">
-              <img src="${escapeHtml(retreat.hero)}" alt="${escapeHtml(rd.eyebrow)}" class="retreat-rich-hero__image" width="960" height="1200" decoding="async" data-critical-hero>
+              <img src="${escapeHtml(toWebp(retreat.hero) || retreat.hero)}" alt="${escapeHtml(rd.eyebrow)}" class="retreat-rich-hero__image" width="960" height="1200" loading="eager" fetchpriority="high" decoding="async" data-critical-hero>
             </figure>
           </div>
           <div class="retreat-rich-hero__body">
@@ -922,7 +920,7 @@ function renderRetreat(root) {
 
   const gallery = root.querySelector('.program-detail-gallery');
   if (gallery) initGallery(gallery);
-  updateDocumentMeta(rd.pageTitle || rd.eyebrow, rd.heroSubtitle, retreat.hero);
+  updateDocumentMeta(rd.pageTitle || rd.eyebrow, rd.heroSubtitle, toWebp(retreat.hero) || retreat.hero);
   refreshReveals(root);
 }
 

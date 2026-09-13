@@ -100,7 +100,7 @@ const PRIVATE_SESSIONS_DETAILS_AR = [
     slug: 'restore-confidence-self-worth',
     session_name: 'استعادة الثقة والقيمة الذاتية',
     transformation_title: 'من الشك في نفسك… إلى الشعور بقيمتك الحقيقية',
-    image: 'assets/images/sessions/session-restore-confidence.png',
+    image: 'assets/images/programs/program-confidence.webp',
     description: [
       'هل تشعر أن قيمتك أصبحت مرتبطة برأي الآخرين؟',
       'تشك في نفسك، وتنتظر التقدير من الخارج، وتشعر أن ثقتك تهتز مع كل نقد أو رفض أو مقارنة.',
@@ -190,7 +190,7 @@ const PRIVATE_SESSIONS_DETAILS_AR = [
     slug: 'emotional-need-attachment-release',
     session_name: 'التحرر من الاحتياج العاطفي والتعلّق',
     transformation_title: 'من التعلّق بالناس… إلى الامتلاء من الداخل',
-    image: 'assets/images/sessions/session-emotional-attachment.png',
+    image: 'assets/images/programs/program-new-version.webp',
     description: [
       'هل تشعر أن سعادتك أصبحت مرتبطة بشخص آخر؟',
       'تخاف من الفقد، وتبحث باستمرار عن الاهتمام، ويؤلمك التجاهل أو الرفض أكثر مما ينبغي، حتى أصبحت علاقاتك تستنزف قلبك بدل أن تمنحه السلام.',
@@ -282,7 +282,7 @@ const PRIVATE_SESSIONS_DETAILS_AR = [
     slug: 'return-to-god-inner-peace',
     session_name: 'إصلاح العلاقة مع الله والعودة إليه',
     transformation_title: 'من البعد والصراع… إلى علاقة أقرب بالله',
-    image: 'assets/images/sessions/session-return-to-god.png',
+    image: 'assets/images/programs/program-mottasel.webp',
     description: [
       'هل تشعر أن هناك مسافة بينك وبين الله…',
       'رغم أنك تصلي، وتدعو، وتحاول أن تقترب؟',
@@ -379,7 +379,7 @@ const PRIVATE_SESSIONS_DETAILS_AR = [
     slug: 'private-journey-1-to-1',
     session_name: 'جلسة الإرشاد الخاصة 1:1 مع د. رنا مسعد',
     transformation_title: 'مساحة آمنة… لنفهم ما تعيشه، ونرسم طريقك نحو التحول',
-    image: 'assets/images/sessions/session-private-journey.png',
+    image: 'assets/images/programs/program-new-version.webp',
     description: [
       'أحيانًا لا نحتاج برنامجًا كاملًا…',
       'ولا نحتاج إجابات جاهزة.',
@@ -462,7 +462,7 @@ const PRIVATE_SESSIONS_DETAILS_AR = [
     slug: 'healing-roots-old-wounds',
     session_name: 'شفاء الصدمات والجروح القديمة',
     transformation_title: 'من سجن الماضي… إلى حرية الحاضر',
-    image: 'assets/images/sessions/session-healing-roots.png',
+    image: 'assets/images/programs/program-self-leadership.webp',
     description: [
       'هل تشعر أن هناك ألمًا قديمًا ما زال يؤثر على حياتك حتى اليوم؟',
       'ربما مرّت سنوات على بعض المواقف… لكن أثرها ما زال حاضرًا في مشاعرك، وعلاقاتك، وثقتك بنفسك، وطريقتك في رؤية الحياة.',
@@ -643,7 +643,7 @@ const PRIVATE_SESSIONS_DETAILS_EN = [
     slug: 'restore-confidence-self-worth',
     session_name: 'Rebuilding Self-Confidence and Self-Worth',
     transformation_title: 'From doubting yourself… to recognizing your true worth',
-    image: 'assets/images/sessions/session-restore-confidence.png',
+    image: 'assets/images/programs/program-confidence.webp',
     description: [
       "Do you feel that your worth has become tied to other people's opinions?",
       'You doubt yourself, wait for validation from the outside, and feel your confidence shake with every criticism, rejection, or comparison.',
@@ -733,7 +733,7 @@ const PRIVATE_SESSIONS_DETAILS_EN = [
     slug: 'emotional-need-attachment-release',
     session_name: 'Releasing Emotional Neediness and Attachment',
     transformation_title: 'From attachment to others… to inner fullness',
-    image: 'assets/images/sessions/session-emotional-attachment.png',
+    image: 'assets/images/programs/program-new-version.webp',
     description: [
       'Do you feel that your happiness has become tied to another person?',
       'You fear losing them, constantly seek attention, and feel deeply hurt by being ignored or rejected, until your relationships begin to drain your heart instead of bringing it peace.',
@@ -825,7 +825,7 @@ const PRIVATE_SESSIONS_DETAILS_EN = [
     slug: 'return-to-god-inner-peace',
     session_name: 'Repairing Your Relationship with God and Returning to Him',
     transformation_title: 'From distance and inner conflict… to a closer relationship with God',
-    image: 'assets/images/sessions/session-return-to-god.png',
+    image: 'assets/images/programs/program-mottasel.webp',
     description: [
       'Do you feel there is a distance between you and God…',
       'Even though you pray, call upon Him, and try to draw closer?',
@@ -923,7 +923,7 @@ const PRIVATE_SESSIONS_DETAILS_EN = [
     session_name: 'Private 1:1 Guidance Session with Dr. Rana Mosaad',
     transformation_title:
       'A safe space… to understand what you are going through and map your path toward transformation',
-    image: 'assets/images/sessions/session-private-journey.png',
+    image: 'assets/images/programs/program-new-version.webp',
     description: [
       'Sometimes we do not need a complete program…',
       'And we do not need ready-made answers.',
@@ -1006,7 +1006,7 @@ const PRIVATE_SESSIONS_DETAILS_EN = [
     slug: 'healing-roots-old-wounds',
     session_name: 'Healing Trauma and Old Wounds',
     transformation_title: 'From being imprisoned by the past… to freedom in the present',
-    image: 'assets/images/sessions/session-healing-roots.png',
+    image: 'assets/images/programs/program-self-leadership.webp',
     description: [
       'Do you feel there is an old pain that is still affecting your life today?',
       'Years may have passed since certain experiences… yet their impact is still present in your emotions, relationships, self-confidence, and the way you see life.',
