@@ -17,10 +17,6 @@ export const ANA_ONTHA_PROGRAM_AR = {
     supporting_line: 'رحلة عودة الي فطرتك الأنثوية السليمة',
     primary_cta: 'ابدأ رحلة العودة إلى أنوثتك الآن',
   },
-  popup: {
-    enabled: true,
-    message: 'انثي آمنة مطمئنة يأتيها رزقها رغدا من كل مكان',
-  },
   pain: {
     heading: 'هل هذا يشبه ما تعيشه؟',
     intro: 'ربما أنت:',
@@ -220,11 +216,6 @@ export const ANA_ONTHA_PROGRAM_EN = {
     title: 'I Am a Woman',
     supporting_line: 'A Journey Back to Your Healthy Feminine Nature',
     primary_cta: 'Begin Your Journey Back to Your Femininity',
-  },
-  popup: {
-    enabled: true,
-    message:
-      'A Safe and Reassured Woman, Receiving Her Provision Abundantly from Everywhere',
   },
   pain: {
     heading: "Does This Sound Like What You're Experiencing?",

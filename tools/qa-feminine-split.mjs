@@ -12,7 +12,7 @@ const checks = {
   structure: ar.structure_type === 'feminine-healing-journey',
   title: ar.hero.title === 'أنا انثي',
   supporting: ar.hero.supporting_line.includes('فطرتك الأنثوية'),
-  popup: ar.popup.message === 'انثي آمنة مطمئنة يأتيها رزقها رغدا من كل مكان',
+  noPopup: !ar.popup,
   pain7: ar.pain.bullets.length === 7,
   flows7: ar.transformation.flows.length === 7,
   pillars5: ar.pillars.items.length === 5,

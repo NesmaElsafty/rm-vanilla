@@ -59,29 +59,6 @@ feminine = feminine.replace(
 );
 
 feminine = feminine.replace(
-  '/* Continuation popup */',
-  '/* Structure popup */',
-);
-
-feminine = feminine.replace(
-  /(\.program-feminine-popup__body \{\r?\n  margin: 0 0 1\.25rem;\r?\n  line-height: 1\.65;\r?\n  color: var\(--pf-muted\);\r?\n\})/,
-  `.program-feminine-popup__body,
-.program-feminine-popup__message {
-  margin: 0 0 1.25rem;
-  line-height: 1.65;
-  color: var(--pf-muted);
-}
-
-.program-feminine-popup__message {
-  margin: 0.35rem 1.75rem 0.15rem 0;
-  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: clamp(1.2rem, 2vw, 1.45rem);
-  color: var(--pf-ink);
-  text-align: center;
-}`,
-);
-
-feminine = feminine.replace(
   /(\.program-feminine-importance__inner \{\r?\n  max-width: 46rem;\r?\n\})/,
   `$1
 

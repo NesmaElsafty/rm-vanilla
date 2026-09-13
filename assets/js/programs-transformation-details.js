@@ -12,15 +12,6 @@ import {
 } from '../../data/programs-details.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
 
-const POPUP_SESSION_PREFIX = 'program-transform-continuation:';
-const FOCUSABLE =
-  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-
-let popupBound = false;
-let popupObserver = null;
-let lastFocusBeforePopup = null;
-let popupBodyLocked = false;
-
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -388,226 +379,6 @@ function renderFinalCta(root, finalCta, slug) {
   }
 }
 
-function popupSessionKey(slug) {
-  return `${POPUP_SESSION_PREFIX}${slug || 'program'}`;
-}
-
-function hasShownPopup(slug) {
-  try {
-    return sessionStorage.getItem(popupSessionKey(slug)) === '1';
-  } catch {
-    return false;
-  }
-}
-
-function markPopupShown(slug) {
-  try {
-    sessionStorage.setItem(popupSessionKey(slug), '1');
-  } catch {
-    /* ignore */
-  }
-}
-
-function lockPopupBody() {
-  if (popupBodyLocked) return;
-  popupBodyLocked = true;
-  document.body.style.overflow = 'hidden';
-}
-
-function unlockPopupBody() {
-  if (!popupBodyLocked) return;
-  popupBodyLocked = false;
-  document.body.style.overflow = '';
-}
-
-function getPopupRoot() {
-  return document.querySelector('[data-pt-continuation-popup]');
-}
-
-function closeContinuationPopup() {
-  const popup = getPopupRoot();
-  if (!popup || popup.hidden) return;
-  popup.hidden = true;
-  unlockPopupBody();
-  if (lastFocusBeforePopup && typeof lastFocusBeforePopup.focus === 'function') {
-    lastFocusBeforePopup.focus();
-  }
-  lastFocusBeforePopup = null;
-}
-
-function openContinuationPopup(program) {
-  const popupData = program?.continuation_popup;
-  if (!popupData?.enabled) return;
-
-  const slug = program?.slug || currentSlug();
-  if (hasShownPopup(slug)) return;
-
-  const popup = getPopupRoot();
-  const dialog = popup?.querySelector('[data-pt-popup-dialog]');
-  if (!popup || !dialog) return;
-
-  setText(popup, '[data-pt-popup-title]', popupData.title);
-  setText(popup, '[data-pt-popup-body]', popupData.body);
-  setText(popup, '[data-pt-popup-primary-label]', popupData.primary_cta);
-  setText(popup, '[data-pt-popup-secondary-label]', popupData.secondary_cta);
-
-  const primary = popup.querySelector('[data-pt-popup-primary]');
-  if (primary) primary.setAttribute('href', contactHref(slug));
-
-  const title = popup.querySelector('[data-pt-popup-title]');
-  const body = popup.querySelector('[data-pt-popup-body]');
-  const actions = popup.querySelector('[data-pt-popup-actions]');
-  const primaryBtn = popup.querySelector('[data-pt-popup-primary]');
-  const secondaryBtn = popup.querySelector('[data-pt-popup-secondary]');
-
-  if (title) title.hidden = !popupData.title;
-  if (body) body.hidden = !popupData.body;
-  if (dialog) {
-    if (popupData.title) {
-      dialog.removeAttribute('aria-label');
-      dialog.setAttribute('aria-labelledby', 'program-transform-popup-title');
-    } else {
-      dialog.removeAttribute('aria-labelledby');
-      dialog.setAttribute('aria-label', popupData.body || 'Notice');
-    }
-  }
-  if (primaryBtn) primaryBtn.hidden = !popupData.primary_cta;
-  if (secondaryBtn) secondaryBtn.hidden = !popupData.secondary_cta;
-  if (actions) {
-    actions.hidden = !popupData.primary_cta && !popupData.secondary_cta;
-  }
-
-  lastFocusBeforePopup = document.activeElement;
-  markPopupShown(slug);
-  popup.hidden = false;
-  lockPopupBody();
-
-  const focusTarget =
-    popup.querySelector('[data-pt-popup-primary]') ||
-    popup.querySelector('[data-pt-popup-secondary]') ||
-    dialog;
-  focusTarget?.focus?.();
-}
-
-function bindContinuationPopup(program) {
-  const popupData = program?.continuation_popup;
-  const popup = getPopupRoot();
-  const triggerSection =
-    document.querySelector('.program-transform-pain') ||
-    document.querySelector('[data-pt-final-cta]');
-
-  if (popupObserver) {
-    popupObserver.disconnect();
-    popupObserver = null;
-  }
-
-  if (!popupData?.enabled || !popup || !triggerSection) {
-    if (popup) popup.hidden = true;
-    return;
-  }
-
-  if (!popupBound) {
-    popupBound = true;
-
-    popup
-      .querySelector('[data-pt-popup-backdrop]')
-      ?.addEventListener('click', () => closeContinuationPopup());
-
-    popup
-      .querySelector('[data-pt-popup-secondary]')
-      ?.addEventListener('click', () => closeContinuationPopup());
-
-    popup
-      .querySelector('[data-pt-popup-close]')
-      ?.addEventListener('click', () => closeContinuationPopup());
-
-    document.addEventListener('keydown', (event) => {
-      const openPopup = getPopupRoot();
-      if (!openPopup || openPopup.hidden) return;
-
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closeContinuationPopup();
-        return;
-      }
-
-      if (event.key !== 'Tab') return;
-      const dialog = openPopup.querySelector('[data-pt-popup-dialog]');
-      if (!dialog) return;
-      const nodes = [...dialog.querySelectorAll(FOCUSABLE)].filter(
-        (el) => !el.hasAttribute('disabled') && el.offsetParent !== null,
-      );
-      if (!nodes.length) return;
-      const first = nodes[0];
-      const last = nodes[nodes.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    });
-  }
-
-  const slug = program?.slug || currentSlug();
-  if (hasShownPopup(slug)) return;
-
-  popupObserver = new IntersectionObserver(
-    (entries) => {
-      const entry = entries[0];
-      if (!entry?.isIntersecting) return;
-      openContinuationPopup(program);
-      popupObserver?.disconnect();
-      popupObserver = null;
-    },
-    { threshold: 0.35 },
-  );
-  popupObserver.observe(triggerSection);
-}
-
-function renderPopupContent(program) {
-  const popup = getPopupRoot();
-  const popupData = program?.continuation_popup;
-  if (!popup || !popupData) return;
-
-  setText(popup, '[data-pt-popup-title]', popupData.title);
-  setText(popup, '[data-pt-popup-body]', popupData.body);
-  setText(popup, '[data-pt-popup-primary-label]', popupData.primary_cta);
-  setText(popup, '[data-pt-popup-secondary-label]', popupData.secondary_cta);
-
-  const primary = popup.querySelector('[data-pt-popup-primary]');
-  if (primary) {
-    primary.setAttribute(
-      'href',
-      contactHref(program?.slug || currentSlug()),
-    );
-  }
-
-  const title = popup.querySelector('[data-pt-popup-title]');
-  const body = popup.querySelector('[data-pt-popup-body]');
-  const dialog = popup.querySelector('[data-pt-popup-dialog]');
-  const actions = popup.querySelector('[data-pt-popup-actions]');
-  const primaryBtn = popup.querySelector('[data-pt-popup-primary]');
-  const secondaryBtn = popup.querySelector('[data-pt-popup-secondary]');
-  if (title) title.hidden = !popupData.title;
-  if (body) body.hidden = !popupData.body;
-  if (dialog) {
-    if (popupData.title) {
-      dialog.removeAttribute('aria-label');
-      dialog.setAttribute('aria-labelledby', 'program-transform-popup-title');
-    } else {
-      dialog.removeAttribute('aria-labelledby');
-      dialog.setAttribute('aria-label', popupData.body || 'Notice');
-    }
-  }
-  if (primaryBtn) primaryBtn.hidden = !popupData.primary_cta;
-  if (secondaryBtn) secondaryBtn.hidden = !popupData.secondary_cta;
-  if (actions) {
-    actions.hidden = !popupData.primary_cta && !popupData.secondary_cta;
-  }
-}
-
 function renderNotFound(root) {
   const found = root.querySelector('[data-pt-found]');
   const missing = root.querySelector('[data-pt-not-found]');
@@ -631,10 +402,6 @@ function renderNotFound(root) {
   setText(root, '[data-pt-404-title]', fallback.title);
   setText(root, '[data-pt-404-body]', fallback.body);
   setText(root, '[data-pt-404-back-label]', fallback.back);
-
-  closeContinuationPopup();
-  const popup = getPopupRoot();
-  if (popup) popup.hidden = true;
 }
 
 function renderProgram(root, program) {
@@ -655,8 +422,6 @@ function renderProgram(root, program) {
   renderTrainer(root, program.trainer);
   renderDelivery(root, program.delivery);
   renderFinalCta(root, program.final_cta, slug);
-  renderPopupContent(program);
-  bindContinuationPopup(program);
   updateDocumentMeta(program);
 
   refreshReveals(root);

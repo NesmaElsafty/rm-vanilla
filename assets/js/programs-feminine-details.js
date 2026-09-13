@@ -11,15 +11,6 @@ import {
 } from '../../data/programs-details.js';
 import { getProgramHeroImage } from './utils/program-hero-images.js';
 
-const POPUP_SESSION_PREFIX = 'program-feminine-popup:';
-const FOCUSABLE =
-  'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
-
-let popupBound = false;
-let popupObserver = null;
-let lastFocusBeforePopup = null;
-let popupBodyLocked = false;
-
 function escapeHtml(value) {
   return String(value ?? '')
     .replace(/&/g, '&amp;')
@@ -284,153 +275,6 @@ function renderFinalCta(root, finalCta, slug) {
   }
 }
 
-function popupSessionKey(slug) {
-  return `${POPUP_SESSION_PREFIX}${slug || 'program'}`;
-}
-
-function hasShownPopup(slug) {
-  try {
-    return sessionStorage.getItem(popupSessionKey(slug)) === '1';
-  } catch {
-    return false;
-  }
-}
-
-function markPopupShown(slug) {
-  try {
-    sessionStorage.setItem(popupSessionKey(slug), '1');
-  } catch {
-    /* ignore */
-  }
-}
-
-function lockPopupBody() {
-  if (popupBodyLocked) return;
-  popupBodyLocked = true;
-  document.body.style.overflow = 'hidden';
-}
-
-function unlockPopupBody() {
-  if (!popupBodyLocked) return;
-  popupBodyLocked = false;
-  document.body.style.overflow = '';
-}
-
-function getPopupRoot() {
-  return document.querySelector('[data-pf-popup]');
-}
-
-function closePopup() {
-  const popup = getPopupRoot();
-  if (!popup || popup.hidden) return;
-  popup.hidden = true;
-  unlockPopupBody();
-  if (lastFocusBeforePopup && typeof lastFocusBeforePopup.focus === 'function') {
-    lastFocusBeforePopup.focus();
-  }
-  lastFocusBeforePopup = null;
-}
-
-function openPopup(program) {
-  const popupData = program?.popup;
-  if (!popupData?.enabled) return;
-
-  const slug = program?.slug || currentSlug();
-  if (hasShownPopup(slug)) return;
-
-  const popup = getPopupRoot();
-  const dialog = popup?.querySelector('[data-pf-popup-dialog]');
-  if (!popup || !dialog) return;
-
-  setText(popup, '[data-pf-popup-message]', popupData.message);
-  lastFocusBeforePopup = document.activeElement;
-  markPopupShown(slug);
-  popup.hidden = false;
-  lockPopupBody();
-
-  const closeBtn = popup.querySelector('[data-pf-popup-close]');
-  (closeBtn || dialog).focus?.();
-}
-
-function bindPopup(program) {
-  const popupData = program?.popup;
-  const popup = getPopupRoot();
-  const triggerSection =
-    document.querySelector('.program-feminine-pain') ||
-    document.querySelector('[data-pf-final-cta]');
-
-  if (popupObserver) {
-    popupObserver.disconnect();
-    popupObserver = null;
-  }
-
-  if (!popupData?.enabled || !popup || !triggerSection) {
-    if (popup) popup.hidden = true;
-    return;
-  }
-
-  if (!popupBound) {
-    popupBound = true;
-
-    popup
-      .querySelector('[data-pf-popup-backdrop]')
-      ?.addEventListener('click', () => closePopup());
-    popup
-      .querySelector('[data-pf-popup-close]')
-      ?.addEventListener('click', () => closePopup());
-
-    document.addEventListener('keydown', (event) => {
-      const openPopupEl = getPopupRoot();
-      if (!openPopupEl || openPopupEl.hidden) return;
-
-      if (event.key === 'Escape') {
-        event.preventDefault();
-        closePopup();
-        return;
-      }
-
-      if (event.key !== 'Tab') return;
-      const dialog = openPopupEl.querySelector('[data-pf-popup-dialog]');
-      if (!dialog) return;
-      const nodes = [...dialog.querySelectorAll(FOCUSABLE)].filter(
-        (el) => !el.hasAttribute('disabled') && el.offsetParent !== null,
-      );
-      if (!nodes.length) return;
-      const first = nodes[0];
-      const last = nodes[nodes.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    });
-  }
-
-  const slug = program?.slug || currentSlug();
-  if (hasShownPopup(slug)) return;
-
-  popupObserver = new IntersectionObserver(
-    (entries) => {
-      const entry = entries[0];
-      if (!entry?.isIntersecting) return;
-      openPopup(program);
-      popupObserver?.disconnect();
-      popupObserver = null;
-    },
-    { threshold: 0.35 },
-  );
-  popupObserver.observe(triggerSection);
-}
-
-function renderPopupContent(program) {
-  const popup = getPopupRoot();
-  const popupData = program?.popup;
-  if (!popup || !popupData) return;
-  setText(popup, '[data-pf-popup-message]', popupData.message);
-}
-
 function renderNotFound(root) {
   const found = root.querySelector('[data-pf-found]');
   const missing = root.querySelector('[data-pf-not-found]');
@@ -454,7 +298,6 @@ function renderNotFound(root) {
   setText(root, '[data-pf-404-title]', fallback.title);
   setText(root, '[data-pf-404-body]', fallback.body);
   setText(root, '[data-pf-404-back-label]', fallback.back);
-  closePopup();
 }
 
 function renderProgram(root, program) {
@@ -474,8 +317,6 @@ function renderProgram(root, program) {
   renderDifferentiator(root, program.differentiator);
   renderTrainer(root, program.trainer);
   renderFinalCta(root, program.final_cta, slug);
-  renderPopupContent(program);
-  bindPopup(program);
   updateDocumentMeta(program);
 
   refreshReveals(root);

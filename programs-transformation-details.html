@@ -292,31 +292,6 @@
       </div>
     </main>
 
-    <!-- Continuation popup (outside normal section flow) -->
-    <div class="program-transform-popup" data-pt-continuation-popup hidden>
-      <div class="program-transform-popup__backdrop" data-pt-popup-backdrop></div>
-      <div
-        class="program-transform-popup__dialog glass-slide"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="program-transform-popup-title"
-        tabindex="-1"
-        data-pt-popup-dialog
-      >
-        <button type="button" class="program-transform-popup__close" data-pt-popup-close aria-label="Close">×</button>
-        <h2 class="program-transform-popup__title" id="program-transform-popup-title" data-pt-popup-title hidden></h2>
-        <p class="program-transform-popup__body" data-pt-popup-body hidden></p>
-        <div class="program-transform-popup__actions" data-pt-popup-actions>
-          <a class="btn-luxury-primary program-transform-popup__primary" data-pt-popup-primary href="index.html#contact">
-            <span data-pt-popup-primary-label></span>
-          </a>
-          <button type="button" class="btn-luxury-ghost program-transform-popup__secondary" data-pt-popup-secondary>
-            <span data-pt-popup-secondary-label></span>
-          </button>
-        </div>
-      </div>
-    </div>
-
     <footer class="footer-luxury" id="site-footer">
       <div class="footer-inner">
         <div class="footer-grid">
@@ -327,28 +302,28 @@
             <div class="footer-social">
               <span class="footer-label" data-i18n="footer.socialLabel">شبكات التواصل الاجتماعي الرسمية</span>
               <div class="footer-social-row">
-                <a class="footer-social-icon" href="https://t.me/rana_mossad" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+                <a class="footer-social-icon" data-social="telegram" href="https://t.me/rana_mossad" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
                   <span data-icon="telegram" data-icon-class="icon icon-sm"></span>
                 </a>
                 <div class="footer-social-fb">
-                  <span class="footer-social-icon footer-social-fb-idle" aria-hidden="true">
+                  <span class="footer-social-icon footer-social-fb-idle" data-social="facebook" aria-hidden="true">
                     <span data-icon="facebook" data-icon-class="icon icon-sm"></span>
                   </span>
                   <div class="footer-social-fb-split">
-                    <a class="footer-social-icon footer-social-icon--text" href="https://www.facebook.com/share/1BQiFnQnTb/" target="_blank" rel="noopener noreferrer">
+                    <a class="footer-social-icon footer-social-icon--text" data-social="facebook" href="https://www.facebook.com/share/1BQiFnQnTb/" target="_blank" rel="noopener noreferrer">
                       <span data-icon="facebook" data-icon-class="icon icon-sm"></span>
                       <span data-i18n="footer.facebookPage">صفحة</span>
                     </a>
-                    <a class="footer-social-icon footer-social-icon--text" href="https://www.facebook.com/share/18jNNt2MYJ/" target="_blank" rel="noopener noreferrer">
+                    <a class="footer-social-icon footer-social-icon--text" data-social="facebook" href="https://www.facebook.com/share/18jNNt2MYJ/" target="_blank" rel="noopener noreferrer">
                       <span data-icon="facebook" data-icon-class="icon icon-sm"></span>
                       <span data-i18n="footer.facebookProfile">بروفايل</span>
                     </a>
                   </div>
                 </div>
-                <a class="footer-social-icon" href="https://www.instagram.com/dr_rana_mossad?igsh=MTgxa3Rqdm41dHNmdQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <a class="footer-social-icon" data-social="instagram" href="https://www.instagram.com/dr_rana_mossad?igsh=MTgxa3Rqdm41dHNmdQ==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <span data-icon="instagram" data-icon-class="icon icon-sm"></span>
                 </a>
-                <a class="footer-social-icon" href="https://youtube.com/@drranamosaad?si=2wqPxPHpROvhGhqr" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <a class="footer-social-icon" data-social="youtube" href="https://youtube.com/@drranamosaad?si=2wqPxPHpROvhGhqr" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                   <span data-icon="youtube" data-icon-class="icon icon-sm"></span>
                 </a>
               </div>

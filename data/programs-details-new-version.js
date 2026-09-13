@@ -9,16 +9,16 @@ export const NEW_VERSION_PROGRAM_AR = {
   slug: 'new-version-of-yourself',
   structure_type: 'transformation-journey',
   seo: {
-    title: 'النسخة الجديدة من نفسك | Dr. Rana Mosaad',
+    title: 'النسخة الاقوى من نفسك | Dr. Rana Mosaad',
     description:
-      'النسخة الجديدة من نفسك هو برنامج تحولي يساعدك على الانتقال من الضعف، الشك، وسيطرة المشاعر… إلى القوة، الثقة، والقيادة، من خلال منهج عملي يعيد بناءك من الداخل.',
+      'النسخة القوية من نفسك هو برنامج تحولي يساعدك على الانتقال من الضعف، الشك، وسيطرة المشاعر… إلى القوة، الثقة، والقيادة، من خلال منهج عملي يعيد بناءك من الداخل.',
   },
   hero: {
-    title: 'النسخة الجديدة من نفسك',
+    title: 'النسخة الاقوى من نفسك',
     supporting_line:
-      'رحلة تحوّل من النسخة الضعيفة… إلى النسخة القوية من نفسك',
+      'رحلة تحوّل من النسخة الضعيفة… إلى النسخة الاقوى من نفسك',
     description:
-      'النسخة الجديدة من نفسك هو برنامج تحولي يساعدك على الانتقال من الضعف، الشك، وسيطرة المشاعر… إلى القوة، الثقة، والقيادة، من خلال منهج عملي يعيد بناءك من الداخل.',
+      'النسخة الاقوى من نفسك هو برنامج تحولي يساعدك على الانتقال من الضعف، الشك، وسيطرة المشاعر… إلى القوة، الثقة، والقيادة، من خلال منهج عملي يعيد بناءك من الداخل.',
     primary_cta: 'احجز مكانك في البرنامج',
     secondary_cta: 'اكتشف البرنامج',
   },
@@ -41,7 +41,7 @@ export const NEW_VERSION_PROGRAM_AR = {
     paragraphs: [
       'لأن العمل على المشكلات من السطح لا يعطي نتائج ملموسة.',
       'فتحصل على تحسن مؤقت… ثم تعود لنفس الألم.',
-      'في برنامج النسخة الجديدة من نفسك، لا تحصل على معلومات فقط…',
+      'في برنامج النسخة الاقوى من نفسك، لا تحصل على معلومات فقط…',
       'بل تدخل منهجًا عمليًا يعالج جذور الضعف، الشك، وقلة تقدير الذات، من خلال العمل على:',
     ],
     bullets: ['السلوك', 'الأفكار', 'المشاعر'],
@@ -50,7 +50,7 @@ export const NEW_VERSION_PROGRAM_AR = {
   },
   transformation: {
     intro:
-      'تخيل أنك في النسخة الجديدة من نفسك، ستنتقل من:',
+      'تخيل أنك في النسخة الاقوى من نفسك، ستنتقل من:',
     flows: [
       { from: 'من الضعف', to: 'القوة' },
       { from: 'من التشتت', to: 'الثقة والتمكين' },
@@ -106,7 +106,7 @@ export const NEW_VERSION_PROGRAM_AR = {
     ],
   },
   differentiator: {
-    heading: 'لماذا برنامج النسخة الجديدة من نفسك مختلف؟',
+    heading: 'لماذا برنامج النسخة الاقوى من نفسك مختلف؟',
     paragraphs: [
       'لأنه لا يعالج السطح فقط،',
       'بل يعالج الجذور وراء:',
@@ -121,7 +121,7 @@ export const NEW_VERSION_PROGRAM_AR = {
     subheading: 'ما الذي يميّزه؟',
     features: [
       'منهج علمي متكامل في فهم النفس، لا يعتمد على جانب واحد، بل يعالج السلوك، الأفكار، والمشاعر',
-      'مدعوم بجلسات تأمل لصياغة تصور واضح لنسختك الجديدة، ورؤيتها بوضوح ودقة',
+      'مدعوم بجلسات تأمل لصياغة تصور واضح لنسختك الاقوى ورؤيتها بوضوح ودقة',
       'مبني على أدوات علمية من مدرسة Neuro-Semantics',
       'أسلوب تطبيقي تدريجي يهدف إلى بناء هوية جديدة أكثر ثقة وتمكينًا',
       'متابعة يومية مع د. رنا لدعمك في التطبيق والثبات طوال الرحلة',
@@ -141,7 +141,7 @@ export const NEW_VERSION_PROGRAM_AR = {
       'وجود أصوات داخلية سلبية تعيق الوصول إلى أفضل نسخة من النفس',
     ],
     closing: [
-      'ومن هنا جاء برنامج النسخة الجديدة من نفسك،',
+      'ومن هنا جاء برنامج النسخة الاقوى من نفسك،',
       'ليضع أساسًا نفسيًا قويًا يساعدك على الانطلاق في طريق الوعي من مكان أكثر ثباتًا، قوة، وتمكينًا.',
     ],
   },
@@ -165,15 +165,8 @@ export const NEW_VERSION_PROGRAM_AR = {
       'وتبني نسخة أقوى وأكثر تمكينًا من نفسك',
     ],
     closing:
-      'فربما يكون برنامج النسخة الجديدة من نفسك هو الخطوة التي تحتاجها الآن.',
+      'فربما يكون برنامج النسخة الاقوى من نفسك هو الخطوة التي تحتاجها الآن.',
     primary_cta: 'احجز مكانك في البرنامج',
-  },
-  continuation_popup: {
-    enabled: true,
-    title: 'فرصة للاستمرار بعد البرنامج',
-    body: 'انضم إلى مجتمع خاص يساعدك على المتابعة، التطبيق، وتثبيت التحول بعد انتهاء الرحلة.',
-    primary_cta: 'أريد التفاصيل',
-    secondary_cta: 'لاحقًا',
   },
   purchase: {
     target: 'new-version-of-yourself',
@@ -190,12 +183,12 @@ export const NEW_VERSION_PROGRAM_EN = {
   slug: 'new-version-of-yourself',
   structure_type: 'transformation-journey',
   seo: {
-    title: 'The New Version of Yourself | Dr. Rana Mosaad',
+    title: 'The Stronger Version of Yourself - Dr. Rana Mosaad',
     description:
-      'The New Version of Yourself is a transformational program that helps you move from weakness, doubt, and being controlled by your emotions to strength, confidence, and leadership through a practical methodology that rebuilds you from within.',
+      'The Stronger Version of Yourself is a transformational program that helps you move from weakness, doubt, and being controlled by your emotions to strength, confidence, and leadership through a practical methodology that rebuilds you from within.',
   },
   hero: {
-    title: 'The New Version of Yourself',
+    title: 'The Stronger Version of Yourself',
     supporting_line:
       'A transformation journey from the weaker version of yourself… to the stronger version of yourself',
     description:
@@ -222,7 +215,7 @@ export const NEW_VERSION_PROGRAM_EN = {
     paragraphs: [
       'Because working only on problems at the surface does not create tangible results.',
       'You experience temporary improvement… then return to the same pain.',
-      'In The New Version of Yourself, you do not simply receive information…',
+      'In The Stronger Version of Yourself, you do not simply receive information…',
       'You enter a practical methodology that works on the roots of weakness, doubt, and low self-worth through:',
     ],
     bullets: ['Behavior', 'Thoughts', 'Emotions'],
@@ -231,7 +224,7 @@ export const NEW_VERSION_PROGRAM_EN = {
   },
   transformation: {
     intro:
-      'Imagine that in The New Version of Yourself, you will move from:',
+      'Imagine that in The Stronger Version of Yourself, you will move from:',
     flows: [
       { from: 'Weakness', to: 'Strength' },
       { from: 'Distraction', to: 'Confidence and empowerment' },
@@ -291,7 +284,7 @@ export const NEW_VERSION_PROGRAM_EN = {
     ],
   },
   differentiator: {
-    heading: 'Why Is The New Version of Yourself Different?',
+    heading: 'Why Is The Stronger Version of Yourself Different?',
     paragraphs: [
       'Because it does not work only on the surface.',
       'It works on the roots behind:',
@@ -326,7 +319,7 @@ export const NEW_VERSION_PROGRAM_EN = {
       'Negative inner voices that prevent people from reaching the best version of themselves.',
     ],
     closing: [
-      'This is where The New Version of Yourself came from,',
+      'This is where The Stronger Version of Yourself came from,',
       'to build a strong psychological foundation that helps you move forward on the path of awareness from a place of greater stability, strength, and empowerment.',
     ],
   },
@@ -350,15 +343,8 @@ export const NEW_VERSION_PROGRAM_EN = {
       'Build a stronger and more empowered version of yourself.',
     ],
     closing:
-      'Then The New Version of Yourself may be the step you need right now.',
+      'Then The Stronger Version of Yourself may be the step you need right now.',
     primary_cta: 'Reserve Your Place in the Program',
-  },
-  continuation_popup: {
-    enabled: true,
-    title: 'An Opportunity to Continue After the Program',
-    body: "Join a private community that helps you continue, apply what you've learned, and reinforce the transformation after the journey ends.",
-    primary_cta: 'I Want the Details',
-    secondary_cta: 'Later',
   },
   purchase: {
     target: 'new-version-of-yourself',

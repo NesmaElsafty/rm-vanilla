@@ -168,22 +168,6 @@ const mainAndPopup = `<main id="main-content" class="page-main page-main--padded
       </div>
     </main>
 
-    <!-- Structure popup (outside normal section flow) -->
-    <div class="program-feminine-popup" data-pf-popup hidden>
-      <div class="program-feminine-popup__backdrop" data-pf-popup-backdrop></div>
-      <div
-        class="program-feminine-popup__dialog glass-slide"
-        role="dialog"
-        aria-modal="true"
-        aria-label="Notice"
-        tabindex="-1"
-        data-pf-popup-dialog
-      >
-        <button type="button" class="program-feminine-popup__close" data-pf-popup-close aria-label="Close">×</button>
-        <p class="program-feminine-popup__message" data-pf-popup-message></p>
-      </div>
-    </div>
-
     `;
 
 html = html.slice(0, mainStart) + mainAndPopup + html.slice(footerStart);

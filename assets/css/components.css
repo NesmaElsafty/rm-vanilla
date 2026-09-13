@@ -899,16 +899,58 @@
   color: var(--theme-footer-ink);
 }
 
-[data-theme='cream-elegance'] .footer-luxury .footer-charter-box,
-[data-theme='cream-elegance'] .footer-luxury .footer-social-icon {
+[data-theme='cream-elegance'] .footer-luxury .footer-charter-box {
   background: var(--theme-footer-panel);
   border-color: var(--theme-footer-border);
   color: var(--theme-footer-ink);
 }
 
-[data-theme='cream-elegance'] .footer-luxury .footer-social-icon:hover,
-[data-theme='cream-elegance'] .footer-luxury .footer-social-icon:focus-visible {
-  color: var(--theme-footer-heading);
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon {
+  background: var(--theme-footer-panel);
+  border-color: var(--theme-footer-border);
+}
+
+/* Brand glyph colors must win over cream-elegance ink overrides */
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='telegram'],
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='telegram']:hover,
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='telegram']:focus-visible {
+  color: #229ed9;
+  border-color: color-mix(in srgb, #229ed9 32%, var(--theme-footer-border));
+  background: color-mix(in srgb, #229ed9 12%, var(--theme-footer-panel));
+}
+
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='facebook'],
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='facebook']:hover,
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='facebook']:focus-visible {
+  color: #1877f2;
+  border-color: color-mix(in srgb, #1877f2 32%, var(--theme-footer-border));
+  background: color-mix(in srgb, #1877f2 12%, var(--theme-footer-panel));
+}
+
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='instagram'],
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='instagram']:hover,
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='instagram']:focus-visible {
+  color: #e4405f;
+  border-color: color-mix(in srgb, #e4405f 32%, var(--theme-footer-border));
+  background: color-mix(in srgb, #e4405f 12%, var(--theme-footer-panel));
+}
+
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='youtube'],
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='youtube']:hover,
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon[data-social='youtube']:focus-visible {
+  color: #ff0000;
+  border-color: color-mix(in srgb, #ff0000 32%, var(--theme-footer-border));
+  background: color-mix(in srgb, #ff0000 12%, var(--theme-footer-panel));
+}
+
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon--text[data-social='facebook'],
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon--text[data-social='facebook']:hover,
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon--text[data-social='facebook']:focus-visible {
+  color: var(--theme-footer-ink);
+}
+
+[data-theme='cream-elegance'] .footer-luxury .footer-social-icon--text[data-social='facebook'] svg {
+  color: #1877f2;
 }
 
 .footer-heading {
@@ -982,7 +1024,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.5rem;
+  box-sizing: border-box;
+  min-width: 3.1rem;
+  min-height: 3.1rem;
+  padding: 0.55rem;
   border-radius: 0.75rem;
   border: 1px solid color-mix(in srgb, var(--theme-gold) 20%, transparent);
   background: var(--theme-footer-social-bg);
@@ -993,7 +1038,12 @@
     border-color 0.25s ease;
 }
 
+/* Footer-only glyph size — do not change global .icon / .icon-sm */
+.footer-social-icon .icon,
+.footer-social-icon .icon.icon-sm,
 .footer-social-icon svg {
+  width: 1.625rem;
+  height: 1.625rem;
   color: inherit;
 }
 
@@ -1003,13 +1053,105 @@
   border-color: var(--theme-gold);
 }
 
+/* Platform brand colors on the glyph + subtle tinted chrome */
+.footer-social-icon[data-social='telegram'] {
+  color: #229ed9;
+  border-color: color-mix(in srgb, #229ed9 28%, transparent);
+  background: color-mix(in srgb, #229ed9 10%, var(--theme-footer-social-bg));
+}
+
+.footer-social-icon[data-social='facebook'] {
+  color: #1877f2;
+  border-color: color-mix(in srgb, #1877f2 28%, transparent);
+  background: color-mix(in srgb, #1877f2 10%, var(--theme-footer-social-bg));
+}
+
+.footer-social-icon[data-social='instagram'] {
+  color: #e4405f;
+  border-color: color-mix(in srgb, #e4405f 28%, transparent);
+  background: color-mix(in srgb, #e4405f 10%, var(--theme-footer-social-bg));
+}
+
+.footer-social-icon[data-social='youtube'] {
+  color: #ff0000;
+  border-color: color-mix(in srgb, #ff0000 28%, transparent);
+  background: color-mix(in srgb, #ff0000 10%, var(--theme-footer-social-bg));
+}
+
+.footer-social-icon[data-social='telegram']:hover,
+.footer-social-icon[data-social='telegram']:focus-visible {
+  color: #229ed9;
+  background: color-mix(in srgb, #229ed9 18%, var(--theme-footer-social-bg));
+  border-color: color-mix(in srgb, #229ed9 48%, transparent);
+}
+
+.footer-social-icon[data-social='facebook']:hover,
+.footer-social-icon[data-social='facebook']:focus-visible {
+  color: #1877f2;
+  background: color-mix(in srgb, #1877f2 18%, var(--theme-footer-social-bg));
+  border-color: color-mix(in srgb, #1877f2 48%, transparent);
+}
+
+.footer-social-icon[data-social='instagram']:hover,
+.footer-social-icon[data-social='instagram']:focus-visible {
+  color: #e4405f;
+  background: color-mix(in srgb, #e4405f 18%, var(--theme-footer-social-bg));
+  border-color: color-mix(in srgb, #e4405f 48%, transparent);
+}
+
+.footer-social-icon[data-social='youtube']:hover,
+.footer-social-icon[data-social='youtube']:focus-visible {
+  color: #ff0000;
+  background: color-mix(in srgb, #ff0000 18%, var(--theme-footer-social-bg));
+  border-color: color-mix(in srgb, #ff0000 48%, transparent);
+}
+
 .footer-social-icon--text {
   gap: 0.375rem;
-  padding-inline: 0.625rem;
+  padding-inline: 0.7rem;
   font-size: 0.625rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  min-width: auto;
+}
+
+/* Facebook split: readable label + brand-colored glyph */
+.footer-social-icon--text[data-social='facebook'] {
+  color: var(--theme-cream-muted);
+}
+
+.footer-social-icon--text[data-social='facebook'] svg,
+.footer-social-icon--text[data-social='facebook'] .icon {
+  color: #1877f2;
+}
+
+.footer-social-icon--text[data-social='facebook']:hover,
+.footer-social-icon--text[data-social='facebook']:focus-visible {
+  color: var(--theme-cream);
+  background: color-mix(in srgb, #1877f2 18%, var(--theme-footer-social-bg));
+  border-color: color-mix(in srgb, #1877f2 48%, transparent);
+}
+
+.footer-social-icon--text[data-social='facebook']:hover svg,
+.footer-social-icon--text[data-social='facebook']:focus-visible svg,
+.footer-social-icon--text[data-social='facebook']:hover .icon,
+.footer-social-icon--text[data-social='facebook']:focus-visible .icon {
+  color: #1877f2;
+}
+
+@media (max-width: 390px) {
+  .footer-social-icon {
+    min-width: 3rem;
+    min-height: 3rem;
+  }
+
+  .footer-social-icon .icon,
+  .footer-social-icon .icon.icon-sm,
+  .footer-social-icon svg {
+    width: 1.55rem;
+    height: 1.55rem;
+  }
 }
 
 .footer-modal-panel {

@@ -41,9 +41,9 @@ const TAB_MAP = {
   },
 };
 
-const SKIP_KEYS = new Set(['popup', 'final_cta']);
-const PROGRAM_SKIP = new Set(['popup', 'final_cta', 'faq']);
-const RECORDED_SKIP = new Set(['popup', 'final_cta', 'faq', 'transformation', 'audience']);
+const SKIP_KEYS = new Set(['final_cta']);
+const PROGRAM_SKIP = new Set(['final_cta', 'faq']);
+const RECORDED_SKIP = new Set(['final_cta', 'faq', 'transformation', 'audience']);
 
 const NOT_FOUND = {
   program: 'index.html#programs',

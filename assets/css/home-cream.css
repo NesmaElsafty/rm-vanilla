@@ -544,11 +544,58 @@ html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-link:foc
   color: var(--home-cream);
 }
 
-html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-charter-box,
-html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon {
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-charter-box {
   background: color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-primary));
   border-color: color-mix(in srgb, var(--home-cream) 16%, transparent);
   color: var(--home-cream);
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon {
+  background: color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-primary));
+  border-color: color-mix(in srgb, var(--home-cream) 16%, transparent);
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='telegram'],
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='telegram']:hover,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='telegram']:focus-visible {
+  color: #229ed9;
+  border-color: color-mix(in srgb, #229ed9 36%, transparent);
+  background: color-mix(in srgb, #229ed9 14%, color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-primary)));
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='facebook'],
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='facebook']:hover,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='facebook']:focus-visible {
+  color: #1877f2;
+  border-color: color-mix(in srgb, #1877f2 36%, transparent);
+  background: color-mix(in srgb, #1877f2 14%, color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-primary)));
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='instagram'],
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='instagram']:hover,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='instagram']:focus-visible {
+  color: #e4405f;
+  border-color: color-mix(in srgb, #e4405f 36%, transparent);
+  background: color-mix(in srgb, #e4405f 14%, color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-primary)));
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='youtube'],
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='youtube']:hover,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon[data-social='youtube']:focus-visible {
+  color: #ff0000;
+  border-color: color-mix(in srgb, #ff0000 36%, transparent);
+  background: color-mix(in srgb, #ff0000 14%, color-mix(in srgb, var(--home-dark-chapter) 70%, var(--home-primary)));
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon--text[data-social='facebook'],
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon--text[data-social='facebook']:hover,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon--text[data-social='facebook']:focus-visible {
+  color: var(--home-cream);
+}
+
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon--text[data-social='facebook'] svg,
+html[data-theme='cream-elegance'] body.home-page .footer-luxury .footer-social-icon--text[data-social='facebook'] .icon {
+  color: #1877f2;
 }
 
 /* -------------------------------------------------------------------------- */
