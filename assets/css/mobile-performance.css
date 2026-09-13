@@ -152,17 +152,53 @@
     filter: none !important;
   }
 
-  /* ── Skip painting long below-fold chapters until needed ── */
-  body.home-page #opening,
-  body.home-page #about,
-  body.home-page #stats,
-  body.home-page #philosophy,
-  body.home-page #programs,
-  body.home-page #testimonials,
-  body.home-page #contact,
-  body.home-page #final-cta,
-  body.home-page .footer-luxury {
-    content-visibility: auto;
-    contain-intrinsic-size: 1px 640px;
+  /* Native finger scroll — never CSS-smooth the document */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Cheap section reveals: opacity + small translate only */
+  [data-reveal] {
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition-delay: 0s !important;
+  }
+
+  /* Sticky navbar: opaque theme fill, no live blur */
+  .nav-luxury,
+  .nav-luxury.nav-luxury-scrolled,
+  .nav-luxury.nav--scrolled {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .nav-luxury {
+    background: var(--theme-bg);
+  }
+
+  .nav-luxury.nav-luxury-scrolled,
+  .nav-luxury.nav--scrolled {
+    background: var(--theme-nav-scrolled);
+  }
+
+  .switcher-btn,
+  .lang-switcher,
+  .theme-switcher-menu {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Floating dock: no filter-pulse or live blur during page scroll */
+  .whatsapp-green-highlight {
+    animation: none;
+  }
+
+  .whatsapp-dock .logo-white-highlight {
+    animation: none;
+  }
+
+  .motmain-hover-card {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 }

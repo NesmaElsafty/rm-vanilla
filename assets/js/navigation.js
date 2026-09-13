@@ -12,6 +12,13 @@ const SECTION_HREF = {
   'final-cta': 'index.html#final-cta',
 };
 
+let navEls = [];
+let navLinks = [];
+let sectionEls = [];
+let lastActiveId = null;
+let lastScrolled = null;
+let scrollRaf = 0;
+
 function currentPage() {
   const file = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   return file || 'index.html';
@@ -24,6 +31,15 @@ export function isHomePage() {
 
 export function isAboutPage() {
   return currentPage() === 'about.html';
+}
+
+function cacheNavDom() {
+  navEls = Array.from(document.querySelectorAll('.nav-luxury'));
+  if (!navEls.length) navEls = Array.from(document.querySelectorAll('nav'));
+  navLinks = Array.from(document.querySelectorAll('[data-nav]'));
+  sectionEls = HOME_SECTIONS
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
 }
 
 function closeMobileMenu() {
@@ -59,34 +75,113 @@ function toggleMobileMenu() {
   else openMobileMenu();
 }
 
-function updateScrollNav() {
-  const scrolled = window.scrollY > SCROLL_THRESHOLD;
-  document.querySelectorAll('nav, .nav-luxury').forEach((nav) => {
+function setScrolled(scrolled) {
+  if (scrolled === lastScrolled) return;
+  lastScrolled = scrolled;
+  navEls.forEach((nav) => {
     nav.classList.toggle('nav-luxury-scrolled', scrolled);
     nav.classList.toggle('nav--scrolled', scrolled);
   });
 }
 
 function setActiveSection(id) {
-  document.querySelectorAll('[data-nav]').forEach((link) => {
+  if (id === lastActiveId) return;
+  lastActiveId = id;
+  navLinks.forEach((link) => {
     const target = link.getAttribute('data-nav');
     let active = false;
     if (target === 'about' && isAboutPage()) active = true;
     else if (isHomePage() && target === id) active = true;
+    const wasActive = link.classList.contains('is-active');
+    if (active === wasActive) return;
     link.classList.toggle('is-active', active);
     link.classList.toggle('text-brand-gold', active);
   });
 }
 
-function syncActiveFromScroll() {
+function clearActiveNav() {
+  if (lastActiveId === '') return;
+  lastActiveId = '';
+  navLinks.forEach((link) => {
+    link.classList.remove('is-active', 'text-brand-gold');
+  });
+}
+
+function syncActiveFromCachedGeometry() {
   if (!isHomePage() || isAboutPage()) return;
-  let current = 'hero';
   const y = window.scrollY + SCROLL_OFFSET;
-  for (const id of HOME_SECTIONS) {
-    const el = document.getElementById(id);
-    if (el && y >= el.offsetTop && y < el.offsetTop + el.offsetHeight) current = id;
+  let current = 'hero';
+  for (const el of sectionEls) {
+    if (y >= el.offsetTop && y < el.offsetTop + el.offsetHeight) current = el.id;
   }
   setActiveSection(current);
+}
+
+function ensureScrollSentinel() {
+  let sentinel = document.querySelector('[data-nav-scroll-sentinel]');
+  if (sentinel) return sentinel;
+  sentinel = document.createElement('div');
+  sentinel.setAttribute('data-nav-scroll-sentinel', '');
+  sentinel.setAttribute('aria-hidden', 'true');
+  const shell = document.querySelector('.page-shell') || document.body;
+  shell.insertBefore(sentinel, shell.firstChild);
+  return sentinel;
+}
+
+function initNavbarSentinel() {
+  if (!('IntersectionObserver' in window)) return false;
+  const sentinel = ensureScrollSentinel();
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (!entry) return;
+      setScrolled(!entry.isIntersecting);
+    },
+    { threshold: 0 },
+  );
+  observer.observe(sentinel);
+  return true;
+}
+
+function initSectionObserver() {
+  if (!isHomePage() || isAboutPage()) return false;
+  if (!('IntersectionObserver' in window) || !sectionEls.length) return false;
+
+  const intersectingIds = new Set();
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) intersectingIds.add(entry.target.id);
+        else intersectingIds.delete(entry.target.id);
+      });
+      let current = null;
+      for (const id of HOME_SECTIONS) {
+        if (intersectingIds.has(id)) current = id;
+      }
+      if (current) setActiveSection(current);
+    },
+    {
+      root: null,
+      rootMargin: '-20% 0px -55% 0px',
+      threshold: 0,
+    },
+  );
+
+  sectionEls.forEach((el) => observer.observe(el));
+  return true;
+}
+
+function initScrollFallback() {
+  const onScroll = () => {
+    if (scrollRaf) return;
+    scrollRaf = requestAnimationFrame(() => {
+      scrollRaf = 0;
+      setScrolled(window.scrollY > SCROLL_THRESHOLD);
+      syncActiveFromCachedGeometry();
+    });
+  };
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
 
 export function goToSection(id) {
@@ -99,6 +194,7 @@ export function goToSection(id) {
 
   const el = document.getElementById(id);
   if (el) {
+    setActiveSection(id);
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
@@ -109,6 +205,7 @@ export function goToSection(id) {
 export function goHome() {
   closeMobileMenu();
   if (isHomePage()) {
+    setActiveSection('hero');
     document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
@@ -128,41 +225,47 @@ function scrollToTarget(id) {
 
 function highlightCurrentPage() {
   if (isAboutPage()) {
-    document.querySelectorAll('[data-nav]').forEach((link) => {
-      const active = link.getAttribute('data-nav') === 'about';
-      link.classList.toggle('is-active', active);
-      link.classList.toggle('text-brand-gold', active);
-    });
+    setActiveSection('about');
     return;
   }
 
   if (currentPage() === 'recorded-sessions.html' || currentPage() === 'policies.html') {
-    document.querySelectorAll('[data-nav]').forEach((link) => {
-      link.classList.remove('is-active', 'text-brand-gold');
-    });
+    clearActiveNav();
     return;
   }
 
-  if (isHomePage()) syncActiveFromScroll();
+  if (isHomePage()) {
+    const hash = location.hash.replace('#', '');
+    if (hash && HOME_SECTIONS.includes(hash)) {
+      setActiveSection(hash);
+      return;
+    }
+    setActiveSection('hero');
+  }
 }
 
 function handleNavClick(event, id) {
   closeMobileMenu();
 
-  if (isHomePage() && document.getElementById(id)) {
+  const el = document.getElementById(id);
+  if (isHomePage() && el) {
     event.preventDefault();
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setActiveSection(id);
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
 export function initNavigation() {
-  updateScrollNav();
+  cacheNavDom();
   highlightCurrentPage();
+  setScrolled(window.scrollY > SCROLL_THRESHOLD);
 
-  window.addEventListener('scroll', () => {
-    updateScrollNav();
-    syncActiveFromScroll();
-  }, { passive: true });
+  const navbarObserved = initNavbarSentinel();
+  const sectionsObserved = initSectionObserver();
+  const needsSectionFallback = isHomePage() && !isAboutPage() && !sectionsObserved;
+  if (!navbarObserved || needsSectionFallback) {
+    initScrollFallback();
+  }
 
   document.querySelectorAll('[data-menu-toggle]').forEach((btn) => {
     btn.addEventListener('click', () => toggleMobileMenu());
@@ -172,7 +275,7 @@ export function initNavigation() {
     if (event.key === 'Escape' && isMenuOpen()) closeMobileMenu();
   });
 
-  document.querySelectorAll('[data-nav]').forEach((link) => {
+  navLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
       const id = link.getAttribute('data-nav');
       if (!id) return;
@@ -194,9 +297,11 @@ export function initNavigation() {
   document.querySelectorAll('[data-scroll="contact"]').forEach((el) => {
     el.addEventListener('click', (event) => {
       closeMobileMenu();
-      if (isHomePage() && document.getElementById('contact')) {
+      const contact = document.getElementById('contact');
+      if (isHomePage() && contact) {
         event.preventDefault();
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setActiveSection('contact');
+        contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   });

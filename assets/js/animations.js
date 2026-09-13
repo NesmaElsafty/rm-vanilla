@@ -6,6 +6,10 @@ function prefersReducedMotion() {
   return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+function isCoarsePointer() {
+  return window.matchMedia('(max-width: 767px), (hover: none) and (pointer: coarse)').matches;
+}
+
 function revealAll(nodes) {
   nodes.forEach((el) => {
     el.classList.add('is-visible');
@@ -54,7 +58,7 @@ function ensureObserver() {
         if (!entry.isIntersecting) return;
         const el = entry.target;
         const delay = el.getAttribute('data-reveal-delay');
-        if (delay) {
+        if (delay && !isCoarsePointer()) {
           el.style.transitionDelay = /^\d+$/.test(delay) ? `${delay}ms` : delay;
         }
         el.classList.add('is-visible');
@@ -71,6 +75,7 @@ function ensureObserver() {
 }
 
 function prepareStaggerContainers(scope) {
+  if (isCoarsePointer()) return;
   scope.querySelectorAll(STAGGER_CONTAINER_SELECTORS.join(',')).forEach((container) => {
     const children = [...container.children].filter(
       (el) => el.nodeType === 1 && !el.hasAttribute('hidden'),

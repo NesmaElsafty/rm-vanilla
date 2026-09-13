@@ -40,6 +40,17 @@
   padding-block: 0.75rem;
 }
 
+[data-nav-scroll-sentinel] {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 1px;
+  height: 24px;
+  pointer-events: none;
+  opacity: 0;
+  overflow: hidden;
+}
+
 .nav-luxury.nav-luxury-scrolled,
 .nav-luxury.nav--scrolled {
   padding-block: 0.5rem;
