@@ -28,7 +28,7 @@ function toDisplayNum(n) {
 }
 
 function bookingHref(target) {
-  return `index.html?scroll=contact&session=${encodeURIComponent(target)}`;
+  return `index.html?scroll=contact-form&session=${encodeURIComponent(target)}`;
 }
 
 function emphasizeText(text, phrases = []) {

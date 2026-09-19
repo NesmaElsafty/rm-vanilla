@@ -16,7 +16,7 @@ function currentSlug() {
 }
 
 function contactHref(slug) {
-  return `index.html?scroll=contact&program=${encodeURIComponent(slug)}`;
+  return `index.html?scroll=contact-form&program=${encodeURIComponent(slug)}`;
 }
 
 function sortByOrder(items = []) {

@@ -19,7 +19,7 @@ function currentSlug() {
 }
 
 function purchaseHref(target) {
-  return `index.html?scroll=contact&program=${encodeURIComponent(target)}`;
+  return `index.html?scroll=contact-form&program=${encodeURIComponent(target)}`;
 }
 
 function updateDocumentMeta(session) {

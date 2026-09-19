@@ -318,7 +318,8 @@ export const translations = {
       charter: 'ميثاق الجلسات',
       icf: 'مراقب بالكامل ومعتمد من الاتحاد الدولي للتدريب الشخصي (ICF).',
       secureSessions: 'جلسات كوتشينج متزامنة مرئية آمنة وبصيغ دفع آمنة عالمياً.',
-      madeWithLove: 'Made with love by Nesma Elsafty',
+      madeWithLove:
+        'جميع الحقوق محفوظة لشركة د/رنا مسعد للإستشارات و التدريب Balance Space Training',
       privacy: 'سياسة الخصوصية واسترداد الرسوم',
       ethics: 'ميثاق الشرف والأكواد الأخلاقية',
       privacyModalTitle: 'سياسة الخصوصية وسياسات استرداد الرسوم',
@@ -881,7 +882,8 @@ export const translations = {
       charter: 'Session Charter',
       icf: 'Fully supervised and accredited by the International Coaching Federation (ICF).',
       secureSessions: 'Secure live video coaching sessions with globally secure payment methods.',
-      madeWithLove: 'Made with love by Nesma Elsafty',
+      madeWithLove:
+        'جميع الحقوق محفوظة لشركة د/رنا مسعد للإستشارات و التدريب Balance Space Training',
       privacy: 'Privacy & Refund Policy',
       ethics: 'Ethics Charter & Code of Conduct',
       privacyModalTitle: 'Privacy Policy & Refund Policies',

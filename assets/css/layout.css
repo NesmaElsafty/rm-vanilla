@@ -982,6 +982,11 @@ html[dir="ltr"] .opening-statement-text {
   flex-direction: column;
 }
 
+/* Conversion CTAs land here — clear of fixed navbar */
+#contact-form {
+  scroll-margin-top: clamp(5.5rem, 8vw, 7rem);
+}
+
 .contact-info {
   justify-content: space-between;
   flex: 1;

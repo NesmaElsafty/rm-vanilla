@@ -1,6 +1,7 @@
 const HOME_SECTIONS = ['hero', 'about', 'philosophy', 'programs', 'testimonials', 'final-cta', 'contact'];
 const SCROLL_OFFSET = 180;
 const SCROLL_THRESHOLD = 24;
+const FORM_SCROLL_ID = 'contact-form';
 
 const SECTION_HREF = {
   hero: 'index.html#hero',
@@ -10,6 +11,7 @@ const SECTION_HREF = {
   testimonials: 'index.html#testimonials',
   contact: 'index.html#contact',
   'final-cta': 'index.html#final-cta',
+  'contact-form': 'index.html?scroll=contact-form',
 };
 
 let navEls = [];
@@ -194,7 +196,8 @@ export function goToSection(id) {
 
   const el = document.getElementById(id);
   if (el) {
-    setActiveSection(id);
+    if (id === FORM_SCROLL_ID) setActiveSection('contact');
+    else setActiveSection(id);
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
@@ -220,7 +223,21 @@ function applyPreselectFromQuery() {
 }
 
 function scrollToTarget(id) {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (id === FORM_SCROLL_ID) setActiveSection('contact');
+  else if (HOME_SECTIONS.includes(id)) setActiveSection(id);
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/** One destination scroll after layout is ready — no contact → form double jump. */
+function scheduleScrollTo(id) {
+  if (!id || !document.getElementById(id)) return;
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      scrollToTarget(id);
+    });
+  });
 }
 
 function highlightCurrentPage() {
@@ -236,6 +253,10 @@ function highlightCurrentPage() {
 
   if (isHomePage()) {
     const hash = location.hash.replace('#', '');
+    if (hash === FORM_SCROLL_ID) {
+      setActiveSection('contact');
+      return;
+    }
     if (hash && HOME_SECTIONS.includes(hash)) {
       setActiveSection(hash);
       return;
@@ -252,6 +273,15 @@ function handleNavClick(event, id) {
     event.preventDefault();
     setActiveSection(id);
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+function handleScrollClick(event, id) {
+  closeMobileMenu();
+  const el = document.getElementById(id);
+  if (isHomePage() && el) {
+    event.preventDefault();
+    scrollToTarget(id);
   }
 }
 
@@ -294,15 +324,11 @@ export function initNavigation() {
     });
   });
 
-  document.querySelectorAll('[data-scroll="contact"]').forEach((el) => {
+  document.querySelectorAll('[data-scroll]').forEach((el) => {
     el.addEventListener('click', (event) => {
-      closeMobileMenu();
-      const contact = document.getElementById('contact');
-      if (isHomePage() && contact) {
-        event.preventDefault();
-        setActiveSection('contact');
-        contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+      const id = el.getAttribute('data-scroll');
+      if (!id) return;
+      handleScrollClick(event, id);
     });
   });
 
@@ -315,9 +341,10 @@ export function initNavigation() {
   const params = applyPreselectFromQuery();
   const hashTarget = location.hash.replace('#', '');
   const queryScroll = params.get('scroll');
+  // Prefer query scroll (supports contact-form); do not remap contact-form → contact
   const target = queryScroll || hashTarget;
 
   if (target) {
-    window.setTimeout(() => scrollToTarget(target), 120);
+    scheduleScrollTo(target);
   }
 }

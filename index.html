@@ -123,7 +123,7 @@
             <button type="button" class="switcher-btn switcher-btn--theme" data-theme-toggle data-i18n-aria="theme.switchToLight">
               <span data-theme-icon></span>
             </button>
-            <a href="index.html#contact" class="nav-book btn-luxury-ghost" data-scroll="contact" data-i18n="nav.bookConsultation">احجز استشارتك</a>
+            <a href="index.html?scroll=contact-form" class="nav-book btn-luxury-ghost" data-scroll="contact-form" data-i18n="nav.bookConsultation">احجز استشارتك</a>
             <button type="button" class="nav-menu-btn" data-menu-toggle aria-expanded="false" aria-label="Menu">
               <span data-icon="menu" data-icon-class="icon icon-md"></span>
             </button>
@@ -138,7 +138,7 @@
           <a href="index.html#programs" class="mobile-menu-link" data-nav="programs" data-i18n="nav.programs">البرامج</a>
           <a href="index.html#testimonials" class="mobile-menu-link" data-nav="testimonials" data-i18n="nav.testimonials">قالوا عنا</a>
           <a href="index.html#contact" class="mobile-menu-link" data-nav="contact" data-i18n="nav.contact">تواصل</a>
-          <a href="index.html#contact" class="btn-luxury-primary" data-scroll="contact" data-i18n="nav.bookConsultation">احجز استشارتك</a>
+          <a href="index.html?scroll=contact-form" class="btn-luxury-primary" data-scroll="contact-form" data-i18n="nav.bookConsultation">احجز استشارتك</a>
         </div>
       </div>
     </nav>
@@ -158,7 +158,7 @@
               <div class="gold-rule-short" data-hero-reveal="rule"></div>
               <p class="keynote-body hero-subtitle" data-hero-reveal="subtitle" data-i18n="hero.subtitle">بساعدك على التحرر من الشك الداخلي، الاحتياج العاطفي، والانفصال عن الذات، والعودة إلى قيمتك واتصالك الحقيقي بالله، حتى تعيش بسلام داخلي وتمكين ومتعة.</p>
               <div class="hero-actions" data-hero-reveal="actions">
-                <a href="index.html#contact" class="btn-luxury-primary" data-scroll="contact" data-i18n="hero.primaryCta">ابدأ رحلتك الآن</a>
+                <a href="index.html?scroll=contact-form" class="btn-luxury-primary" data-scroll="contact-form" data-i18n="hero.primaryCta">ابدأ رحلتك الآن</a>
                 <a href="index.html#programs" class="btn-luxury-ghost" data-nav="programs" data-i18n="hero.secondaryCta">تعرف علي خدماتنا</a>
               </div>
             </div>
@@ -443,9 +443,9 @@
             </h2>
             <div class="gold-rule" data-reveal data-reveal-delay="40" aria-hidden="true"></div>
             <a
-              href="index.html#contact"
+              href="index.html?scroll=contact-form"
               class="btn-luxury-primary"
-              data-scroll="contact"
+              data-scroll="contact-form"
               data-i18n="finalCta.button"
               data-reveal
               data-reveal-delay="80"
@@ -525,7 +525,7 @@
               </div>
             </aside>
 
-            <div class="contact-form-panel glass-panel">
+            <div id="contact-form" class="contact-form-panel glass-panel">
               <form id="booking-form-element" class="contact-form" novalidate data-form="contact">
                 <div class="contact-form-row">
                   <div class="contact-field-wrap">
@@ -702,8 +702,7 @@
 
         <div class="footer-bottom">
           <p class="footer-made-with-love">
-            <span data-i18n="footer.madeWithLove">Made with love by Nesma Elsafty</span>
-            <span class="footer-made-with-love-heart" aria-hidden="true">?</span>
+            <span data-i18n="footer.madeWithLove">جميع الحقوق محفوظة لشركة د/رنا مسعد للإستشارات و التدريب Balance Space Training</span>
           </p>
           <div class="footer-legal">
             <a href="policies.html?highlight=cancellation-refund" class="footer-link" id="privacy-policy-modal-btn" data-policies="cancellation-refund" data-i18n="footer.privacy">سياسة الخصوصية واسترداد الرسوم</a>
