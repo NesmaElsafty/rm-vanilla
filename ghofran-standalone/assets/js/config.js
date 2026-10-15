@@ -1,10 +1,10 @@
 /**
- * GHOFRAN standalone site configuration.
- *
- * applicationUrl: verified application form. Leave empty until one exists.
- * inquiryUrl: separate contact path. Opening it is an inquiry, not an application.
- * productionUrl: public origin, for example https://ghofran.example.com
- *   Leave empty until the subdomain is known. Do not invent it.
+ * GHOFRAN standalone configuration.
+ * applicationUrl: a verified https application form.
+ * The brief supplied the literal placeholder PASTE_GOOGLE_FORM_URL_HERE.
+ * That is not a destination, so this stays empty and primary CTAs remain
+ * WhatsApp inquiries until a real form URL is set.
+ * productionUrl: public origin once the subdomain is known. Do not invent it.
  */
 export const siteConfig = {
   applicationUrl: '',
@@ -12,4 +12,7 @@ export const siteConfig = {
   inquiryMessage:
     'مرحبًا، لدي استفسار عن رحلة غُفْرَان من أسوان إلى الأقصر (20–24 يناير 2027). هذا استفسار وليس تقديم طلب، ولا يعني تأكيد الحجز.',
   productionUrl: '',
+  inquiryLabel: 'استفسر عن الرحلة عبر واتساب',
+  heroApplyLabel: 'أريد أن أعيش تجربة غُفْرَان',
+  applyLabel: 'أريد التقديم إلى رحلة غُفْرَان',
 };

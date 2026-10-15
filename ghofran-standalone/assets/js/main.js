@@ -2,31 +2,58 @@ import { siteConfig } from './config.js';
 
 const DESKTOP_NAV = window.matchMedia('(min-width: 1100px)');
 
-function initApplication() {
+function inquiryHref() {
+  const base = (siteConfig.inquiryUrl || '').trim();
+  if (!base) return '#apply';
+  const message = siteConfig.inquiryMessage || '';
+  return message ? `${base}?text=${encodeURIComponent(message)}` : base;
+}
+
+function verifiedApplicationUrl() {
   const url = (siteConfig.applicationUrl || '').trim();
-  const notice = document.querySelector('[data-apply-offline]');
-  const links = document.querySelectorAll('[data-apply]');
+  if (!/^https:\/\/\S+$/i.test(url)) return '';
+  if (/paste_google_form_url_here/i.test(url)) return '';
+  return url;
+}
+
+function initCtas() {
+  const url = verifiedApplicationUrl();
+  const ctas = document.querySelectorAll('[data-cta]');
+  const inquiryPanels = document.querySelectorAll('[data-inquiry-panel]');
+  const applyPanels = document.querySelectorAll('[data-apply-panel]');
+  const inquiryNotes = document.querySelectorAll('[data-note="inquiry"]');
+  const applyNotes = document.querySelectorAll('[data-note="apply"]');
 
   if (url) {
-    links.forEach((link) => {
+    ctas.forEach((link) => {
       link.href = url;
       link.target = '_blank';
       link.rel = 'noopener noreferrer';
+      const slot = link.getAttribute('data-cta');
+      link.textContent = slot === 'hero' ? siteConfig.heroApplyLabel : siteConfig.applyLabel;
     });
-    if (notice) notice.hidden = true;
+    inquiryPanels.forEach((panel) => {
+      panel.hidden = true;
+    });
+    applyPanels.forEach((panel) => {
+      panel.hidden = false;
+    });
+    inquiryNotes.forEach((note) => {
+      note.hidden = true;
+    });
+    applyNotes.forEach((note) => {
+      note.hidden = false;
+    });
+    return;
   }
 
-  if (siteConfig.inquiryUrl) {
-    const message = siteConfig.inquiryMessage || '';
-    const href = message
-      ? `${siteConfig.inquiryUrl}?text=${encodeURIComponent(message)}`
-      : siteConfig.inquiryUrl;
-    document.querySelectorAll('[data-inquiry]').forEach((inquiry) => {
-      inquiry.href = href;
-      inquiry.target = '_blank';
-      inquiry.rel = 'noopener noreferrer';
-    });
-  }
+  const href = inquiryHref();
+  ctas.forEach((link) => {
+    link.href = href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = siteConfig.inquiryLabel;
+  });
 }
 
 function initMenu() {
@@ -119,7 +146,27 @@ function initStickyCta() {
   update();
 }
 
-initApplication();
+function initHeaderHeight() {
+  const header = document.querySelector('.header');
+  if (!header) return;
+
+  const sync = () => {
+    document.documentElement.style.setProperty('--actual-header-height', `${header.offsetHeight}px`);
+  };
+
+  sync();
+
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(sync);
+    observer.observe(header);
+    return;
+  }
+
+  window.addEventListener('resize', sync);
+}
+
+initCtas();
 initMenu();
 initActiveNav();
 initStickyCta();
+initHeaderHeight();
