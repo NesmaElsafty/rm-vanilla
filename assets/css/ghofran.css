@@ -1,0 +1,986 @@
+/* GHOFRAN campaign page. Scoped to .ghofran-page.
+   Brand: Royal Spiritual Orchid, Muted Orchid, Soft Luxury Gold, Warm Ivory, Deep Spiritual Charcoal. */
+
+html:has(body.ghofran-page) {
+  background-color: #1f1a33 !important;
+}
+
+html[data-theme='cream-elegance']:has(body.ghofran-page) {
+  background-color: #f8f5f0 !important;
+}
+
+.ghofran-page {
+  --theme-bg: #1f1a33;
+  --theme-navy: #2a2340;
+  --theme-navy-deep: #161222;
+  --theme-purple-deep: #3a2460;
+  --theme-primary: #5b2a86;
+  --theme-accent: #7e5a9b;
+  --theme-rose: #7e5a9b;
+  --theme-mauve: rgba(248, 245, 240, 0.72);
+  --theme-cream: #f8f5f0;
+  --theme-cream-muted: rgba(248, 245, 240, 0.76);
+  --theme-gold: #c8a46a;
+  --theme-soft-gold: #d7c297;
+  --theme-glass-border: rgba(200, 164, 106, 0.24);
+  --theme-btn-primary: linear-gradient(135deg, #5b2a86 0%, #6d3b96 55%, #7e5a9b 100%);
+  --theme-btn-primary-text: #f8f5f0;
+  --theme-btn-ghost-text: #f8f5f0;
+  --theme-btn-ghost-border: rgba(200, 164, 106, 0.55);
+  --theme-gold-gradient: linear-gradient(135deg, #f8f5f0 0%, #d7c297 46%, #c8a46a 100%);
+  --theme-portrait-glow: radial-gradient(ellipse 65% 75% at 50% 42%, rgba(126, 90, 155, 0.38) 0%, rgba(91, 42, 134, 0.16) 42%, transparent 76%);
+  --ghofran-ink-gold: #e4d0a4;
+  --ghofran-ink-main: #e7d8f2;
+  background:
+    radial-gradient(ellipse 42% 28% at 88% 0%, rgba(91, 42, 134, 0.34), transparent 62%),
+    radial-gradient(ellipse 34% 24% at 0% 28%, rgba(126, 90, 155, 0.18), transparent 68%),
+    radial-gradient(ellipse 26% 18% at 72% 62%, rgba(200, 164, 106, 0.08), transparent 70%),
+    var(--theme-bg);
+  color: var(--theme-cream);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+html[data-theme='cream-elegance'] .ghofran-page {
+  --theme-bg: #f8f5f0;
+  --theme-navy: #1f1a33;
+  --theme-navy-deep: #efeae3;
+  --theme-purple-deep: #5b2a86;
+  --theme-primary: #5b2a86;
+  --theme-accent: #7e5a9b;
+  --theme-rose: rgba(126, 90, 155, 0.4);
+  --theme-mauve: rgba(31, 26, 51, 0.62);
+  --theme-cream: #1f1a33;
+  --theme-cream-muted: rgba(31, 26, 51, 0.72);
+  --theme-gold: #9a7844;
+  --theme-soft-gold: #c8a46a;
+  --theme-glass-border: rgba(91, 42, 134, 0.16);
+  --theme-btn-primary: linear-gradient(135deg, #5b2a86 0%, #6d3b96 52%, #7e5a9b 100%);
+  --theme-btn-primary-text: #f8f5f0;
+  --theme-btn-ghost-text: #5b2a86;
+  --theme-btn-ghost-border: rgba(91, 42, 134, 0.32);
+  --theme-gold-gradient: linear-gradient(135deg, #7e5a9b 0%, #5b2a86 100%);
+  --theme-portrait-glow: radial-gradient(ellipse 65% 75% at 50% 42%, rgba(200, 164, 106, 0.22) 0%, rgba(126, 90, 155, 0.16) 42%, transparent 76%);
+  --ghofran-ink-gold: #7a5a2c;
+  --ghofran-ink-main: #5b2a86;
+  background:
+    radial-gradient(ellipse 40% 26% at 100% 0%, rgba(126, 90, 155, 0.12), transparent 64%),
+    radial-gradient(ellipse 32% 22% at 0% 18%, rgba(200, 164, 106, 0.14), transparent 66%),
+    var(--theme-bg);
+}
+
+.ghofran-page .page-main {
+  padding-bottom: 1rem;
+}
+
+.ghofran-section {
+  scroll-margin-top: 6.5rem;
+  padding-block: clamp(3.25rem, 6vw, 5.25rem);
+}
+
+.ghofran-measure {
+  max-width: 40rem;
+}
+
+.ghofran-measure-wide {
+  max-width: 46rem;
+}
+
+.ghofran-page p,
+.ghofran-page li {
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+@media (min-width: 768px) {
+  .ghofran-page p,
+  .ghofran-page li {
+    font-size: 1.125rem;
+    line-height: 1.9;
+  }
+}
+
+.ghofran-kicker {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--theme-cream-muted);
+}
+
+.ghofran-page h1,
+.ghofran-page h2,
+.ghofran-page h3 {
+  font-family: var(--font-serif);
+  color: var(--theme-cream);
+  line-height: 1.45;
+}
+
+.ghofran-page h2 {
+  font-size: clamp(1.7rem, 3vw, 2.35rem);
+  font-weight: 700;
+  margin-bottom: 1.25rem;
+}
+
+.ghofran-page h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.ghofran-lead {
+  font-size: 1.125rem;
+  line-height: 1.95;
+}
+
+@media (min-width: 768px) {
+  .ghofran-lead {
+    font-size: 1.25rem;
+  }
+}
+
+.ghofran-stack > * + * {
+  margin-top: 1rem;
+}
+
+.ghofran-page .gold-rule,
+.ghofran-page .gold-rule-short {
+  margin-block: 1.1rem 1.25rem;
+}
+
+.ghofran-page .skip-link {
+  background: var(--theme-primary);
+  color: #f8f3eb;
+}
+
+.ghofran-page :focus-visible {
+  outline: 2px solid var(--theme-soft-gold);
+  outline-offset: 3px;
+}
+
+html[data-theme='cream-elegance'] .ghofran-page :focus-visible {
+  outline-color: var(--theme-primary);
+}
+
+/* Navigation */
+
+.ghofran-page .nav-luxury {
+  background: color-mix(in srgb, var(--theme-bg) 96%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--theme-gold) 16%, transparent);
+}
+
+.ghofran-nav-links {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.15rem;
+}
+
+.ghofran-nav-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.4rem 0.65rem;
+  color: var(--theme-cream-muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.ghofran-nav-links a.is-active {
+  color: var(--theme-cream);
+}
+
+.ghofran-nav-cta {
+  display: none;
+  min-height: 44px;
+  padding: 0.55rem 1rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.ghofran-page .nav-menu-btn,
+.ghofran-page .switcher-btn {
+  display: inline-flex;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.ghofran-hero {
+  position: relative;
+  overflow-x: clip;
+}
+
+.ghofran-gap {
+  margin-top: 3rem;
+}
+
+.ghofran-gap-sm {
+  margin-top: 1.75rem;
+}
+
+.ghofran-byline {
+  margin-top: 0.85rem;
+}
+
+.ghofran-mobile-menu {
+  display: none;
+  margin: 0.4rem 1rem 0;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 18%, transparent);
+  background: var(--theme-bg);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+.ghofran-mobile-menu.is-open {
+  display: block;
+}
+
+.ghofran-mobile-menu a {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.6rem;
+  color: var(--theme-cream);
+  text-decoration: none;
+}
+
+.ghofran-mobile-menu a.is-active {
+  background: color-mix(in srgb, var(--theme-gold) 10%, transparent);
+}
+
+.ghofran-mobile-menu .btn-luxury-primary {
+  width: 100%;
+  margin-top: 0.4rem;
+}
+
+@media (min-width: 1180px) {
+  .ghofran-nav-links,
+  .ghofran-nav-cta {
+    display: inline-flex;
+  }
+
+  .ghofran-page .nav-menu-btn,
+  .ghofran-mobile-menu,
+  .ghofran-mobile-menu.is-open {
+    display: none !important;
+  }
+}
+
+.ghofran-menu-open {
+  overflow: hidden;
+}
+
+/* Hero */
+
+.ghofran-hero {
+  padding-top: 6.25rem;
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.ghofran-hero-grid {
+  display: grid;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.ghofran-title {
+  font-size: clamp(3rem, 8vw, 5.4rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+}
+
+.ghofran-hero-line {
+  font-family: var(--font-serif);
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--theme-cream);
+}
+
+.ghofran-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  margin-top: 1.15rem;
+}
+
+.ghofran-meta span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0.2rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 28%, transparent);
+  color: var(--theme-cream);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.ghofran-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.35rem;
+}
+
+.ghofran-page .btn-luxury-primary,
+.ghofran-page .btn-luxury-ghost {
+  min-height: 44px;
+  text-align: center;
+  border-radius: 999px;
+}
+
+.ghofran-page .btn-luxury-primary {
+  border-color: transparent;
+  box-shadow: 0 14px 30px -18px rgba(91, 42, 134, 0.65);
+}
+
+.ghofran-page .btn-luxury-ghost,
+.ghofran-page .btn-luxury-ghost::after {
+  animation: none;
+}
+
+.ghofran-reassure {
+  margin-top: 0.85rem;
+  color: var(--theme-cream-muted);
+  font-size: 0.95rem;
+}
+
+.ghofran-figure {
+  margin: 0;
+}
+
+.ghofran-frame {
+  position: relative;
+  border-radius: 1.4rem 1.4rem 1.4rem 4.5rem;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 35%, transparent);
+  box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.55);
+}
+
+.ghofran-frame img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 16 / 10;
+}
+
+.ghofran-caption {
+  margin-top: 0.7rem;
+  color: var(--theme-cream-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.ghofran-vine {
+  display: none;
+  width: 4.5rem;
+  height: 9rem;
+  color: color-mix(in srgb, var(--theme-gold) 70%, transparent);
+}
+
+@media (min-width: 960px) {
+  .ghofran-hero-grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 2.5rem;
+  }
+
+  .ghofran-vine {
+    display: block;
+    position: absolute;
+    inset-inline-start: 46%;
+    top: 7rem;
+    opacity: 0.55;
+    pointer-events: none;
+  }
+}
+
+/* Quotes and pillars */
+
+.ghofran-quotes {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.75rem;
+}
+
+@media (min-width: 800px) {
+  .ghofran-quotes {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ghofran-quote {
+  margin: 0;
+  padding: 1.15rem 1.2rem 1.15rem 1.35rem;
+  border-inline-start: 2px solid color-mix(in srgb, var(--theme-gold) 70%, transparent);
+  background: color-mix(in srgb, var(--theme-navy) 35%, transparent);
+}
+
+html[data-theme='cream-elegance'] .ghofran-quote {
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.ghofran-quote p {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: var(--theme-cream);
+}
+
+.ghofran-note {
+  margin-top: 0.8rem;
+  color: var(--theme-cream-muted);
+  font-size: 0.95rem;
+}
+
+.ghofran-pillars {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 800px) {
+  .ghofran-pillars {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 1.5rem;
+  }
+}
+
+.ghofran-pillar {
+  padding: 1.35rem 1.25rem 1.4rem;
+  border-radius: 1.1rem;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 18%, transparent);
+  background: color-mix(in srgb, var(--theme-navy) 28%, transparent);
+}
+
+html[data-theme='cream-elegance'] .ghofran-pillar {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.ghofran-index {
+  display: block;
+  margin-bottom: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 0.14em;
+  color: var(--theme-cream-muted);
+}
+
+.ghofran-pillar p,
+.ghofran-practice p,
+.ghofran-day p {
+  color: var(--theme-cream-muted);
+}
+
+.ghofran-pillar h3,
+.ghofran-practice h3,
+.ghofran-day h3,
+.ghofran-faq h3 {
+  color: var(--theme-cream);
+  margin-bottom: 0.45rem;
+}
+
+/* Practices */
+
+.ghofran-practices {
+  margin-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--theme-gold) 22%, transparent);
+}
+
+.ghofran-practice {
+  display: grid;
+  grid-template-columns: 2.75rem minmax(0, 1fr);
+  gap: 0.9rem;
+  align-items: start;
+  padding-block: 1.15rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--theme-gold) 16%, transparent);
+}
+
+.ghofran-practice-icon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  color: var(--theme-primary);
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 35%, transparent);
+}
+
+html[data-theme='luxury-rose'] .ghofran-practice-icon {
+  color: var(--theme-soft-gold);
+}
+
+.ghofran-practice-icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Boat */
+
+.ghofran-boat-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.ghofran-benefits {
+  display: grid;
+  gap: 0.85rem;
+}
+
+@media (min-width: 700px) {
+  .ghofran-benefits {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ghofran-benefit {
+  padding: 1rem 1.05rem;
+  border-radius: 0.95rem;
+  background: color-mix(in srgb, var(--theme-primary) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--theme-rose) 25%, transparent);
+}
+
+.ghofran-benefit h3 {
+  font-size: 1.08rem;
+}
+
+@media (min-width: 960px) {
+  .ghofran-boat-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: 2.5rem;
+  }
+}
+
+.ghofran-boat-panel {
+  min-height: 16rem;
+  padding: clamp(1.5rem, 3vw, 2.4rem);
+  border-radius: 1.5rem 1.5rem 4rem 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 32%, transparent);
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(185, 143, 162, 0.16), transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(199, 154, 59, 0.1), transparent 50%),
+    color-mix(in srgb, var(--theme-navy) 55%, transparent);
+}
+
+html[data-theme='cream-elegance'] .ghofran-boat-panel {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(122, 62, 177, 0.08), transparent 55%),
+    rgba(255, 255, 255, 0.62);
+}
+
+.ghofran-boat-panel p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+  line-height: 1.7;
+  color: var(--theme-cream);
+}
+
+/* Itinerary */
+
+.ghofran-days {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 1.5rem;
+}
+
+.ghofran-day {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.9rem;
+  padding: 1rem 0.2rem 1.1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--theme-gold) 14%, transparent);
+}
+
+.ghofran-day-num {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 40%, transparent);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--theme-cream);
+}
+
+.ghofran-after {
+  margin-top: 1.5rem;
+  padding: 1.25rem 1.3rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 28%, transparent);
+  background: color-mix(in srgb, var(--theme-primary) 10%, transparent);
+}
+
+.ghofran-after h3 {
+  margin-bottom: 0.4rem;
+}
+
+/* Facilitator */
+
+.ghofran-facilitator {
+  display: grid;
+  gap: 1.75rem;
+  align-items: center;
+}
+
+.ghofran-page .portrait-arch {
+  max-width: 22rem;
+  margin-inline: auto;
+}
+
+.ghofran-page .portrait-arch img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 680 / 1024;
+  object-fit: cover;
+  object-position: center top;
+}
+
+@media (min-width: 860px) {
+  .ghofran-facilitator {
+    grid-template-columns: minmax(16rem, 0.72fr) minmax(0, 1.28fr);
+    gap: 2.5rem;
+  }
+
+  .ghofran-page .portrait-arch {
+    margin-inline: 0;
+  }
+}
+
+.ghofran-role {
+  margin-bottom: 0.8rem;
+  color: var(--theme-cream-muted);
+}
+
+/* Takeaways, suitability, included */
+
+.ghofran-points {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.ghofran-points li {
+  padding: 0.85rem 1rem;
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--theme-navy) 24%, transparent);
+  color: var(--theme-cream);
+}
+
+html[data-theme='cream-elegance'] .ghofran-points li {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.ghofran-split {
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 860px) {
+  .ghofran-split {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+}
+
+.ghofran-included {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 700px) {
+  .ghofran-included {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ghofran-included h3 {
+  margin-bottom: 0.6rem;
+}
+
+.ghofran-included ul {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.ghofran-included li {
+  position: relative;
+  padding-inline-start: 1.1rem;
+  color: var(--theme-cream);
+}
+
+.ghofran-included li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.85em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: var(--theme-primary);
+}
+
+html[data-theme='luxury-rose'] .ghofran-included li::before {
+  background: var(--theme-soft-gold);
+}
+
+/* FAQ */
+
+.ghofran-faq {
+  display: grid;
+  gap: 0.65rem;
+  max-width: 46rem;
+}
+
+.ghofran-faq details {
+  border-radius: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 18%, transparent);
+  background: color-mix(in srgb, var(--theme-navy) 22%, transparent);
+  overflow: visible;
+}
+
+html[data-theme='cream-elegance'] .ghofran-faq details {
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.ghofran-faq summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 44px;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+}
+
+.ghofran-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.ghofran-faq h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.ghofran-faq summary::after {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-inline-end: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  color: var(--theme-cream-muted);
+}
+
+.ghofran-faq details[open] summary::after {
+  transform: rotate(225deg);
+  margin-top: 0.3rem;
+}
+
+.ghofran-faq details p {
+  padding: 0 1rem 1rem;
+  color: var(--theme-cream-muted);
+}
+
+/* Apply */
+
+.ghofran-steps {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.25rem 0;
+}
+
+@media (min-width: 800px) {
+  .ghofran-steps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.ghofran-step {
+  padding: 1rem;
+  border-radius: 0.95rem;
+  border: 1px solid color-mix(in srgb, var(--theme-gold) 18%, transparent);
+}
+
+.ghofran-step span {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-display);
+  color: var(--theme-cream-muted);
+  text-align: start;
+}
+
+.ghofran-offline {
+  margin-top: 1rem;
+  padding: 1rem 1.05rem;
+  border-radius: 0.9rem;
+  border: 1px solid color-mix(in srgb, var(--theme-primary) 35%, transparent);
+  background: color-mix(in srgb, var(--theme-primary) 8%, transparent);
+}
+
+.ghofran-inquiry {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 0.85rem;
+  color: var(--theme-cream);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+/* Sticky CTA */
+
+.ghofran-sticky {
+  position: fixed;
+  z-index: 45;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
+  background: color-mix(in srgb, var(--theme-bg) 94%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--theme-gold) 20%, transparent);
+}
+
+.ghofran-sticky .btn-luxury-primary {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .ghofran-sticky {
+    display: none !important;
+  }
+}
+
+.ghofran-page.has-sticky-cta .page-main {
+  padding-bottom: calc(5.1rem + env(safe-area-inset-bottom));
+}
+
+/* Footer focus for this campaign */
+
+.ghofran-footer-grid {
+  display: grid;
+  gap: 1.75rem;
+}
+
+@media (min-width: 800px) {
+  .ghofran-footer-grid {
+    grid-template-columns: 1.2fr 1fr 1fr;
+    align-items: start;
+  }
+}
+
+.ghofran-footer-links {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.ghofran-footer-links a,
+.ghofran-page .footer-link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.ghofran-page .footer-luxury,
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury {
+  background:
+    radial-gradient(ellipse 48% 42% at 85% 0%, rgba(91, 42, 134, 0.42), transparent 62%),
+    radial-gradient(ellipse 36% 32% at 8% 100%, rgba(200, 164, 106, 0.16), transparent 66%),
+    #1f1a33;
+  color: #f8f5f0;
+  border-top-color: rgba(200, 164, 106, 0.24);
+}
+
+.ghofran-page .footer-luxury .footer-heading {
+  color: #d7c297;
+}
+
+.ghofran-page .footer-luxury .footer-link,
+.ghofran-page .footer-luxury .footer-made-with-love,
+.ghofran-page .footer-luxury .ghofran-note,
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury .footer-link,
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury .footer-link:hover {
+  color: rgba(248, 245, 240, 0.84);
+}
+
+html[data-theme='cream-elegance'] .ghofran-vine {
+  color: #7e5a9b;
+}
+
+.ghofran-page h1,
+.ghofran-page h2,
+.ghofran-page .ghofran-kicker,
+.ghofran-page .ghofran-index,
+.ghofran-page .ghofran-quote p,
+.ghofran-page .ghofran-boat-panel p,
+.ghofran-page .ghofran-day-num,
+.ghofran-page .ghofran-step span,
+.ghofran-page .ghofran-inquiry,
+.ghofran-page .ghofran-nav-links a.is-active,
+.ghofran-page .ghofran-mobile-menu a.is-active:not(.btn-luxury-primary),
+.ghofran-page .footer-luxury .footer-heading {
+  color: var(--ghofran-ink-gold);
+}
+
+.ghofran-page h3,
+.ghofran-page .ghofran-hero-line,
+.ghofran-page p,
+.ghofran-page li,
+.ghofran-page .ghofran-byline,
+.ghofran-page .ghofran-role,
+.ghofran-page .ghofran-meta span,
+.ghofran-page .ghofran-nav-links a,
+.ghofran-page .ghofran-mobile-menu a:not(.btn-luxury-primary),
+.ghofran-page .ghofran-caption,
+.ghofran-page .ghofran-note,
+.ghofran-page .ghofran-reassure {
+  color: var(--ghofran-ink-main);
+}
+
+.ghofran-page .footer-luxury {
+  --ghofran-ink-gold: #e4d0a4;
+  --ghofran-ink-main: #e7d8f2;
+}
+
+.ghofran-page .footer-luxury .footer-link,
+.ghofran-page .footer-luxury .footer-made-with-love,
+.ghofran-page .footer-luxury .ghofran-note,
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury .footer-link,
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury .footer-link:hover,
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury .footer-heading,
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury .ghofran-note,
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury .footer-made-with-love {
+  color: var(--ghofran-ink-main);
+}
+
+html[data-theme='cream-elegance'] .ghofran-page .footer-luxury .footer-heading {
+  color: var(--ghofran-ink-gold);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .ghofran-page *,
+  .ghofran-page *::before,
+  .ghofran-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .ghofran-page .btn-luxury-primary:hover,
+  .ghofran-page .btn-luxury-ghost:hover {
+    transform: none;
+  }
+}
